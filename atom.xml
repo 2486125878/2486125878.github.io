@@ -3,11 +3,11 @@
   <title>听歌</title>
   
   
-  <link href="https://2486125878.github.io/2486125878.github.io/atom.xml" rel="self"/>
+  <link href="https://2486125878.github.io/atom.xml" rel="self"/>
   
-  <link href="https://2486125878.github.io/2486125878.github.io/"/>
+  <link href="https://2486125878.github.io/"/>
   <updated>2023-11-24T07:06:01.847Z</updated>
-  <id>https://2486125878.github.io/2486125878.github.io/</id>
+  <id>https://2486125878.github.io/</id>
   
   <author>
     <name>kk</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>hello hexo</title>
-    <link href="https://2486125878.github.io/2486125878.github.io/2023/11/24/hello-hexo/"/>
-    <id>https://2486125878.github.io/2486125878.github.io/2023/11/24/hello-hexo/</id>
+    <link href="https://2486125878.github.io/2023/11/24/hello-hexo/"/>
+    <id>https://2486125878.github.io/2023/11/24/hello-hexo/</id>
     <published>2023-11-24T07:04:22.000Z</published>
     <updated>2023-11-24T07:06:01.847Z</updated>
     
@@ -27,14 +27,14 @@
     
     
     
-    <category term="第一次创建博客记录" scheme="https://2486125878.github.io/2486125878.github.io/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/"/>
+    <category term="第一次创建博客记录" scheme="https://2486125878.github.io/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://2486125878.github.io/2486125878.github.io/2023/11/24/hello-world/"/>
-    <id>https://2486125878.github.io/2486125878.github.io/2023/11/24/hello-world/</id>
+    <link href="https://2486125878.github.io/2023/11/24/hello-world/"/>
+    <id>https://2486125878.github.io/2023/11/24/hello-world/</id>
     <published>2023-11-24T03:19:59.820Z</published>
     <updated>2023-11-24T03:19:59.820Z</updated>
     

@@ -1,4 +1,4 @@
-https://2486125878.github.io/2486125878.github.io/2023/11/24/hello-hexo/
-https://2486125878.github.io/2486125878.github.io/2023/11/24/hello-world/
-https://2486125878.github.io/2486125878.github.io
-https://2486125878.github.io/2486125878.github.io/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
+https://2486125878.github.io/2023/11/24/hello-hexo/
+https://2486125878.github.io/2023/11/24/hello-world/
+https://2486125878.github.io/
+https://2486125878.github.io/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
