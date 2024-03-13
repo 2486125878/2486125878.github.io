@@ -1,0 +1,1245 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>javascript | 音符跳动</title><meta name="author" content="kk"><meta name="copyright" content="kk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="1.4浏览器执行JS简介浏览器分成两部分:渲染引擎和JS引擎 渲染引擎:用来解析HTML与CSS ,俗称内核,比如chrome浏览器的blink ,老版本的webkit Js引擎:也称为JS解释器。用来读取网页中的JavaScript代码,对其处理后运行,比如chrome浏览器的V8 浏览器本身并不会执行IS代码,而是通过内置JavaScript引擎(解释器)来执行JS代码。S引擎执行代码时逐行解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript">
+<meta property="og:url" content="https://2486125878.github.io/2024/03/13/js/index.html">
+<meta property="og:site_name" content="音符跳动">
+<meta property="og:description" content="1.4浏览器执行JS简介浏览器分成两部分:渲染引擎和JS引擎 渲染引擎:用来解析HTML与CSS ,俗称内核,比如chrome浏览器的blink ,老版本的webkit Js引擎:也称为JS解释器。用来读取网页中的JavaScript代码,对其处理后运行,比如chrome浏览器的V8 浏览器本身并不会执行IS代码,而是通过内置JavaScript引擎(解释器)来执行JS代码。S引擎执行代码时逐行解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg">
+<meta property="article:published_time" content="2024-03-13T07:14:59.000Z">
+<meta property="article:modified_time" content="2024-03-13T07:16:10.822Z">
+<meta property="article:author" content="kk">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://2486125878.github.io/2024/03/13/js/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'javascript',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-13 15:16:10'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/header.css?1"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="音符跳动" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.v8Y5QxZNIiQVIEk3JOCC2QHaGi?rs=1&amp;pid=ImgDetMain" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="音符跳动"><img class="site-icon" src="/img/logo.png"/><span class="site-name">音符跳动</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">javascript</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-13T07:14:59.000Z" title="Created 2024-03-13 15:14:59">2024-03-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-13T07:16:10.822Z" title="Updated 2024-03-13 15:16:10">2024-03-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="javascript"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"></svg><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-4浏览器执行JS简介"><a href="#1-4浏览器执行JS简介" class="headerlink" title="1.4浏览器执行JS简介"></a>1.4浏览器执行JS简介</h1><p><strong>浏览器分成两部分:渲染引擎和JS引擎</strong></p>
+<p><strong>渲染引擎:用来解析HTML与CSS ,俗称内核,比如chrome浏览器的blink ,老版本的webkit</strong></p>
+<p><strong>Js引擎:也称为JS解释器。用来读取网页中的JavaScript代码,对其处理后运行,比如chrome浏览器的V8</strong></p>
+<p><strong>浏览器本身并不会执行IS代码,而是通过内置JavaScript引擎(解释器)来执行JS代码。S引擎执行代码时逐行解释每一句源码(转换为机器语言) ,然后由计算机去执行,所以JavaScript语言归为脚本语言,会逐行解释执行。</strong></p>
+<p>​			<strong>JavaScript</strong></p>
+<p><strong>ECMAScript   Javascript语法</strong></p>
+<p><strong>DOM			页面文档对象模型</strong></p>
+<p><strong>BOM			浏览器对象模型</strong></p>
+<p><strong>可以将单行或少量JS代码写在HTML标签的事件属性中(以on开头的属性),如: onclick</strong></p>
+<p><strong>注意单双引号的使用:在HTML中我们推荐使用双引号,JS中我们推荐使用单引号</strong></p>
+<p><strong>可读性差,在html中编写IS大量代码时,不方便阅读;引号易错,</strong></p>
+<p><strong>引号多层嵌套匹配时,非常容易弄混;</strong></p>
+<p><strong>特殊情况下使用</strong></p>
+<p><strong>单行注释ctrl +&#x2F;</strong></p>
+<p><strong>多行注释 	默认的快捷键shift + alt +a</strong></p>
+<p><strong>多行注释 vscode中修改多行注释的快捷键: ctrl + shift +&#x2F;</strong></p>
+<p><strong>方法									说明																	归属</strong></p>
+<p><strong>alert(msg)						浏览器弹出警示框											浏览器</strong></p>
+<p><strong>console.log(msg)			浏览器控制台打印输出信息						   浏览器</strong></p>
+<p><strong>prompt(info)					浏览器弹出输入框,用户可以输入				  浏览器</strong></p>
+<h2 id="1-2变量的数据类型"><a href="#1-2变量的数据类型" class="headerlink" title="1.2变量的数据类型"></a>1.2变量的数据类型</h2><p><strong>变量是用来存储值的所在处,它们有名字和数据类型。变量的数据类型决定了如何将代表这些值的位存储到计算机的内存中。 JavaScript是一种弱类型或者说动态语言。这意味着不用提前声明变量的类型,在程序运行过程中,类型会被自动确定。</strong></p>
+<p><strong>var age &#x3D; 10;&#x2F;&#x2F;这是一个数字型</strong></p>
+<p><strong>var arexouok &#x3D;‘是的’; &#x2F;&#x2F;这是一个字符串</strong></p>
+<p><strong>在代码运行时,变量的数据类型是由JS引擎根据&#x3D;右边变量值的数据类型来判断的,运行完毕之后,变量就确定了数据类型。</strong></p>
+<p><strong>Javascript拥有动态类型,同时也意味着相同的变量可用作不同的型:</strong></p>
+<p><strong>var x&#x3D;6;x为数字</strong></p>
+<p><strong>var x&#x3D; “Bil”;x为字符串</strong> </p>
+<h2 id="2-1简单数据类型-基本数据类型"><a href="#2-1简单数据类型-基本数据类型" class="headerlink" title="2.1简单数据类型(基本数据类型)"></a>2.1简单数据类型(基本数据类型)</h2><p><strong>JavaScript中的简单数据类型及其说明如下:</strong></p>
+<p><strong>简单数据类型					说明																						默认值</strong></p>
+<p><strong>Number						数字型,包含整型值和浮点型值,如21、0.21 								0</strong></p>
+<p><strong>Boolean						布尔值类型,如true、false,等价于1和0									false</strong></p>
+<p><strong>string 							字符串类型,如”张三”注意咱们js里面,字符串都带引号			“”</strong></p>
+<p><strong>Undefined					var a;声明了变量a但是没有给值,此时a&#x3D; undefined			undefined</strong></p>
+<p><strong>Null								var a &#x3D;null;声明了变量a为空值													null</strong> </p>
+<p><strong>现阶段我们只需要记住,在JS中八进制前面加0,十六进制前面加Ox</strong> </p>
+<p><strong>JavaScriptthf的最大和最小值</strong></p>
+<p><strong>alert (Number.MAX_VALUE); &#x2F;&#x2F; 1.7976931348623157e+308</strong> </p>
+<p><strong>alert (Number.MIN VALUE); &#x2F;&#x2F; 5e-324</strong></p>
+<p><strong>数字型三个特殊值</strong></p>
+<p><strong>alert(Infinity); &#x2F;&#x2F; Infinity</strong></p>
+<p><strong>alert(nfinity) ; &#x2F;&#x2F;-Infinity</strong></p>
+<p><strong>alert (NaN);NaN</strong></p>
+<p><strong>Infinity ,代表无穷大,大于任何数值</strong></p>
+<p><strong>-Infinity ,代表无穷小,小于任何数值</strong></p>
+<p><strong>NaN , Not a number,代表一个非数值</strong></p>
+<h2 id="4-isNaN"><a href="#4-isNaN" class="headerlink" title="4.isNaN()"></a>4.isNaN()</h2><p><strong>用来判断一个变量是否为非数字的类型,返回true或者falsex</strong></p>
+<p><strong>x是数字,返回false</strong></p>
+<p><strong>isNaN (x)</strong></p>
+<p><strong>x不是数字,返回true</strong> </p>
+<p><strong>x是一个非数字类型</strong></p>
+<p><strong>1,字符串引号嵌套JS可以用单引号嵌套双引号,或者用双引号碳套单引号(外双内单,外单内双)</strong></p>
+<h2 id="2-字符串转义符"><a href="#2-字符串转义符" class="headerlink" title="2.字符串转义符"></a>2.字符串转义符</h2><p><strong>类似HTML面的特殊字符,字符串中也有特殊字符,我们称之为转义符。</strong></p>
+<p><strong>转义符都是\开头的,常用的转义符及其说明如下:</strong></p>
+<p><strong>转义符					解释说明</strong></p>
+<p><strong>\n						换行符,n是newline的意思</strong></p>
+<p><strong>\\						斜杠</strong></p>
+<p><strong>\‘					     单引号</strong></p>
+<p><strong>\“						双引号</strong></p>
+<p><strong>\t						tab缩进</strong></p>
+<p><strong>\b					空格,b是blank的意思</strong></p>
+<p><strong>字符串是由若干字符组成的,这些字符的数量就是字符串的长度。通过字符串的length属性可以获取整个字符串的长度。</strong></p>
+<p><strong>console. log(true +1); &#x2F;&#x2F; 2</strong></p>
+<p><strong>console.log (false + 1); &#x2F;&#x2F; 1</strong></p>
+<h2 id="4-2转换为字符串"><a href="#4-2转换为字符串" class="headerlink" title="4.2转换为字符串"></a>4.2转换为字符串</h2><p><strong>方式									说明																案例</strong></p>
+<p><strong>toString()						  转成字符串													var num&#x3D; 1; alert(num.toString();</strong></p>
+<p><strong>String()强制转换			  转成字符串												    var num &#x3D;1; alert(String(null);</strong></p>
+<p><strong>加号拼接字符串			   和字符串拼接的结果都是字符串				var num &#x3D;1; alert(num+ “我是字符串”);</strong></p>
+<p><strong>toString0和String0使用方式不一样。</strong></p>
+<p><strong>三种转换方式,我们更喜欢用第三种加号拼接字符串转换方式,这一种方式也称之为隐式转换。</strong></p>
+<h2 id="4-3转换为数字型-重点"><a href="#4-3转换为数字型-重点" class="headerlink" title="4.3转换为数字型(重点)"></a>4.3转换为数字型(重点)</h2><p><strong>方式												 说明</strong>																			<strong>案例</strong></p>
+<p><strong>parselnt(string)函数					将string类型转成整数数值型							parselnt(78’)</strong></p>
+<p><strong>parseFloat(string)函数			   将string类型转成浮点数数值型						parsefloat(‘78.21’)</strong></p>
+<p><strong>Number()强制转换函数			  将string类型转换为数值型								Number(‘12’)</strong></p>
+<p><strong>js隐式转换(- * &#x2F;)							利用算术运算隐式转换为数值型案例				‘12-0’</strong></p>
+<h2 id="4-4转换为布尔型"><a href="#4-4转换为布尔型" class="headerlink" title="4.4转换为布尔型"></a>4.4转换为布尔型</h2><p><strong>方式						说明												案例</strong></p>
+<p><strong>Boolean()函数		其他类型转成布尔值				Boolean(‘true’);</strong></p>
+<p><strong>代表空、否定的值会被转换为false ,如 0,NaN, null, undefined</strong></p>
+<p><strong>其余值都会被转换为true</strong></p>
+<p><strong>tml标签marquee可以实现多种滚动效果，而且不仅可以移动文字，也可以移动图片，表格等。</strong><br><strong>语法：<marquee>…</marquee>；</strong><br><strong>说明：在标记之间添加要进行滚动的内容。</strong></p>
+<p><strong>marquee常用到的两个事件：</strong><br><strong>onMouseOut&#x3D;“this.start()” 当鼠标移出该区域时</strong><br><strong>onMouseOver&#x3D;“this.stop()” 当鼠标移入该区域时</strong></p>
+<p><strong>代码示例：</strong><br><strong><marquee onMouseOut="this.start()" onMouseOver="this.stop()">marquee常用到的两个事件</marquee></strong></p>
+<p><strong>marquee的重要属性：</strong><br><strong>1.behavior设置滚动的方式；</strong><br><strong>scroll:循环滚动，默认效果；</strong><br><strong>slide:只滚动一次就停止；</strong><br><strong>alternate:来回交替进行滚动。</strong><br><strong>语法：<marquee behavior="滚动方式">…</marquee></strong></p>
+<p><strong>2.direction设置滚动的方向；</strong><br><strong>可选值有 left, right, up and down。如果未指定值，默认值为 left。</strong><br><strong>语法：<marquee direction="滚动方向">…</marquee></strong><br><strong>3.scrollamount设置滚动的速度；</strong><br><strong>以像素为单位，默认值为 6。</strong><br><strong>语法：<marquee scrollamount="5">…</marquee></strong><br><strong>4.scrolldelay设置两次滚动的时间间隔；</strong><br><strong>以毫秒为单位，默认值为 85。 除非指定 truespeed 值，否则将忽略任何小于 60 的值，并改为使用 60。</strong><br><strong>5.loop设置 marquee 滚动的次数；</strong><br><strong>如果未指定值，默认值为 −1，表示 marquee 将连续滚动。</strong><br><strong>6.width、height设置滚动的范围；</strong><br><strong>7.hspace、vspace设置水平和垂直边距；</strong><br><strong>8.bgcolor设置滚动的背景颜色。</strong></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="3-4小结"><a href="#3-4小结" class="headerlink" title="3.4小结"></a>3.4小结</h3><p><strong>函数可以带參数也可以不带参数</strong></p>
+<p><strong>声明函数的时候,函数名括号里面的是形参,形参的默认值为undefined</strong></p>
+<p><strong>调用函数的时候,函数名括号里面的是实参</strong></p>
+<p><strong>多个参数中间用逗号分隔</strong></p>
+<p><strong>形参的个数可以和实参个数不配,但是结果不可预计,我们尽量要匹配</strong></p>
+<h2 id="4-5-break-continue-return的区别"><a href="#4-5-break-continue-return的区别" class="headerlink" title="4.5 break,continue ,return的区别."></a>4.5 break,continue ,return的区别.</h2><p><strong>break :结束当前的循环体(如for, while )</strong></p>
+<p><strong>continue :跳出本次循环,继续执行下次循环(如for, while )</strong></p>
+<p><strong>return :不仅可以退出循环,还能够返回return语句中的值,同时还可以结束当前的函数体内的代码</strong></p>
+<h2 id="5-arguments的使用"><a href="#5-arguments的使用" class="headerlink" title="5.arguments的使用"></a>5.arguments的使用</h2><p><strong>当我们不确定有多少个参数传递的时候,可以用arguments来获取。</strong></p>
+<p><strong>在JavaScript中, arguments实际上它是当前函数的一个内置对象。</strong></p>
+<p><strong>所有函数都内置了一个arguments对象, <u>arguments对象中存储了传递的所有实参。</u></strong></p>
+<p><strong><u>arguments展示形式是一个伪数组</u>,因此可以进行遍历。伪数组具有以下特点:</strong></p>
+<p><strong>具有length属性</strong></p>
+<p><strong>按索引方式储存数据</strong></p>
+<p><strong>不具有数组的push, pop等方法</strong></p>
+<h2 id="Javascript作用域"><a href="#Javascript作用域" class="headerlink" title="Javascript作用域"></a>Javascript作用域</h2><p><strong>Javascript作用域: 就是代码名字在某个范围内起作用和效果</strong></p>
+<p><strong>目的是为了提高程序的可靠性更重要的是减少命名冲突</strong></p>
+<p><strong>js的作用域(es6)之前: 全局作用域 局部作用域</strong></p>
+<p><u><strong>全局作用域: 整个script标签或者是一个单独的js文件</strong></u></p>
+<p><strong><u>局部作用域(函数作用域)：在函数内部就是局部作用域这个代码的名字只在函数内部起效果和作用</u></strong></p>
+<p><strong>注意：如果在函数内部没有声明直接赋值的变量也属于全局变量</strong></p>
+<p><strong>注意: 函数的形参也可以看做是局部变量</strong></p>
+<p><strong>3,从执行效率来看全局变量和局部变量</strong></p>
+<p><strong>1全局变量只有浏览器关闭的时候才会销毁,比较占内存资源</strong></p>
+<p><strong>2局部变量当我们程序执行完毕就会销毁 比较节约内存资源</strong></p>
+<h3 id="2-2全局变量"><a href="#2-2全局变量" class="headerlink" title="2.2全局变量"></a>2.2全局变量</h3><p><strong>在全局作用域下声明的变量叫做全局变量(在函数外部定义的变量)</strong></p>
+<p><strong>全局变量在代码的任何位置都可以使用</strong></p>
+<p><strong>在全局作用域下var声明的变量是全局变量</strong></p>
+<p><strong>特殊情况下,在函数内不使用var声明的变量也是全局变量(不建议使用)</strong></p>
+<h3 id="2-2局部变量"><a href="#2-2局部变量" class="headerlink" title="2.2局部变量"></a>2.2局部变量</h3><p><strong>在局部作用域下声明的变量叫做局部变量(在函数内部定义的变量</strong></p>
+<p><strong>局部变量只能在该函数内部使用</strong></p>
+<p><strong>在函数内部var声明的变量是局部变量</strong></p>
+<p><strong>函数的形参实际上就是局部变量</strong></p>
+<h3 id="2-3全局变量和局部变量的区别"><a href="#2-3全局变量和局部变量的区别" class="headerlink" title="2.3全局变量和局部变量的区别"></a>2.3全局变量和局部变量的区别</h3><p><strong>全局变量:在任何一个地方都可以使用,只有在浏览器关闭时才会被销毁,因此比较占内存</strong></p>
+<p><strong>局部变量:只在函数内部使用,当其所在的代码块被执行时,会被初始化;当代码块运行结束后,就会被·销毁,因此更节省内存空间</strong></p>
+<p><strong>js中没有块级作用域 js的作用域: 全局作用域 局部作用域 现阶段我们js没有块级作用域</strong></p>
+<p><strong>我们is也是在es6的时候新增的块级作用域</strong></p>
+<p><strong>块级作用域 {} if{}  for {}</strong></p>
+<h3 id="3作用域链：内部函数访问外部函数的变量-采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链"><a href="#3作用域链：内部函数访问外部函数的变量-采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链" class="headerlink" title="3作用域链：内部函数访问外部函数的变量,采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链"></a>3作用域链：内部函数访问外部函数的变量,采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链</h3><p><strong>只要是代码，就至少有一个作用域</strong></p>
+<p><strong>写在函数内部的局部作用域</strong></p>
+<p><strong>如果函数中还有函数,那么在这个作用域中就又可以诞生一个作用域</strong></p>
+<p><strong>根据在内部函数可以访问外部函数变量的这种机制,用链式查找决定哪些数据能被内部函数访问,就称作作用域链</strong></p>
+<p><strong>就近原则</strong></p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="1-1什么是对象"><a href="#1-1什么是对象" class="headerlink" title="1.1什么是对象?"></a>1.1什么是对象?</h3><p><strong>现实生活中:万物皆对象,对象一个具体的事物1看得见摸得着的实物。例如,一本书、-辆汽车、一个人可以是”对象” ,一个数据库、张网页、一写远程服务器的连接也可以是“对象”</strong></p>
+<p><strong>在Javascript 中,对象是一组无序的相关属性和方法的集合,所有的事物都是对象,例如字符串、数值、数组、函数等。</strong></p>
+<p><u><strong>对象是由属性和方法组成的。</strong></u></p>
+<p><u><strong>属性:事物的特征,在对象中用属性来表示(常用名词)</strong></u></p>
+<p><u><strong>方法：事物的行为,在对象中用方法来表示(常用动词)</strong></u></p>
+<h3 id="1-2为什么需要对象"><a href="#1-2为什么需要对象" class="headerlink" title="1.2为什么需要对象"></a>1.2为什么需要对象</h3><p><strong>保存一个值时,可以使用变量,保存多个值(一组值)时,可以使用数组。如果要保存一个人的完整信息呢?</strong></p>
+<p><strong>例如,将”张三疯”的个人的信息保存在数组中的方式为:</strong></p>
+<p><strong>var arr &#x3D;[‘张三疯’,男’, 128,154];</strong></p>
+<p><strong><u>JS中的对象表达结构更清晰,更强大。张三疯的个人信息在对象中的表达结构如下:</u></strong></p>
+<p><strong>张三疯.姓名&#x3D; ‘’张三疯’;</strong></p>
+<p><strong>张三疯.性别&#x3D;’男’;</strong></p>
+<p><strong>张三疯.年龄&#x3D;129;</strong></p>
+<p><strong>张三疯.身高&#x3D;154;</strong></p>
+<p><strong>person. name &#x3D; ‘张三疯’;</strong></p>
+<p><strong>person.sex&#x3D;男;</strong></p>
+<p><strong>person.age &#x3D;128;</strong></p>
+<p><strong>person.height &#x3D; 154;</strong></p>
+<h2 id="2．创建对象的三种方式"><a href="#2．创建对象的三种方式" class="headerlink" title="2．创建对象的三种方式"></a>2．创建对象的三种方式</h2><p><strong>在Javascript中,现阶段我们可以采用三种方式创建对象(object) :</strong></p>
+<p><strong>利用字面量创建对象</strong></p>
+<p><strong>利用new Object创建对象</strong></p>
+<p><strong>利用构造函数创建对象</strong></p>
+<h3 id="2-1利用字面量创建对象"><a href="#2-1利用字面量创建对象" class="headerlink" title="2.1利用字面量创建对象"></a>2.1利用字面量创建对象</h3><p><strong>对象字面量:就是花括号()里面包含了表达这个具体事物(对象)的属性和方法。</strong></p>
+<h4 id="对象的调用"><a href="#对象的调用" class="headerlink" title="对象的调用"></a>对象的调用</h4><p><strong>对象里面的属性调用:对象 属性名,这个小点.就理解为”的“</strong></p>
+<p><strong>对象里面属性的另一种调用方式:对象[‘属性名‘ ],注意方括号里面的属性必须加引号,我们后面会用对象里面的方法调用:对象方法名(),注意这个方法名字后面一定加括号</strong></p>
+<p><strong>console.log (star.name) &#x2F;&#x2F;调用名字属性</strong></p>
+<p><strong>console.log (star [‘name’]) &#x2F;&#x2F;调用名字属性</strong></p>
+<p><strong>star.sayHi(); &#x2F;&#x2F;调用sayHi方法,注意,一定不要忘记带后面的括号</strong></p>
+<h3 id="变量、属性、函数、方法总结"><a href="#变量、属性、函数、方法总结" class="headerlink" title="变量、属性、函数、方法总结"></a>变量、属性、函数、方法总结</h3><p><strong>变量:单独声明赋值,单独存在</strong></p>
+<p><strong>属性:对象里面的变量称为属性,不需要声明,用来描述该对象的特征</strong></p>
+<p><strong>函数:单独存在的,通过”函数名()”的方式就可以调用</strong></p>
+<p><strong>方法:对象里面的函数称为方法,方法不需要声明,使用“对象方法名()”的方式就可以调用,方法用来描述该对象的行为和功能。</strong></p>
+<h2 id="2-3利用构造函数创建对象"><a href="#2-3利用构造函数创建对象" class="headerlink" title="2.3利用构造函数创建对象"></a>2.3利用构造函数创建对象</h2><p><strong>构造函数:是一种特殊的函数,主要用来初始化对象,即为对象成员变量赋初值,它总与new运算符一起使用。我们可以把对象中一些公共的属性和方法抽取出来,然后封装到这个函数里面。</strong></p>
+<h2 id="2-4构造函数和对象"><a href="#2-4构造函数和对象" class="headerlink" title="2.4构造函数和对象"></a>2.4构造函数和对象</h2><p><strong>构造函数,如Stars() ,抽象了对象的公共部分,封装到了函数里面,它泛指某一大类(class)</strong></p>
+<p><strong>创建对象,如new Stars(),特指某一个,通过new关键字创建对象的过程我们也称为对象实例化</strong></p>
+<h3 id="new在执行时会做四件事情"><a href="#new在执行时会做四件事情" class="headerlink" title="new在执行时会做四件事情:"></a>new在执行时会做四件事情:</h3><p><strong>1,在内存中创建一个新的空对象。</strong></p>
+<p><strong>2．让this指向这个新的对象。</strong></p>
+<p><strong>3.执行构造函数里面的代码,给这个新对象添加属性和方法。</strong></p>
+<p><strong>4.返回这个新对象(所以构造函数里面不需要return).</strong></p>
+<h3 id="for-in-语句用于对数组或者对象的属性进行循环操作。"><a href="#for-in-语句用于对数组或者对象的属性进行循环操作。" class="headerlink" title="for in 语句用于对数组或者对象的属性进行循环操作。"></a>for in 语句用于对数组或者对象的属性进行循环操作。</h3><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><strong>1.对象可以让代码结构更清晰</strong></p>
+<p><strong>2,对象复杂数据类型object</strong></p>
+<p><strong>3·本质:对象就是一组无序的相关属性和方法的集合</strong></p>
+<p><strong>4.构造函数泛指某一大类,比如苹果,不管是红色苹果还是绿色苹果,都统称为苹果。</strong></p>
+<p><strong>5.for..in 用于对对象的属性进行循环操作。</strong></p>
+<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><p><strong>Javascript中的对象分为3种:自定义对象、内置对象、浏览器对象</strong></p>
+<p><strong>前面两种对象是&#x2F;S基础内容,属于ECMAScript ;第三个浏览器对象属于我们Js独有的,我们JS APl讲解</strong></p>
+<p><strong>内置对象就是指JS语言自带的一些对象,这些对象供开发者使用,并提供了一些常用的或是最基本而必要的功能(属性和方法)</strong></p>
+<p><strong>内置对象最大的优点就是帮助我们快速开发</strong></p>
+<p><strong>Javascript提供了多个内置对象: Math, Date、Array, string等</strong> </p>
+<h2 id="查文档"><a href="#查文档" class="headerlink" title="查文档"></a>查文档</h2><h3 id="2-1-MDN学习一个内置对象的使用只要学会其常用成员的使用即可"><a href="#2-1-MDN学习一个内置对象的使用只要学会其常用成员的使用即可" class="headerlink" title="2.1 MDN学习一个内置对象的使用只要学会其常用成员的使用即可"></a>2.1 MDN学习一个内置对象的使用只要学会其常用成员的使用即可</h3><p><strong>我们可以通过查文档学习,可以通过MDN&#x2F;W3C来查询。</strong></p>
+<p><strong>Mozilla开发者网络(MDN )提供了有关开放网络技术(Open Web )的信息,包括HTML, CSS和万维网及HTML5应用的API</strong></p>
+<p><strong>MDN: <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/">https://developer.mozilla.org/zh-CN/</a></strong></p>
+<h3 id="2-2如何学习对象中的方法"><a href="#2-2如何学习对象中的方法" class="headerlink" title="2.2如何学习对象中的方法"></a>2.2如何学习对象中的方法</h3><p><strong>1．查阅该方法的功能</strong></p>
+<p><strong>2．查看里面参数的意义和类型</strong></p>
+<p><strong>3.查看返回值的意义和类型</strong></p>
+<p><strong>4.通过demo进行测试</strong></p>
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><p><strong>Math是一个内置对象,它具有数学常数和函数的属性和方法。不是一个函数对象。</strong></p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><strong>与其它全局对象不同的是, Math不是一个构造器 Math 的所有属性和方法都是静态的,你用到的常数p可以用Math.PI 表示用 x 作参数 Math.sin (x) 调sin函数 JavaScript中的常数,是以全精度的实数定义的</strong></p>
+<h3 id="3-1-Math概述"><a href="#3-1-Math概述" class="headerlink" title="3.1 Math概述"></a>3.1 Math概述</h3><p><strong>Math对象不是构造函数,它具有数学常数和函数的属性和方法。跟数学相关的运算(求绝对值,取整、最大值等)可以使用Math中的成员。</strong></p>
+<p><strong>Math.PI&#x2F;&#x2F;圆周率</strong></p>
+<p><strong>Math.floor()&#x2F;&#x2F;向下取整</strong></p>
+<p><strong>Math.ceil ()&#x2F;&#x2F;向上取整</strong></p>
+<p><strong>Math.round()&#x2F;&#x2F;四舍五入  就近取整 注意-3.5 结果是-3</strong></p>
+<p><strong>Math.abs ()&#x2F;&#x2F;绝对值</strong></p>
+<p><strong>Math.max () &#x2F;Math.min() &#x2F;&#x2F;求最大和最小值</strong></p>
+<h2 id="random-随机生成小数"><a href="#random-随机生成小数" class="headerlink" title="random()随机生成小数"></a>random()随机生成小数</h2><p><strong>随机生成整数</strong></p>
+<p><strong>function getRandom(min, max) {</strong></p>
+<p>​      <strong>return Math.floor(Math.random() * (max - min + 1)) + min;</strong></p>
+<p>​    <strong>}</strong></p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p><strong>new Date();</strong></p>
+<p><strong>需要注意的是只能通过调用Date构這函 来实例化日期对象:以常规函数调用它, (即不加new操作符)将会返回一个字符串,而不是一个日期对象。另外,不像其他JavaScript类型, Date对象没有字面量格式。</strong></p>
+<p><strong>如果没有输入 可容数,则Date的构造器会依据系统设置的当前时间来创建一个Date对象。</strong></p>
+<p><strong>如果提供了至少两个参数,其余的参数均会默认设置为1 (如果没有提供day参数)或者0</strong></p>
+<p><strong>&#x2F;&#x2F;参数常用写法 数字型参数 常用的写法数字型 2019, 10, 01或者是 字符型’2019-10-1 8:8:8’’</strong></p>
+<p>​    <strong>var date1 &#x3D; new Date(2019, 10, 1);</strong></p>
+<p>​    <strong>console.log(date1); &#x2F;&#x2F;返回的是11月不是10月</strong></p>
+<p>​    <strong>var date2 &#x3D; new Date(‘2019-10-1 8:8:8’);</strong></p>
+<p>​    <strong>console.log(date2); &#x2F;&#x2F;准确建议使用</strong></p>
+<h2 id="4-1-Date概述"><a href="#4-1-Date概述" class="headerlink" title="4.1 Date概述"></a>4.1 Date概述</h2><p><strong>Date对象和Math对象不一样,他是一个构造函数,所以我们需要实例化后才能使用</strong></p>
+<p><strong>Date实例用来处理日期和时间</strong></p>
+<h2 id="4-2-Date-方法的使用"><a href="#4-2-Date-方法的使用" class="headerlink" title="4.2 Date()方法的使用"></a>4.2 Date()方法的使用</h2><p><strong>1,获取当前时间必须实例化</strong></p>
+<p><strong>var now &#x3D; new Date ();</strong></p>
+<p><strong>console.log (now);</strong></p>
+<p><strong>2.Date)构造函数的参数</strong></p>
+<p><strong>如果括号里面有时间,就返回参数里面的时间。例如日期格式字符串为‘2019-5-1’ ,可以写成new Date(2019-5-1)或者new Date(’2019&#x2F;5&#x2F;1‘)</strong></p>
+<p><strong>4.3日期格式化</strong></p>
+<p><strong>我们想要2019-8-88:8:8格式的日期,要怎么办?</strong></p>
+<p><strong>需要获取日期指定的部分,所以我们要手动的得到这种格式。</strong></p>
+<p><strong>方法名									说明												  代码</strong></p>
+<p><strong>getFullYear()                          获取当年										  dObj.getFullYear()</strong></p>
+<p><strong>getMonth()							 获取当月(0-11)							   dobj.getMonth()</strong></p>
+<p><strong>getDate()								获取当天日期								  dObi.getDate()</strong></p>
+<p><strong>getDay()								 获取星期几(周日0到周六6)			dObj.getDay()</strong></p>
+<p><strong>getHours()							 获取当前小时								  dobj.getHours()</strong></p>
+<p><strong>getMinutes()						  获取当前分钟								dobj.getMinutes()</strong></p>
+<p><strong>getSeconds()						获取当前秒钟							   dObj.getSeconds()</strong></p>
+<p><strong>不需要参数</strong></p>
+<h3 id="4-4获取日期的总的毫秒形式"><a href="#4-4获取日期的总的毫秒形式" class="headerlink" title="4.4获取日期的总的毫秒形式"></a>4.4获取日期的总的毫秒形式</h3><p><strong>Date对象是基于1970年1月1日(世界标准时间)起的毫秒数</strong></p>
+<p><strong>为什么计算机起始时间从1970年开始?</strong></p>
+<p><strong>我们经常利用总的毫秒数来计算时间,因为它更精确</strong></p>
+<h2 id="4-日期对象"><a href="#4-日期对象" class="headerlink" title="4.日期对象"></a>4.日期对象</h2><h3 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h3><p><strong>倒计时算法</strong></p>
+<p><strong>①核心算法:输入的时间减去现在的时间就是剩余的时间,即倒计时,但是不能拿着时分秒相减,比如05分减去25分,结果会是负数的。</strong></p>
+<p><strong>用时间戳来做。用户输入时间总的毫秒数减去现在时间的总的毫秒数,得到的就是剩余时,间的毫秒数。</strong></p>
+<p><strong>把剩余时间总的毫秒数转换为天、时、分、秒(时间戳转换为时分秒)</strong></p>
+<p><strong>转换公式如下:</strong></p>
+<p><strong>d &#x3D; parselnt(总秒数&#x2F;60&#x2F;60&#x2F;24); &#x2F;&#x2F;计算天数</strong></p>
+<p><strong>h &#x3D; parselnt(总秒数&#x2F;60&#x2F;60%24) &#x2F;&#x2F;计算小时</strong></p>
+<p><strong>m &#x3D; parselnt(总秒数&#x2F;60 %60); &#x2F;&#x2F;计算分数</strong></p>
+<p><strong>s&#x3D; parselnt(总秒数%60); &#x2F;&#x2F;计算当前秒数</strong></p>
+<h2 id="5-数组对象"><a href="#5-数组对象" class="headerlink" title="5.数组对象"></a>5.数组对象</h2><h3 id="instanceof和isArray"><a href="#instanceof和isArray" class="headerlink" title="instanceof和isArray"></a>instanceof和isArray</h3><p><strong>当检测Array实例时, Array.isArray优于instanceof,因为Array. isArray能检测iframes.</strong></p>
+<h3 id="5-3添加删除数组元素的方法"><a href="#5-3添加删除数组元素的方法" class="headerlink" title="5.3添加删除数组元素的方法"></a>5.3添加删除数组元素的方法</h3><p><strong>方法名						 说明																		                                返回值</strong></p>
+<p><strong>push(参数1..) 			末尾添加一个或多个元素,注意修改原数组		                               并返回新的长度</strong></p>
+<p><strong>pop()						   删除数组最后一个元素,把教组长度减1无参数、修改原数组         返回它删除的元素的值</strong></p>
+<p><strong>unshift(参数… )		 向数组的开头添加一个或更多元素,注意修改原数组					   并返回新的长度</strong></p>
+<p><strong>shift()                         删除数组的第一个元素,数组长度减1无参数、修改原数组 			并返回第一个元素的值</strong></p>
+<h3 id="5-4数组排序"><a href="#5-4数组排序" class="headerlink" title="5.4数组排序"></a>5.4数组排序</h3><p><strong>方法名 				说明																 是否修改原数组</strong></p>
+<p><strong>reverse()			 颠倒数组中元素的顺序,无参数					该方法会改变原来的数组返回新数组</strong></p>
+<p><strong>sort()					对数组的元素进行排序								该方法会改变原来的数组返回新数组</strong></p>
+<h3 id="5-5数组索引方法"><a href="#5-5数组索引方法" class="headerlink" title="5.5数组索引方法"></a>5.5数组索引方法</h3><p><strong>方法名					 说明															返回值</strong>  </p>
+<p><strong>indexOf()			    数组中查找给定元素的第一个索引		如果存在返回索引号如果不存在,则返回-1</strong></p>
+<p><strong>lastindexOf()		 在数组中的最后一个的索引,                   如果存在返回素引号如果不存在,则返回-1.</strong></p>
+<p><strong>有一个数组[‘c’, ‘a’, ‘2’, ‘a’, ‘x’, ‘a’, ‘x’, ‘c’,’b’],要求去除数组中重复的元素。</strong></p>
+<p><strong>核心算法:我们遍历日数组,然后拿着旧数组元素去查询新数组,如果该元素在新数组里面没有出现过,我们就添加,否则不添加。</strong></p>
+<p><strong>我们怎么知道该元素没有存在?利用新数组.indexOf(数组元素)如果返回时-1就说明新数组里面没有改元素</strong></p>
+<h3 id="5-6数组转换为字符串"><a href="#5-6数组转换为字符串" class="headerlink" title="5.6数组转换为字符串"></a>5.6数组转换为字符串</h3><p><strong>方法名							   说明																					 返回值</strong></p>
+<p><strong>toString()						  把数组转换成字符串,逗号分隔每一项							返回一个字符串</strong></p>
+<p><strong>join(‘分隔符’)					方法用于把数组中的所有元素转换为一个字符串。	 返回一个字符串</strong></p>
+<h3 id="5-7课下查询"><a href="#5-7课下查询" class="headerlink" title="5.7课下查询"></a>5.7课下查询</h3><p><strong>方法名 				说明																  返回值</strong></p>
+<p><strong>concat() 			 连接两个或多个数组不影响原数组		 	 返回一个新的数组</strong></p>
+<p><strong>slice()				  数组截取slice(begin, end)							 返回被截取项目的新数组</strong></p>
+<p><strong>splice()			   数组删除splice(第几个开始,要删除个数) 	返回被删除项目的新数组注意,这个会影响原数组</strong></p>
+<p><strong>slice()和splice()目的基本相同,建议同学们重点看下splice()</strong></p>
+<h3 id="6-1基本包装类型"><a href="#6-1基本包装类型" class="headerlink" title="6.1基本包装类型"></a>6.1基本包装类型</h3><p><strong>为了方便操作基本数据类型, Javascript还提供了三个特殊的引用类型: String, Number和Boolean.</strong></p>
+<p><strong>基本包装类型就是把简单数据类型包装成为复杂数据类型,这样基本数据类型就有了属性和方法</strong></p>
+<h3 id="6-2字符串的不可变"><a href="#6-2字符串的不可变" class="headerlink" title="6.2字符串的不可变"></a>6.2字符串的不可变</h3><p><strong>指的是里面的值不可变,虽然看上去可以改变内容,但其实是地址变了,内存中新开辟了一个内存空间。</strong></p>
+<h3 id="6-3根据字符返回位置"><a href="#6-3根据字符返回位置" class="headerlink" title="6.3根据字符返回位置"></a>6.3根据字符返回位置</h3><p><strong>字符串所有的方法,都不会修改字符串本身字符串是不可变的,操作完成会返回一个新的字符串。</strong></p>
+<p><strong>方法名																  说明</strong></p>
+<p><strong>indexof(要查找的字符,开始的位置)				返回指定内容在元字符串中的位置,如果找不到就返回-1,开始的位置是index索引号</strong></p>
+<p><strong>lastlindexof()													 从后往前找,只找第一个匹配的</strong></p>
+<h3 id="6-4根据位置返回字符-重点"><a href="#6-4根据位置返回字符-重点" class="headerlink" title="6.4根据位置返回字符(重点)"></a>6.4根据位置返回字符(重点)</h3><p><strong>方法名									说明																				 使用</strong></p>
+<p><strong>charAt(index)					   返回指定位置的字符(index字符串的索引号) 			str.charAt(0)</strong></p>
+<p><strong>charCodeAt(index)		      获取指定位置处字符的ASCI1码(index素引号) 		 str.charCodeAt(0)</strong></p>
+<p><strong>charAt(index)						获取指定位置处字符													HTML5, IE8+支持和charAt()等效</strong></p>
+<h3 id="6-5字符串操作方法-重点"><a href="#6-5字符串操作方法-重点" class="headerlink" title="6.5字符串操作方法(重点)"></a>6.5字符串操作方法(重点)</h3><p><strong>方法名											  说明</strong></p>
+<p><strong>concat(str1,str2,str3…. 				concat()方法用于连接两个或多个字符串。拼接字符串,等效于+, +更常用</strong></p>
+<p><strong>substr(start,length) 					 从start位置开始(索引号) , length取的个数重点记住这个</strong></p>
+<p><strong>slice(start, end)							从start位置开始,截取到end位置, end取不到(他们俩都是索引号)</strong></p>
+<p><strong>substring(start, end)				  从start位置开始,截取到end位置, end取不到基本和slice相同但是不接受负值</strong></p>
+<h3 id="6-8课下查阅"><a href="#6-8课下查阅" class="headerlink" title="6.8课下查阅"></a>6.8课下查阅</h3><p><strong>toUpperCase()&#x2F;&#x2F;转换大写</strong></p>
+<p><strong>tolowerCase() &#x2F;&#x2F;转换小写</strong></p>
+<h1 id="1-简单类型与复杂类型"><a href="#1-简单类型与复杂类型" class="headerlink" title="1.简单类型与复杂类型"></a>1.简单类型与复杂类型</h1><p><strong>简单类型又叫做基本数据类型或者 值类型,复杂类型又叫做 引用类型。·</strong></p>
+<p><strong>值类型:简单数据类型基本数据类型,在存储时变量中存储的是值本身,因此 做值类型</strong></p>
+<p><strong>string , number, boolean , undefined, null</strong></p>
+<p><strong>引用类型:复杂数据类型,在存储时变量中存储的仅仅是地址(引用) ,因此叫做引用数据类型</strong></p>
+<p><strong>通过new关键字创建的对象(系统对象、自定义对象) ,如Object,Array. Date等</strong></p>
+<h2 id="2-堆和栈"><a href="#2-堆和栈" class="headerlink" title="2.堆和栈"></a>2.堆和栈</h2><p><strong>堆栈空间分配区别：</strong></p>
+<p><strong>1、栈(操作系统) :由操作系统自动分配释放存放函数的参数值、局部变量的值等。其操作方式类似于数据结构中的栈;</strong></p>
+<p><strong>简单数据类型存放到栈里面</strong></p>
+<p><strong>2、堆(操作系统) :存储复杂类型对象,一般由程序员分配释放,若程序员不释放,由垃圾回收机制回收。</strong></p>
+<p><strong>复杂数据类型存放到堆里面</strong></p>
+<p><strong>注意: JavaScriot中没有堆栈的概念,通过堆栈的方式,可以让大家更容易理解代码的一些执行方式,便于将来学习其他语言</strong></p>
+<h2 id="3-简单类型的内存分配"><a href="#3-简单类型的内存分配" class="headerlink" title="3.简单类型的内存分配"></a>3.简单类型的内存分配</h2><p><strong>值类型(简单数据类型) : string , number , boolean , undefined , null</strong></p>
+<p><strong>值类型变量的数据直接存放在变量(栈空间)中</strong></p>
+<h2 id="6-复杂类型传参"><a href="#6-复杂类型传参" class="headerlink" title="6.复杂类型传参"></a>6.复杂类型传参</h2><p><strong>函数的形参也可以看做是一个变量,当我们把一个值类型变量作为参数传给函数的形参时,其实是把变量在栈空间里的值复制了一份给形参,那么在方法内部对形参做任何修改,都不会影响到的外部变量。</strong></p>
+<p><strong>函数的形参也可以看做是一个变量,当我们把引用类型变量传给形参时,其实是把变量在栈空间里保存的堆地址复制给了形参,形参和实参其实葆存的是同一个堆地址,所以操作的是同一个对象。</strong></p>
+<h1 id="Web-APIs介绍"><a href="#Web-APIs介绍" class="headerlink" title="Web APIs介绍"></a>Web APIs介绍</h1><h2 id="1-1-JS的组成"><a href="#1-1-JS的组成" class="headerlink" title="1.1 JS的组成"></a>1.1 JS的组成</h2><p><img src="C:\Users\24861\Desktop\笔记图\js组成.JPG" alt="js组成"></p>
+<h2 id="1-2JS基础阶段以及Web-APIs阶段"><a href="#1-2JS基础阶段以及Web-APIs阶段" class="headerlink" title="1.2JS基础阶段以及Web APIs阶段"></a>1.2JS基础阶段以及Web APIs阶段</h2><p><strong>JS基础阶段</strong></p>
+<p><strong>我们学习的是ECMAScript标准规定的基本语法</strong></p>
+<p><strong>要求同学们掌握Js基础语法</strong></p>
+<p><strong>只学习基本语法,做不了常用的网页交互效果</strong></p>
+<p><strong>目的是为了Js后面的课程打基础、做铺垫</strong></p>
+<p><strong>Web APis阶段Web APIs是w3c组织的标准</strong></p>
+<p><strong>Web APIs a Doм和BOM</strong></p>
+<p><strong>Web APIs是我们Js所独有的部分</strong></p>
+<p><strong>我们主要学习页面交互功能</strong></p>
+<p><strong>需要使用Js基础的课程内容做基础</strong></p>
+<p><strong>Js基础学习ECMAScript基础语法为后面作铺垫, web APIs是Js的应用,大量使用Js基础语法做交互效果</strong></p>
+<h2 id="2-1-API"><a href="#2-1-API" class="headerlink" title="2.1 API"></a>2.1 API</h2><p><strong>API (Application Programming Interface,应用程序编程接口)是一些预先定义的函数,目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力,而又无需访问源码,或理解内部工作机制的细节。</strong></p>
+<p><strong>简单理解: API是给程序员提供的一种工具,以便能更轻松的实现想要完成的功能。</strong></p>
+<h2 id="2-2-Web-API"><a href="#2-2-Web-API" class="headerlink" title="2.2 Web API"></a>2.2 Web API</h2><p><strong>Web API是浏览器提供的一套操作浏览器功能和页面元素的API (BOM和DOM).</strong></p>
+<p><strong>现阶段我们主要针对于浏览器讲解常用的API,主要针对浏览器做交互效果。</strong></p>
+<p><strong>比如我们想要浏览器弹出一个警示框,直接使用alert( 弹出 )</strong></p>
+<p><strong>MDN详细API : <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API">https://developer.mozilla.org/zh-CN/docs/Web/API</a></strong></p>
+<p><strong>因为Web API很多,所以我们将这个阶段称为Web APls</strong></p>
+<h2 id="2-3-API和Web-API总结"><a href="#2-3-API和Web-API总结" class="headerlink" title="2.3 API和Web API总结"></a>2.3 API和Web API总结</h2><p><strong>1.API是为我们程序员提供的一个接口,帮助我们实现某种功能,我们会使用就可以了,不必纠结内部如何实现</strong></p>
+<p><strong>2.Web API主要是针对于浏览器提供的接口,主要针对于浏览器做交互效果。</strong></p>
+<p><strong>3.Web API一般都有输入和输出(函数的传参和返回值) , WebAPI很多都是方法(函数)</strong></p>
+<p><strong>4.学习Web APl可以结合前面学习内置对象方法的思路学习</strong></p>
+<h2 id="DOM-重点"><a href="#DOM-重点" class="headerlink" title="DOM(重点)"></a>DOM(重点)</h2><h3 id="1-1什么是DOM"><a href="#1-1什么是DOM" class="headerlink" title="1.1什么是DOM"></a>1.1什么是DOM</h3><p><strong>文档对象模型( Document Object Model ,简称DOM ) ,是W3C组织推荐的处理可扩展标记语言(HTML或者XML )的标准编程接口。</strong></p>
+<p> <strong>W3C已经定义了一系列的DOM接口,通过这些DOM接口可以改变网页的内容、结构和样式。</strong></p>
+<h3 id="1-2-DOM树"><a href="#1-2-DOM树" class="headerlink" title="1.2 DOM树"></a>1.2 DOM树</h3><p><img src="C:\Users\24861\Desktop\笔记图\dom树.JPG" alt="dom树"></p>
+<p><strong>文档:一个页面就是一个文档, DOM中使用document表示</strong></p>
+<p><strong>元素:页面中的所有标签都是元素, DOM中使用element表示</strong></p>
+<p><strong>节点:网页中的所有内容都是节点(标签、属性、文本、注释等) , DOM中使用node表示</strong></p>
+<p><strong>DOM把以上内容都看做是对象</strong></p>
+<h3 id="2-1如何获取页面元素"><a href="#2-1如何获取页面元素" class="headerlink" title="2.1如何获取页面元素"></a>2.1如何获取页面元素</h3><p><strong>DOM在我们实际开发中主要用来操作元素。</strong></p>
+<p><strong>我们如何来获取页面中的元素呢?</strong></p>
+<p><strong>获取页面中的元素可以使用以下几种方式:</strong></p>
+<p><strong>根据ID获取</strong></p>
+<p><strong>根据标签名获取</strong></p>
+<p><strong>通过HTML5新增的方法获取</strong></p>
+<p><strong>特殊元素获取</strong></p>
+<h3 id="2-2根据ID获取"><a href="#2-2根据ID获取" class="headerlink" title="2.2根据ID获取"></a>2.2根据ID获取</h3><p><strong>使用getElementByld()方法可以获取带有ID的元素对象。</strong></p>
+<p><strong>Document的方法getElementByld())返回一个匹配特定1D的元素由于元素的ID在大部分情况下要求是独一无二的,这个方法自然而然地成为了一个高效查找特库元素的方法。</strong></p>
+<p><strong>element是一个Element对象。如果当前文档中拥有特定ID的元素不存在则返回null</strong></p>
+<p><strong>id是写的字,代表了所要查找的元素的唯一ID.</strong></p>
+<p><strong>返回一个匹配到ID的DOM ElementE,若在当前Document下没有找到,则返回null</strong></p>
+<h3 id="2-3根据标签名获取"><a href="#2-3根据标签名获取" class="headerlink" title="2.3根据标签名获取"></a>2.3根据标签名获取</h3><p><strong>使用getElementsByTagName()方法可以返回带有指定标签名的对象的集合。</strong></p>
+<p><strong>还可以获取某个元素(3元素)内部所有指定标签名的子元素.</strong></p>
+<p><strong>element.getElementsByTagName (‘标签名‘);</strong></p>
+<p><strong>注意:父元素必须是单个对象(必须指明是哪一个元素对象).获取的时候不包括元素自己。</strong></p>
+<h3 id="2-4通过HTML5新增的方法获取i9以上浏览器可以使用"><a href="#2-4通过HTML5新增的方法获取i9以上浏览器可以使用" class="headerlink" title="2.4通过HTML5新增的方法获取i9以上浏览器可以使用"></a>2.4通过HTML5新增的方法获取i9以上浏览器可以使用</h3><p><strong>1.document.getElementsByClassName (类名’) ; &#x2F;&#x2F;根据类名返回元素对象集合</strong></p>
+<p><strong>2.document.querySelector (‘选择器’);  &#x2F;&#x2F;根据指定选择器返回第一个元素对象</strong></p>
+<p><strong>3.document.querySelelctorAll (,選择器’);&#x2F;&#x2F;根据指定选择器返回</strong></p>
+<h3 id="2-5获取特殊元素-body-html"><a href="#2-5获取特殊元素-body-html" class="headerlink" title="2.5获取特殊元素( body , html )"></a>2.5获取特殊元素( body , html )</h3><p><strong>获取body元素</strong></p>
+<p><strong>doucumnet.body &#x2F;&#x2F;返回body元素对象</strong></p>
+<p><strong>获取html元素</strong></p>
+<p><strong>document-documentElement &#x2F;&#x2F;返回html元素对象</strong></p>
+<h2 id="3-事件基础"><a href="#3-事件基础" class="headerlink" title="3.事件基础"></a>3.事件基础</h2><h3 id="3-1事件概述"><a href="#3-1事件概述" class="headerlink" title="3.1事件概述"></a>3.1事件概述</h3><p><strong>JavaScript使我们有能力创建动态页面,而事件是可以被Javascript侦测到的行为</strong>。</p>
+<p><strong>简单理解:触发–响应机制。</strong></p>
+<p><strong>网页中的每个元素都可以产生某些可以触发JavaScript的事件,例如,我们可以在用户点击某按钮时产生一个事件,然后去执行某些操作。</strong></p>
+<h3 id="3-3执行事件的步骤"><a href="#3-3执行事件的步骤" class="headerlink" title="3.3执行事件的步骤"></a>3.3执行事件的步骤</h3><p><strong>1.获取事件源</strong></p>
+<p><strong>2注册事件（绑定事件)</strong></p>
+<p><strong>3.添事件处理程序(采取函数赋值形式)</strong></p>
+<h3 id="3-3常见的鼠标事件"><a href="#3-3常见的鼠标事件" class="headerlink" title="3.3常见的鼠标事件"></a>3.3常见的鼠标事件</h3><p><strong>鼠标事件										 触发条件</strong></p>
+<p><strong>onclick										   鼠标点击左键触发</strong></p>
+<p><strong>onmouseover							  鼠标经过触</strong></p>
+<p><strong>onmouseout								鼠标离开触发</strong></p>
+<p><strong>onfocus									    获得鼠标焦点触发</strong></p>
+<p><strong>onblur										  失去鼠标焦点触发</strong></p>
+<p><strong>onmousemove					     鼠标移动触发</strong></p>
+<p><strong>onmouseup						      鼠标弹起触发</strong></p>
+<p><strong>onmousedown					    鼠标按下触发</strong></p>
+<h2 id="4·操作元素"><a href="#4·操作元素" class="headerlink" title="4·操作元素"></a>4·操作元素</h2><p><strong>JavaScript的DOM操作可以改变网页内容、结构和样式,我们可以利用DOM操作元素来改变元素里面的内容、属性等。注意以下都是属性</strong></p>
+<h3 id="4-1改变元素内容"><a href="#4-1改变元素内容" class="headerlink" title="4.1改变元素内容"></a>4.1改变元素内容</h3><p><strong>element. innerText</strong></p>
+<p><strong>从起始位置到终止位置的内容,但它去除html标签,同时空格和换行也会去掉</strong></p>
+<p><strong>element. innerHTML</strong></p>
+<p><strong>起始位置到终止位置的全部内容,包括html标签,同时保留空格和换行</strong></p>
+<h3 id="4-2常用元素的属性操作"><a href="#4-2常用元素的属性操作" class="headerlink" title="4.2常用元素的属性操作"></a>4.2常用元素的属性操作</h3><p><strong>1.innerText. innerHTMI改变元素内容</strong></p>
+<p><strong>2.src, href</strong></p>
+<p><strong>3.id, alt, title</strong></p>
+<h3 id="4-3表单元素的属性操作"><a href="#4-3表单元素的属性操作" class="headerlink" title="4.3表单元素的属性操作"></a>4.3表单元素的属性操作</h3><p><strong>利用DOM可以操作如下表单元素的属性:</strong></p>
+<p><strong>type, value, checked, selected, disabled</strong></p>
+<h3 id="4-4样式属性操作"><a href="#4-4样式属性操作" class="headerlink" title="4.4样式属性操作"></a>4.4样式属性操作</h3><p><strong>我们可以通过IS修改元素的大小、颜色、位置等样式。</strong></p>
+<ol>
+<li><strong>element.style 行内样式操作——-用行内样式覆盖了</strong>  </li>
+<li><strong>element.className类名样式操作——-样式很多用</strong></li>
+</ol>
+<p><strong>注意:</strong></p>
+<p><strong>1.Js里面的样式采取驼峰命名法比如fontSize, backgroundColor</strong></p>
+<p><strong>2.Js修改style样式操作,产生的是行内样式, css权重比较高</strong></p>
+<p><strong>注意：</strong></p>
+<p><strong>1,如果样式修改较多,可以采取操作类名方式更改元素样式。</strong></p>
+<p><strong>2.class因为是个保留字,因此使用className来操作元素类名属性</strong></p>
+<p><strong>3.className会直接更改元素的类名,会覆盖原先的类名。</strong></p>
+<p><strong>可以利用for循环设置一组元素的精灵图背景</strong></p>
+<p><strong>首先精灵图图片排列有规律的核心思路:</strong></p>
+<p><strong>利用for循环修改精灵图片的背景位置background-position</strong></p>
+<p><strong>剩下的就是考验你的数学功底了</strong></p>
+<p><strong>i循环里面的i索引号*44就是每个图片的y坐标</strong></p>
+<p><strong>首先表单需要2个新事件,获得焦点onfocus失去焦点onblur</strong></p>
+<p><strong>如果获得焦点,判断表单里面内容是否为默认文字,如果是默认文字,就清空表单内容</strong></p>
+<p><strong>如果失去焦点,判断表单内容是否为空,如果为空,则表单内容改为默认文字</strong></p>
+<h2 id="4·操作元素总结"><a href="#4·操作元素总结" class="headerlink" title="4·操作元素总结"></a>4·操作元素总结</h2><p><strong>操作元素是DOM核心内容</strong></p>
+<p><img src="C:\Users\24861\Desktop\笔记图\操作元素总结.JPG" alt="操作元素总结"></p>
+<h3 id="4-6自定义属性的操作"><a href="#4-6自定义属性的操作" class="headerlink" title="4.6自定义属性的操作"></a>4.6自定义属性的操作</h3><p><strong>1·获取属性值</strong></p>
+<p><strong>element.属性 获取属性值</strong></p>
+<p><strong>element.getAttribute (属性);</strong></p>
+<p><strong>区别:</strong></p>
+<p><strong>element.属性 获取内置属性值(元素本身自带的属性)</strong></p>
+<p><strong>element .getattribute ( ‘属性’);主要获得自定义的属性(标准)我们程序员自定义的属性</strong></p>
+<p><strong>2,设置属性值</strong></p>
+<p><strong>element.属性&#x3D; ‘值’ 设置内置属性值。</strong> </p>
+<p><strong>element .setAttribute (‘属性’,‘值’);</strong></p>
+<p><strong>3.移除属性</strong></p>
+<p><strong>element. removeAttribute (‘’属性”);</strong></p>
+<h3 id="4-7-H5自定义属性"><a href="#4-7-H5自定义属性" class="headerlink" title="4.7 H5自定义属性"></a>4.7 H5自定义属性</h3><p><strong>自定义属性目的:是为了保存并使用数据。有些数据可以保存到页面中而不用保存到数据库中。</strong></p>
+<p><strong>自定义属性获取是通过getAttribute (属性”)获取。但是有些自定义属性很容易引起歧义,不容易判断是元素的内 属性还是自定义属性。</strong></p>
+<p><strong>H5给我们新增了自定义属性:</strong></p>
+<p><strong>1·设置H5自定义属性H5规定自定义属性data开头做为属性名并且赋值</strong></p>
+<p><strong>比如<div data-inde= "1" ></div></strong></p>
+<p><strong>或者使用JS设置</strong></p>
+<p><strong>element.setAttribute( ‘data-index’ ,2)</strong></p>
+<p><strong>2,获取H5自定义属性</strong></p>
+<p><strong>1,兼容性获取element.getAttribute( ‘data-index ‘)</strong></p>
+<p><strong>H5新增element.dataset.index或者element.dataset ’index’ ] ie 11才开始支持</strong></p>
+<h2 id="5．节点操作"><a href="#5．节点操作" class="headerlink" title="5．节点操作"></a>5．节点操作</h2><h3 id="5-1为什么学节点操作"><a href="#5-1为什么学节点操作" class="headerlink" title="5.1为什么学节点操作"></a>5.1为什么学节点操作</h3><h4 id="1-利用DOM提供的方法获取元素"><a href="#1-利用DOM提供的方法获取元素" class="headerlink" title="1,利用DOM提供的方法获取元素"></a><strong>1,利用DOM提供的方法获取元素</strong></h4><p><strong>document.getElementByld(）</strong></p>
+<p><strong>document.getElementsByTagName()</strong></p>
+<p><strong>document.querySelector等</strong></p>
+<p><strong>逻辑性不强、繁琐</strong></p>
+<h4 id="2·利用节点层级关系获取元素"><a href="#2·利用节点层级关系获取元素" class="headerlink" title="2·利用节点层级关系获取元素"></a>2·利用节点层级关系获取元素</h4><p><strong>利用父子兄节点关系获取元素</strong></p>
+<p><strong>逻辑性强,但是兼容性稍差</strong></p>
+<p><strong>这两种方式都可以获取元素节点,我们后面都会使用,但是节点操作更简单</strong></p>
+<h3 id="5-2节点概述"><a href="#5-2节点概述" class="headerlink" title="5.2节点概述"></a>5.2节点概述</h3><p><strong>网页中的所有内容都是节点(标签、属性、文本、注程等) ,在DOM中,节点使用node来表示。HTMILDOM树中的所有节点均可通过Javascript进行访问,所有HTML元素(节点)均可被修改,也可以创建或删除。</strong></p>
+<p><strong>一般地,节点至少拥有nodeType (节点类型)、nodeName (节点名称)和nodeValue (节点值)这三个基本属性。</strong></p>
+<p><strong>元素节点nodeType为1</strong></p>
+<p><strong>属性节点nodeType为2</strong></p>
+<p><strong>文本节点nodelype为3 (文本节点包含文字、空恪、换行等)</strong></p>
+<p><strong>我们在实际开发中,节点操作主要操作的是元素节点</strong></p>
+<h3 id="5-3节点层级"><a href="#5-3节点层级" class="headerlink" title="5.3节点层级"></a>5.3节点层级</h3><p><strong>利用DOM树可以把节点划分为不同的层级关系,常见的是父子兄层级关系。</strong></p>
+<p><strong>1,父级节点 node.parentNode</strong></p>
+<p><strong>parentNode属性可返回某节点的父节点,注意是最近的一个父节点</strong></p>
+<p><strong>如果指定的节点没有父节点则返回null</strong></p>
+<p><strong>2.子节点</strong></p>
+<p><strong>1. parentNode. childNodes (标准）</strong></p>
+<p><strong>parentNode. childNodes返回包含指定节点的子节点的集合,该集合为即时更新的集合。</strong></p>
+<p><strong>注意：返回值里面包含了所有的子节点,包括元素节点,文本节点等。如果只想要获得里面的元素节点,则需要专门处理。所以我们一般不提倡使用childNodes</strong></p>
+<p><strong>var ul &#x3D; document. queryselector (‘ul’);</strong></p>
+<p><strong>for(var i&#x3D; 0; i &lt; ul.childNodes.length;i++) {</strong></p>
+<p><strong>if (ul.childNodes [i].nodeType&#x3D;&#x3D;1) {</strong></p>
+<p><strong>&#x2F;&#x2F; ul.childNodes [i]是元素节点</strong></p>
+<p><strong>console. log (ul.childNodes [i]);</strong></p>
+<p><strong>}</strong></p>
+<p><strong>}</strong></p>
+<p><strong>children获取所有的子元素节点</strong></p>
+<p><strong>2.parentNode. children (非标准)</strong></p>
+<p><strong>firstChild返回第一个子节点,找不到则返回null,同样,也是包含所有的节点。</strong></p>
+<p><strong>3.parentNode.firstChild</strong></p>
+<p><strong>lastchild返回第一个子节点,找不到则返回null,同样,也是包含所有的节点。</strong></p>
+<p><strong>4.parentNode.lastchild</strong></p>
+<p><strong>5.parentNode .firstElementChild</strong></p>
+<p><strong>firstElementchild返回第一个子元素节点,找不到则返回null</strong></p>
+<p><strong>6.parent Node  .lastElementChild</strong></p>
+<p><strong>lastElenentchild返回最后一个子元素节点,找不到则返回null</strong></p>
+<p><strong>注意:这两个方法有兼容性问题, IE9以上才支持。</strong></p>
+<p><strong>实际开发中, firstChild和lastchild包含其他节点,操作不方便,而firstElementchild和lastElementchila又有兼容性问题,那么我们如何获取第一个子元素节点或最后一个子元素节点呢?</strong></p>
+<h3 id="3-兄弟节点"><a href="#3-兄弟节点" class="headerlink" title="3.兄弟节点"></a><strong>3.兄弟节点</strong></h3><p><strong>1.node.nextsibling</strong></p>
+<p><strong>nextsibling返回当前元素的下一个兄弟节点,找不到则返回nu11。同样,也是包含所有的节点。</strong></p>
+<p><strong>2.node.previoussibling</strong></p>
+<p><strong>previoussibling返回当前元素上一个兄弟节点,找不到则返回nu11。同样,也是包含所有的节点</strong></p>
+<p><strong>3.node.nextElementsibling</strong></p>
+<p><strong>nextElementsibling返回当前元素下一个兄弟元素节点,找不到则返回null.</strong></p>
+<p><strong>4.node.previousElementsibling</strong></p>
+<p><strong>previousElementsibling返回当前元素上一个兄弟节点,找不到则返回null.</strong></p>
+<p><strong>主意:这两个方法有兼容性问题, 1E9以上才支持。</strong></p>
+<p><strong>如何解决兼容性问题?</strong></p>
+<p><strong>自己封装一个兼容性的函数</strong></p>
+<p><strong>function getNextElementsibling (element) {</strong></p>
+<p><strong>var el &#x3D; element;</strong></p>
+<p><strong>while (el &#x3D; el.nextsibling) {</strong></p>
+<p><strong>if (el.nodeType &#x3D;&#x3D;1) {</strong> </p>
+<p><strong>return el;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>}</strong></p>
+<p><strong>return null;</strong></p>
+<p><strong>}</strong></p>
+<h3 id="5-4创建节点"><a href="#5-4创建节点" class="headerlink" title="5.4创建节点"></a>5.4创建节点</h3><p><strong>document. createElement (“tagName ‘)document. createlement ()</strong></p>
+<p><strong>方法创建由tagName指定的HTML元素。因为这些元素原先不存在,是根据我们的需求动态生成的,所以我们也称为动态创建元素节点。</strong></p>
+<h3 id="5-5添加节点"><a href="#5-5添加节点" class="headerlink" title="5.5添加节点"></a>5.5添加节点</h3><p><strong>1.node.appendchild (child)</strong> </p>
+<p><strong>node. appendchild()方法将一个节点添加到指定父节点的子节点列表未尾。类似于css里面的after伪元素。</strong></p>
+<p><strong>2.node.insertBefore (child,指定元素)</strong></p>
+<p><strong>node. insert Be fore ()方法将一个节点添加到父节点的指定子节点前面。类似于css里面的before伪元素。</strong></p>
+<h3 id="5-5删除节点"><a href="#5-5删除节点" class="headerlink" title="5.5删除节点"></a>5.5删除节点</h3><p><strong>node. removechild (child)</strong></p>
+<p><strong>node.removechild()方法从DoM中删除一个子节点,返回删除的节点</strong></p>
+<h3 id="5-6复制节点-克隆节点"><a href="#5-6复制节点-克隆节点" class="headerlink" title="5.6复制节点(克隆节点)"></a>5.6复制节点(克隆节点)</h3><p><strong>node.cloneNode ()node.cloneNode (1)方法返回调用该方法的节点的一个副本。也称为克隆节点&#x2F;拷贝节点</strong></p>
+<p><strong>注意：</strong></p>
+<p><strong>1,如果括号参数为空或者为false ,则是浅拷贝,即只克隆复制节点本身,不克隆里面的子节点。</strong></p>
+<p><strong>2,如果括号参数为true,则是深度拷贝,会复制节点本身以及里面所有的子节点。</strong></p>
+<h3 id="5-8三种动态创建元素区别"><a href="#5-8三种动态创建元素区别" class="headerlink" title="5.8三种动态创建元素区别"></a>5.8三种动态创建元素区别</h3><p><strong>document.write ()</strong></p>
+<p><strong>element .innerHTML</strong></p>
+<p><strong>document. creeateElement ().</strong></p>
+<p><strong>区别.</strong></p>
+<p><strong>1. document.write是直接将内容写入页面的内容流,但是文档流执行完毕,则它会导致页面全部重绘</strong></p>
+<p><strong>2.innerHTML是将内容写入某个DoM节点,不会导致页面全部重绘</strong></p>
+<p><strong>3.innerHTML创建多个元素效率更高(不要拼接字符串,采取数组形式拼接) ,结构稍微复杂</strong></p>
+<p><strong>4.createElement ()创建多个元素效率稍低一点点,但是结构更清材</strong></p>
+<p><strong>总结:不同浏览器下, innerHTM效率要比creatElement高</strong></p>
+<h2 id="6-DOM重点核心"><a href="#6-DOM重点核心" class="headerlink" title="6.DOM重点核心"></a>6.DOM重点核心</h2><p><strong>文档对象模型( Document Object Model,简称DOM ) ,是W3C组织推荐的处理可扩展标记语言(HTML或者XML )的标准编程接口</strong></p>
+<p><strong>W3C已经定义了一系列的DOM接口,通过这些DOM接口可以改变网页的内容、结构和样式</strong></p>
+<p><strong>1,对于JavaScript,为了能够使lavaScript操作HTML , JavaScript就有了一套自己的dom编程接口。</strong></p>
+<p><strong>2,对于HTMIL, dom使得html形成一棵dom树,包含文档、元素、节点</strong></p>
+<p><strong>我们获取过来的DOM元素是一个对象(object) , 所以称为文档对象模型</strong></p>
+<p><strong>关于dom操作,我们主要针对于元素的操作。主要有创建、增、删、改、查、属性操作、事件操作。</strong></p>
+<h3 id="6-1创建"><a href="#6-1创建" class="headerlink" title="6.1创建"></a>6.1创建</h3><ol>
+<li><strong>document.write</strong></li>
+<li><strong>innerHTML</strong></li>
+<li><strong>createElement</strong></li>
+</ol>
+<h3 id="6-2增"><a href="#6-2增" class="headerlink" title="6.2增"></a>6.2增</h3><ol>
+<li><strong>appendChild</strong></li>
+<li><strong>insertBefore</strong></li>
+</ol>
+<h3 id="6-3删"><a href="#6-3删" class="headerlink" title="6.3删"></a><strong>6.3删</strong></h3><ol>
+<li><strong>removeChild</strong></li>
+</ol>
+<h3 id="6-4改"><a href="#6-4改" class="headerlink" title="6.4改"></a>6.4改</h3><p><strong>主要修改dom的元素属性, dom元素的内容、属性,表单的值等</strong></p>
+<p><strong>1.修改元素属性: src, href, titte等</strong></p>
+<p><strong>2,修改普通元素内容: innerHTML, innerText</strong></p>
+<p><strong>3,修改表单元素: value, type, disabled等</strong></p>
+<p><strong>4.修改元素样式: style, className</strong></p>
+<h3 id="6-5查"><a href="#6-5查" class="headerlink" title="6.5查"></a>6.5查</h3><p><strong>主要获取查询dom的元素</strong></p>
+<ol>
+<li><p><strong>DOM提供的API方法: getElementByld, getElementsByTagName  古老用法不太推荐</strong></p>
+</li>
+<li><p><strong>H5提供的新方法: querySelector, querySelectorAll提倡</strong></p>
+</li>
+<li><p><strong>“利用节点操作获取元素:父(parentNode),子(children),</strong></p>
+<p><strong>兄(previousElementSibling \ nextElementSibling )提倡</strong></p>
+</li>
+</ol>
+<h3 id="6-6属性操作"><a href="#6-6属性操作" class="headerlink" title="6.6属性操作"></a>6.6属性操作</h3><p><strong>主要针对于自定义属性。</strong></p>
+<ol>
+<li><strong>setAttribute :设置dom的属性值</strong></li>
+<li><strong>getAttribute :得到dom的属性值</strong></li>
+<li><strong>removeAttribute移除属性</strong></li>
+</ol>
+<h3 id="6-7-事件操作"><a href="#6-7-事件操作" class="headerlink" title="6.7 事件操作"></a>6.7 事件操作</h3><p><strong>给元素注册事件,采取事件源事件类型&#x3D;事件处理程序</strong></p>
+<img src="C:\Users\24861\Desktop\笔记图\操作事件.JPG" alt="操作事件" style="zoom:100%;" />
+
+<h2 id="1-注册事件-绑定事件"><a href="#1-注册事件-绑定事件" class="headerlink" title="1.注册事件(绑定事件)"></a>1.注册事件(绑定事件)</h2><p><strong>1.1注册事件概述给元素添加事件,称为注册事件或者绑定事件。</strong></p>
+<p><strong>注册事件有两种方式:传统方式和方法监听注册方式</strong></p>
+<p><strong>传统注册方式</strong></p>
+<p><strong>利用on开头的事件onclick</strong></p>
+<p><button onclick= "alert(hi~)" ></button></p>
+<p><strong>btn.onclick &#x3D; function(){}</strong></p>
+<p><strong>特点：注册事件的唯一性,</strong></p>
+<p><strong>同一个元素同一个事件只能设置一个处理函数,最后注册的处理函数将会覆盖前面注册的处理函数</strong></p>
+<p><strong>方法监听注册方式</strong></p>
+<p><strong>w3c标准推荐方式</strong></p>
+<p><strong>addEventListener()它是一个方法</strong></p>
+<p><strong>IE9之前的IE不变持此方法,可使用attachEvent()代替</strong></p>
+<p><strong>特点:同一个元素同一个事件可以注册多个监听器</strong></p>
+<p><strong>按注册顺序依次执行</strong></p>
+<h3 id="1-2-addEventListener事件监听方式"><a href="#1-2-addEventListener事件监听方式" class="headerlink" title="1.2 addEventListener事件监听方式"></a>1.2 addEventListener事件监听方式</h3><p><strong>eventTarget.addEventListener (type, listener [, usecapture]).</strong></p>
+<p><strong>eventTarget.addEventListener ()方法将指定的监听器注册到eventTarget (目标对象)上,当该对象触发指定的事件时,就会执行事件处理函数。</strong></p>
+<p><strong>该方法接收三个参数:</strong></p>
+<p><strong>type:事件类型字符串,比如click, mouseover ,注意这里不要带on</strong></p>
+<p><strong>listener:事件处理函数,事件发生时,会调用该监听函数</strong></p>
+<p><strong>useCapture:可选参数,是一个布尔值,默认是false,学完DOM事件流后,我们再进步学习</strong></p>
+<h3 id="1-3-attachEvent事件监听方式"><a href="#1-3-attachEvent事件监听方式" class="headerlink" title="1.3 attachEvent事件监听方式"></a>1.3 attachEvent事件监听方式</h3><p><strong>eventrarget. attachEvent (eventNamewithOn, callback).</strong></p>
+<p><strong>eventTarget. attachEvent ()方法将指定的监听器注册到eventTarget (目标对象)上,当该对象触发指定的事件时,指定的回调函数就会被执行。</strong></p>
+<p><strong>该方法接收两个参数:</strong></p>
+<p><strong>eventNameWithOn :事件类型字符串,比如onclick, onmouseover ,这里要带on</strong></p>
+<p><strong>callback :事件处理函数,当目标触发事件时回调函数被调用</strong></p>
+<h3 id="1-4注册事件兼容性解决方案"><a href="#1-4注册事件兼容性解决方案" class="headerlink" title="1.4注册事件兼容性解决方案"></a>1.4注册事件兼容性解决方案</h3><p><strong>function addEventzistener (element, eventName, fn) {</strong></p>
+<p><strong>&#x2F;&#x2F;判断当前浏览器是否支持addEventListener方法</strong></p>
+<p><strong>if (element. addEventListener) {</strong></p>
+<p><strong>element.addiventListener (eventName, fn); &#x2F;&#x2F;第三个参数默认是false</strong></p>
+<p><strong>} else if (element.attachEvent) {</strong></p>
+<p><strong>element. attachEvent (‘on’ + eventName, fn);</strong></p>
+<p><strong>} else{</strong></p>
+<p><strong>&#x2F;&#x2F;相当于element.onclick&#x3D;fn;</strong></p>
+<p><strong>element[‘on’ + eventName] &#x3D; fn;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>兼容性处理的原则:首先照顾大多数浏览器,再处理特殊浏览器</strong></p>
+<h2 id="2-删除事件（解绑事件"><a href="#2-删除事件（解绑事件" class="headerlink" title="2.删除事件（解绑事件)."></a>2.删除事件（解绑事件).</h2><h3 id="2-1删除事件的方式"><a href="#2-1删除事件的方式" class="headerlink" title="2.1删除事件的方式"></a>2.1删除事件的方式</h3><p><strong>1.传统注册方式</strong></p>
+<p><strong>eventTarget.onclick &#x3D; null;</strong></p>
+<p><strong>2.方法监听注册方式.</strong></p>
+<p><strong>eventTarget. removeEventListener (type, listenerl, useCapturel);</strong></p>
+<p><strong>ventrarget. detachEvent (eventNamewithon, callback);</strong></p>
+<h3 id="2-2删除事件兼容性解决方案"><a href="#2-2删除事件兼容性解决方案" class="headerlink" title="2.2删除事件兼容性解决方案"></a>2.2删除事件兼容性解决方案</h3><p><strong>functiont removeEventListener (element, eventName, fn)</strong></p>
+<p> <strong>&#x2F;&#x2F;判断当前浏览器是否支持removeEventistener方法</strong></p>
+<p><strong>if (element. removeEventListener) {</strong></p>
+<p><strong>element.removeEventListener (eventName, fn); &#x2F;&#x2F;第三个参数默认是false</strong></p>
+<p><strong>} else if (element.detaEvent) {</strong></p>
+<p><strong>element. detachEvent (‘on’ + eventName, fn);</strong></p>
+<p><strong>} else {</strong></p>
+<p><strong>element[‘on’ + eventName] &#x3D; null;</strong></p>
+<p><strong>}</strong></p>
+<h2 id="3-DOM事件流"><a href="#3-DOM事件流" class="headerlink" title="3.DOM事件流"></a>3.DOM事件流</h2><p><strong>事件流描述的是从页面中接收事件的顺序。</strong></p>
+<p><strong>事件发生时会在元素节点之间按照特定的顺字传播,这个传播过程即DOM事件流。</strong></p>
+<p><img src="C:\Users\24861\Desktop\笔记图\Dom事件流.JPG" alt="Dom事件流"></p>
+<p><strong>事件冒泡: IE最早提出,事件开始时由最具体的元素接收,然后逐级向上传播到到DOM最顶层节点的过程。</strong></p>
+<p><strong>事件捕获:网景最早提出,由DOM最顶层节点开始,然后逐级向下传播到到最具体的元素接收的过程。</strong></p>
+<p><strong>我们向水里面扔一块石头,首先它会有一个下降的过程,这个过程就可以理解为从最顶层向事件发生的最具体元素(目标点)的捕获过程;之后会产生泡泡,会在最低点(最具体元素)之后漂浮到水面上,这个过程相当于事件冒泡。</strong></p>
+<p><img src="C:\Users\24861\Desktop\笔记图\事件流2.JPG" alt="事件流2"></p>
+<p><strong>事件发生时会在元素节点之间按照特定的顺序传播,这个传播过程即DoM事件流。</strong></p>
+<p><strong>注意.</strong></p>
+<p><strong>1. Js代码中只能执行捕获或者冒泡其中的一个阶段。</strong></p>
+<p><strong>2.onclick和attachEvent只能得到冒泡阶段</strong></p>
+<p><strong>3.addEventListener (type, listenert, usecapture] )</strong></p>
+<p><strong>第三个参数如果是true ,表示在事件捕获阶段调用事件处理程序;</strong></p>
+<p><strong>如果是false (不写默认就是false ) ,表示在事件冒泡阶段调用事件处理程序。</strong></p>
+<p><strong>4,实际开发中我们很少使用事件捕获,我们更关注事件冒泡。</strong></p>
+<p><strong>5,有些事件是没有冒泡的,比如onblur, onfocus, onmouseenter, onmouseleave</strong></p>
+<p><strong>6·事件冒泡有时候会带来麻烦,有时候又会帮助很巧妙的做某些事件,我们后面讲解。</strong></p>
+<h3 id="4-1什么是事件对象"><a href="#4-1什么是事件对象" class="headerlink" title="4.1什么是事件对象"></a>4.1什么是事件对象</h3><p><strong>eventTarget. onclick &#x3D; function (event) {}</strong></p>
+<p><strong>&#x2F;&#x2F;这个event就是事件对象,我们还喜欢的写成e或者evt</strong></p>
+<p><strong>eventTarget.addEventListener (‘click’, function (event) {})</strong></p>
+<p><strong>&#x2F;&#x2F;这个event就是事件对象,我们还喜欢的写成e或者evt</strong></p>
+<p><strong>官方解释: event对象代表事件的状态 比如键盘按键的状态鼠标的位置、鼠标按钮的状态。</strong></p>
+<p><strong>简单理解:事件发生后,跟事件相关的一系列信息数据的集合都放到这个对象里面,这个对象就是事件对象event,它有很多属性和方法。</strong></p>
+<p><strong>比如：</strong></p>
+<p><strong>1谁绑定了这个事件。</strong></p>
+<p><strong>2鼠标触发事件的话,会得到鼠标的相关信息,如鼠标位置。</strong></p>
+<p><strong>3键盘触发事件的话,会得到腱盘的相关信息,如按了哪个键。</strong></p>
+<p><strong>这个event是个形参,系统帮我们设定为事件对象,不需要传递实参过去。</strong></p>
+<p><strong>当我们注册事件时, event对象就会被系统自动创建,并依次传递给事件监听器(事件处理函数)。</strong></p>
+<h3 id="4-3事件对象的兼容性方案"><a href="#4-3事件对象的兼容性方案" class="headerlink" title="4.3事件对象的兼容性方案"></a>4.3事件对象的兼容性方案</h3><p><strong>事件对象本身的获取存在兼容问题:</strong></p>
+<p><strong>1,标准浏览器中是浏览器给方法传递的参数,只需要定义形参e就可以获取到。</strong></p>
+<p><strong>2.在1E6-8中,浏览器不会给方法传递参数,如果需要的话,需要到window.event中获取查找。</strong></p>
+<p><strong>解决:e &#x3D;e Il window.event</strong></p>
+<h3 id="4-4事件对象的常见属性和方法"><a href="#4-4事件对象的常见属性和方法" class="headerlink" title="4.4事件对象的常见属性和方法"></a>4.4事件对象的常见属性和方法</h3><p><strong>事件对象属性方法								说明</strong></p>
+<p><strong>e.target 												返回触发事件的对象标准</strong></p>
+<p><strong>e.srcElement										返回触发事件的对象非标准1e6-8使用</strong></p>
+<p><strong>e.type													返回事件的类型比如click mouseover不带on</strong></p>
+<p><strong>e.cancelBubble									该属性阻止冒泡非标准ie6-8使用</strong></p>
+<p><strong>e.returnValue									该属性阻止默认事件(默认行为)非标准ie6-8使用比如不让链接跳转</strong></p>
+<p><strong>e.preventDefault()							该方法阻止默认事件(默认行为)标准比如不让链接跳转</strong></p>
+<p><strong>e.stopPropagation()						阻止冒泡标准</strong></p>
+<h3 id="5-1阻止事件冒泡的两种方式"><a href="#5-1阻止事件冒泡的两种方式" class="headerlink" title="5.1阻止事件冒泡的两种方式"></a>5.1阻止事件冒泡的两种方式</h3><p><strong>事件冒泡:开始时由最具体的元素接收,然后逐级向上传播到到DOM最页层节点。</strong></p>
+<p><strong>事件冒泡本身的特性,会带来的坏处,也会带来的好处,需要我们灵活掌握。</strong></p>
+<p><strong>阻止事件冒泡标准写法:</strong></p>
+<p><strong>利用事件对象里面的stopPropagation()方法</strong>  <strong>&#x2F;&#x2F;stop停止 Propagation 传播</strong></p>
+<p><strong>e.cancelBubble &#x3D; true;&#x2F;&#x2F;cancel 取消bubble泡泡</strong> </p>
+<h3 id="5-2阻止事件冒泡的兼容性解决方案"><a href="#5-2阻止事件冒泡的兼容性解决方案" class="headerlink" title="5.2阻止事件冒泡的兼容性解决方案"></a>5.2阻止事件冒泡的兼容性解决方案</h3><p><strong>if (e &amp;&amp; e.stopPropagation) {</strong></p>
+<p><strong>e.stopPropagation();</strong></p>
+<p><strong>}else{</strong></p>
+<p><strong>window.event.cancelBubble &#x3D; true;</strong></p>
+<p><strong>}</strong></p>
+<h2 id="6．事件委托（代理、委派"><a href="#6．事件委托（代理、委派" class="headerlink" title="6．事件委托（代理、委派)"></a>6．事件委托（代理、委派)</h2><p><strong>事件冒泡本身的特性,会带来的坏处,也会带来的好处,需要我们灵活掌握,生活中有如下场景:</strong></p>
+<p><strong>咱们班有100个学生,快递员有100个快递,如果一个个的送花费时间较长。同时每个学生领取的时候,也需要排队领取，也花费时间较长,何如?</strong></p>
+<p><strong>解决方案:快递员把100个快递,委托给班主任,班主任把这些快递放到办公室,同学们下课自行领取即可。</strong></p>
+<p><strong>优势:快递员省事,委托给班主任就可以走了。同学们领取也方便,因为相信班主任。</strong></p>
+<p>事件冒泡本身的特性,会带来的坏处,也会带来的好处,需要我们灵活掌握。程序中也有如此场景:</p>
+<p>1.<ul></p>
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<p>1.<ul></p>
+<p><strong>点击每个li都会弹出对话框,以前需要给每个 注册事件,是非常辛苦的,而且访问DOM的次数越多,这就会延长整个页面的交互就绪时间。</strong></p>
+<h3 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h3><p><strong>事件委托也称为事件代理,在jQuery里面称为事件委派。</strong></p>
+<h3 id="事件委托的原理"><a href="#事件委托的原理" class="headerlink" title="事件委托的原理"></a>事件委托的原理</h3><p><u><strong>(重要)不是每个子节点单独设置事件监听器,而是事件监听器设置在其父节点上,然后利用冒泡原理影响设置每个子节点。</strong></u></p>
+<p><strong>以上案例:给ul注册点击事件,然后利用事件对象的target来找到当前点击的l1,因为点击li,事件会冒泡到ul上,ul有注册事件,就会触发事件监听器。</strong></p>
+<h3 id="事件委托的作用"><a href="#事件委托的作用" class="headerlink" title="事件委托的作用"></a><strong>事件委托的作用</strong></h3><p><strong>我们只操作了一次DOM,提高了程序的性能。</strong></p>
+<h2 id="7．常用的鼠标事件"><a href="#7．常用的鼠标事件" class="headerlink" title="7．常用的鼠标事件"></a>7．常用的鼠标事件</h2><h3 id="7-1常用的鼠标事件"><a href="#7-1常用的鼠标事件" class="headerlink" title="7.1常用的鼠标事件"></a>7.1常用的鼠标事件</h3><p><strong>1.禁止鼠标右键菜单</strong></p>
+<p><strong>contextmenu主要控制应该何时显示上下文菜单,主要用于程序员取消默认的上下文某单document.addEventListener (‘contextmenu’, function(e) {</strong></p>
+<p><strong>e.preventDefault ();</strong></p>
+<p><strong>})</strong></p>
+<p><strong>2.禁止鼠标选中( selectstart开始选中)</strong></p>
+<p><strong>document.addEventListener (‘selectstart’, function(e) {</strong></p>
+<p><strong>e.preventDefault ();</strong></p>
+<p><strong>})</strong></p>
+<h3 id="7-2鼠标事件对象"><a href="#7-2鼠标事件对象" class="headerlink" title="7.2鼠标事件对象"></a>7.2鼠标事件对象</h3><p><strong>event对象代表事件的状态,跟事件相关的一系列信息的集合。现阶段我们主要是用鼠标事件对象</strong></p>
+<p><strong>MouseEvent和键盘事件对象KeyboardEvent.</strong></p>
+<p><strong>鼠标事件对象						说明</strong></p>
+<p><strong>e.clientx								返回鼠标相对于浏览器窗口可视区的×坐标</strong></p>
+<p><strong>e.clientY								返回鼠标相对于浏览器窗口可视区的Y坐标</strong></p>
+<p><strong>e.pagex								返回鼠标相对于文档页面的x坐标1E9+支持</strong></p>
+<p><strong>e.pageY								返回鼠标相对于文档页面的Y坐标1E9+支持</strong></p>
+<p><strong>e.screenX							返回鼠标相对于电脑屏幕的x坐标</strong></p>
+<p><strong>e.screenY							返回鼠标相对于电脑屏幕的Y坐标</strong></p>
+<h3 id="8-1常用键盘事件"><a href="#8-1常用键盘事件" class="headerlink" title="8.1常用键盘事件"></a>8.1常用键盘事件</h3><p><strong>事件除了使用鼠标触发,还可以使用鍵盘触发。</strong></p>
+<p><strong>键盘事件					触发条件</strong></p>
+<p><strong>onkeyup					某个键盘按键被松开时触发</strong></p>
+<p><strong>onkeydown 			某个鍵盘按键被按下时触发</strong></p>
+<p><strong>onkeypress			某个键盘按键被按下时触发 但是它不识别功能键比如ctrl shift箭头等</strong></p>
+<p><strong>注意:</strong></p>
+<p><strong>1,如果使用addEventListener不需要加on</strong></p>
+<p><strong>2.onkeypress和前面2个的区别是,它不识别功能键,比如左右箭头, shift等。</strong></p>
+<p><strong>3.三个事件的执行顺序是: keydown–keypress —keyup</strong></p>
+<h3 id="8-2键盘事件对象"><a href="#8-2键盘事件对象" class="headerlink" title="8.2键盘事件对象"></a>8.2键盘事件对象</h3><p><strong>键盘事件对象属性    				说明</strong></p>
+<p><strong>keyCode									返回该键的ASCII值</strong></p>
+<p><strong>注意: onkeydown和onkeyup不区分字母大与, onkeypress区分字母大小写.</strong></p>
+<p><strong>在我们实际开发中,我们更多的使用keydown和keyup ,它能识别所有的键(包括功能键)</strong></p>
+<p><strong>Keypress不识别功能键,但是keyCode属性能区分大小写,返回不同的ASCI值</strong></p>
+<p><img src="C:\Users\24861\Desktop\笔记图\ACSII.JPG" alt="ACSII"></p>
+<h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h1><p><strong>1.1什么是BOMBOM (Browser Object Model )即浏览器对象模型,它提供了独立于内容而与浏览器窗口进行交互的对象,其核心对象是window.</strong></p>
+<p><strong>BOM由一系列相关的对象构成,并且每个对象都提供了很多方法与属性。BOM缺乏标准, Javascript语法的标准化组织是ECMA, DOM的标准化组织是W3C, BOM最初是Netscape浏览器标准的一部分。</strong></p>
+<p><strong>DOM</strong></p>
+<p><strong>文档对象模型</strong></p>
+<p><strong>DOM就是把「文档」当做一个「对象」来看待</strong></p>
+<p><strong>DOM的顶级对象是document</strong></p>
+<p><strong>DOM主要学习的是操作页面元素</strong></p>
+<p><strong>DOM是W3C标准规范</strong></p>
+<p><strong>BOM</strong></p>
+<p><strong>浏览器对象模型</strong></p>
+<p><strong>把「浏览器」当做一个「对象」来看待</strong></p>
+<p><strong>BOM的顶级对象是window</strong></p>
+<p><strong>BOM学习的是浏览器窗口交互的一些对象</strong></p>
+<p><strong>BOM是浏览器厂商在各自浏览器上定义的,兼容性较差</strong></p>
+<p><strong>вом比DOM更大,包含DOM.</strong></p>
+<h2 id="1-2-BоM的构成"><a href="#1-2-BоM的构成" class="headerlink" title="1.2 BоM的构成"></a>1.2 BоM的构成</h2><p><img src="E:\桌面\笔记图\bom.JPG" alt="bom"></p>
+<p><strong>window对象是浏览器的顶级对象,它具有双重角色。</strong></p>
+<p><strong>1,它是JS访问浏览器窗口的一个接口。</strong></p>
+<p><strong>2,它是一个全局对象。定义在全局作用域中的变量、函数都会变成window对象的属性和方法。在调用的时候可以省略window ,前面学习的对话框都属于window对象方法,如alert(), prompt()等。</strong></p>
+<p><strong>注意： window下的一个特殊属性window.name</strong></p>
+<h2 id="2-1窗口加载事件"><a href="#2-1窗口加载事件" class="headerlink" title="2.1窗口加载事件"></a>2.1窗口加载事件</h2><p><strong>window.onload &#x3D; function (){}</strong></p>
+<p><strong>或者window.addEventListener (“load”, function () {});</strong></p>
+<p><strong>window.onload是窗口(页面)加载事件,当文档内容完全加载完成会触发该事件(包括图像、脚本文件、CSs文件等),就调用的处理函数。</strong></p>
+<p><strong>注意:</strong></p>
+<p><strong>1,有了window.onload就可以把JS代码写到页面元素的上方,因为onload是等页面内容全部加载完毕,再去执行处理函数。</strong></p>
+<p><strong>2. window.onload传统注册事件方式只能写一次,如果有多个,会以最后一个window.onload为准。</strong></p>
+<p><strong>3,如果使用addEventnistener则没有限制</strong></p>
+<p><strong>document.addEventListener (‘DOMContentLoaded’, function(){})</strong></p>
+<p><strong>DOMContentLoaded事件触发时,仅当DOM加载完成,不包括样式表,图片, flash等等。le9以上才支持</strong></p>
+<p><strong>如果页面的图片很多的话,从用户访问到onload触发可能需要较长的时间,交互效果就不能实现,必然影响用户的体验,此时用DOMContentloaded事件比较合适。</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>load等页面内容全部加载完毕,包含页面dom元素图片flash css等等DOMContentLoaded是DOM加载完毕,不包含图片falsh css等就可以执行加载速度比load更快一些</strong></p>
+<h2 id="2-2调整窗口大小事件"><a href="#2-2调整窗口大小事件" class="headerlink" title="2.2调整窗口大小事件"></a>2.2调整窗口大小事件</h2><p><strong>window.onresize &#x3D; function(){}</strong></p>
+<p><strong>window.addEventListener(“resize”, function(){});</strong></p>
+<p><strong>window.onresize是调整窗口大小加载事件,当触发时就调用的处理函数。注意:</strong></p>
+<p><strong>1,只要窗口大小发生像素变化,就会触发这个事件。</strong></p>
+<p><strong>2,我们经常利用这个事件完成响应式布局.window.innerWidth当前屏幕的宽度</strong></p>
+<h2 id="3-1两种定时器"><a href="#3-1两种定时器" class="headerlink" title="3.1两种定时器"></a><strong>3.1两种定时器</strong></h2><p><strong>window对象给我们提供了2个非常好用的方法-定时器。</strong></p>
+<p><strong>setTimeout()</strong></p>
+<p><strong>setlnterval()</strong></p>
+<h2 id="3-2-setTimeout-定时器"><a href="#3-2-setTimeout-定时器" class="headerlink" title="3.2 setTimeout()定时器"></a>3.2 setTimeout()定时器</h2><p><strong>window.setTimeout (调用函数, [延迟的毫秒数]);</strong></p>
+<p><strong>setTimeout()方法用于设置一个定时器,该定时器在定时器到期后执行调用函数。</strong></p>
+<p><strong>这个window在调用的时候可以省略</strong></p>
+<p><strong>这个延时时间单位是毫秒但是可以省略,如果省略默认的是0</strong></p>
+<p><strong>这个调用函数可以直接写函数还可以写函数名</strong></p>
+<p><strong>还有一个写法,’函数名()’ &#x2F;&#x2F;我们不提倡这个写法</strong></p>
+<p><strong>页面中可能有很多的定时器,我们经常给定时器加标识符(名字)</strong></p>
+<p><strong>setTimeout()这个调用函数我们也称为回调函数callback</strong></p>
+<p><strong>普通函数是按照代码顺序直接调用。</strong></p>
+<p><strong>而这个函数,需要等待时间,时间到了才去调用这个函数,因此称为回调函数。</strong></p>
+<p><strong>简单理解:回调,就是回头调用的意思。上一件事干完,再回头再调用这个函数。</strong></p>
+<p><strong>以前我们讲的element.onclick&#x3D;functiono(){}或者element.addeventistener(“clik”, fn);里面的函数也是回调函数。</strong></p>
+<h2 id="3-3停止setTimeout-定时器（只调用一次）"><a href="#3-3停止setTimeout-定时器（只调用一次）" class="headerlink" title="3.3停止setTimeout()定时器（只调用一次）"></a>3.3停止setTimeout()定时器（只调用一次）</h2><p><strong>window.clearTimeout (timeoutID)—(定时器名字)</strong></p>
+<p><strong>clearTimeout (1)方法取消了先前通过调用setTimeout ()建立的定时器。</strong></p>
+<p><strong>注意：1. window可以省略。</strong></p>
+<h2 id="3-4-setInterval-定时器（重复调用）"><a href="#3-4-setInterval-定时器（重复调用）" class="headerlink" title="3.4 setInterval()定时器（重复调用）"></a>3.4 setInterval()定时器（重复调用）</h2><p><strong>window.set Interval (回 函数, [间隔的毫秒数] );</strong></p>
+<p><strong>setinterval()方法重复调用一个函数,每隔这个时间,就去调用一次回调函数。</strong></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li><strong>window可以省略</strong></li>
+<li><strong>这个调用函数可以直接写函数,或者写函数名或者采取字符串函数名0三种形式。</strong></li>
+<li><strong>间隔的毫秒数省略默认是0,如果写,必须是毫秒,表示每隔多少毫秒就自动调用这个函数。</strong></li>
+<li><strong>因为定时器可能有很多,所以我们经常给定时器赋值一个标识符。</strong></li>
+</ol>
+<h2 id="3-5停止setInterval-定时器"><a href="#3-5停止setInterval-定时器" class="headerlink" title="3.5停止setInterval()定时器"></a>3.5停止setInterval()定时器</h2><p><strong>window. clearInterval (intervalID);</strong></p>
+<p><strong>clearInterval ()方法取消了先前通过调用setInterval ()建立的定时器。</strong></p>
+<p><strong>注意:</strong></p>
+<p><strong>1.window可以省略。</strong></p>
+<p><strong>2.里面的参数就是定时器的标识符。</strong></p>
+<h2 id="3-6-this"><a href="#3-6-this" class="headerlink" title="3.6 this"></a>3.6 this</h2><p><strong>this的指向在函数定义的时候是确定不了的,只有函数执行的时候才能确定</strong></p>
+<p><strong>this到底指向谁,一般情况下this的最终指向的是那个调用它的对象</strong></p>
+<p><strong>现阶段,我们先了解一下几个this指向</strong></p>
+<p><strong>1,全局作用域或者普通函数中this指向全局对象window (注意定时器里面的this指向window )</strong></p>
+<h2 id="4-JS执行机制"><a href="#4-JS执行机制" class="headerlink" title="4.JS执行机制"></a>4.JS执行机制</h2><h2 id="4-1JS单线程"><a href="#4-1JS单线程" class="headerlink" title="4.1JS单线程"></a>4.1JS单线程</h2><p><strong>JavaScript语言的一大特点就是单线程,也就是说,同一个时间只能做一件事。这是因为Javascript这门脚本语言诞生的使命所致-JavaScript是为处理页面中用户的交互,以及操作DOM而诞生的。比如我们对某个DOM元素进行添加和删除操作,不能同时进行。应该先进行添加,之后再删除。</strong></p>
+<p><strong>单线程就意味着,所有任务需要排队,前一个任务结束,才会执行后一个任务。这样所导致的问题是:如果JS执行的时间过长,这样就会造成页面的渲染不连贯,导致页面渲染加载阻塞的感觉。</strong></p>
+<h2 id="4-3同步和异步"><a href="#4-3同步和异步" class="headerlink" title="4.3同步和异步"></a>4.3同步和异步</h2><p><strong>为了解决这个问题,利用多核CPU的计算能力, HTML5提出Web Worker标准,允许JavaScript脚本创建多个线程。于是，JS中出现了同步和异步。</strong></p>
+<p><strong>同步</strong></p>
+<p><strong>前一个任务结束后再执行后一个任务,程序的执行顺字与任务的排列顺序是一致的、同步的。比如做饭的同步做法:我们要烧水煮饭,等水开了(10分钟之后) ,再去切菜,炒菜。</strong></p>
+<p><strong>异步</strong></p>
+<p><strong>你在做一件事情时,因为这件事情会花费很长时间,在做这件事的同时,你还可以去处理其他事情。比如做饭的异步做法,我们在烧水的同时,利用这10分钟,去切菜,炒菜。</strong></p>
+<p><strong>他们的本质区别：这条流水线上各个流程的执行顺序不同。</strong></p>
+<p><strong>同步任务</strong></p>
+<p><strong>同步任务都在主线程上执行,形成一个执行栈。</strong></p>
+<p><strong>异步任务</strong></p>
+<p><strong>JS的异步是通过回调函数实现的。</strong></p>
+<p><strong>一般而言,异步任务有以下三种类型</strong></p>
+<p><strong>1、普通事件,如click, resize等</strong></p>
+<p><strong>2、资源加载,如load, error等</strong></p>
+<p><strong>3、定时器,包括setInterval, setTimeout等</strong></p>
+<p><strong>异步任务相关回调函数添加到任务队列中(任务队列也称为消息队列)。</strong></p>
+<h2 id="4-4-JS执行机制"><a href="#4-4-JS执行机制" class="headerlink" title="4.4 JS执行机制"></a>4.4 JS执行机制</h2><p><strong>1.先执行执行栈中的同步任务。</strong></p>
+<p><strong>2异步任务(回调函数)放入任务队列中。</strong></p>
+<p><strong>3,一旦执行栈中的所有同步任务执行完毕,系统就会按次序读取任务队列中的异步任务,于是被读取的异步任务结束等待状态,进入执行栈，开始执行。</strong></p>
+<p><strong>由于主线程不断的重复获得任务、执行任务、再获取任务、再执行,所以这种机制被称为事件循环( event loop).</strong></p>
+<h2 id="5-location对象"><a href="#5-location对象" class="headerlink" title="5.location对象"></a>5.location对象</h2><h3 id="5-1什么是location对象"><a href="#5-1什么是location对象" class="headerlink" title="5.1什么是location对象"></a>5.1什么是location对象</h3><p><strong>window对象给我们提供了一个location属性用于获取或设置窗体的URL ,并且可以用于解析URL。</strong></p>
+<p><strong>因为这个属性返回的是一个对象,所以我们将这个属性也称为location对象。</strong></p>
+<h3 id="5-2-URL"><a href="#5-2-URL" class="headerlink" title="5.2 URL"></a>5.2 URL</h3><p><strong>统一资源定位符(Uniform Resource Locator, URL)是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL,它包含的信息指出文件的位置以及浏览器应该怎么处理它</strong></p>
+<p><strong>URL的一股语法格式为:</strong></p>
+<p><strong>protocol:&#x2F;&#x2F;host [:port]&#x2F;path&#x2F; [?query]#fragment</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="http://www.itcast.cn/index.html">http://www.itcast.cn/index.html</a> ?name-andysage&#x3D;18#link</strong></p>
+<p><strong>组成						说明</strong></p>
+<p><strong>protocol 				通信协议常用的http,ftp,maito等</strong></p>
+<p><strong>host						主机(域名) <a target="_blank" rel="noopener" href="http://www.itheima.com/">www.itheima.com</a></strong></p>
+<p><strong>port						端口号可选,省略时使用方案的默认端口如http的默认端口为80</strong></p>
+<p><strong>path						路径由零或多个&#x2F;符号隔开的字符串,一般用来表示主机上的一个目录或文件地址</strong></p>
+<p><strong>query					 参数以键值对的形式,通过&amp;符号分隔开来</strong></p>
+<p><strong>fragment 			 片段#后面内容常见于链接锚点</strong></p>
+<h2 id="5-3-location对象的属性"><a href="#5-3-location对象的属性" class="headerlink" title="5.3 location对象的属性"></a><strong>5.3 location对象的属性</strong></h2><p><strong>location对象属性						返回值</strong></p>
+<p><strong>location.href								获取或者设置整个URL</strong></p>
+<p><strong>location. host							返回主机(域名) <a target="_blank" rel="noopener" href="http://www.itheima.com/">www.itheima.com</a></strong></p>
+<p> <strong>location.port							返回端口号如果未写返回空字符串</strong></p>
+<p> <strong>location.pathname				  返回路径</strong></p>
+<p> <strong>location. search						返回参数</strong></p>
+<p> <strong>location. hash							返回片段#后面内容常见于链接锚点</strong></p>
+<p><strong>重点记住: href和search</strong></p>
+<h2 id="5-4-location对象的方法"><a href="#5-4-location对象的方法" class="headerlink" title="5.4 location对象的方法"></a>5.4 location对象的方法</h2><p><strong>location对象方法			返回值</strong></p>
+<p><strong>location.assign()			跟href一样,可以跳转页面(也称为重定向页面)</strong></p>
+<p><strong>location.replace()		替换当前页面,因为不记录历史,所以不能后退页面</strong></p>
+<p><strong>location.reload()		 重新加载页面,相当于刷新按钮或者f5如果参数为true强制刷新ctrl+5</strong></p>
+<h2 id="6-navigator对象"><a href="#6-navigator对象" class="headerlink" title="6.navigator对象"></a>6.navigator对象</h2><p><strong>navigator对象包含有关浏览器的信息,它有很多属性,我们最常用的是userAgent ,该属性可以返回由客户机发送服务器的user-agent头部的值。</strong></p>
+<p><strong>下面前端代码可以判断用户那个终端打开页面,实现跳转</strong></p>
+<p><strong>if ( (navigator. userAgent. match (&#x2F; (phone lpadl podl iPhone lipodl ios l iPad I Androidl tMobile IBlackBerryl IEMobi le IMOOBrowserl JuC I Fennec IwOSBrowser I BrowserNG| WebosI Symbian Iwindows Phone)&#x2F;i))) {</strong></p>
+<p><strong>window.location.href&#x3D;””;&#x2F;&#x2F;手机</strong></p>
+<p><strong>} else {</strong></p>
+<p><strong>window. location.href &#x3D;””;&#x2F;&#x2F;电脑</strong></p>
+<p><strong>}</strong></p>
+<h2 id="7-history对象"><a href="#7-history对象" class="headerlink" title="7.history对象"></a>7.history对象</h2><p><strong>window对象给我们提供了一个history对象,与浏览器历史记录进行交互。该对象包含用户(在浏览器窗口中)访问过的URL</strong></p>
+<p><strong>history对象方法			作用</strong></p>
+<p><strong>back()							可以后退功能</strong></p>
+<p><strong>forward()						前进功能</strong></p>
+<p><strong>go(参数)						前进后退功能参数如果是1前进1个页面如果是-1后退1个页面</strong></p>
+<h2 id="1·元素偏移量offset系列"><a href="#1·元素偏移量offset系列" class="headerlink" title="1·元素偏移量offset系列"></a>1·元素偏移量offset系列</h2><h3 id="1-1-offset概述"><a href="#1-1-offset概述" class="headerlink" title="1.1 offset概述"></a>1.1 offset概述</h3><p><strong>offset 翻译过来就是偏移量,我们使用offset系列相关属性可以动态的得到该元素的位置(偏移)、大小等。</strong></p>
+<p><strong>获得元素距离带有定位父元素的位置</strong></p>
+<p><strong>获得元素自身的大小(宽度高度)</strong></p>
+<p><strong>注意:返回的数值都不带单位</strong></p>
+<p><strong>offset系列常用属性:</strong></p>
+<p><strong>offset系列属性						作用</strong></p>
+<p><strong>element.offsetParent				返回作为该元素带有定位的父级元素如果父级都没有定位则返回body</strong></p>
+<p><strong>element.offsetTop				 	返回元素相对带有定位父元素上方的偏移</strong></p>
+<p><strong>element.offsetLeft					返回元素相对带有定位父元素左边框的偏移</strong></p>
+<p><strong>element.offsetWidth				返回自身包括padding、边框、内容区的宽度,返回数值不带单位</strong></p>
+<p><strong>element.offsetHeight			 返回自身包括padding、边框、内容区的高度,返回数值不带单位</strong></p>
+<h2 id="1-2-offset与style区别"><a href="#1-2-offset与style区别" class="headerlink" title="1.2 offset与style区别"></a>1.2 offset与style区别</h2><p><strong>offset</strong></p>
+<p><strong>offset可以得到任意样式表中的样式值</strong></p>
+<p><strong>offset系列获得的数值是没有单位的</strong></p>
+<p><strong>offsetwidth 包含padding+border+width</strong></p>
+<p><strong>offsetidth等属性是只读属性,只能获取不能赋值</strong></p>
+<p><strong>所以,我们想要获取元素大小位置,用offset更合适</strong></p>
+<p><strong>style</strong></p>
+<p><strong>style只能得到行内样式表中的样式值</strong></p>
+<p><strong>style.width获得的是带有单位的字符串</strong></p>
+<p><strong>style.width获得不包含padding和border 的值</strong></p>
+<p><strong>style.width是可读写属性,可以获取也可以赋值</strong></p>
+<p><strong>所以,我们想要给元素更改值,则需要用style改变</strong></p>
+<h2 id="2-元素可视区client系列"><a href="#2-元素可视区client系列" class="headerlink" title="2,元素可视区client系列"></a>2,元素可视区client系列</h2><p><strong>client翻译过来就是客户端,我们使用clent系列的相关属性来获取元素可视区的相关信息。通过client系列的相关属性可以动态的得到该元素的边框大小、元素大小等。</strong></p>
+<p><strong>elient系列属性					   作用</strong></p>
+<p><strong>element.clientTop				返回元素上边框的大小</strong></p>
+<p><strong>element.clientLeft				返回元素左边框的大小</strong></p>
+<p><strong>element.clientWidth			返回自身包括padding、内容区的宽度,不含边框返回数值不带单位</strong></p>
+<p><strong>element.clientHeight		 返回自身包括padding、内容区的高度,不含边框,返回数值不带单位</strong></p>
+<h2 id="3-立即执行函数"><a href="#3-立即执行函数" class="headerlink" title="3.立即执行函数"></a>3.立即执行函数</h2><p><strong>立即执行函数</strong></p>
+<p><strong>(functiono(){})()</strong></p>
+<p><strong>或者</strong></p>
+<p><strong>(function(){}())</strong></p>
+<p><strong>主要作用:创建一个独立的作用域。避免了命名冲突问题</strong></p>
+<h2 id="案例：淘宝flexible-js源码分析"><a href="#案例：淘宝flexible-js源码分析" class="headerlink" title="案例：淘宝flexible.js源码分析"></a><strong>案例：淘宝flexible.js源码分析</strong></h2><p><strong>下面三种情况都会刷新页面都会触发load事件。</strong></p>
+<p><strong>1.a标签的超链接</strong></p>
+<p><strong>2.F5或者刷新按钮(强制刷断)</strong></p>
+<p><strong>3.前进后退按钮</strong></p>
+<p><strong>但是火狐中,有个特点,有个”往返缓存” ,这个缓存中不仅保存着页面数据,还保存了DOM和JavaScript的状态;实际上是将整个页面都保存在了内存里。</strong></p>
+<p><strong>所以此时后退按钮不能刷新页面。</strong></p>
+<p><strong>此时可以使用pageshow事件来触发。,这个事件在页面显示时触发,无论页面是否来自缓存。在重新加载页面中, pageshow会在load或件触发后触发;根据事件对象中的persisted来判断是否是缓存中的页面触发的pageshow事件,注意这个事件给window添加。</strong></p>
+<h2 id="3-1元素scroll系列属性"><a href="#3-1元素scroll系列属性" class="headerlink" title="3.1元素scroll系列属性"></a>3.1元素scroll系列属性</h2><p><strong>scroll翻译过来就是滚动的,我们使用scroll系列的相关属性可以动态的得到该元素的大小、滚动距离等。</strong></p>
+<p><strong>scroll系列属性					    作用</strong></p>
+<p><strong>element.scrollTop				返回被卷去的上侧距离,返回数值不带单位</strong></p>
+<p><strong>element.scrollLeft				返回被卷去的左侧距离,返回数值不带单位</strong></p>
+<p><strong>element.scrollWidth			返回自身实际的宽度,不含边框,返回数值不带单位</strong></p>
+<p><strong>element.scrollHeight		  返回自身实际的高度,不含边框,返回数值不带单位</strong></p>
+<p><strong>内容的实际大小</strong></p>
+<h2 id="3-2页面被卷去的头部"><a href="#3-2页面被卷去的头部" class="headerlink" title="3.2页面被卷去的头部"></a>3.2页面被卷去的头部</h2><p><strong>如果浏览器的高(或宽)度不足以显示整个页面时,会自动出现滚动条。当滚动条向下滚动时,页面上面被隐藏掉的高度,我们就称为页面被卷去的头部。滚动条在滚动时会触发onscroll事件。</strong></p>
+<p><strong>需要用到页面滚动事件scroll因为是页面滚动,所以事件源是document</strong></p>
+<p><strong>②滚动到某个位置,就是判断页面被卷去的上部值。</strong></p>
+<p><strong>3页面被卷去的头部:可以通过window.pageYoffset获得 如果是被卷去的左侧window.pagexoffset</strong></p>
+<p><strong>④注意,元素被卷去的头部是element.scolTop,如果是页面被卷去的头部则是window.pageYofset</strong></p>
+<p><strong>3,新方法window.pageroffset和window. pagexoffset , IE9开始支持</strong></p>
+<p><strong>function getscroll() {</strong></p>
+<p><strong>return {</strong></p>
+<p><strong>left: window.pagexoffset I I document.documentElement.scrollleft II document.body.scrollleft I I0, top: window.pageYoffset II document.documentElement.scrollTop II document.body.scrollTop II0};</strong></p>
+<p><strong>}</strong></p>
+<p><strong>使用的时候getScroll ().left</strong></p>
+<h2 id="三大系列总结"><a href="#三大系列总结" class="headerlink" title="三大系列总结"></a>三大系列总结</h2><p><strong>三大系列大小对比					作用</strong></p>
+<p><strong>element.offsetWidth			 返回自身包括padding.(边框)内容区的宽度,返回数值不带单位</strong></p>
+<p><strong>element.clientWidth			 返回自身包括padding、内容区的宽度,不含边框,返回数值不带单位</strong></p>
+<p><strong>element.scrollWidth			 返回自身实际的宽度,不含边框,返回数值不带单位</strong></p>
+<p><strong>他们主要用法:</strong></p>
+<p><strong>1.offst系列经常用于获得元素位置offsetLeft offsetTop</strong></p>
+<p><strong>2.client经常用于获取元素大小clientwidth clientHeight</strong></p>
+<p><strong>3, scroll经常用于获取滚动距离scrollTop scrolleft</strong></p>
+<p><strong>4,注意页面滚动的距离通过window.pagexoffset获得</strong></p>
+<h2 id="mouseenter和mouseover的区别"><a href="#mouseenter和mouseover的区别" class="headerlink" title="mouseenter和mouseover的区别"></a>mouseenter和mouseover的区别</h2><h3 id="mouseenter鼠标事件"><a href="#mouseenter鼠标事件" class="headerlink" title="mouseenter鼠标事件"></a>mouseenter鼠标事件</h3><p><strong>当鼠标移动到元素上时就会触发mouseenter事件</strong></p>
+<p><strong>类似mouseover,它们两者之间的差别是</strong></p>
+<p><strong>mouseover鼠标经过自身盒子会触发,经过子盒子还会触发。mouseenter只会经过自身盒子触发</strong></p>
+<p><strong>之所以这样,就是因为mouseenter不会冒泡</strong></p>
+<p><strong>跟mouseenter搭配鼠标离开mouseleave同样不会冒泡</strong></p>
+<h2 id="4．动画函数封装"><a href="#4．动画函数封装" class="headerlink" title="4．动画函数封装"></a>4．动画函数封装</h2><h3 id="4-1动画实现原理"><a href="#4-1动画实现原理" class="headerlink" title="4.1动画实现原理"></a>4.1动画实现原理</h3><p><strong>核心原理:通过定时器setinterval()不断移动盒子位置。</strong></p>
+<p><strong>实现步骤：</strong></p>
+<p><strong>1获得盒子当前位置</strong></p>
+<p><strong>2.让盒子在当前位置加上1个移动距离</strong></p>
+<p><strong>3,利用定时器不断重复这个操作</strong></p>
+<p><strong>4.加一个结束定时器的条件</strong></p>
+<p><strong>5,注意此元素需要添加定位,才能使用element.style.left</strong></p>
+<h3 id="4-2动画函数简单封装"><a href="#4-2动画函数简单封装" class="headerlink" title="4.2动画函数简单封装"></a>4.2动画函数简单封装</h3><p><strong>注意函数需要传递2个参数，动画对象和移动到的距离。</strong></p>
+<h3 id="4-4缓动效果原理"><a href="#4-4缓动效果原理" class="headerlink" title="4.4缓动效果原理,"></a>4.4缓动效果原理,</h3><p><strong>缓动动画就是让元素运动速度有所变化,最常见的是让速度慢慢停下来</strong></p>
+<p><strong>思路:1,让盒子每次移动的距离慢慢变小,速度就会慢慢落下来。</strong></p>
+<p><strong>核心算法: (目标值·现在的位置) &#x2F; 10做为每次移动的距离步长</strong></p>
+<p><strong>停止的条件是:让当前盒子位置等于目标位置就停止定时器</strong></p>
+<h2 id="5．常见网页特效案例"><a href="#5．常见网页特效案例" class="headerlink" title="5．常见网页特效案例"></a>5．常见网页特效案例</h2><h3 id="5-1节流阀"><a href="#5-1节流阀" class="headerlink" title="5.1节流阀"></a>5.1节流阀</h3><p><strong>防止轮播图按纽连续点击造成播放过快.</strong></p>
+<p><strong>节流阀目的:当上一个函数动画内容执行完毕,再去执行下一个函鼓动画,让事件无法连续身发。</strong></p>
+<p><strong>核心实现思路:利用回调函数,添加一个变量来控制,锁住函数和解锁函数</strong></p>
+<p><strong>开始设置一个变量 var flag&#x3D; true;</strong></p>
+<p><strong>If(flag) (flag &#x3D; false; do somethng) 闭水龙头</strong></p>
+<p><strong>利用回调函数动画执行完毕, flag&#x3D;true打开水龙头</strong></p>
+<h1 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h1><h2 id="1-触屏事件"><a href="#1-触屏事件" class="headerlink" title="1.触屏事件"></a>1.触屏事件</h2><h3 id="1-1触屏事件概述"><a href="#1-1触屏事件概述" class="headerlink" title="1.1触屏事件概述"></a>1.1触屏事件概述</h3><p><strong>移动端浏览器兼容性较好,我们不需要考虑以前JS的兼容性问题,可以放心的使用原生JS书写效果,但是移动端也有自己独特的地方。比如触屏事件touch (也称触摸事件) , Android和IOS都有。</strong> </p>
+<p><strong>touch对象代表一个触摸点。触摸点可能是一根手指,也可能是一根触摸笔。触屏事件可响应用户手指(或触空笔）对屏幕或者触控板操作。</strong></p>
+<p><strong>触屏touch事件			说明</strong></p>
+<p><strong>touchstart				  手指触摸到一个DOM元素时触发</strong></p>
+<p><strong>touchmove				手指在一个DOM元素上滑动时触发</strong></p>
+<p><strong>touchend					手指从一个DOM元素上移开时触发</strong></p>
+<h3 id="1-2触摸事件对象-TouchEvent"><a href="#1-2触摸事件对象-TouchEvent" class="headerlink" title="1.2触摸事件对象(TouchEvent )"></a>1.2触摸事件对象(TouchEvent )</h3><p><strong>TouchEvent是一类描述手指在触莫平面(触摸屏、触莫板等)的状态变化的事件。这类事件用于描述一个或多个触点,使开发者可以检测触点的移动,触点的增加和减少,等等</strong></p>
+<p><strong>touchstart, touchmove, touchend三个事件都会各自有事件对象。</strong></p>
+<p><strong>触摸列表						说明</strong></p>
+<p><strong>touches						正在触摸屏幕的所有手指的一个列表</strong></p>
+<p><strong>targetTouches			正在触摸当前DOM元素上的手指的一个列表</strong></p>
+<p><strong>changedTouches		手指状态发生了改变的列表,从无到有,从有到无变化</strong></p>
+<p><strong>因为平时我们都是给元素注册触摸事件,所以重点记住targetTocuhes</strong></p>
+<h3 id="1-3移动端拖动元素"><a href="#1-3移动端拖动元素" class="headerlink" title="1.3移动端拖动元素"></a>1.3移动端拖动元素</h3><p><strong>1.touchstart, touchmove, touchend可以实现拖动元素</strong></p>
+<p><strong>2,但是拖动元素需要当前手指的坐标值我们可以使用targetTouches[0]里面的pagex和pageY</strong></p>
+<p><strong>3,移动端拖动的原理: 手指移动中,计算出手指移动的距离。然后用盒子原来的位置+手指移动的距离</strong></p>
+<p><strong>4,手指移动的距离:手指滑动中的位置减去手指刚开始触摸的位置</strong></p>
+<p><strong>拖动元素三步曲:</strong></p>
+<p><strong>(1)触摸元素touchstart :获取手指初始坐标,同时获得盒子原来的位置</strong></p>
+<p><strong>(2)移动手指touchmove :计算手指的滑动距离,并且移动盒子</strong></p>
+<p><strong>(3)离开手指touchend:</strong></p>
+<p><strong>注意:手指移动也会触发滚动屏幕所以这里要阻止默认的屏幕滚动e.preventDefault();</strong></p>
+<h2 id="2-移动端常见特效"><a href="#2-移动端常见特效" class="headerlink" title="2.移动端常见特效"></a>2.移动端常见特效</h2><p><strong>classList属性</strong></p>
+<p><strong>classlist属性是HTML5新增的一个属性,返回元素的类名。但是ie10以上版本支持。</strong></p>
+<p><strong>该属性用于在元素中添加,移除及切换CSS类。</strong></p>
+<p><strong>有以下方法</strong></p>
+<p><strong>添加类：</strong></p>
+<p><strong>element.classlist.add ( 类名” ) ;</strong></p>
+<p><strong>移除类:</strong></p>
+<p><strong>element.classlist.remove (‘类名’ );</strong></p>
+<p><strong>切换类</strong></p>
+<p><strong>element.classlist.toggle (‘类名’ ) ;</strong></p>
+<h3 id="2-2-click延时解决方案"><a href="#2-2-click延时解决方案" class="headerlink" title="2.2 click延时解决方案"></a>2.2 click延时解决方案</h3><p><strong>移动端click事件会有300ms的延时,原因是移动端屏幕双击会缩放(double tapto zoom)页面。</strong></p>
+<p><strong>解决方案:1,禁用缩放。浏览器禁用默认的双击缩放行为并且去掉300ms的点击延迟。</strong></p>
+<p><strong>1.<meta name="viewport" content="user-scalable=no"></strong></p>
+<p><strong>2.利用touch事件自己封装这个事件解决300ms延迟。</strong></p>
+<p><strong>原理就是:</strong></p>
+<p><strong>1,当我们手指触摸屏幕,记录当前触摸时间</strong></p>
+<p><strong>2,当我们手指离开屏幕,用离开的时间减去触莫的时间</strong></p>
+<p><strong>3.如果时间小于150ms ,并且没有滑动过屏幕,那么我们就定义为点击</strong></p>
+<p><strong>&#x2F;&#x2F;封装tap,解决click 300ms延时</strong></p>
+<p><strong>function tap (obj, callback) {</strong></p>
+<p><strong>var isMove &#x3D; false;</strong></p>
+<p><strong>var startTime &#x3D;0; &#x2F;&#x2F;记录触摸时候的时间变量</strong></p>
+<p><strong>obj.addeventListener (‘touchstart’, function (e){</strong></p>
+<p><strong>startrime &#x3D; Date.now(); &#x2F;&#x2F;记录触摸时间</strong></p>
+<p><strong>});</strong></p>
+<p><strong>obj.addEventListener (‘touchmove’, function (e) {</strong></p>
+<p><strong>isMove &#x3D;true; &#x2F;&#x2F;看看是否有滑动,有滑动算拖拽,不算点击</strong></p>
+<p><strong>});</strong></p>
+<p><strong>obj.addeventListener (‘touchend’, function (e) {</strong></p>
+<p><strong>if (isMove &amp;&amp; (Date.now() -startTime) &lt; 150) { &#x2F;&#x2F;如果手指触摸和离开时间小于150ms算点击</strong></p>
+<p><strong>callback &amp;&amp; callback(); &#x2F;&#x2F;执行回调函数</strong></p>
+<p><strong>}isMove &#x3D; false; &#x2F;&#x2F; 取反重置</strong></p>
+<p><strong>startTime &#x3D; 0;</strong></p>
+<p><strong>});</strong></p>
+<p><strong>&#x2F;&#x2F;调用</strong></p>
+<p><strong>tap(div, function(){ &#x2F;&#x2F;执行代码});</strong></p>
+<h2 id="3-移动端常用开发插件"><a href="#3-移动端常用开发插件" class="headerlink" title="3.移动端常用开发插件"></a>3.移动端常用开发插件</h2><h3 id="3-1什么是插件"><a href="#3-1什么是插件" class="headerlink" title="3.1什么是插件"></a>3.1什么是插件</h3><p><strong>移动端要求的是快速开发,所以我们经常会借助于一些插件来帮我完成操作,那么什么是插件呢?</strong></p>
+<p><strong>Js插件是js文件,它遵循一定规范编写,方便程序展示效果,拥有特定功能目方便调用。如轮播图和瀑布流插件。</strong></p>
+<p><strong>特点:它一般是为了解决某个问题而专门存在,其功能单一,并且比较小。</strong></p>
+<p><strong>我们以前写的animatejs也算一个最简单的插件</strong></p>
+<p><strong>fastclick插件解决300ms延迟。使用延时</strong></p>
+<p><strong>GitHub官网地址: <a target="_blank" rel="noopener" href="https://github.com/ftlabs/fastclick">https://github.com/ftlabs/fastclick</a></strong></p>
+<h3 id="3-3-Swiper插件的使用"><a href="#3-3-Swiper插件的使用" class="headerlink" title="3.3 Swiper插件的使用"></a>3.3 Swiper插件的使用</h3><p><strong>中文官网地址: <a target="_blank" rel="noopener" href="https://www.swiper.com.cn/1">https://www.swiper.com.cn/1</a>.</strong></p>
+<p><strong>引入插件相关文件</strong></p>
+<p><strong>按照规定语法使用</strong></p>
+<h3 id="3-4其他移动端常见插件"><a href="#3-4其他移动端常见插件" class="headerlink" title="3.4其他移动端常见插件"></a>3.4其他移动端常见插件</h3><p><strong>superslide : <a target="_blank" rel="noopener" href="http://www.superslide2.com/">http://www.superslide2.com/</a></strong> </p>
+<p><strong>iscroll: <a target="_blank" rel="noopener" href="https://github.com/cubiq/iscroll">https://github.com/cubiq/iscroll</a></strong></p>
+<h3 id="3-5插件的使用总结"><a href="#3-5插件的使用总结" class="headerlink" title="3.5插件的使用总结"></a>3.5插件的使用总结</h3><p><strong>1,确认插件实现的功能</strong> </p>
+<p><strong>2,去官网查看使用说明</strong></p>
+<p><strong>3.下载插件</strong></p>
+<p><strong>4,打开demo实例文件,查看需要引入的相关文件,并且引入</strong></p>
+<p><strong>5.复制demo实例文件中的结构html,样式ss以及s代码</strong></p>
+<h3 id="3-6练习移动端视频插件zy-media-js"><a href="#3-6练习移动端视频插件zy-media-js" class="headerlink" title="3.6练习移动端视频插件zy.media.js"></a>3.6练习移动端视频插件zy.media.js</h3><p><strong>H5给我们提供了video标签,但是浏览器的支持情况不同。</strong></p>
+<p><strong>不同的视频格式文件,我们可以通过source解决。</strong></p>
+<p><strong>但是外观样式,还有暂停,播放,全屏等功能我们只能自己写代码解决。</strong></p>
+<p><strong>这个时候我们可以使用插件方式来制作。</strong></p>
+<h2 id="4-移动端常用开发框架"><a href="#4-移动端常用开发框架" class="headerlink" title="4.移动端常用开发框架"></a>4.移动端常用开发框架</h2><h3 id="4-1框架概述框架"><a href="#4-1框架概述框架" class="headerlink" title="4.1框架概述框架,"></a>4.1框架概述框架,</h3><p><strong>顾名思义就是一套架构,它会基于自身的特点向用户提供一套较为完整的解决方案。框架的控制权在框架本身,使用者要按照框架所规定的某种规范进行开发。</strong></p>
+<p><strong>插件一般是为了解决某个问题而专门存在,其功能单一,并且比较小。</strong></p>
+<p><strong>前端常用的框架有Bootstrap, Vue, Angular, React等。既能开发PC端,也能开发移动端</strong></p>
+<p><strong>前端常用的移动端插件有swiper, superslide, iscrol等</strong></p>
+<p><strong>框架:大而全,一整套解决方案</strong></p>
+<p><strong>插件：小而专一,某个功能的解决方案</strong></p>
+<h3 id="4-2-BootstrapBootstrap"><a href="#4-2-BootstrapBootstrap" class="headerlink" title="4.2 BootstrapBootstrap"></a>4.2 BootstrapBootstrap</h3><p><strong>是一个简洁、直观、强悍的前端开发框架,它让web开发更迅速、简单。它能开发PC端,也能开发移动端</strong></p>
+<p><strong>Bootstrap JS插件使用步骤:</strong></p>
+<p><strong>1,引入相关js文件</strong></p>
+<p><strong>2.复制HTML结构</strong></p>
+<p><strong>3,修改对应样式</strong></p>
+<p><strong>4,修改相应JS参数</strong></p>
+<h1 id="1-本地存储"><a href="#1-本地存储" class="headerlink" title="1.本地存储"></a>1.本地存储</h1><p><strong>随着互联网的快速发展,基于网页的应用越来越普遍,同时也变的越来越复杂,为了满足各种各样的需求,会常性在本地存储大量的数据, HTMI5规范提出了相关解决方案</strong></p>
+<p><strong>本地存储特性</strong></p>
+<p><strong>1、数据存储在用户浏览器中</strong></p>
+<p><strong>2、设置、读取方便、甚至页面刷新不丢失数据</strong></p>
+<p><strong>3、容量较大, sessionStorage约5M, localstorage约20M</strong></p>
+<p><strong>4、只能存储字符串,可以将对象JSON.stringifyo编码后存储</strong></p>
+<h3 id="2-window-sessionStorage"><a href="#2-window-sessionStorage" class="headerlink" title="2.window.sessionStorage"></a>2.window.sessionStorage</h3><p> <strong>1.生命周期为关闭浏览器窗口</strong></p>
+<p><strong>2.在同一个窗口(页面)下数据可以共享</strong></p>
+<p><strong>3,以键值对的形式存储使用</strong></p>
+<p><strong>存储数据：</strong></p>
+<p><strong>sessionStorage.setltem(key, value)</strong></p>
+<p><strong>获取数据:</strong></p>
+<p><strong>sessionStorage.getitem(key)</strong></p>
+<p><strong>删除数据:</strong></p>
+<p><strong>sessionStorage.removeltem(key)</strong></p>
+<p><strong>删除所有数据:</strong></p>
+<p><strong>sessionStorage.clear()</strong></p>
+<h2 id="3-window-localStorage"><a href="#3-window-localStorage" class="headerlink" title="3.window.localStorage."></a>3.window.localStorage.</h2><p><strong>1、生命周期永久生效,除非手动删除否则关闭页面也会存在</strong></p>
+<p><strong>2、可以多窗口(页面)共享(同一浏览器可以共享)</strong></p>
+<p><strong>3,以键值对的形式存储使用</strong></p>
+<p><strong>存储数据:</strong></p>
+<p><strong>localStorage.setitem(key, value)</strong></p>
+<p><strong>获取数据:</strong></p>
+<p><strong>localStorage.getltem(key)</strong></p>
+<p><strong>删除数据:</strong></p>
+<p><strong>localStorage.removeltem(key)</strong></p>
+<p><strong>删除所有数据:</strong></p>
+<p><strong>localStorage.clear()</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://2486125878.github.io">kk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://2486125878.github.io/2024/03/13/js/">https://2486125878.github.io/2024/03/13/js/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a></div><div class="post_share"><div class="social-share" data-image="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/13/jquery/" title="jQuery"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">jQuery</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/13/thinkphp-sql/" title="thinkphp_sql"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">thinkphp_sql</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/03/13/Vue/" title="Vue"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-13</div><div class="title">Vue</div></div></a></div><div><a href="/2024/03/13/jquery/" title="jQuery"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-13</div><div class="title">jQuery</div></div></a></div><div><a href="/2024/03/13/nodeJs/" title="nodeJs"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-13</div><div class="title">nodeJs</div></div></a></div><div><a href="/2024/03/13/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-13</div><div class="title">数据可视化</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.v8Y5QxZNIiQVIEk3JOCC2QHaGi?rs=1&amp;pid=ImgDetMain" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">kk</div><div class="author-info__description">...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/2486125878" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2486125878@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-4%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A7%E8%A1%8CJS%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">1.4浏览器执行JS简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2%E5%8F%98%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1.2变量的数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2.1简单数据类型(基本数据类型)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-isNaN"><span class="toc-number">1.3.</span> <span class="toc-text">4.isNaN()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E4%B9%89%E7%AC%A6"><span class="toc-number">1.4.</span> <span class="toc-text">2.字符串转义符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.</span> <span class="toc-text">4.2转换为字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97%E5%9E%8B-%E9%87%8D%E7%82%B9"><span class="toc-number">1.6.</span> <span class="toc-text">4.3转换为数字型(重点)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="toc-number">1.7.</span> <span class="toc-text">4.4转换为布尔型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.8.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E5%B0%8F%E7%BB%93"><span class="toc-number">1.8.1.</span> <span class="toc-text">3.4小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-break-continue-return%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.9.</span> <span class="toc-text">4.5 break,continue ,return的区别.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-arguments%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.10.</span> <span class="toc-text">5.arguments的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.11.</span> <span class="toc-text">Javascript作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">1.11.1.</span> <span class="toc-text">2.2全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number">1.11.2.</span> <span class="toc-text">2.2局部变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.11.3.</span> <span class="toc-text">2.3全局变量和局部变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%EF%BC%9A%E5%86%85%E9%83%A8%E5%87%BD%E6%95%B0%E8%AE%BF%E9%97%AE%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%98%E9%87%8F-%E9%87%87%E5%8F%96%E7%9A%84%E6%98%AF%E9%93%BE%E5%BC%8F%E6%9F%A5%E6%89%BE%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E5%86%B3%E5%AE%9A%E5%8F%96%E9%82%A3%E4%B8%AA%E5%80%BC%E8%BF%99%E7%A7%8D%E7%BB%93%E6%9E%84%E6%88%91%E4%BB%AC%E7%A7%B0%E4%B8%BA%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">1.11.4.</span> <span class="toc-text">3作用域链：内部函数访问外部函数的变量,采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.1.</span> <span class="toc-text">1.1什么是对象?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.2.</span> <span class="toc-text">1.2为什么需要对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%BC%8E%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.13.</span> <span class="toc-text">2．创建对象的三种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%88%A9%E7%94%A8%E5%AD%97%E9%9D%A2%E9%87%8F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.13.1.</span> <span class="toc-text">2.1利用字面量创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%B0%83%E7%94%A8"><span class="toc-number">1.13.1.1.</span> <span class="toc-text">对象的调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E5%87%BD%E6%95%B0%E3%80%81%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93"><span class="toc-number">1.13.2.</span> <span class="toc-text">变量、属性、函数、方法总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3%E5%88%A9%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.14.</span> <span class="toc-text">2.3利用构造函数创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.15.</span> <span class="toc-text">2.4构造函数和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#new%E5%9C%A8%E6%89%A7%E8%A1%8C%E6%97%B6%E4%BC%9A%E5%81%9A%E5%9B%9B%E4%BB%B6%E4%BA%8B%E6%83%85"><span class="toc-number">1.15.1.</span> <span class="toc-text">new在执行时会做四件事情:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in-%E8%AF%AD%E5%8F%A5%E7%94%A8%E4%BA%8E%E5%AF%B9%E6%95%B0%E7%BB%84%E6%88%96%E8%80%85%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E8%BF%9B%E8%A1%8C%E5%BE%AA%E7%8E%AF%E6%93%8D%E4%BD%9C%E3%80%82"><span class="toc-number">1.15.2.</span> <span class="toc-text">for in 语句用于对数组或者对象的属性进行循环操作。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.16.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.17.</span> <span class="toc-text">内置对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%96%87%E6%A1%A3"><span class="toc-number">1.18.</span> <span class="toc-text">查文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-MDN%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%AA%E8%A6%81%E5%AD%A6%E4%BC%9A%E5%85%B6%E5%B8%B8%E7%94%A8%E6%88%90%E5%91%98%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8D%B3%E5%8F%AF"><span class="toc-number">1.18.1.</span> <span class="toc-text">2.1 MDN学习一个内置对象的使用只要学会其常用成员的使用即可</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.18.2.</span> <span class="toc-text">2.2如何学习对象中的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math"><span class="toc-number">1.19.</span> <span class="toc-text">Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.20.</span> <span class="toc-text">描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Math%E6%A6%82%E8%BF%B0"><span class="toc-number">1.20.1.</span> <span class="toc-text">3.1 Math概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#random-%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%B0%8F%E6%95%B0"><span class="toc-number">1.21.</span> <span class="toc-text">random()随机生成小数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.22.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Date%E6%A6%82%E8%BF%B0"><span class="toc-number">1.23.</span> <span class="toc-text">4.1 Date概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Date-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.24.</span> <span class="toc-text">4.2 Date()方法的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E8%8E%B7%E5%8F%96%E6%97%A5%E6%9C%9F%E7%9A%84%E6%80%BB%E7%9A%84%E6%AF%AB%E7%A7%92%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.24.1.</span> <span class="toc-text">4.4获取日期的总的毫秒形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.25.</span> <span class="toc-text">4.日期对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">1.25.1.</span> <span class="toc-text">案例分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.26.</span> <span class="toc-text">5.数组对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof%E5%92%8CisArray"><span class="toc-number">1.26.1.</span> <span class="toc-text">instanceof和isArray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.26.2.</span> <span class="toc-text">5.3添加删除数组元素的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F"><span class="toc-number">1.26.3.</span> <span class="toc-text">5.4数组排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95%E6%96%B9%E6%B3%95"><span class="toc-number">1.26.4.</span> <span class="toc-text">5.5数组索引方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.26.5.</span> <span class="toc-text">5.6数组转换为字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7%E8%AF%BE%E4%B8%8B%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.26.6.</span> <span class="toc-text">5.7课下查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E5%9F%BA%E6%9C%AC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.26.7.</span> <span class="toc-text">6.1基本包装类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%8F%98"><span class="toc-number">1.26.8.</span> <span class="toc-text">6.2字符串的不可变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E8%BF%94%E5%9B%9E%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.26.9.</span> <span class="toc-text">6.3根据字符返回位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4%E6%A0%B9%E6%8D%AE%E4%BD%8D%E7%BD%AE%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6-%E9%87%8D%E7%82%B9"><span class="toc-number">1.26.10.</span> <span class="toc-text">6.4根据位置返回字符(重点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95-%E9%87%8D%E7%82%B9"><span class="toc-number">1.26.11.</span> <span class="toc-text">6.5字符串操作方法(重点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-8%E8%AF%BE%E4%B8%8B%E6%9F%A5%E9%98%85"><span class="toc-number">1.26.12.</span> <span class="toc-text">6.8课下查阅</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%AE%80%E5%8D%95%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%A4%8D%E6%9D%82%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">1.简单类型与复杂类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A0%86%E5%92%8C%E6%A0%88"><span class="toc-number">2.1.</span> <span class="toc-text">2.堆和栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%80%E5%8D%95%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">2.2.</span> <span class="toc-text">3.简单类型的内存分配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%A4%8D%E6%9D%82%E7%B1%BB%E5%9E%8B%E4%BC%A0%E5%8F%82"><span class="toc-number">2.3.</span> <span class="toc-text">6.复杂类型传参</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-APIs%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">Web APIs介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-JS%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">3.1.</span> <span class="toc-text">1.1 JS的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2JS%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E4%BB%A5%E5%8F%8AWeb-APIs%E9%98%B6%E6%AE%B5"><span class="toc-number">3.2.</span> <span class="toc-text">1.2JS基础阶段以及Web APIs阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-API"><span class="toc-number">3.3.</span> <span class="toc-text">2.1 API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Web-API"><span class="toc-number">3.4.</span> <span class="toc-text">2.2 Web API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-API%E5%92%8CWeb-API%E6%80%BB%E7%BB%93"><span class="toc-number">3.5.</span> <span class="toc-text">2.3 API和Web API总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E9%87%8D%E7%82%B9"><span class="toc-number">3.6.</span> <span class="toc-text">DOM(重点)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E4%BB%80%E4%B9%88%E6%98%AFDOM"><span class="toc-number">3.6.1.</span> <span class="toc-text">1.1什么是DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-DOM%E6%A0%91"><span class="toc-number">3.6.2.</span> <span class="toc-text">1.2 DOM树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0"><span class="toc-number">3.6.3.</span> <span class="toc-text">2.1如何获取页面元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E6%A0%B9%E6%8D%AEID%E8%8E%B7%E5%8F%96"><span class="toc-number">3.6.4.</span> <span class="toc-text">2.2根据ID获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E6%A0%B9%E6%8D%AE%E6%A0%87%E7%AD%BE%E5%90%8D%E8%8E%B7%E5%8F%96"><span class="toc-number">3.6.5.</span> <span class="toc-text">2.3根据标签名获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E9%80%9A%E8%BF%87HTML5%E6%96%B0%E5%A2%9E%E7%9A%84%E6%96%B9%E6%B3%95%E8%8E%B7%E5%8F%96i9%E4%BB%A5%E4%B8%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8"><span class="toc-number">3.6.6.</span> <span class="toc-text">2.4通过HTML5新增的方法获取i9以上浏览器可以使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5%E8%8E%B7%E5%8F%96%E7%89%B9%E6%AE%8A%E5%85%83%E7%B4%A0-body-html"><span class="toc-number">3.6.7.</span> <span class="toc-text">2.5获取特殊元素( body , html )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="toc-number">3.7.</span> <span class="toc-text">3.事件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E4%BA%8B%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">3.7.1.</span> <span class="toc-text">3.1事件概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E6%89%A7%E8%A1%8C%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.7.2.</span> <span class="toc-text">3.3执行事件的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E5%B8%B8%E8%A7%81%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.7.3.</span> <span class="toc-text">3.3常见的鼠标事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%C2%B7%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0"><span class="toc-number">3.8.</span> <span class="toc-text">4·操作元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E6%94%B9%E5%8F%98%E5%85%83%E7%B4%A0%E5%86%85%E5%AE%B9"><span class="toc-number">3.8.1.</span> <span class="toc-text">4.1改变元素内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E5%B8%B8%E7%94%A8%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.2.</span> <span class="toc-text">4.2常用元素的属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.3.</span> <span class="toc-text">4.3表单元素的属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.4.</span> <span class="toc-text">4.4样式属性操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%C2%B7%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E6%80%BB%E7%BB%93"><span class="toc-number">3.9.</span> <span class="toc-text">4·操作元素总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.1.</span> <span class="toc-text">4.6自定义属性的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-H5%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">3.9.2.</span> <span class="toc-text">4.7 H5自定义属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%BC%8E%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">5．节点操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.1.</span> <span class="toc-text">5.1为什么学节点操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%A9%E7%94%A8DOM%E6%8F%90%E4%BE%9B%E7%9A%84%E6%96%B9%E6%B3%95%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">3.10.1.1.</span> <span class="toc-text">1,利用DOM提供的方法获取元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%C2%B7%E5%88%A9%E7%94%A8%E8%8A%82%E7%82%B9%E5%B1%82%E7%BA%A7%E5%85%B3%E7%B3%BB%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">3.10.1.2.</span> <span class="toc-text">2·利用节点层级关系获取元素</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E8%8A%82%E7%82%B9%E6%A6%82%E8%BF%B0"><span class="toc-number">3.10.2.</span> <span class="toc-text">5.2节点概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3%E8%8A%82%E7%82%B9%E5%B1%82%E7%BA%A7"><span class="toc-number">3.10.3.</span> <span class="toc-text">5.3节点层级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.4.</span> <span class="toc-text">3.兄弟节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.5.</span> <span class="toc-text">5.4创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.6.</span> <span class="toc-text">5.5添加节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.7.</span> <span class="toc-text">5.5删除节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6%E5%A4%8D%E5%88%B6%E8%8A%82%E7%82%B9-%E5%85%8B%E9%9A%86%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.8.</span> <span class="toc-text">5.6复制节点(克隆节点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-8%E4%B8%89%E7%A7%8D%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%85%83%E7%B4%A0%E5%8C%BA%E5%88%AB"><span class="toc-number">3.10.9.</span> <span class="toc-text">5.8三种动态创建元素区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-DOM%E9%87%8D%E7%82%B9%E6%A0%B8%E5%BF%83"><span class="toc-number">3.11.</span> <span class="toc-text">6.DOM重点核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E5%88%9B%E5%BB%BA"><span class="toc-number">3.11.1.</span> <span class="toc-text">6.1创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2%E5%A2%9E"><span class="toc-number">3.11.2.</span> <span class="toc-text">6.2增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3%E5%88%A0"><span class="toc-number">3.11.3.</span> <span class="toc-text">6.3删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4%E6%94%B9"><span class="toc-number">3.11.4.</span> <span class="toc-text">6.4改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5%E6%9F%A5"><span class="toc-number">3.11.5.</span> <span class="toc-text">6.5查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-6%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.11.6.</span> <span class="toc-text">6.6属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-7-%E4%BA%8B%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">3.11.7.</span> <span class="toc-text">6.7 事件操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6-%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.12.</span> <span class="toc-text">1.注册事件(绑定事件)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-addEventListener%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E6%96%B9%E5%BC%8F"><span class="toc-number">3.12.1.</span> <span class="toc-text">1.2 addEventListener事件监听方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-attachEvent%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E6%96%B9%E5%BC%8F"><span class="toc-number">3.12.2.</span> <span class="toc-text">1.3 attachEvent事件监听方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.12.3.</span> <span class="toc-text">1.4注册事件兼容性解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6%EF%BC%88%E8%A7%A3%E7%BB%91%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.13.</span> <span class="toc-text">2.删除事件（解绑事件).</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">3.13.1.</span> <span class="toc-text">2.1删除事件的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.13.2.</span> <span class="toc-text">2.2删除事件兼容性解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-DOM%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">3.14.</span> <span class="toc-text">3.DOM事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.14.1.</span> <span class="toc-text">4.1什么是事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E6%96%B9%E6%A1%88"><span class="toc-number">3.14.2.</span> <span class="toc-text">4.3事件对象的兼容性方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">3.14.3.</span> <span class="toc-text">4.4事件对象的常见属性和方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">3.14.4.</span> <span class="toc-text">5.1阻止事件冒泡的两种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.14.5.</span> <span class="toc-text">5.2阻止事件冒泡的兼容性解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%EF%BC%8E%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%88%E4%BB%A3%E7%90%86%E3%80%81%E5%A7%94%E6%B4%BE"><span class="toc-number">3.15.</span> <span class="toc-text">6．事件委托（代理、委派)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">3.15.1.</span> <span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">3.15.2.</span> <span class="toc-text">事件委托的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.15.3.</span> <span class="toc-text">事件委托的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%EF%BC%8E%E5%B8%B8%E7%94%A8%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.16.</span> <span class="toc-text">7．常用的鼠标事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1%E5%B8%B8%E7%94%A8%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.16.1.</span> <span class="toc-text">7.1常用的鼠标事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.16.2.</span> <span class="toc-text">7.2鼠标事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1%E5%B8%B8%E7%94%A8%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.16.3.</span> <span class="toc-text">8.1常用键盘事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.16.4.</span> <span class="toc-text">8.2键盘事件对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BOM"><span class="toc-number">4.</span> <span class="toc-text">BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-B%D0%BEM%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">4.1.</span> <span class="toc-text">1.2 BоM的构成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E7%AA%97%E5%8F%A3%E5%8A%A0%E8%BD%BD%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">2.1窗口加载事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.2.1.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E8%B0%83%E6%95%B4%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">2.2调整窗口大小事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1%E4%B8%A4%E7%A7%8D%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">4.4.</span> <span class="toc-text">3.1两种定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-setTimeout-%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">4.5.</span> <span class="toc-text">3.2 setTimeout()定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3%E5%81%9C%E6%AD%A2setTimeout-%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%88%E5%8F%AA%E8%B0%83%E7%94%A8%E4%B8%80%E6%AC%A1%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">3.3停止setTimeout()定时器（只调用一次）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-setInterval-%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%88%E9%87%8D%E5%A4%8D%E8%B0%83%E7%94%A8%EF%BC%89"><span class="toc-number">4.7.</span> <span class="toc-text">3.4 setInterval()定时器（重复调用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5%E5%81%9C%E6%AD%A2setInterval-%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">4.8.</span> <span class="toc-text">3.5停止setInterval()定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-this"><span class="toc-number">4.9.</span> <span class="toc-text">3.6 this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JS%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">4.10.</span> <span class="toc-text">4.JS执行机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1JS%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="toc-number">4.11.</span> <span class="toc-text">4.1JS单线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="toc-number">4.12.</span> <span class="toc-text">4.3同步和异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-JS%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">4.13.</span> <span class="toc-text">4.4 JS执行机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-location%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.14.</span> <span class="toc-text">5.location对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E4%BB%80%E4%B9%88%E6%98%AFlocation%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.14.1.</span> <span class="toc-text">5.1什么是location对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-URL"><span class="toc-number">4.14.2.</span> <span class="toc-text">5.2 URL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-location%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">4.15.</span> <span class="toc-text">5.3 location对象的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-location%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">4.16.</span> <span class="toc-text">5.4 location对象的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-navigator%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.17.</span> <span class="toc-text">6.navigator对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-history%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.18.</span> <span class="toc-text">7.history对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1%C2%B7%E5%85%83%E7%B4%A0%E5%81%8F%E7%A7%BB%E9%87%8Foffset%E7%B3%BB%E5%88%97"><span class="toc-number">4.19.</span> <span class="toc-text">1·元素偏移量offset系列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-offset%E6%A6%82%E8%BF%B0"><span class="toc-number">4.19.1.</span> <span class="toc-text">1.1 offset概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-offset%E4%B8%8Estyle%E5%8C%BA%E5%88%AB"><span class="toc-number">4.20.</span> <span class="toc-text">1.2 offset与style区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%83%E7%B4%A0%E5%8F%AF%E8%A7%86%E5%8C%BAclient%E7%B3%BB%E5%88%97"><span class="toc-number">4.21.</span> <span class="toc-text">2,元素可视区client系列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="toc-number">4.22.</span> <span class="toc-text">3.立即执行函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%B7%98%E5%AE%9Dflexible-js%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">4.23.</span> <span class="toc-text">案例：淘宝flexible.js源码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1%E5%85%83%E7%B4%A0scroll%E7%B3%BB%E5%88%97%E5%B1%9E%E6%80%A7"><span class="toc-number">4.24.</span> <span class="toc-text">3.1元素scroll系列属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2%E9%A1%B5%E9%9D%A2%E8%A2%AB%E5%8D%B7%E5%8E%BB%E7%9A%84%E5%A4%B4%E9%83%A8"><span class="toc-number">4.25.</span> <span class="toc-text">3.2页面被卷去的头部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%A4%A7%E7%B3%BB%E5%88%97%E6%80%BB%E7%BB%93"><span class="toc-number">4.26.</span> <span class="toc-text">三大系列总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mouseenter%E5%92%8Cmouseover%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.27.</span> <span class="toc-text">mouseenter和mouseover的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mouseenter%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.27.1.</span> <span class="toc-text">mouseenter鼠标事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%EF%BC%8E%E5%8A%A8%E7%94%BB%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">4.28.</span> <span class="toc-text">4．动画函数封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">4.28.1.</span> <span class="toc-text">4.1动画实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E5%8A%A8%E7%94%BB%E5%87%BD%E6%95%B0%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85"><span class="toc-number">4.28.2.</span> <span class="toc-text">4.2动画函数简单封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E7%BC%93%E5%8A%A8%E6%95%88%E6%9E%9C%E5%8E%9F%E7%90%86"><span class="toc-number">4.28.3.</span> <span class="toc-text">4.4缓动效果原理,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%BC%8E%E5%B8%B8%E8%A7%81%E7%BD%91%E9%A1%B5%E7%89%B9%E6%95%88%E6%A1%88%E4%BE%8B"><span class="toc-number">4.29.</span> <span class="toc-text">5．常见网页特效案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E8%8A%82%E6%B5%81%E9%98%80"><span class="toc-number">4.29.1.</span> <span class="toc-text">5.1节流阀</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="toc-number">5.</span> <span class="toc-text">移动端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%A6%E5%B1%8F%E4%BA%8B%E4%BB%B6"><span class="toc-number">5.1.</span> <span class="toc-text">1.触屏事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E8%A7%A6%E5%B1%8F%E4%BA%8B%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">5.1.1.</span> <span class="toc-text">1.1触屏事件概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-TouchEvent"><span class="toc-number">5.1.2.</span> <span class="toc-text">1.2触摸事件对象(TouchEvent )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%8B%96%E5%8A%A8%E5%85%83%E7%B4%A0"><span class="toc-number">5.1.3.</span> <span class="toc-text">1.3移动端拖动元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%89%B9%E6%95%88"><span class="toc-number">5.2.</span> <span class="toc-text">2.移动端常见特效</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-click%E5%BB%B6%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">5.2.1.</span> <span class="toc-text">2.2 click延时解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">3.移动端常用开发插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E4%BB%80%E4%B9%88%E6%98%AF%E6%8F%92%E4%BB%B6"><span class="toc-number">5.3.1.</span> <span class="toc-text">3.1什么是插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-Swiper%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">5.3.2.</span> <span class="toc-text">3.3 Swiper插件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E5%85%B6%E4%BB%96%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E8%A7%81%E6%8F%92%E4%BB%B6"><span class="toc-number">5.3.3.</span> <span class="toc-text">3.4其他移动端常见插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93"><span class="toc-number">5.3.4.</span> <span class="toc-text">3.5插件的使用总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6%E7%BB%83%E4%B9%A0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%A7%86%E9%A2%91%E6%8F%92%E4%BB%B6zy-media-js"><span class="toc-number">5.3.5.</span> <span class="toc-text">3.6练习移动端视频插件zy.media.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6"><span class="toc-number">5.4.</span> <span class="toc-text">4.移动端常用开发框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0%E6%A1%86%E6%9E%B6"><span class="toc-number">5.4.1.</span> <span class="toc-text">4.1框架概述框架,</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-BootstrapBootstrap"><span class="toc-number">5.4.2.</span> <span class="toc-text">4.2 BootstrapBootstrap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="toc-number">6.</span> <span class="toc-text">1.本地存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-window-sessionStorage"><span class="toc-number">6.0.1.</span> <span class="toc-text">2.window.sessionStorage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-window-localStorage"><span class="toc-number">6.1.</span> <span class="toc-text">3.window.localStorage.</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/SSM/" title="SSM"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SSM"/></a><div class="content"><a class="title" href="/2024/03/13/SSM/" title="SSM">SSM</a><time datetime="2024-03-13T07:40:53.000Z" title="Created 2024-03-13 15:40:53">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/JavaWeb/" title="JavaWeb"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaWeb"/></a><div class="content"><a class="title" href="/2024/03/13/JavaWeb/" title="JavaWeb">JavaWeb</a><time datetime="2024-03-13T07:40:02.000Z" title="Created 2024-03-13 15:40:02">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据可视化"/></a><div class="content"><a class="title" href="/2024/03/13/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化">数据可视化</a><time datetime="2024-03-13T07:19:21.000Z" title="Created 2024-03-13 15:19:21">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/Vue/" title="Vue"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue"/></a><div class="content"><a class="title" href="/2024/03/13/Vue/" title="Vue">Vue</a><time datetime="2024-03-13T07:18:25.000Z" title="Created 2024-03-13 15:18:25">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/nodeJs/" title="nodeJs"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nodeJs"/></a><div class="content"><a class="title" href="/2024/03/13/nodeJs/" title="nodeJs">nodeJs</a><time datetime="2024-03-13T07:17:22.000Z" title="Created 2024-03-13 15:17:22">2024-03-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer"><div class="bubbles"><div class="bubble" style="--size:5.68773139156865rem; --distance:6.865316895937453rem; --position:57.290621099151096%; --time:3.6854046435828636s; --delay:-2.7251770753589684s;"></div><div class="bubble" style="--size:2.660276236307203rem; --distance:6.5309092242477105rem; --position:83.05841036424813%; --time:2.2410333043068316s; --delay:-3.7448096399901005s;"></div><div class="bubble" style="--size:4.58682412655002rem; --distance:7.1551180839752515rem; --position:27.90433039108703%; --time:2.9067014320187554s; --delay:-2.356507082699378s;"></div><div class="bubble" style="--size:5.3896963621676rem; --distance:6.693265365529442rem; --position:81.79914676372805%; --time:2.3727912399072473s; --delay:-3.3483453477970735s;"></div><div class="bubble" style="--size:4.559209408088377rem; --distance:9.2318834095179rem; --position:92.32004304020153%; --time:2.4719107307507047s; --delay:-2.166661213440785s;"></div><div class="bubble" style="--size:2.387374017330253rem; --distance:8.847153059500563rem; --position:93.21585229191915%; --time:3.0483562324845455s; --delay:-3.549169455570099s;"></div><div class="bubble" style="--size:4.751239747622374rem; --distance:7.223289117370025rem; --position:80.86240467180554%; --time:3.237309239781081s; --delay:-2.4360874727244446s;"></div><div class="bubble" style="--size:3.0707692750056585rem; --distance:9.246549003884915rem; --position:27.264062481467278%; --time:2.941653248248137s; --delay:-2.7432435571563962s;"></div><div class="bubble" style="--size:4.368912071388863rem; --distance:6.801962844895689rem; --position:11.599033599414927%; --time:3.9124319266726353s; --delay:-3.996138377038414s;"></div><div class="bubble" style="--size:2.807877169919278rem; --distance:8.17443002594924rem; --position:10.53958145856784%; --time:3.993722751918406s; --delay:-3.81139617857031s;"></div><div class="bubble" style="--size:5.631850213930575rem; --distance:9.794470782300422rem; --position:-2.3942050526785796%; --time:2.595675640708646s; --delay:-3.4061095657094387s;"></div><div class="bubble" style="--size:2.588920046494393rem; --distance:6.523775443074385rem; --position:77.48395927895594%; --time:2.1619080405610034s; --delay:-3.9617586884038953s;"></div><div class="bubble" style="--size:4.8423024905764835rem; --distance:8.536836111285158rem; --position:67.8414954819596%; --time:2.4470491883359244s; --delay:-3.852573750177295s;"></div><div class="bubble" style="--size:5.395463014653748rem; --distance:8.413492527039743rem; --position:72.33551424170244%; --time:3.7456536209073437s; --delay:-3.7634426478282332s;"></div><div class="bubble" style="--size:2.827370185829401rem; --distance:8.318753363897518rem; --position:94.3046296533108%; --time:2.2278848722016464s; --delay:-2.141293980316371s;"></div><div class="bubble" style="--size:5.9278859875395105rem; --distance:7.056251844262246rem; --position:52.69646012281166%; --time:2.5080233857503758s; --delay:-3.040101351572961s;"></div><div class="bubble" style="--size:2.6718916579030854rem; --distance:9.678635726310766rem; --position:35.780391468637596%; --time:2.6204068613581706s; --delay:-3.6194812942209698s;"></div><div class="bubble" style="--size:5.571217724447724rem; --distance:7.272488345782061rem; --position:43.080715384224895%; --time:2.9589915911994438s; --delay:-3.8059823383219724s;"></div><div class="bubble" style="--size:5.932659339819549rem; --distance:9.29482871356592rem; --position:34.62031472244305%; --time:2.6712560309119016s; --delay:-3.0328391919999897s;"></div><div class="bubble" style="--size:3.3744046802890866rem; --distance:6.7631058154291885rem; --position:19.01839193174235%; --time:2.803206535043418s; --delay:-3.2439283859708246s;"></div><div class="bubble" style="--size:3.034292094000902rem; --distance:8.897257991863588rem; --position:102.63563042728424%; --time:3.311565612394456s; --delay:-2.446589563710601s;"></div><div class="bubble" style="--size:5.381220949210583rem; --distance:7.057120149806893rem; --position:65.0722806947774%; --time:3.6913497976867005s; --delay:-2.9684755807787084s;"></div><div class="bubble" style="--size:3.2713880293822024rem; --distance:8.747945080446971rem; --position:1.1903814691317027%; --time:3.926151595290244s; --delay:-2.3326761298281244s;"></div><div class="bubble" style="--size:5.19080022011983rem; --distance:8.774926824925565rem; --position:16.83477212878429%; --time:2.4906451082990895s; --delay:-2.4860914220537254s;"></div><div class="bubble" style="--size:4.7380698617326455rem; --distance:7.411165139321156rem; --position:58.15738016369941%; --time:2.3151442715689385s; --delay:-3.746705864785136s;"></div><div class="bubble" style="--size:5.716771651272407rem; --distance:8.093871929293485rem; --position:65.87661493065762%; --time:2.0395043268705977s; --delay:-2.3903838545258513s;"></div><div class="bubble" style="--size:5.235754959058878rem; --distance:8.354775623144441rem; --position:29.879432162864617%; --time:3.3929399157189826s; --delay:-2.628831791788514s;"></div><div class="bubble" style="--size:5.969225936001087rem; --distance:8.070342620794065rem; --position:70.45296806977836%; --time:2.6295748907578322s; --delay:-3.906237137458487s;"></div><div class="bubble" style="--size:4.236497484678103rem; --distance:7.670508902905173rem; --position:74.04762093247611%; --time:3.4167946356149765s; --delay:-2.7209103991351595s;"></div><div class="bubble" style="--size:2.6059969958705382rem; --distance:9.079509615148682rem; --position:41.17170437851198%; --time:2.2427262528330534s; --delay:-3.9257694502385228s;"></div><div class="bubble" style="--size:3.7584593778362843rem; --distance:9.444585015075628rem; --position:81.95957351847532%; --time:2.395457540211894s; --delay:-3.749225652865458s;"></div><div class="bubble" style="--size:3.611479707638785rem; --distance:9.440634663382902rem; --position:38.76191565150896%; --time:3.904137203765664s; --delay:-2.6328865954435465s;"></div><div class="bubble" style="--size:5.796707302839222rem; --distance:9.412504422660394rem; --position:85.87149718150586%; --time:3.3955928643668014s; --delay:-2.575263537915135s;"></div><div class="bubble" style="--size:4.947468414232225rem; --distance:9.794549956633901rem; --position:0.7888649455578189%; --time:3.600089597918856s; --delay:-2.13146896790118s;"></div><div class="bubble" style="--size:2.69645163520551rem; --distance:7.47384661822294rem; --position:30.540224784612683%; --time:3.8890962574236183s; --delay:-2.289880400877382s;"></div><div class="bubble" style="--size:5.361840732389469rem; --distance:8.50559679122945rem; --position:59.24638361029099%; --time:3.205500527818642s; --delay:-3.5985106856787303s;"></div><div class="bubble" style="--size:3.2461424341222394rem; --distance:8.684088305711395rem; --position:11.577085688452769%; --time:3.3972633476570455s; --delay:-2.7570245160448237s;"></div><div class="bubble" style="--size:5.971380315872772rem; --distance:6.22067526136339rem; --position:49.11697637040754%; --time:3.231785042464168s; --delay:-2.0567197567731768s;"></div><div class="bubble" style="--size:2.528313985371769rem; --distance:9.315723871300635rem; --position:73.10522646970179%; --time:2.1145790660368022s; --delay:-3.267897152476562s;"></div><div class="bubble" style="--size:3.641574751463259rem; --distance:7.56025870259945rem; --position:57.89884634216083%; --time:3.493940664934371s; --delay:-2.2528834464279326s;"></div><div class="bubble" style="--size:5.242787511892561rem; --distance:6.933673300013276rem; --position:47.426943915250234%; --time:2.3615320767449726s; --delay:-2.5059068394041297s;"></div><div class="bubble" style="--size:3.037995898932933rem; --distance:6.430162953509438rem; --position:98.43539390016471%; --time:2.6749784325762067s; --delay:-2.5051655531435215s;"></div><div class="bubble" style="--size:3.381473210923768rem; --distance:7.010235474248121rem; --position:4.041193237327345%; --time:3.649538880712888s; --delay:-3.144167024973066s;"></div><div class="bubble" style="--size:2.2250834986908696rem; --distance:9.234389936694374rem; --position:95.29712643728118%; --time:3.2177900649096856s; --delay:-2.2693885052875995s;"></div><div class="bubble" style="--size:4.48280652526205rem; --distance:6.156624180463972rem; --position:87.73345814597424%; --time:2.927073638409615s; --delay:-3.6450966483986287s;"></div><div class="bubble" style="--size:5.0863119992331844rem; --distance:7.515992384539784rem; --position:9.23663108583413%; --time:3.8771278116707975s; --delay:-2.9102357978941833s;"></div><div class="bubble" style="--size:2.7611506962116783rem; --distance:8.520348976318417rem; --position:38.97301035219851%; --time:2.0026189752917136s; --delay:-2.221064919869286s;"></div><div class="bubble" style="--size:4.4396698479361145rem; --distance:8.718734349296305rem; --position:20.749530122213915%; --time:3.1270606576632822s; --delay:-2.36882341337086s;"></div><div class="bubble" style="--size:2.6426332413004046rem; --distance:9.848304242593336rem; --position:62.2302566572352%; --time:2.4903748826787213s; --delay:-2.0351392392082372s;"></div><div class="bubble" style="--size:2.0397945496954657rem; --distance:7.495987104796226rem; --position:59.02395916318015%; --time:3.215061978645465s; --delay:-2.409150655237257s;"></div><div class="bubble" style="--size:3.040359462242205rem; --distance:9.250807119120099rem; --position:68.22332673880365%; --time:3.933573615837122s; --delay:-2.42793570069172s;"></div><div class="bubble" style="--size:3.105028403933092rem; --distance:7.750544072059823rem; --position:8.506742476434896%; --time:3.2757184022828265s; --delay:-3.1847765850951024s;"></div><div class="bubble" style="--size:4.560477061566379rem; --distance:6.138827913633948rem; --position:59.96054957055944%; --time:3.942641116114473s; --delay:-2.007697447647552s;"></div><div class="bubble" style="--size:3.114697812147064rem; --distance:9.448516180966672rem; --position:32.13564256753505%; --time:3.043580784740865s; --delay:-3.75329570805167s;"></div><div class="bubble" style="--size:5.731734535042041rem; --distance:8.7855561915333rem; --position:68.54829030546402%; --time:3.3510898850971866s; --delay:-3.245884799060554s;"></div><div class="bubble" style="--size:2.921391027875406rem; --distance:6.674815443703066rem; --position:73.9960910505726%; --time:2.6633932069020942s; --delay:-3.593081989180334s;"></div><div class="bubble" style="--size:3.044377263339407rem; --distance:9.592465126593929rem; --position:39.05632772950524%; --time:3.097887255475451s; --delay:-2.981255738905484s;"></div><div class="bubble" style="--size:2.738423284815873rem; --distance:9.047146592054567rem; --position:53.19795680869545%; --time:3.7603098499996097s; --delay:-3.149503220812297s;"></div><div class="bubble" style="--size:3.2487174227861644rem; --distance:7.909126592620642rem; --position:8.958039205396107%; --time:2.7930141089800915s; --delay:-2.336581333481098s;"></div><div class="bubble" style="--size:3.175395499317742rem; --distance:7.669028779476115rem; --position:10.068029317662898%; --time:2.178675263301276s; --delay:-2.474069365655883s;"></div><div class="bubble" style="--size:3.7830235221008808rem; --distance:6.0579215530859605rem; --position:19.003232750333353%; --time:2.590329527766653s; --delay:-3.3164002487198143s;"></div><div class="bubble" style="--size:3.3687809489951492rem; --distance:6.6856097355825606rem; --position:20.294681829867553%; --time:3.9286706222983194s; --delay:-2.5416447011095102s;"></div><div class="bubble" style="--size:5.1922180648481895rem; --distance:7.965242365135587rem; --position:8.192377721054683%; --time:3.7225586763006s; --delay:-3.558380847529143s;"></div><div class="bubble" style="--size:3.3664719098123994rem; --distance:6.777041736451956rem; --position:15.586294106667069%; --time:3.954860423150183s; --delay:-3.540125862646614s;"></div><div class="bubble" style="--size:3.7882930290179155rem; --distance:6.554315842979523rem; --position:81.63306183364216%; --time:2.479695997671441s; --delay:-3.0087903643460834s;"></div><div class="bubble" style="--size:2.8972179985938817rem; --distance:6.426492517871922rem; --position:71.43208783850378%; --time:3.5143557595920893s; --delay:-3.007686123998869s;"></div><div class="bubble" style="--size:5.870718342399724rem; --distance:6.157783264957513rem; --position:61.619440807541736%; --time:3.2171394926000763s; --delay:-3.433098964096046s;"></div><div class="bubble" style="--size:2.719513421240862rem; --distance:6.631672235310097rem; --position:29.587933660178457%; --time:2.0495382531260753s; --delay:-3.836744723098494s;"></div><div class="bubble" style="--size:4.231963343141554rem; --distance:6.436908956998579rem; --position:71.14379233298405%; --time:3.38497379005187s; --delay:-3.637137131759826s;"></div><div class="bubble" style="--size:3.94379430389722rem; --distance:6.3606256153343rem; --position:18.754468702422717%; --time:3.403259342042215s; --delay:-3.475138001170929s;"></div><div class="bubble" style="--size:5.446084416965755rem; --distance:8.5396717839484rem; --position:-0.3035390092210388%; --time:2.9854936211016954s; --delay:-3.828933625310839s;"></div><div class="bubble" style="--size:5.394751216263335rem; --distance:6.698927461888331rem; --position:11.604492762006181%; --time:2.3085956998385306s; --delay:-3.8160125998244707s;"></div><div class="bubble" style="--size:2.1393875015844444rem; --distance:8.262930602381259rem; --position:87.28858637156873%; --time:3.839194220951215s; --delay:-2.6897822375458116s;"></div><div class="bubble" style="--size:2.721974665451488rem; --distance:8.228653894478304rem; --position:67.86004112697083%; --time:3.691816568140235s; --delay:-3.992176666747984s;"></div><div class="bubble" style="--size:4.915437513760504rem; --distance:9.596817795851265rem; --position:36.585512870253645%; --time:3.3996203446991755s; --delay:-3.7399459009457674s;"></div><div class="bubble" style="--size:5.1275137173458845rem; --distance:7.943485936133441rem; --position:29.961426071572994%; --time:2.4229374184422685s; --delay:-2.866652497621464s;"></div><div class="bubble" style="--size:2.344837812454635rem; --distance:9.962325344627402rem; --position:92.66312525091658%; --time:3.7338845163493173s; --delay:-2.4238925062964665s;"></div><div class="bubble" style="--size:2.1209349260962416rem; --distance:8.90892913160872rem; --position:42.31355081751806%; --time:3.186108652405582s; --delay:-2.1349589606135764s;"></div><div class="bubble" style="--size:5.053120743382651rem; --distance:8.821142864747875rem; --position:82.13168636390134%; --time:3.0903899575177047s; --delay:-3.615682974079604s;"></div><div class="bubble" style="--size:3.860477064368582rem; --distance:6.468244381564283rem; --position:47.43278589917347%; --time:3.0952889730812294s; --delay:-2.472520539824861s;"></div><div class="bubble" style="--size:3.1238636814876344rem; --distance:9.801061408261566rem; --position:81.02691096599276%; --time:2.786371320333712s; --delay:-2.36427438463683s;"></div><div class="bubble" style="--size:2.9983570387297034rem; --distance:6.151704357821059rem; --position:19.628550582909195%; --time:3.583380455415261s; --delay:-2.5879859260691847s;"></div><div class="bubble" style="--size:2.7495826149116516rem; --distance:9.473438773679318rem; --position:24.601527150357427%; --time:2.2673911383073624s; --delay:-3.292878571551834s;"></div><div class="bubble" style="--size:5.740787223313238rem; --distance:9.217859998151066rem; --position:75.30059999430273%; --time:3.5893322792828553s; --delay:-3.8810719263576874s;"></div><div class="bubble" style="--size:3.929363848316969rem; --distance:8.645351951835949rem; --position:21.838145436889654%; --time:3.1132455107517703s; --delay:-3.2296767657869276s;"></div><div class="bubble" style="--size:4.22667246609572rem; --distance:6.411128062115626rem; --position:93.30526210489582%; --time:2.5226575698529663s; --delay:-3.4492185407493796s;"></div><div class="bubble" style="--size:5.915686132411128rem; --distance:6.190514236369592rem; --position:71.64562935357465%; --time:2.6187400681808546s; --delay:-2.0795361916409294s;"></div><div class="bubble" style="--size:4.607077069162905rem; --distance:9.666256081951444rem; --position:58.268506043038734%; --time:2.1100445906923424s; --delay:-2.823577393084579s;"></div><div class="bubble" style="--size:3.225705700102905rem; --distance:8.725882309370865rem; --position:19.465067768832633%; --time:3.9426129890955113s; --delay:-3.6825969434263945s;"></div><div class="bubble" style="--size:4.4828513583616525rem; --distance:7.856422065698262rem; --position:97.84880080244392%; --time:3.259417825030069s; --delay:-3.3542690009030682s;"></div><div class="bubble" style="--size:3.035497334157446rem; --distance:8.711214189605194rem; --position:37.935909060457405%; --time:2.1931039903979737s; --delay:-3.5301789571788675s;"></div><div class="bubble" style="--size:4.052983448020311rem; --distance:8.531346743411817rem; --position:66.60319070111382%; --time:2.6008473115904014s; --delay:-3.77005506386261s;"></div><div class="bubble" style="--size:2.73136162891241rem; --distance:9.187276377602622rem; --position:20.102006908784706%; --time:2.7059678247109122s; --delay:-3.8228634683394196s;"></div><div class="bubble" style="--size:5.428858951640142rem; --distance:7.5257879859373205rem; --position:8.510446688769598%; --time:2.500752269113448s; --delay:-2.8639934528568025s;"></div><div class="bubble" style="--size:4.641393913912858rem; --distance:6.522734595345106rem; --position:2.266483969318731%; --time:2.9072485619613917s; --delay:-3.513127957847623s;"></div><div class="bubble" style="--size:2.565960608204997rem; --distance:6.567858707683354rem; --position:8.160190968461995%; --time:3.534251450171989s; --delay:-2.2973623245974495s;"></div><div class="bubble" style="--size:4.362267712616694rem; --distance:8.608714148095927rem; --position:94.96052425446995%; --time:2.206887561991268s; --delay:-3.410186594677341s;"></div><div class="bubble" style="--size:2.3617967252816356rem; --distance:6.83673648194295rem; --position:67.84306643018515%; --time:3.226530075965372s; --delay:-2.8115776354452344s;"></div><div class="bubble" style="--size:5.099745388124156rem; --distance:9.28034564936032rem; --position:45.015902871039934%; --time:2.7076358786003287s; --delay:-2.1280298815909213s;"></div><div class="bubble" style="--size:5.198903810774651rem; --distance:6.428075208768082rem; --position:80.59100237794993%; --time:2.705639963991455s; --delay:-2.7675518983617797s;"></div><div class="bubble" style="--size:4.457325766165171rem; --distance:7.5313757014919265rem; --position:25.229327623889752%; --time:3.4076653872267757s; --delay:-2.1247577644390208s;"></div><div class="bubble" style="--size:3.1600241398839106rem; --distance:7.238150617050592rem; --position:90.29272116949706%; --time:3.3153672764521303s; --delay:-3.687659425302122s;"></div><div class="bubble" style="--size:4.241304872859382rem; --distance:8.25152720404454rem; --position:57.76454219696978%; --time:3.934960832485421s; --delay:-3.707239329101205s;"></div><div class="bubble" style="--size:3.6730948802574153rem; --distance:7.188241000471602rem; --position:12.256868664855055%; --time:2.9032628757244625s; --delay:-2.1893571052196057s;"></div><div class="bubble" style="--size:5.2419784755794065rem; --distance:9.03361324481814rem; --position:55.943011670028305%; --time:3.1688236840350505s; --delay:-2.4672906730288124s;"></div><div class="bubble" style="--size:4.382687669607966rem; --distance:7.437366948116339rem; --position:100.02791214373853%; --time:2.6623065428222445s; --delay:-3.988703100150124s;"></div><div class="bubble" style="--size:5.032415584376693rem; --distance:6.633489169338708rem; --position:88.84789359914295%; --time:3.3796480321179776s; --delay:-2.7250016240741366s;"></div><div class="bubble" style="--size:4.787890609762553rem; --distance:8.953964866098516rem; --position:82.58468920247853%; --time:2.059887514867122s; --delay:-2.886365923602751s;"></div><div class="bubble" style="--size:5.557996335667664rem; --distance:7.954004734379126rem; --position:9.673284416970196%; --time:2.3048931287445638s; --delay:-2.8341547100762026s;"></div><div class="bubble" style="--size:5.951773019819248rem; --distance:9.537259795342393rem; --position:8.133504396135315%; --time:2.9378255651976075s; --delay:-2.165769207923414s;"></div><div class="bubble" style="--size:2.5497147107087104rem; --distance:8.684236820466829rem; --position:88.22400383999016%; --time:2.025563583222504s; --delay:-2.8856791657636163s;"></div><div class="bubble" style="--size:3.7907013902633544rem; --distance:8.978966112018208rem; --position:58.67988083802812%; --time:3.7406310926630124s; --delay:-3.974488189689701s;"></div><div class="bubble" style="--size:5.503181342537289rem; --distance:8.282168177008245rem; --position:80.31153293125489%; --time:3.9605161384320033s; --delay:-2.1179378511213587s;"></div><div class="bubble" style="--size:3.50177506723983rem; --distance:9.804450326553077rem; --position:94.27756667405872%; --time:3.4848159947200728s; --delay:-2.385298349272258s;"></div><div class="bubble" style="--size:4.1215458076342255rem; --distance:7.765565764924762rem; --position:17.126569072864527%; --time:3.606325520310503s; --delay:-2.6386224472538307s;"></div><div class="bubble" style="--size:3.913214158849926rem; --distance:9.337236401342425rem; --position:48.0833198162169%; --time:3.9017220413830382s; --delay:-2.4913689401177264s;"></div><div class="bubble" style="--size:4.861477126691963rem; --distance:6.550354799241916rem; --position:19.71364910511757%; --time:2.7942205658909476s; --delay:-2.5930063946197137s;"></div><div class="bubble" style="--size:3.742553356651552rem; --distance:6.608697419219666rem; --position:17.244372692977823%; --time:2.4700155640943846s; --delay:-3.1136747611501554s;"></div><div class="bubble" style="--size:5.767173416422185rem; --distance:8.824415585657274rem; --position:69.42312479970013%; --time:2.422449871788825s; --delay:-3.924333912735062s;"></div><div class="bubble" style="--size:4.314680733496919rem; --distance:9.365971425774035rem; --position:34.15827757091123%; --time:3.9124208619165812s; --delay:-3.493668095074741s;"></div><div class="bubble" style="--size:4.355423862622692rem; --distance:7.155402840099149rem; --position:-2.3537286027864357%; --time:3.1860159553850527s; --delay:-2.042191619613396s;"></div><div class="bubble" style="--size:2.3673465348184735rem; --distance:9.607988335289445rem; --position:97.44027892666632%; --time:2.0121555412738092s; --delay:-2.212772835839277s;"></div><div class="bubble" style="--size:2.9018564876931485rem; --distance:6.12451131167315rem; --position:18.042215720298557%; --time:2.145959884834457s; --delay:-2.9102893653716455s;"></div><div class="bubble" style="--size:4.694375891893983rem; --distance:9.163695846781856rem; --position:67.94116846105268%; --time:3.250968876904008s; --delay:-2.0575528280000235s;"></div><div class="bubble" style="--size:2.6884968491675965rem; --distance:6.262390247594476rem; --position:25.402599867069544%; --time:3.896195803524973s; --delay:-2.0666071744092953s;"></div><div class="bubble" style="--size:3.6105573720068396rem; --distance:6.721731785023822rem; --position:61.65806415531489%; --time:2.029489687496506s; --delay:-3.3958931363125218s;"></div><div class="bubble" style="--size:3.9053939741229495rem; --distance:8.73863858747719rem; --position:18.33540757542941%; --time:2.3800584466029138s; --delay:-2.2146778382070496s;"></div><div class="bubble" style="--size:5.155331556101125rem; --distance:9.512961481452944rem; --position:97.99546662933591%; --time:2.169683958282751s; --delay:-3.209172100573546s;"></div></div><div class="content"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

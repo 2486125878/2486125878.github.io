@@ -1,0 +1,1736 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JavaWeb | 音符跳动</title><meta name="author" content="kk"><meta name="copyright" content="kk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="1.1Junit单元测试:测试分类:1.黑盒测试:不需要写代码,给输入值,看程序是否能够输出期望的值。 2.白盒测试:需要写代码的。关注程序具体的执行流程。 Junit使用:白盒测试 Junit使用:白盒测试步骤: 1.定义一个测试类(测试用例) 建议: 测试类名: 被测试的类名Test      calculatorTest 包名: xxx.xxx.xx.test               c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb">
+<meta property="og:url" content="https://2486125878.github.io/2024/03/13/JavaWeb/index.html">
+<meta property="og:site_name" content="音符跳动">
+<meta property="og:description" content="1.1Junit单元测试:测试分类:1.黑盒测试:不需要写代码,给输入值,看程序是否能够输出期望的值。 2.白盒测试:需要写代码的。关注程序具体的执行流程。 Junit使用:白盒测试 Junit使用:白盒测试步骤: 1.定义一个测试类(测试用例) 建议: 测试类名: 被测试的类名Test      calculatorTest 包名: xxx.xxx.xx.test               c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg">
+<meta property="article:published_time" content="2024-03-13T07:40:02.000Z">
+<meta property="article:modified_time" content="2024-03-13T07:40:36.216Z">
+<meta property="article:author" content="kk">
+<meta property="article:tag" content="JAVA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://2486125878.github.io/2024/03/13/JavaWeb/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JavaWeb',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-13 15:40:36'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/header.css?1"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="音符跳动" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.v8Y5QxZNIiQVIEk3JOCC2QHaGi?rs=1&amp;pid=ImgDetMain" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="音符跳动"><img class="site-icon" src="/img/logo.png"/><span class="site-name">音符跳动</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JavaWeb</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-13T07:40:02.000Z" title="Created 2024-03-13 15:40:02">2024-03-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-13T07:40:36.216Z" title="Updated 2024-03-13 15:40:36">2024-03-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JavaWeb"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"></svg><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-1Junit单元测试"><a href="#1-1Junit单元测试" class="headerlink" title="1.1Junit单元测试:"></a>1.1Junit单元测试:</h1><h2 id="测试分类"><a href="#测试分类" class="headerlink" title="测试分类:"></a><strong>测试分类:</strong></h2><p><strong>1.黑盒测试:不需要写代码,给输入值,看程序是否能够输出期望的值。</strong></p>
+<p><strong>2.白盒测试:需要写代码的。关注程序具体的执行流程。</strong></p>
+<p><strong>Junit使用:白盒测试</strong></p>
+<h2 id="Junit使用-白盒测试"><a href="#Junit使用-白盒测试" class="headerlink" title="Junit使用:白盒测试"></a>Junit使用:白盒测试</h2><p><strong>步骤:</strong></p>
+<p><strong>1.定义一个测试类(测试用例)</strong></p>
+<p><strong>建议:</strong></p>
+<p><strong>测试类名: 被测试的类名Test      calculatorTest</strong></p>
+<p><strong>包名: xxx.xxx.xx.test               cn.itcast.test</strong></p>
+<p><strong>2.定义测试方法:可以独立运行</strong></p>
+<p><strong>建议:</strong></p>
+<p><strong>方法名:test测试的方法名				testAdd()</strong></p>
+<p><strong>返回值: void</strong></p>
+<p><strong>参数列表: 空参</strong></p>
+<p><strong>3.给方法加@Test</strong></p>
+<p><strong>4.导入junit依赖环境</strong></p>
+<p><strong>判定结果:</strong></p>
+<p><strong>红色:失败</strong></p>
+<p><strong>绿色:成功</strong></p>
+<p><strong>一般我们会使用断言操作来处理结果</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Assert.assertEquals(期望的结果,运算的结果);</span><br></pre></td></tr></table></figure>
+
+<p><strong>补充:</strong></p>
+<p> <strong>@Before:修饰的方法会在测试方法之前被自动执行</strong></p>
+<p><strong>@After:修饰的方法会在测试方法执行之后自动被执行。</strong></p>
+<h1 id="反射-框架设计的灵魂"><a href="#反射-框架设计的灵魂" class="headerlink" title="反射:框架设计的灵魂"></a>反射:框架设计的灵魂</h1><p><strong>框架:半成品软件。可以在框架的基础上进行软件开发,简化编码</strong></p>
+<p><strong>反射:将类的各个组成部分封装为其他对象,这就是反射机制</strong></p>
+<p><strong>好处:</strong></p>
+<p><strong>1.可以在程序运行过程中,操作这些对象。</strong></p>
+<p><strong>2.可以解耦,提高程序的可扩展性。</strong></p>
+<h2 id="Java代码-在计算机中经历的阶段-三个阶段"><a href="#Java代码-在计算机中经历的阶段-三个阶段" class="headerlink" title="Java代码 在计算机中经历的阶段:三个阶段"></a><strong>Java代码 在计算机中经历的阶段:三个阶段</strong></h2><p><strong>源代码阶段  : javac 编译–字节码文件加载到内存：成员变量，构造方法，成员方法—</strong></p>
+<p><strong>Class类对象阶段：类加载器  对象描述  class类对象：成员变量Field[ ]fields，构造方法constructor[ ]cons，成员方法Method[ ] methods</strong></p>
+<p><strong>运行时阶段</strong></p>
+<h2 id="获取Class对象的方式"><a href="#获取Class对象的方式" class="headerlink" title="获取Class对象的方式:"></a><strong>获取Class对象的方式:</strong></h2><p>**1.Class.forName(“全类名”); 将字节码文件加载进内存,返回class对象   **</p>
+<p><strong>多用于配置文件  将类名定义在配置文件中。读取文件,加载类</strong></p>
+<p>**2.类名.class: 通过类名的属性class获取 **</p>
+<p><strong>多用于参数的传递</strong></p>
+<p><strong>3.对象.getclass(): getclass()方法在object类中定义着。</strong></p>
+<p><strong>多用于对象的获取字节码的方式</strong></p>
+<p><strong>结论:同一个字节码文件(*.class)在一次程序运行过程中,只会被加载一次,不论通过哪一种方式获取的class对象都是同一个。</strong></p>
+<h1 id="Class对象功能"><a href="#Class对象功能" class="headerlink" title="Class对象功能"></a>Class对象功能</h1><p><strong>获取功能:</strong></p>
+<p>**1,获取成员变量们  **</p>
+<p>**Field[] getFields()                    		  获取所有public修饰的成员变量    **</p>
+<p><strong>Field getField(String name)       	获取指定名称的bublic修饰的成员变量</strong></p>
+<p><strong>Field[] getDeclaredFields()</strong></p>
+<p><strong>Field getDeclaredField(String name)</strong></p>
+<p><strong>2.获取构造方法们</strong></p>
+<p><strong>Constructor&lt;?&gt;[] getConstructors()</strong></p>
+<p><strong>Constructor<T> getconstructor(类&lt;?&gt;…. parameterTypes)</strong></p>
+<p><strong>Constructdr<t> getDeclaredConstructor (类&lt;?&gt;… parameterTypes)</strong></p>
+<p> <strong>Constructor&lt;?&gt;[] getDeclaredConstructors()</strong></p>
+<p><strong>3.获取成员方法们</strong></p>
+<p><strong>Method[] getMethods()</strong></p>
+<p><strong>Method getMethod(String name, 类&lt;?&gt;… parameterTypes)</strong> </p>
+<p><strong>Method[] getDeclaredMethods()</strong></p>
+<p><strong>Method getDeclaredMethod(String name, 类&lt;?&gt;… parameterTypes)</strong> </p>
+<p><strong>4.获取类名</strong></p>
+<p><strong>string getName()</strong></p>
+<p><strong>Field :成员变量</strong></p>
+<p><strong>操作:</strong></p>
+<p><strong>1.设置值</strong></p>
+<p><strong>void set(Object obj, Object value)</strong></p>
+<p><strong>2.获取值</strong></p>
+<p><strong>get(object obj)</strong></p>
+<p><strong>3.忽略访问权限修饰符的安全检擦</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setAccessible(<span class="literal">true</span>);<span class="comment">//暴力反射</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Constructor:构造方法</strong></p>
+<p><strong>创建对象:</strong></p>
+<p><strong>T newInstance(Object…. initargs)</strong></p>
+<p><strong>如果使用空参数构造方法创建对象,操作可以简化: class对象的newInstance方法</strong></p>
+<p><strong>Method : 方法对象</strong></p>
+<p><strong>执行方法:</strong></p>
+<p><strong>Object invoke(Object obj, object… args)</strong></p>
+<p><strong>获取方法名称:</strong></p>
+<p> <strong>string getName</strong></p>
+<p><strong>案例:</strong></p>
+<p><strong>需求:</strong></p>
+<p><strong>写一个”框架”,不能改变该类的任何代码的前提下,可以帮我们创建任意类的对象,并且执行其中任意方法</strong></p>
+<p><strong>实现:</strong></p>
+<p><strong>1.配置文件</strong></p>
+<p><strong>2.反射</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1,将需要创建的对象的全类名和需要执行的方法定义在配置文件中</strong></p>
+<p><strong>2,在程序中加载读取配置文件</strong></p>
+<p><strong>3.使用反射技术来加载类文件进内存</strong></p>
+<p><strong>4.创建对象</strong></p>
+<p><strong>5.执行方法</strong></p>
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><p><strong>概念:说明程序的。给计算机看的</strong></p>
+<p><strong>注释:用文字描述程序的。给程序员看的</strong></p>
+<p><strong>定义:注解(Annotation),也叫元数据。一种代码级别的说明。它是JDK1.5及以后版本引入的一个特性,与类、接口、枚举是在同一个层次。它可以声明在包、类、字段、方法、局部变量、方法参数等的前面,用来对这些元素进行说明,注释。</strong></p>
+<p><strong>概念描述:</strong></p>
+<p> <strong>JDK1.5之后的新特性</strong></p>
+<p><strong>说明程序的</strong></p>
+<p><strong>使用注解:@注解名称</strong></p>
+<p><strong>作用分类:</strong></p>
+<p><strong>@编写文档:通过代码里标识的注解生成文档【生成文档doc文档】</strong></p>
+<p><strong>@代码分析:通过代码里标识的注解对代码进行分析【使用反射】</strong></p>
+<p><strong>@编译检查:通过代码里标识的注解让编译器能够实现基本的编译检查【override】</strong></p>
+<p><strong>JDK中预定义的一些注解</strong></p>
+<p><strong>@override：检测被该注解标注的方法是否是继承自父类(接口)的</strong></p>
+<p><strong>@Deprecated：将该注解标注的内容,已过时</strong></p>
+<p> <strong>@Suppresswarnings：压制警告                  一般传递参数all@Suppresswarnings(“all”)</strong>   </p>
+<p><strong>自定义注解</strong></p>
+<p><strong>格式:</strong></p>
+<p><strong>元注解</strong>  </p>
+<p><strong>public @interface 注解名{</strong></p>
+<p><strong>属性列表；</strong></p>
+<p><strong>}</strong></p>
+<p><strong>本质:注解本质上就是一个接口,该接口默认继承Annotation接口</strong></p>
+<p> <strong>public interface MyAnno extends java.lang. annotation. Annotation{ }</strong></p>
+<p><strong>属性:接口中的抽象方法</strong></p>
+<p><strong>要求:</strong></p>
+<p><strong>1.属性的返回值类型有下列取值</strong></p>
+<p><strong>基本数据类型</strong></p>
+<p><strong>string</strong></p>
+<p><strong>枚举</strong></p>
+<p><strong>注解</strong></p>
+<p><strong>以上类型的数组</strong></p>
+<p><strong>2.定义了属性,在使用时需要给属性赋值</strong></p>
+<p><strong>2.1.如果定义属性时,使用default关键字给属性默认初始化值,则使用注解时,可以不进行属性的赋值。</strong></p>
+<p><strong>2.2如果只有一个属性需要赋值,并且属性的名称是value,则value可以省略,直接定义值即可</strong></p>
+<p><strong>2.3数组赋值时,值使用包裹。如果数组中只有一个值,则分省略</strong></p>
+<p><strong>元注解:期于描述注解的注解</strong></p>
+<p><strong>@Target :描述注解能够作用的位置</strong></p>
+<p><strong>ElementType取值:</strong></p>
+<p> <strong>TYPE:可以作用于类上</strong></p>
+<p> <strong>METHOD :可以作用于方法上</strong></p>
+<p><strong>FIELD:可以作用于成员变量上</strong></p>
+<p><strong>@Retention :描述注解被保留的阶段</strong></p>
+<p>​		<strong>@Retention(RetentionPolicy.RUNTIME)：当前被描述的注解,会保留到class字节码文件中,并被JVM读取到</strong></p>
+<p><strong>@Documented :描述注解是否被抽取到api文档中</strong></p>
+<p><strong>@Inherited:描述注解是否被子类继承</strong></p>
+<p><strong>在程序使用(解析)注解:获取注解中定义的属性值</strong></p>
+<p><strong>1.获取注解定义的位置的对象 (class, Method, Field)</strong></p>
+<p><strong>2.获取指定的注解</strong></p>
+<p>*** getAnnotation(class)**</p>
+<p><strong>其实就是在内存中生成了一个该注解接口的子类实现对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProImpl</span> implement Pro&#123;</span><br><span class="line">       String <span class="title function_">className</span><span class="params">()</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;cn.itcast.annotation.Demo1&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">        String <span class="title function_">methodName</span><span class="params">()</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="string">&quot;show&quot;</span>;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.调用注解中的抽象方法获取配置的属性值</strong></p>
+<p><strong>小结:</strong></p>
+<p><strong>1.以后大多数时候,我们会使用注解,而不是自定义注解</strong></p>
+<p><strong>2.注解给谁用?</strong></p>
+<p><strong>1.编译器</strong></p>
+<p><strong>2.给解析程序用</strong></p>
+<p><strong>3.注解不是程序的一部分,问以理解为注解就是一个标签</strong></p>
+<h1 id="javaweb"><a href="#javaweb" class="headerlink" title="javaweb"></a>javaweb</h1><h2 id="1-数据库"><a href="#1-数据库" class="headerlink" title="1.数据库"></a>1.数据库</h2><p><strong>什么数据库?</strong></p>
+<p><strong>用于存储和管理数据的仓库。</strong></p>
+<p><strong>数据库的特点:</strong></p>
+<p><strong>1,持久化存储数据的。其实数据库就是一个文件系统</strong></p>
+<p><strong>2.方便存储和管理数据</strong></p>
+<p><strong>3.使用了统一的方式操作数据库。</strong></p>
+<p><strong>1.什么是SQL?</strong></p>
+<p><strong>Structured oWery Language : 结构化查询语</strong></p>
+<p><strong>其实就是定义了操作所有关系型数据库的规则。</strong></p>
+<p><strong>每一种数据库操作的方式存在不一样的地方,称为“方言”</strong></p>
+<h2 id="3-SQL分类"><a href="#3-SQL分类" class="headerlink" title="3.SQL分类"></a>3.SQL分类</h2><p><strong>1.DDL(Data Definition Language)数据定义语言用来定义数据库对象:数据库,表,列等。关键字: create, drop,alter等</strong></p>
+<p><strong>2.DML(Data Manipulation Language)数据操作语言用来对数据库中表的数据进行增删改。关键字:insert, delete, update等</strong></p>
+<p><strong>3.DQL(Data Query Language)数据询语言用来查询数据库中表的记录(数据)。关键字: select, where等</strong></p>
+<p><strong>4.DCL (Data Control Language)数据控制语言(了解)用来定义数据库的访问权限和安全级别,及创建用户。关键字: GRANT,REVOKE 等</strong></p>
+<h2 id="1-操作数据库-CRUD"><a href="#1-操作数据库-CRUD" class="headerlink" title="1,操作数据库: CRUD"></a>1,操作数据库: CRUD</h2><p><strong>1.C(Create) :创建</strong></p>
+<p><strong>创建db4数据库,判断是否存在,并制定字符集为gbk</strong></p>
+<ul>
+<li><strong>create database if not exists db4 character set gbk;</strong></li>
+</ul>
+<p><strong>2.R(Retrieve) :查询</strong></p>
+<p>​		<strong>查询所有数据库的名称: show databases;</strong>*</p>
+<p>​		<strong>查询某个数据库的字符集:查询某个数据库的创建语句</strong></p>
+<p>​		<strong>show create database 数据库名称;</strong></p>
+<p><strong>3.U(Update) :修改</strong></p>
+<p><strong>修改数据库的字符集</strong></p>
+<ul>
+<li><strong>alter database 据库名character set 字符集名称;</strong></li>
+</ul>
+<p><strong>4.D(Delete) :删除</strong></p>
+<p><strong>修改数据库的字符集</strong></p>
+<ul>
+<li><p><strong>drop database 据库名</strong></p>
+<p><strong>判断数据库存在,存在再删除</strong></p>
+</li>
+<li><p><strong>drop database if exists 数据库名称;</strong></p>
+</li>
+</ul>
+<p><strong>5.使用数据库</strong></p>
+<p><strong>查询当前正在使用的数据库名称</strong></p>
+<ul>
+<li><strong>select database();</strong></li>
+</ul>
+<p><strong>使用数据库</strong></p>
+<p><strong>use 数据库名称;</strong></p>
+<h2 id="2-操作表"><a href="#2-操作表" class="headerlink" title="2.操作表"></a>2.操作表</h2><p><strong>1.C(Create):创建</strong></p>
+<p><strong>CREATE TABLE student( id int,…);</strong></p>
+<p><strong>2.R(Retrieve) :查询</strong></p>
+<p><strong>查询某个数据库中所有的表名称</strong></p>
+<p>*** show tables;**</p>
+<p><strong>查询表结构</strong></p>
+<p>*<strong>desc表名;</strong></p>
+<p><strong>3.U(Update) :修改</strong></p>
+<p>*** update表名set 列名1 &#x3D;值1,列名2 &#x3D;值2,… [where条件];**</p>
+<p><strong>4.D(Delete) :删除</strong></p>
+<p><strong>delete from表名;</strong></p>
+<p><strong>TRUNCATE TABLE 表名;</strong></p>
+<h2 id="DQL-查询表中的记录"><a href="#DQL-查询表中的记录" class="headerlink" title="DQL:查询表中的记录"></a>DQL:查询表中的记录</h2><p><strong>select * from 表名;</strong></p>
+<p><strong>1.语法:</strong></p>
+<p><strong>select字段列表</strong></p>
+<p><strong>from表名列表</strong></p>
+<p><strong>where条件列表</strong></p>
+<p><strong>group by分组字段</strong></p>
+<p><strong>having分组之后的条件</strong></p>
+<p><strong>order by排序</strong></p>
+<p><strong>limit分页限定</strong></p>
+<p><strong>基础查询</strong></p>
+<p><strong>1,多个字段的查询</strong></p>
+<p><strong>SELECT NAME, age FROM student;</strong> </p>
+<p><strong>SELECT * FROM student;</strong> </p>
+<p><strong>2.去除重复 distinct</strong></p>
+<p><strong>SELECT DISTINCT address FROM student;</strong></p>
+<p><strong>3.计算列</strong></p>
+<p><strong>一般可以使用四则运算计算一些列的值。(一般只会进行数值型的计算)</strong></p>
+<p><strong>SELECT NAME, math, english, math + english FROM student;</strong></p>
+<p><strong>如果有null参与的一般可以使用四则运算计算一些列的值。(一般只会进行数值型的计算),计算结果都为null</strong></p>
+<p><strong>SELECT NAME, math, english, math + IF NULL (english, 0) FROM student;</strong></p>
+<p><strong>4.起别名 as可省略</strong></p>
+<p><strong>SELECT NAME, math, english, math + IF NULL (english, 0) AS总分 FROM student;</strong></p>
+<p><strong>SELECT NAME, math, english, math + IF NULL (english, 0)  总分 FROM student;</strong></p>
+<h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><ol>
+<li><strong>where子句后跟条件</strong></li>
+<li><strong>运算符  &gt;、&lt; 、&lt;&#x3D;  .&gt;&#x3D;. &#x3D; .&lt;&gt;</strong></li>
+<li><ul>
+<li><strong>BETWEEN…AND</strong></li>
+<li><strong>IN(集合)</strong></li>
+<li><strong>LIKE 模糊查询—–占位符:  _:单个任意字符    %:任意多字符</strong></li>
+<li><strong>IS NULL</strong></li>
+<li><strong>and 或&amp;&amp;</strong></li>
+<li><strong>or 或||</strong></li>
+<li><strong>not 或 !</strong></li>
+</ul>
+</li>
+</ol>
+<p><strong>1,修改表名</strong></p>
+<p><strong>alter table 表名 rename to 新的表名;</strong></p>
+<p><strong>2.修改表的字符集</strong></p>
+<p><strong>alter table表名 character set 字符集名称;</strong></p>
+<p><strong>3.添加一列</strong></p>
+<p><strong>alter table 表名 add列名 数据类型;</strong></p>
+<p><strong>4,修改列名称类型</strong></p>
+<p><strong>alter table 表名 change 列名 新列  新数据类型;</strong></p>
+<p><strong>alter table 表名 modify  列名 新数据类型;</strong></p>
+<p><strong>5.删除列</strong></p>
+<p><strong>alter table 表名 drop名;</strong></p>
+<h2 id="DML-增删改表中数据"><a href="#DML-增删改表中数据" class="headerlink" title="DML:增删改表中数据"></a>DML:增删改表中数据</h2><p><strong>1.添加数据:语法:</strong></p>
+<p><strong>insert into 表名(列名1,列名2,列名n) values(值1,值2,.值n);</strong></p>
+<p><strong>除了数字类型,其他类型需要使用引号(单双都可以)引起来,</strong></p>
+<p><strong>2.删除数据:</strong></p>
+<p><strong>delete from 表名[where 条件]</strong></p>
+<p><strong>TRUNCATE  TABLE  stu；——–删除表,然后再创建一个一模一样的空表</strong></p>
+<p><strong>3.修改数据:</strong></p>
+<p><strong>update 表名 set 列名1 &#x3D;值1,列名2 &#x3D; 值2,… [where条件];</strong></p>
+<h2 id="DQL-查询语句"><a href="#DQL-查询语句" class="headerlink" title="DQL:查询语句"></a>DQL:查询语句</h2><p><strong>1.排序查询</strong></p>
+<p><strong>按照数学成绩排名,如果数学成绩一样,则按照英语成绩排名</strong></p>
+<p><strong>SELECT FROM student ORDER BY math ASC , english ASC;</strong></p>
+<p><strong>语法: order by 子句</strong></p>
+<p> <strong>order by 排序字段1排序方式1, 排序字段2排序方式2…·</strong></p>
+<p><strong>排序方式:</strong></p>
+<p> <strong>ASC:升序,默认的。</strong></p>
+<p> <strong>DESC : 降序。</strong></p>
+<p><strong>注意:如果有多个排序条件,则当前边的条件值一样时,才会判断第二条件。</strong></p>
+<p><strong>2.聚合查询</strong></p>
+<p><strong>1.count :计算不数</strong></p>
+<p><strong>BELECT COUNT (If NULL (engliah, 01) FROM atudent;</strong></p>
+<p><strong>2.max:计算最大值</strong></p>
+<p><strong>SELECT MAX (math) FROM student;</strong></p>
+<p><strong>SELECT MIN (math) FROM atudent;</strong></p>
+<p><strong>3.min:计算最小值</strong></p>
+<p><strong>4.sum :计算和</strong></p>
+<p><strong>SELECT COUNT (id) PROM student;</strong></p>
+<p><strong>5.avg:计算平均值</strong></p>
+<p><strong>SELECT AVG (math) PROM student;</strong></p>
+<p><strong>注意:聚合函数的计算,排除null值。</strong></p>
+<p><strong>解决方案:</strong></p>
+<p><strong>1.选择不包含非空的列进行计算</strong></p>
+<p><strong>2. IFNULL函数</strong></p>
+<p><strong>3.分组查询</strong></p>
+<p><strong>group by分组字段;</strong></p>
+<p><strong>按照性别分组,分别查询男、女同学的平均分</strong></p>
+<p><strong>SELECT  sex,avg(math) FROM student GROUP BY sex:</strong></p>
+<p><strong>按照性别分组,分别查询男、女同学的平均分,人数</strong></p>
+<p><strong>SELECT  sex,avg(math),count(id) FROM student GROUP BY sex:</strong></p>
+<p><strong>接照性别分超,分别查询男、文同学的平均分,人数要求:分数低于70分的人,不参与分组</strong></p>
+<p><strong>SELECT sex,AVG (math).count (id) FROM student WHERE math &gt; 70 GROOP BY sex:</strong></p>
+<p><strong>接照性别分超,分别查询男、文同学的平均分,人数要求:分数低于70分的人,不参与分组分组之后要大于2个人</strong></p>
+<p><strong>SELECT sex,AVG (math).count (id) FROM student WHERE math &gt; 70 GROOP BY sex having count(id)&gt;2;</strong></p>
+<p><strong>SELECT sex,AVG (math).count (id) 人数 FROM student WHERE math &gt; 70 GROOP BY sex having 人数&gt;2;</strong></p>
+<p><strong>分组之后查询的字段:分组字段、聚合函数</strong></p>
+<p><strong>where 和having 的区别?</strong></p>
+<p><strong>1. where 在分组之前进行限定,如果不满足条件,则不参与分组。having在分组之后进行限定,如果不满足结果,则不会被查询出来、</strong></p>
+<p><strong>2.where后不可以跟聚合函数, having可以进行聚合函数的判断。</strong></p>
+<p><strong>4,分页查询</strong></p>
+<p><strong>语法limit 开始的索引,每页查询的条数;</strong></p>
+<p><strong>每页品示3条记录</strong></p>
+<p><strong>SELECT * FROM student LIMIT 0，3；</strong></p>
+<p>*<em>公式:开始的案引&#x3D;(当前的页码-1) <em>每页显示的条数</em></em></p>
+<p><strong>limit操作是一个mysql的”方言”</strong></p>
+<p><strong>约束概念:</strong></p>
+<p><strong>对表中的数据进行限定,保证数据的正确性、有效性和完整性。</strong></p>
+<p><strong>分类:</strong></p>
+<ol>
+<li><strong>主键约束: primary key</strong></li>
+</ol>
+<p><strong>1.1,含义:非空且唯一</strong></p>
+<p><strong>1.2.一张表只能有一个字段为主键</strong></p>
+<p><strong>删除主键</strong></p>
+<p><strong>ALTER TABLE Btu DROP PRIMARY KEY;</strong></p>
+<p><strong>自动增长:</strong></p>
+<p><strong>概念:如果某一列是数值类型的,使用auto_increment可以来完成值得自动增长</strong></p>
+<p><strong>INSERT INTO atu VALUES (null, ‘ccc’):</strong></p>
+<p><strong>AITER TABLE stu MODIFY id INT auto_increment;</strong></p>
+<p><strong>删除自动增长</strong></p>
+<p><strong>AITER TABLE stu MODIFY id INT;</strong></p>
+<p><strong>1.3.主键就是表中记录的唯一标识</strong></p>
+<ol start="2">
+<li><strong>非空约束: not null</strong></li>
+</ol>
+<p><strong>-删除name的非空約東</strong></p>
+<p><strong>ALTER TABLE atu MODIFY NAME VARCHAR (20) ;</strong></p>
+<p><strong>–创建表完后,添加非空约束</strong></p>
+<p><strong>ALTER TABLE stu MODIFY NAME VARCHAR (20) NOT NUll;</strong></p>
+<p>3.<strong>唯一约束: unique</strong></p>
+<p>​	<strong>注意:唯一约束可以有NULL值,但是只能有一条记录为null</strong></p>
+<p>​	<strong>删除唯一约束</strong></p>
+<p>​	<strong>ALTER TABLE Stu DROP INDEX phone_number;</strong></p>
+<p>4.<strong>外键约束: foreign key</strong></p>
+<p><strong>1.在创建表时,可以添加外键</strong></p>
+<ul>
+<li><p><strong>语法:</strong></p>
+<p><strong>create table 表名(</strong></p>
+<p><strong>….</strong></p>
+<p><strong>外键列</strong></p>
+<p><strong>constraint 外键名称 foreign key （外键列名） references 主表名称(主表列名称)</strong></p>
+<p><strong>);</strong></p>
+</li>
+</ul>
+<p><strong>2.删除外键</strong></p>
+<p><strong>ALTER TABLE 表名 DROP FOREIGN KEY 外键名称；</strong></p>
+<p><strong>3.创建表之后,添加外键</strong></p>
+<p><strong>TABLE 表名ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称)；</strong></p>
+<p><strong>4.添加外键,设置级联更新</strong></p>
+<p><strong>ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名称) REFERENCES 主表名称 (主表列名称) ON UPDATE CASCADE</strong></p>
+<p><strong>–添加外键,设置级联更新,设置级联删除</strong></p>
+<p><strong>ALTER TABLE employee ADD CONSTRAINT emp_dept_fk FOREIGN KEY(dep id) REFERENCES department (id) ON UPDATE CASCADE ON DELETE CASCADE</strong></p>
+<p><strong>2.分类:</strong></p>
+<p><strong>1,级联更新: ON UPDATE CASCADE</strong></p>
+<p><strong>2.级联删除: ON DELETE CASCADE</strong></p>
+<p><strong>数据库的设计</strong></p>
+<p><strong>1,多表之间的关系</strong></p>
+<p><strong>1.一对一(了解):</strong></p>
+<p><strong>如:人和身份证</strong></p>
+<p><strong>分析:一个人只有一个身份证,一个身份证只能对应一个人</strong></p>
+<p><strong>2.一对多(多对一):</strong></p>
+<p><strong>如:部门和员工</strong></p>
+<p><strong>分析:一个部门有多个员工,一个员工只能对应一个部门</strong></p>
+<p><strong>3,多对多:</strong></p>
+<p><strong>如:学生和课程</strong></p>
+<p><strong>分析:一个学生可以选择很多门课程,一个课程也可以被很多学生选择</strong></p>
+<p><strong>2,实现关系:</strong></p>
+<p><strong>1.一对多(多对一):</strong></p>
+<p><strong>如:部门和员工</strong></p>
+<p><strong>实现方式:在多的一方建立外键,指向一的一方的主键。</strong></p>
+<p><strong>2.多对多关系</strong></p>
+<p><strong>多对多关系实现需要借助第三张中间表。中间表至少包含两个字段,这两个字段作为第三张表的外健,分别指向两张表的主健</strong></p>
+<p><strong>3.一对一(了解):</strong></p>
+<p><strong>如:人和身份证</strong></p>
+<p><strong>实现方式:一对一关系实现,可以在任意一方添加唯一外键指向另一方的主键。</strong></p>
+<p><strong>数据库设计的范式</strong></p>
+<p>*<strong>概念:设计数据库时,需要遵循的一些规范。</strong></p>
+<p><strong>设计关系数据库时,遵从不同的规范要求,设计出合理的关系型数据库,这些不同的规范要求被称为不同的范式,各种范式呈递次规范,越高的范式数据库冗余越小。</strong></p>
+<p><strong>目前关系数据库有六种范式:第一范式(1NF)、第二随式(2NF)、第三范式(3NF)、巴斯-科德范式(BCNF)、第四范式(4NF)和第五范式(5NF,又称完美范式)。</strong></p>
+<p><strong>分类:</strong></p>
+<p><strong>1.第一范式(1NF):每一列都是不可分割的原子数据项,</strong></p>
+<p><strong>2.第二范式(2NF):在1NF的基础上,非码属性必须完全依赖于候选码(在1NF基础上消除非主属性对主码的部分函数依赖)</strong></p>
+<p><strong>几个概念:</strong></p>
+<p><strong>1.函数依赖:A–&gt;B,如果通过A属性(属性组)的值,可以确定唯一B属性的值。则称B依赖于A</strong></p>
+<p><strong>例如:学号–&gt;姓名。(学号,课程名称) –&gt;分数</strong></p>
+<p><strong>2.完全函数依赖:A–&gt;B,如果A是一个属性组,则B属性值得确定需要依赖于A属性组中所有的属性值。</strong></p>
+<p><strong>例如:(学号,课程名称) –&gt;分数</strong></p>
+<p><strong>3.部分函数依赖:A–&gt;B,如果A是一个属性组,则B属性值得确定只需要依赖于A属性组中某一些值即可。</strong></p>
+<p><strong>例如:(学号,课程名称) –&gt;姓名</strong></p>
+<p><strong>4.传递函数依赖:A–&gt;B, B –&gt;C.如果通过A属性(属性组)的值,可以确定唯一B属性的值,在通过B属性(属性组)的值可以确定唯一属性的值,则称C传递函数依赖于A</strong></p>
+<p><strong>例如:学号–)系名,系名–&gt;系主任</strong></p>
+<p><strong>5.码:如果在一张表中,一个属性或属性组,被其他所有属性所完全依赖,则称这个属性(属性组)为该表的码</strong></p>
+<p><strong>例如:该表中码为:(学号,课程名称)</strong></p>
+<p><strong>主属性:码属性组中的所有属性</strong></p>
+<p><strong>非主属性:除过码属性组的属性,</strong></p>
+<p><strong>3.第三范式(3NF):在2NF基础上,任何非主属性不依赖于其它非主属性(在2NF基础上消除传递依赖)</strong></p>
+<p><strong>笛卡尔积:”有两个集合A,B,取这两个集合的所有组成情况。</strong></p>
+<p><strong>要完成多表查询,需要消除无用的数据</strong></p>
+<h2 id="多表查询的分类"><a href="#多表查询的分类" class="headerlink" title="多表查询的分类:"></a><strong>多表查询的分类:</strong></h2><p><strong>隐式内连接:使用where条件消除无用数据</strong></p>
+<p><strong>1,内连接查询:</strong></p>
+<p><strong>-查询所有员工信息和对应的部门信息</strong></p>
+<p><strong>SELECT * FROM emp, dept WHERE emp. ‘dept_id’ &#x3D; dept. ‘id’</strong></p>
+<p><strong>-查询员工表的名称,性别,部门表的名称SELECT emp. name, emp. gender, dept.name FRoM emp, dept wHERe emp. ‘dept id’ &#x3D; dept. ‘id’;</strong></p>
+<p><strong>2.显式内连接:</strong></p>
+<p><strong>语法:select 字段列表 from表名1 inner join表名2 on条件</strong></p>
+<p><strong>SELECT * FROM emp INNER JOIN dept oN emp. ‘dept_id’&#x3D; dept. ‘id’;</strong></p>
+<p><strong>2.外链接查询:</strong></p>
+<p><strong>左外连接:</strong></p>
+<p>*<strong>语法: select 字段列表from表1 left [outer] join 表2 on条件;</strong></p>
+<p><strong>SELECT t1.*,t2. ‘name’ FROM emp t1 LEFT JOIN dept t2 ON t1. ‘dept_id’ &#x3D; t2. ‘id’;</strong></p>
+<p><strong>查询的是左表所有数据以及其交集部分。</strong></p>
+<p><strong>右外连接:</strong></p>
+<p><strong>语法: select 字段列表from 表1 right [outer] join表2 on条件;</strong></p>
+<p><strong>查询的是右表所有数据以及其交集部分。</strong></p>
+<p><strong>3.子查询:</strong></p>
+<p><strong>概念:查询中嵌套查询,称嵌套查询为子查询</strong></p>
+<p><strong>SELECT * FROM omp WHERE emp. ‘salary’ &#x3D; (SELECT MAX (salary) FROM emp) ;</strong></p>
+<p><strong>事务的基本介绍</strong></p>
+<p><strong>1.概念:</strong></p>
+<p>*<strong>如果一个包含多个步骤的业务操作,被事务管理,那么这些操作要么同时成功,要名同时失败。</strong></p>
+<p><strong>2.操作:</strong></p>
+<p><strong>1.1开启事务: start transaction;</strong></p>
+<p><strong>2.1回滚: rollback;</strong></p>
+<p><strong>3.1提交: commit;</strong></p>
+<p><strong>4.1MySQL数据库中事务默认自动提交</strong></p>
+<p><strong>事务提交的两种方式:</strong></p>
+<p><strong>自动提交:</strong></p>
+<p> <strong>mysq1就是自动提交的</strong></p>
+<p><strong>一条DML(增删改)语句会自动提交一次事务。</strong></p>
+<p><strong>手动提交:</strong></p>
+<p> <strong>Oracle 数据库默认是手动提交事务</strong></p>
+<p><strong>需要先开启事务,再提交</strong></p>
+<p><strong>修改事务的默认提交方式:</strong></p>
+<p><strong>查看事务的默认提交方式: SELECT @@autocommit;–1</strong></p>
+<p><strong>代表自动提交 0代表手动提交</strong></p>
+<p><strong>修改默认提交方式: set @@autocommit &#x3D; 0;</strong></p>
+<p><strong>2.事务的四大特征</strong></p>
+<p><strong>1.原子性:是不可分割的最小操作单位,要么同时成功,要么同时失败。</strong></p>
+<p><strong>2.持久性:当事务提交或回滚后,数据库会持久化的保存数据。</strong></p>
+<p><strong>3.隔离性:多个事务之间。相互独立。</strong></p>
+<p><strong>4.一致性:事务操作前后,数据总量不变</strong></p>
+<p><strong>3.事务的隔离级别(了解)</strong></p>
+<p><strong>概念:多个事务之间隔离的,相互独立的。但是如果多个事务操作同一批数据,则会引发一些问题,设置不同的隔离级别就可以解决这些问题。</strong></p>
+<p><strong>存在问题:</strong></p>
+<p><strong>1.脏读:一个事务,读取到另一个事务中没有提交的数据</strong></p>
+<p><strong>2,不可重复读(虚读):在同一个事务中,两次读取到的数据不一样。</strong></p>
+<p><strong>3.幻读:一个事务操作(DML)数据表中所有记录,另一个事务添加了一条数据,则第一个事务查询不到自己的修改。</strong></p>
+<p><strong>隔离级别:</strong></p>
+<p><strong>1.read uncommitted :读未提交</strong></p>
+<p><strong>产生的问题:脏读、不可重复读、幻读</strong></p>
+<p><strong>2.pread committed :读已提交（oracle）</strong></p>
+<p><strong>产生的问题:不可重复读、幻读</strong></p>
+<p><strong>3.repeatable read : 可重复读(mysql默认)</strong></p>
+<p><strong>产生的问题:幻读</strong></p>
+<p><strong>4.serializable :串行化</strong></p>
+<p><strong>可以解决所有的问题</strong></p>
+<p><strong>注意:隔离级别从小到大安全性越来越高,但是效率越来越低</strong></p>
+<p><strong>数据库查询隔离级别:</strong></p>
+<p> <strong>select @@tx_isolation;</strong></p>
+<p><strong>数据库设置隔离级别:</strong></p>
+<p> <strong>set global transaction isolation level 级别字符串;</strong></p>
+<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><p>*<strong>概念: Java DataBase Connectivity Java数据库连接, Java语言操作数据库</strong></p>
+<p><strong>JDBC:定义了一套操作所有关系型数据库的规则（接口）</strong></p>
+<p><strong>JDBC本质:其实是官方(sun公司)定义的一套操作所有关系型数据库的规则,即接口。各个数据库厂商去实现这套接口,提供数据库驱动jar包。我们可以使用这套接口(JDBC)编程,真正执行的代码是驱动jar包中的实现类</strong></p>
+<p><strong>2.快速入门:</strong></p>
+<p>*<strong>步骤:</strong></p>
+<p><strong>1.导入驱动jar包mysql-connector-java-5.1.37-bin.jar</strong></p>
+<p><strong>1.1复制mysql-connector-java-5.1.37-bin.jar到项目的libs目录下</strong></p>
+<p><strong>1.2.右键–&gt;Add As Liblary</strong></p>
+<p><strong>2.注册驱动</strong></p>
+<p><strong>3.获取数据库连接对象Connection</strong></p>
+<p><strong>4,定义sql</strong></p>
+<p><strong>5,获取执行sq1语句的对象Statement</strong></p>
+<p><strong>6.执行sql,接受返回结果</strong></p>
+<p><strong>7,处理结果</strong></p>
+<p><strong>8.释放资源</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JdbcDemo1</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//1.导入驱动jar包</span></span><br><span class="line">        <span class="comment">//2.注册驱动</span></span><br><span class="line">        Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">        <span class="comment">//3.获取数据库连接对象</span></span><br><span class="line">        <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> DriverManager.getConnection( url: <span class="string">&quot;jdbe:mysql://localhost:3306/db3&quot;</span>, <span class="string">&quot;root&quot;</span>,<span class="string">&quot;password&quot;</span>);</span><br><span class="line">       <span class="comment">//4.定义sql语句</span></span><br><span class="line">      String sql= <span class="string">&quot;update account set balance = 500 where id = 1&quot;</span>;</span><br><span class="line">      <span class="comment">//5.获取执行sql的对象Statement</span></span><br><span class="line">      <span class="type">Statement</span> <span class="variable">stmt</span> <span class="operator">=</span> conn.createStatement ();</span><br><span class="line">      <span class="comment">//6.执行sql</span></span><br><span class="line">      <span class="type">int</span> count= stmt.executeUpdate(sq1);</span><br><span class="line">      <span class="comment">//7.处理结果</span></span><br><span class="line">      System. out.println(count);</span><br><span class="line">      <span class="comment">//8.释放资源</span></span><br><span class="line">      stmt.close();</span><br><span class="line">      conn.close();</span><br><span class="line">                                                      </span><br><span class="line">    &#125;</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-详解各个对象"><a href="#3-详解各个对象" class="headerlink" title="3,详解各个对象:"></a><strong>3,详解各个对象:</strong></h2><p><strong>1.DriverManager :驱动管理对象</strong></p>
+<p><strong>功能:</strong></p>
+<p><strong>1.注册驱动:告近程序该使用哪一个数据库驱动jar</strong></p>
+<p><strong>static void registerpriver(Driver driver) :注册与给定的驱动程序 DriverManager.</strong></p>
+<p><strong>写代码使用: class.forName(“com.mysql.jdbc.Driver);</strong></p>
+<p><strong>通过查看源码发现:在com.mysql.jdbc.Driver类中存在静态代码块</strong></p>
+<p><strong>注意:mysq15之后的驱动jar包可以省略注册驱动的步骤。</strong></p>
+<p><strong>2,获取数据库连接</strong></p>
+<p><strong>方法: static Connection getConnection(String url, String user, string password)</strong></p>
+<p><strong>参数:</strong></p>
+<p> <strong>url:指定连接的路径</strong></p>
+<p><strong>语法: jdbc:mysql:&#x2F;&#x2F;ip地址(域名):端口号&#x2F;数据库名称</strong></p>
+<p><strong>例子: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;db3</strong></p>
+<p><strong>细节:如果连接的是本机mysql服务器,并且mysql服务默认端口是3306,则url可以简写为:jdbc:mysql:&#x2F;&#x2F;gb1数据库名称</strong></p>
+<p><strong>user :用户名</strong></p>
+<p><strong>password :密码</strong></p>
+<p><strong>2.connection :数据库连接对象</strong></p>
+<p><strong>1,功能:</strong></p>
+<p><strong>1,获取执行sql的对象</strong></p>
+<p><strong>statement createstatement()</strong></p>
+<p> <strong>Preparedstatement preparestatement (String sql)</strong></p>
+<p><strong>2.管理事务:</strong></p>
+<p><strong>开启事务: setAutoCommit (boolean autoCommit) :调用该方法设置参数为false,即开启事务</strong></p>
+<p><strong>提交事务:commit()</strong></p>
+<p><strong>回滚事务: rollback()</strong> </p>
+<p><strong>3.Statement :执行sql的对象</strong></p>
+<p><strong>执行sql</strong></p>
+<p><strong>1.boolean execute(String sql) :可以执行任意的sql了解</strong></p>
+<p><strong>2.int executeUpdate(String sql) :执行DML (insert, update, delete)、DDI(create, alter, drop)语句</strong></p>
+<p><strong>返回值:影响的行数,可以通过这个影响的行数判断DML语句是否执行成功返回值&gt;0的则执行成功,反之,则失败。</strong></p>
+<p><strong>3.Resultset executeQuery(String sqI) :执行DQL (select)语句</strong></p>
+<p><strong>4.Resultset :结果集对象 封装查询结果</strong></p>
+<p><strong>boolean next():游标向下移动一行,判断当前行是否是最后一行末尾(是否有数据）如果是,则返回false,如果不是则返回true</strong></p>
+<p><strong>getxxx(参数):获取数据</strong></p>
+<p><strong>Xxx:代表数据类型</strong> </p>
+<p><strong>如: int getInt() , String getstring()</strong></p>
+<p><strong>参数:</strong></p>
+<p><strong>1.int :代表列的编号,从1开始 如: getstring(1)</strong></p>
+<p>**2.String :代表列名称如: getDouble(“**balance”)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (rs.next())&#123;</span><br><span class="line">              <span class="comment">//循环判断游标是否是最后一行末尾。</span></span><br><span class="line">              <span class="comment">// 获取数据</span></span><br><span class="line">              <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> rs.getInt(<span class="number">1</span>);</span><br><span class="line">             <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> rs.getString(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">            <span class="type">double</span> <span class="variable">balance</span> <span class="operator">=</span> rs.getDouble(<span class="number">3</span>);</span><br><span class="line">            System.out.println(id+<span class="string">&quot;---&quot;</span>+name+<span class="string">&quot;---&quot;</span>+balance);</span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. Preparedstatement :执sql的对象</strong></p>
+<p><strong>1. SQL注入问题:在拼接sql时,有一些sql的特殊关键字参与字符申的拼接。会造成安全性问题</strong></p>
+<p><strong>1.输入用户随便,输入密码: a’ or ‘a’ &#x3D; ‘a</strong></p>
+<p><strong>2. sql: select * from user where username&#x3D; ‘fhdsjkf’ and password &#x3D; ‘a’ or ‘a’ &#x3D; ‘a’</strong></p>
+<p><strong>2.解决sql注入问题:使用Preparedstatement对象来解决</strong></p>
+<p><strong>3.预编译的SQL:参数使用?作为占位符</strong></p>
+<p><strong>4.步骤:</strong></p>
+<p><strong>1. 导入驱动jar包 mysql-connector-java-5.1.37-bin.jar</strong></p>
+<p><strong>2.注册驱动</strong></p>
+<p><strong>3.获取数据库连接对象Connection</strong></p>
+<p><strong>4,定义sql</strong></p>
+<p>*<strong>注意: sql的参数使用?作为占位符。如: select * from user where username &#x3D; ? and password &#x3D; ?;</strong></p>
+<p><strong>5. 获取执行sq1语句的对象 Preparedstatement Connection.preparestatement (String sql)</strong></p>
+<p><strong>6,给?赋值:</strong></p>
+<p><strong>方法: setXxx(参数1,参数2)</strong></p>
+<p><strong>参数1:?的位置编号 从1开始</strong></p>
+<p><strong>参数2:?的值</strong></p>
+<p><strong>7.执行sql,接受返回结果,不需要传递sql语句</strong></p>
+<p><strong>8.处理结果</strong></p>
+<p><strong>9,释放资源</strong></p>
+<p><strong>5.注意:后期都会使用Preparedstatement来完成增删改查的所有操作</strong></p>
+<p><strong>1.可以防止sQL注入</strong></p>
+<p><strong>2.效率更高</strong></p>
+<p><strong>抽取JDBC工具类: JDBCUtils</strong></p>
+<p><strong>目的:简化书写分析:</strong></p>
+<p><strong>1,注册驱动也抽取</strong></p>
+<p><strong>2.抽取一个方法获取连接对象</strong></p>
+<p><strong>需求:不想传递参数(麻烦),还得保证工具类的通用性。</strong></p>
+<p><strong>解决:配置文件</strong></p>
+<p><strong>jdbc.properties</strong></p>
+<p><strong>url&#x3D;</strong></p>
+<p><strong>user&#x3D;</strong></p>
+<p><strong>password&#x3D;</strong></p>
+<p><strong>抽取一个方法释放资源</strong></p>
+<p><strong>JDBC控制事务:</strong></p>
+<p><strong>1.事务:一个包含多个步骤的业务操作。如果这个业务操作被事务管理,则这多个步骤要么同时成功,要么同时失败。</strong></p>
+<p><strong>2.操作:</strong></p>
+<p><strong>1.开启事务</strong></p>
+<p><strong>2.提交事务</strong></p>
+<p><strong>3.回滚事务</strong></p>
+<p><strong>3.使用Connection对象来管理事务</strong></p>
+<p><strong>开启事务: setAltoCommit(boolean autoCommit) :调用该方法设置参数为false,即开后事务</strong></p>
+<p><strong>在执行sql之前开启事务,</strong></p>
+<p><strong>提交事务:commit()</strong></p>
+<p><strong>当所有sql都执行完提交事务</strong></p>
+<p><strong>回滚事务: rollback()</strong></p>
+<p><strong>在catch中回滚事务</strong></p>
+<h1 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h1><p><strong>概念:其实就是一个容器(集合),存放数据库连接的容器。</strong></p>
+<p><strong>1当系统初始化好后,容器被创建,容器中会申请一些连接对象,当用户来访问数据库时,从容器中获取连接对象,用户访问完之后,会将连接对象归还给容器。</strong></p>
+<p><strong>好处:</strong></p>
+<p><strong>1.节约资源</strong></p>
+<p><strong>2.用户访问高效</strong></p>
+<p><strong>3.实现:</strong></p>
+<p><strong>1.标准接口: DataSource  javax.sql包下的</strong></p>
+<p><strong>1.方法:</strong></p>
+<p> <strong>获取连接: getConnection()</strong></p>
+<p><strong>归还连接:Connection.close()如果连接对象cdnnection是从连接池中获取的,那么调用Connection.close()方法,则不会再关闭连接了。而是归还连接</strong></p>
+<p><strong>2.一般我们不去实现它,有数据库厂商来实现</strong></p>
+<p><strong>1.C3PO :数据库连接池技术</strong></p>
+<p><strong>2.Druid :数据库连接池实现技术，由阿里巴巴提供的</strong></p>
+<h2 id="C3PO-数据库连接池技术"><a href="#C3PO-数据库连接池技术" class="headerlink" title="C3PO:数据库连接池技术"></a><strong>C3PO:数据库连接池技术</strong></h2><p><strong>步骤:1. 导入jar包(两个) c3pe-0.9.5.2.jar mchange-commons-java-0.2.12.jar</strong></p>
+<p><strong>2,定义配置文件:</strong></p>
+<p><strong>名称: c3p0.properties或者c3p0-config.xml</strong></p>
+<p><strong>路径:直接将文件放在src目录下即可。</strong></p>
+<p><strong>3.创建核心对象 数据库连接池对象ComboPooledDataSource</strong></p>
+<p><strong>4.获取连接: getConnection</strong></p>
+<p><strong>5.Druid :数据库连接池实现技术,由阿里巴巴提供的</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1.导入jar包 druid-1.0.9.jar</strong></p>
+<p><strong>2.定义配置文件:</strong></p>
+<p><strong>是properties形式的</strong></p>
+<p><strong>可以叫任意名称,可以放在任意目录下</strong></p>
+<p><strong>3,加载配置文件。Properties</strong></p>
+<p><strong>4.获取数据库连接池对象:通过工厂来来获取 DruidDatasourceFactory</strong></p>
+<p><strong>5.获取连接</strong></p>
+<p><strong>2.定义工具类</strong></p>
+<p><strong>1.定义一个类JDBcutils</strong></p>
+<p><strong>2.提供静态代码块加载配置文件,初始化连接池对象</strong></p>
+<p><strong>3.提供方法</strong></p>
+<p><strong>1.获取连接方法:通过数据库连接池获取连接</strong></p>
+<p><strong>2.释放资源</strong></p>
+<p><strong>3.联取连接池的方法</strong></p>
+<h2 id="Spring-JDBC"><a href="#Spring-JDBC" class="headerlink" title="Spring JDBC"></a>Spring JDBC</h2><p><strong>Spring框架对JDBC的简单封装 提供了一个JDBCTemplate对象简化JDBC的开发</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1.导入jar包</strong></p>
+<p><strong>2.创建]dbcTemplate对象。依赖于数据源DataSource</strong></p>
+<p> <strong>JdbcTemplate template &#x3D; new JdbcTemplate(ds);</strong></p>
+<p><strong>3.调用JdbcTemplate的方法来完成CRUD的操作</strong></p>
+<p><strong>1.1update():执行DML语句。增、删、改语句</strong></p>
+<p>**1.2queryForMap():查询结果将结果集封装为map集合 **</p>
+<p><strong>将列名作为key,将值作为value将这条记录封装为一个map集合</strong></p>
+<p><strong>注意,这个方法查询的结果集长度只能是1</strong></p>
+<p><strong>1.3queryForList():查询结果将结果集封装为list集合</strong></p>
+<p><strong>将每一条记录封装为一个Map集合,再将Map集合装载到List集合中</strong></p>
+<p><strong>1.4query():查询结果,将结果封装为JavaBean对象</strong></p>
+<p><strong>query的参数: RowMapper</strong></p>
+<p><strong>一般我们使用BeanPropertyRowMapper实现类。可以完成数据到JavaBean的自动封装</strong></p>
+<p><strong>new BeanPropertyRowMapper&lt;类型&gt;(类型.class)</strong></p>
+<p><strong>1.5queryForobject :查询结果,将结果封装为对象</strong></p>
+<p><strong>一般用于聚合函数的查询</strong></p>
+<p><strong>junit单元测试可以让方法独立执行</strong></p>
+<h1 id="web概念概述"><a href="#web概念概述" class="headerlink" title="web概念概述"></a>web概念概述</h1><p> <strong>Javaweb:使用Java语言开发基于互联网的项目软件架构:</strong></p>
+<p><strong>1. C&#x2F;S: client&#x2F;Server 客户端&#x2F;服务器端</strong></p>
+<p><strong>在用户本地有一个客户端程序,在远程有一个服务器端程序</strong></p>
+<p><strong>如:QQ,迅雷.</strong></p>
+<p><strong>优点:1.用户体验好</strong></p>
+<p><strong>缺点:1.开发、安装,部署,维护麻烦</strong></p>
+<p><strong>2.B&#x2F;S: Browser&#x2F;Server浏览器&#x2F;服务器端</strong></p>
+<p><strong>只需要一个浏览器,用户通过不同的网址(URL),客户访问不同的服务器端程序</strong></p>
+<p><strong>优点:</strong></p>
+<p><strong>1.开发、安装,部署,维护简单</strong></p>
+<p><strong>缺点:</strong></p>
+<p><strong>1.如果应用过大,用户的体验可能会受到影响</strong></p>
+<p><strong>2、对硬件要求过高</strong></p>
+<p><strong>B&#x2F;S架构详解</strong></p>
+<p><strong>资源分类:</strong></p>
+<p><strong>1.静态资源:</strong></p>
+<p><strong>使用静态网页开发技术发布的资源。</strong></p>
+<p><strong>特点:</strong></p>
+<p><strong>所有用户访问,得到的结果是一样的。</strong></p>
+<p><strong>如:文本,图片,音频、视频, HTML,CSS, Javascript</strong></p>
+<p><strong>如果用户请求的是静态资源,那么服务器会直接将静态资源发送给浏览器。</strong></p>
+<p><strong>浏览器中内置了静态资源的解析引擎,可以展示静态资源</strong></p>
+<p><strong>2.动态资源:</strong></p>
+<p><strong>使用动态网页及时发布的资源。</strong></p>
+<p><strong>特点:</strong></p>
+<p><strong>所有用户访问,得到的结果可能不一样。</strong></p>
+<p><strong>如: jsp&#x2F;servlet,php, asp…</strong></p>
+<p><strong>如果用户请求的是动态资源,那么服务器会执行动态资源,转换为静态资源,再发送给浏览器</strong></p>
+<h2 id="XML"><a href="#XML" class="headerlink" title="XML:"></a><strong>XML:</strong></h2><p><strong>1. 概念: Extensible Markup Language 可扩展标记语言</strong></p>
+<p><strong>可扩展:标签都是自定义的。<user> <student></strong></p>
+<p><strong>2,功能</strong></p>
+<p><strong>存储数据1.配置文件2.在网络中传输</strong></p>
+<p><strong>3.xml与tml的区别</strong></p>
+<p><strong>properties</strong></p>
+<p><strong>1.xml标签都是自定义的, html标签是预定义。</strong></p>
+<p><strong>2.xml的语法严格, html语法松散</strong></p>
+<p><strong>W3c:万维网联盟</strong></p>
+<p><strong>2.语法:</strong></p>
+<p><strong>基本语法:</strong></p>
+<p><strong>1.xml文档的后缀名.xml</strong></p>
+<p><strong>2.xml第一行必须定义为文档声明</strong></p>
+<p><strong>3.xml文档中有且仅有一个根标签</strong></p>
+<p><strong>4.属性值必须使用引号(单双都可)引起来</strong></p>
+<p><strong>5.标签必须正确关闭</strong></p>
+<p><strong>6.xml标签名称区分大小写</strong></p>
+<p><strong>快速入门:</strong></p>
+<p><strong>组成部分:</strong></p>
+<p><strong>1.文档声明</strong></p>
+<p><strong>1.1. 格式:<?xml 属性列表 ?></strong></p>
+<p><strong>2.属性列表;</strong></p>
+<ul>
+<li><strong>version :版本号</strong></li>
+<li><strong>encoding :编码方式  告知解析引擎当前文档使用的字符集,默认值: ISO-8859-1</strong> </li>
+<li><strong>standalone :是否独立—-取值: yes :不依赖其他文件  no:依赖其他文件</strong></li>
+</ul>
+<p><strong>2.指令 结合css的</strong></p>
+<p><strong><?xml-stylesheet type="text/css" href="a.css" ?></strong></p>
+<p><strong>3标签  标签名称自定义的</strong></p>
+<p><strong>名称可以包含字母、数字以及其他的字符</strong></p>
+<p><strong>名称不能以数字或者标点符号开始</strong></p>
+<p><strong>名称不能以字母xml(或者XML、Xml等等)开始</strong></p>
+<p><strong>名称不能包含空格</strong></p>
+<p><strong>4.属性</strong></p>
+<p><strong>id属性值唯一</strong></p>
+<p><strong>5.文本</strong></p>
+<p><strong>CDATA区:在该区域中的数据会被原样展示</strong></p>
+<![CDATA[数据]]>
+
+<p><strong>谁编写xml?-用户,软件使用者</strong></p>
+<p><strong>谁解析xml?-软件</strong></p>
+<p><strong>约束</strong></p>
+<p><strong>说明文档：规定xml文档的书写规则—约束文档</strong></p>
+<p><strong>作为框架的使用者(程序员):</strong></p>
+<p><strong>1.能够在xml中引入约東文档</strong></p>
+<p><strong>2.能够简单的读懂约束文档</strong></p>
+<p><strong>分类:</strong></p>
+<p><strong>1.DTD:一种简单的约束技术</strong></p>
+<p><strong>2.Schema:一种复杂的约束技术</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!ELEMENT <span class="keyword">students</span> (<span class="keyword">student</span>*) &gt;</span> </span><br><span class="line"><span class="meta">&lt;!ELEMENT <span class="keyword">student</span> (<span class="keyword">name</span>, <span class="keyword">age</span>, <span class="keyword">sex</span>)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT <span class="keyword">name</span> (<span class="keyword">#PCDATA</span>)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT <span class="keyword">age</span> (<span class="keyword">#PCDATA</span>)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT <span class="keyword">sex</span> (<span class="keyword">#PCDATA</span>)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ATTLIST <span class="keyword">student</span> <span class="keyword">number</span> <span class="keyword">ID</span> <span class="keyword">#REQUIRED</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>DTD</strong></p>
+<p><strong>引入dtd文档到xml文档中</strong></p>
+<p><strong>内部dtd:将约束规则定义在xml文档中</strong></p>
+<p><strong>外部dtd:将约束的规则定义在外部的dtd文件中</strong></p>
+<p><strong>本地:<!DOCTYPE 根标签名SYSTEM "dtd文件的位置"></strong></p>
+<p><strong>网络:<!DOCTYPE 根标签名PUBLIC "dtd文件名字" "dtd文件的位置URL"></strong></p>
+<p><strong>1.填写xml文档的根元素</strong></p>
+<p><strong>2.引入xsi前 xmlns:xsi&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>“</strong></p>
+<p><strong>3.引入xsd文件命名空间.     xsi:schemaLocation&#x3D;”<a target="_blank" rel="noopener" href="http://www.itcast.cn/xml">http://www.itcast.cn/xml</a> student.xsd”</strong></p>
+<p><strong>4.为每一个xsd约束声明一个前级,作为标识 xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.itcast.cn/xml">http://www.itcast.cn/xml</a>“</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/xMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www. springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">&quot;http://www. springframework.org/schema/mvc&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www. springframework.org/schema/beans </span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/beans/spring-beans.xsd </span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/context </span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/context/spring-context.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">http://www.springframework.org/schema/mvchttp://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3.解析:操作xml文档,将文档中的数据读取到内存中</strong></p>
+<p><strong>操作xml文档</strong></p>
+<p><strong>1.解析(读取):将文档中的数据读取到内存中</strong></p>
+<p><strong>2.写入:将内存中的数据保存到xml文档中。持久化的存储</strong></p>
+<p><strong>解析xml的方式:</strong></p>
+<p><strong>1.DOM:将标记语言文档一次性加载进内存,在内存中形成一颗dom树</strong></p>
+<p><strong>优点:操作方便,可以对文档进行CRUD的所有操作</strong></p>
+<p><strong>缺点:占内存</strong></p>
+<p><strong>2.SAX:逐行读取,基于事件驱动的。</strong></p>
+<p><strong>优点:不占内存。</strong></p>
+<p><strong>缺点:只能读取,不能增删改</strong></p>
+<p><strong>xml常见的解析器:</strong></p>
+<p><strong>1.JAXP: sun公司提供的解析器,支持dom和sax两种思想</strong></p>
+<p><strong>2.DOM4j:一款非常优秀的解析器</strong></p>
+<p><strong>3.jsoup: jsoup是一款Java 的HTML解析器,可直接解析某个URL地址、”HTML文本内容。它提供了一套非常省力的API,可通过DOM, Css以及类似于jQuery的操作方法来取出和操作数据。</strong></p>
+<p><strong>4.PÜLL : Android操作系统内置的解析器, sax方式的。</strong></p>
+<p><strong>快速入门:</strong></p>
+<p><strong>步骤:1. 导入jlar包</strong></p>
+<p><strong>2,获取Document对象</strong></p>
+<p><strong>3.获取对应的标签Element对象</strong></p>
+<p><strong>4,获取数据</strong></p>
+<p><strong>对象的使用:</strong></p>
+<p><strong>1.Jsoup :工具类,可以解析html或xml文档,返回Document</strong></p>
+<p><strong>parse :解析html或xml文档,返回Document</strong></p>
+<p><strong>parse(File in, string charsetName) :解析xml或html文件的。</strong></p>
+<p><strong>parse(String html):解析xml或html字符串</strong></p>
+<p><strong>parse(URL url, int timeoutMillis) :通过网络路径获取指定的html或xml的文档对象</strong></p>
+<p><strong>2.Document :文档对象。代表内存中的dom树</strong></p>
+<p><strong>获取Element对象</strong></p>
+<p><strong>getElementById(String id) :根据id属性值获取唯一的element对象</strong></p>
+<p><strong>getElementsByTag(String tagName):根据标签名称获取元素对象集合</strong></p>
+<p><strong>getElementsByAttribute(String key) :根据属性名称获取元素对象集合</strong></p>
+<p><strong>getElementsByAttributeValue(String key, String value) :根据对应的属性名和属性值获取元素对象集合</strong></p>
+<p><strong>3.Elements :元素Element对象的集合。可以当做ArrayList<Element>来使用</strong></p>
+<p><strong>4.Element :元素对象</strong></p>
+<p><strong>获取子元素对象</strong></p>
+<p><strong>getElementById(stying id) :根据id属性值获取唯一的element对象</strong></p>
+<p><strong>getElementsByTag(String tagName) :根据标签名称获取元素对象集合</strong></p>
+<p><strong>getElementsByAttribute(String key):根据属性名称获取元素对象集合</strong></p>
+<p><strong>getelementsByAttributevalue(String key, String value) :根据对应的属性名和属性值获取元素对象集合</strong></p>
+<p><strong>2.获取属性值</strong></p>
+<p> <strong>string attr(String key) :根据属性名称获取属性值</strong></p>
+<p><strong>3.获取文本内容</strong></p>
+<p><strong>string text() :获取文本内容</strong></p>
+<p><strong>String html():获取标签体的所有内容(包括字标签的字符串内容)</strong></p>
+<p><strong>5.Node :节点对象</strong></p>
+<p><strong>是Document和Element的父类</strong></p>
+<p><strong>快捷查询方式:</strong></p>
+<p><strong>1.selector:选择器</strong></p>
+<p><strong>使用的方法: Elementsselect(String cssQuery)</strong></p>
+<p><strong>语法:参考selector类中定义的语法</strong></p>
+<p><strong>2.XPath:XPath即为XML路径语言,它是一种用来确定XML(标准通用标记语言的子集)文档中某部分位置的语言</strong></p>
+<p><strong>使用]soup的Xpath需要额外导入jar包。</strong></p>
+<p><strong>查询w3cshool参考手册,使用xpath的语法完成查询</strong></p>
+<p><strong>web相关概念回顾</strong></p>
+<p><strong>1.软件架构</strong></p>
+<p><strong>1.C&#x2F;S 客户端&#x2F;服务器端</strong> </p>
+<p><strong>2.B&#x2F;S 浏览器&#x2F;服务器端</strong></p>
+<p><strong>2.资源分类</strong></p>
+<p><strong>1 ,静态资源 所有用户访问后,得到的结果都是一样的,称为静态资源,静态资源可以直接被浏览器解析</strong></p>
+<p><strong>2,动态资源 每个用户访问相同资源后,得到的结果可能不一样。称为动态资源。动态资源被访问后,需要先转换为静态资源,在返回给浏览器</strong></p>
+<p><strong>3.网络通信三要素</strong></p>
+<p><strong>1.IP  电子设备(计算机)在网络中的唯一标识。</strong></p>
+<p><strong>2.端口 应用程序在计算机中的唯一标识 0-65536</strong></p>
+<p><strong>3.传输协议 ·规定了数据传输的规则</strong></p>
+<p><strong>基础协议:</strong></p>
+<p><strong>tcp:安全协议,三次握手。速度稍慢</strong></p>
+<p><strong>udp:不安全协议。速度快</strong></p>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a><strong>Servlet</strong></h2><p> <strong>server applet</strong></p>
+<p><strong>概念:运行在服务器端的小程序Servlet就是一个接口、定义了Java类被浏览器访问到(tomcat识别)的规则</strong></p>
+<p><strong>将来我们自定义一个类,实现Servlet接口,复写方法</strong></p>
+<p><strong>快速入门:</strong></p>
+<p><strong>1.创建JavaEE项目</strong></p>
+<p><strong>2.定义一个类,实现servlet接口</strong></p>
+<p><strong>3.实现接口中的抽象方法</strong></p>
+<p><strong>4.配置Servlet</strong></p>
+<p><strong>在web.xml里面</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.itcast.web.servlet.ServletDemo1<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>执行原理:</strong></p>
+<p><strong>1当服务器接受到客户端浏览器的请求后,会解析请求URL路径,获取访问的Servlet的资源路径</strong></p>
+<p><strong>2.查找web,xml文件,是否有对应的<url-pattern>标签体内容。</strong></p>
+<p><strong>3.如果有,则在找到对应的<servlet-class>全类名</strong></p>
+<p><strong>4.tomcat会将字节码文件加载进内存,并且创建其对象</strong></p>
+<p><strong>5.调用其方法</strong></p>
+<p><strong>Servlet中的生命周期</strong></p>
+<p><strong>1被创建 执行init方法,只执行一次</strong></p>
+<p><strong>Servlet什么时候被创建?</strong></p>
+<p><strong>默认情况下,第一次被访问时, Servlet被创建</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在<span class="tag">&lt;<span class="name">servlet</span>&gt;</span>标签下配置</span><br><span class="line">第一次被访问时创建</span><br><span class="line"> <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>的值为负值</span><br><span class="line">在服务器启动时创建</span><br><span class="line"><span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>的值为0或正数</span><br></pre></td></tr></table></figure>
+
+<p><strong>servlet的init方法,只执行一次,说明一个Servlet在内存中只存在一个对象, Servlet是单例的</strong></p>
+<p><strong>多个用户同时访问时,可能存在线程安全问题。</strong></p>
+<p><strong>解决:尽量不要在Servlet中定义成员变量。即使定义了成员变量,也不要对修改值</strong></p>
+<p><strong>2.提供服务 执行service方法,执行多次</strong></p>
+<p><strong>每次访问Servlet时, Service方法都会被调一次。</strong></p>
+<p><strong>3.被销毁 执行destroy方法,只执行一次</strong></p>
+<p><strong>Servlet被销毁时执行。服务器关闭时, Servlet被销毁</strong></p>
+<p><strong>只有服务器正常关闭时,才会执行destroy方法。</strong></p>
+<p><strong>destroy方法在servlet被销毁之前执行,一般用于释放资源</strong></p>
+<p><strong>servlet3.0:</strong></p>
+<p><strong>好处:支持注解配置。可以不需要web.xml了。</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1.创建JavaEE项目,选择Servlet的版本3.0以上,可以不创建web.xml</strong></p>
+<p><strong>2.定义一个类,实现Servlet接口</strong></p>
+<p><strong>3.复写方法</strong></p>
+<p><strong>4.在类上使用@Webservlet注解,进行配置</strong></p>
+<p><strong>@WebServlet(“资源路径”)</strong></p>
+<p><strong>IDEA与tomcat的相关配置</strong></p>
+<p><strong>1. IDEA会为每一个tomcat部署的项目单独建立一份配置文件</strong></p>
+<p><strong>查看控制台的log : Using CATALINA_BASE: “C: \UsersIfay). IntelliJIdea2018.1)system)tomcat_itcast”</strong></p>
+<p><strong>2.工作空间项目 和tomcat部署的web项目</strong></p>
+<p><strong>tomcat真正访问的是”tomcat部署的web预目”,”tomcat部署的web项目”对应着”工作空间项目”的web目录下的所有资源</strong></p>
+<p><strong>WEB-INF目录下的资源不能被测览器直接访问。</strong></p>
+<p><strong>3.断点调试:使用”小虫子”启动dubug启动</strong></p>
+<p><strong>6. Servlet的体系结构</strong></p>
+<p>**Servlet –接口 **</p>
+<p>|</p>
+<p><strong>GenericServlet –抽象类</strong></p>
+<p>|</p>
+<p><strong>HttpServlet  –抽象类</strong></p>
+<p><strong>GenericServlet :将Servlet接口中其他的方法做了默认空实现,只将service()方法作为抽象</strong></p>
+<p><strong>将来定义servlet类时,可以继承GedericServlet,实现service()方法即可</strong></p>
+<p><strong>ettpServlet:对http协议的一种封装,简化操作</strong></p>
+<p><strong>1,定义类继承Httpservlet</strong></p>
+<p><strong>2.复写doGet&#x2F;doPost方法</strong></p>
+<p><strong>7.Servlet相关配置</strong></p>
+<p><strong>1.urlpartten: Servlet访问路径</strong></p>
+<p><strong>一个servlet可以定义多个访问路径@WebServlet({“&#x2F;d4”,”&#x2F;dd4”,”&#x2F;ddd4”})</strong></p>
+<p><strong>2.路径定义规则:</strong></p>
+<p><strong>1. &#x2F;xxx</strong></p>
+<p><strong>2. &#x2F;xxx&#x2F;xxx</strong></p>
+<p>*<em>3. <em>.doi</em></em></p>
+<p><strong>HTTP :</strong></p>
+<p><strong>概念: Hyper Text Transfer Protocol超文本传输协议</strong></p>
+<p><strong>传输协议:定义了,客户端和服务器端通信时,发送数据的格式</strong></p>
+<p><strong>特点:</strong></p>
+<p><strong>1.基于TCP&#x2F;IP的高级协议</strong></p>
+<p><strong>2.默认端口号:80</strong></p>
+<p><strong>3.基于请求&#x2F;响应模型的:一次请求对应一次响应</strong></p>
+<p><strong>4.无状态的:每次请求之间相互独立</strong></p>
+<p><strong>历史版本:</strong></p>
+<p> <strong>1.0:每一次请求响应都会建立新的连接</strong></p>
+<p><strong>1.1:复用连接</strong></p>
+<p><strong>请求消息数据格式</strong></p>
+<p><strong>1.请求行</strong></p>
+<p><strong>请求方式 请求url请求协议&#x2F;版本</strong></p>
+<p>**GET &#x2F;login.html HTTP&#x2F;1.1 **</p>
+<p><strong>请求方式:HTTP协议有7中请求方式,常用的有2种</strong></p>
+<p><strong>GET:</strong></p>
+<p><strong>1.请求参数在请求行中,在url后。</strong></p>
+<p><strong>2.请求的url长度有限制的</strong></p>
+<p><strong>3.不太安全</strong></p>
+<p><strong>POST:</strong></p>
+<p><strong>1.请求参数在请求体中</strong></p>
+<p><strong>2.请求的url长度没有限制的</strong></p>
+<p><strong>3.相对安全</strong></p>
+<p><strong>2.请求头 客户端浏览器告诉服务器一些信息</strong></p>
+<p><strong>请求头名称:请求头值</strong></p>
+<p><strong>常见的请求头:</strong></p>
+<p><strong>1. User-Agent :浏览器告诉服务器,我访问你使用的浏览器版本信息</strong></p>
+<p><strong>可以在服务器端获取该头的信息,解决浏览器的兼容性问题</strong></p>
+<p><strong>2. Referer: <a target="_blank" rel="noopener" href="http://localhost/login.html">http://localhost/login.html</a></strong></p>
+<p><strong>告诉服务器,我(当前请求)从哪里来?</strong></p>
+<p><strong>作用:1.防盗链:2.统计工作:</strong></p>
+<p><strong>3.请求空行</strong></p>
+<p><strong>空行 就是用于分割POST请求的请求头,和请求体的。</strong></p>
+<p><strong>4,请求体（正文）</strong></p>
+<p><strong>封装POST请求消息的请求参数的</strong></p>
+<p><strong>字符串格式:</strong></p>
+<p><strong>GET &#x2F;login.html HTTP&#x2F;1.1</strong></p>
+<p><strong>Host: localhost</strong></p>
+<p><strong>User-Agent: Moz[lla&#x2F;5.0 (windows NT 6.1; win64; x64; rv:60.0) Gecko&#x2F;20100101 Firefox&#x2F;60.0</strong></p>
+<p>*<em>Accept: text&#x2F;html, application&#x2F;xhtml+xml, application&#x2F;xml;q&#x3D;0.9, <em>&#x2F;</em>;q&#x3D;0.8</em>*</p>
+<p><strong>Accept-Language: zh-CN, zh; q&#x3D;0.8, zh-TW; q&#x3D;0.7, zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3, en;q&#x3D;0.2</strong></p>
+<p><strong>Accept-Encoding: gzip, deflate</strong></p>
+<p><strong>Connection: keep-alive</strong></p>
+<p><strong>Upgrade-Insecure-Requests: 1</strong></p>
+<p><strong>响应消息数据格式</strong></p>
+<p><strong>Request</strong></p>
+<p><strong>1.request对象和response对象的原理</strong></p>
+<p><strong>1.2.request和response对象是由服务器创建的。我们来使用它们</strong></p>
+<p><strong>1.3.request对象是来获取请求消息, response对象是来设置响应消息</strong></p>
+<p><strong>2. request :获取请求消息</strong></p>
+<p><strong>2.1request对象继承体系结构:</strong></p>
+<p><strong>ServletRequest   -接口</strong> </p>
+<p><strong>|    继承</strong></p>
+<p><strong>HttpServletRequest  -接口</strong></p>
+<p><strong>|    实现</strong></p>
+<p><strong>org.apache.catalina.connector.RequestFacade 类（tomcat）</strong></p>
+<p>**3. request 功能: **</p>
+<p><strong>1.获取请求消息数据</strong></p>
+<p>​	<strong>1.获取请求行数据</strong></p>
+<p>​		<strong>GET &#x2F;day14&#x2F;demo1?name&#x3D;zhangsan HTTP&#x2F;1.1</strong></p>
+<p>​		<strong>方法:</strong></p>
+<p>​		<strong>1,获取请求方式:GET</strong></p>
+<p>​		<strong>String getMethod()</strong></p>
+<p>​		<strong>2.(*)获取虚拟目录:&#x2F;day14</strong></p>
+<p>​		<strong>String getContextPath()</strong></p>
+<p>​		<strong>3. 获取Servlet路径: &#x2F;demo1</strong></p>
+<p>​		<strong>string getServletPath()</strong></p>
+<p>​		<strong>4. 获取get方式请求参数: name&#x3D;zhangsan</strong></p>
+<p>​		<strong>String getQueryString()</strong></p>
+<p>​		<strong>5.(*)获取请求URI: &#x2F;day14&#x2F;demo1</strong></p>
+<p>​		<strong>string getRequestURI():&#x2F;day14&#x2F;demo1</strong></p>
+<p>​		<strong>stringBuffer getRequestURL() <a target="_blank" rel="noopener" href="http://localhost/day14/demo1">http://localhost/day14/demo1</a></strong></p>
+<p>​		<strong>URL:统资源定位符:<a target="_blank" rel="noopener" href="http://localhost/day14/demo1">http://localhost/day14/demo1</a>  中华人民某和国</strong></p>
+<p>​		<strong>URI统一资源标识符:&#x2F;day14&#x2F;demo1  共和国</strong></p>
+<p>​		<strong>6.获取协议及版本: HTTP&#x2F;1.1</strong></p>
+<p>​		<strong>string getProtocol()</strong></p>
+<p>​		<strong>7.获取客户机的IP地址:</strong></p>
+<p>​		<strong>string getRemoteAddr()</strong></p>
+<p>​	<strong>2.获取请求头数据</strong></p>
+<p>​		<strong>方法:</strong></p>
+<p>​				**String getHeader(String name):通过请求头的名称获取请求头的值	**</p>
+<p>​				<strong>Enumeration<string>getHeaderNames():获取所有的请求头名称</strong></p>
+<p><strong>3,获取请求体数据</strong></p>
+<p>​	<strong>请求体:只有POST请求方式,才有请求体,在请求体中封装了POST请求的请求参数</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1.获取流对象</strong></p>
+<p><strong>BufferedReader getReader() 获取字符输入流,只能操作字符数据</strong></p>
+<p><strong>ServletInputStream getInputStream() :获取字节输入流,可以操作所有类型数据</strong></p>
+<p><strong>在文件上传知识点后讲解</strong></p>
+<p><strong>2.再从流对象中拿数据</strong></p>
+<p><strong>2.其他功能</strong></p>
+<p><strong>1.获取请求参数通用方式 无论get还是post请求方式都可以使用下列方法来获取请求参数</strong></p>
+<p><strong>1.1.String getParameter(String name) :根据参数名称获取参数值    username&#x3D;zs&amp;password&#x3D;123</strong></p>
+<p><strong>1.2.String[ ] getParameterValues(String name) :根据参数名称获取参数值的数组 hobby&#x3D;xx&amp;hobby&#x3D;game</strong></p>
+<p><strong>1.3.Enumeration<string> getParameterNames ():获取所有请求的参数名称</strong></p>
+<p><strong>1.4.Map&lt;string, String[]&gt; getParameterMap():获取所有参数的map集合</strong></p>
+<p><strong>中文乱码问题:</strong></p>
+<p><strong>get方式: tomcat 8 已经将get方式乱码问题解决了</strong></p>
+<p><strong>post方式会乱码</strong></p>
+<p>*<strong>解决:在获取参数前,设置request的编码request.setCharacterEncoding(“utf-8”);</strong></p>
+<p><strong>2.请求转发: 一种在服务器内部的资源跳转方式</strong></p>
+<p><strong>1.步骤:</strong></p>
+<p><strong>1.通过request对象获取请求转发器对象: RequestDispatcher getRequestDispatcher(String path)</strong></p>
+<p><strong>2. 使用RequestDispatcher对象来进行转: forward(ServletRequest request, ServletResponse response)</strong></p>
+<p><strong>2.特点:</strong></p>
+<p><strong>1.浏览器地址栏路径不发生变化</strong></p>
+<p><strong>2.只能转发到当前服务器内部资源中。</strong></p>
+<p><strong>3.转发是一次请求</strong></p>
+<p><strong>3.共享数据</strong></p>
+<p><strong>域对象:一个有作用范围的对象,可以在范国内共享数据</strong></p>
+<p><strong>request域:代表一次请求的范围,一股用于请求转发的多个资源中共享数据</strong></p>
+<p><strong>方法:</strong></p>
+<p><strong>1. void setAttribute(String name,object obj) :存储数据</strong></p>
+<p><strong>2. object getattitude(String name) :通过健获取值</strong></p>
+<p><strong>3. void removeAttribute(String name):通过键移除健值对</strong></p>
+<p><strong>4.获取ServletContext</strong></p>
+<p><strong>Servletcontext getservletContext()</strong></p>
+<p><strong>1. tomcat服务器会根据请求url中的资源路径,创建对应的ServletDemol的对象。</strong></p>
+<p><strong>2. tomcat服务器,会创建reguest和response对象, request对象中封装请求消息数据。</strong></p>
+<p><strong>3. tomcat将reauest和response两个对象传递给service方法,并且调用service方法。</strong></p>
+<p><strong>4,程序员(我们),可以通过request对象获取请求消息数据,通过通过,response对象设置响应消息数据</strong></p>
+<p><strong>5,服务器在给浏览器做出响应之前,会从response对象中拿程序员设置的响应消息数据。</strong></p>
+<p><strong>Beanutils工具类,简化数据封装</strong></p>
+<p><strong>用于封装JavaBean的</strong></p>
+<p><strong>1. JavaBean : 标准的Java类</strong></p>
+<p><strong>1.要求:</strong></p>
+<p><strong>1.类必须被public修饰</strong></p>
+<p><strong>2.必须提供空参的构造器</strong></p>
+<p><strong>3.成员变量必须使用private修饰</strong></p>
+<p><strong>4.提供公共setter和getter方法</strong></p>
+<p><strong>2.功能:封装数据</strong></p>
+<p><strong>2.概念:</strong></p>
+<p><strong>成员变量:</strong></p>
+<p><strong>属性: setter和getter方法截取后的产物</strong></p>
+<p><strong>例如: getusername() –&gt; Username–&gt; username</strong></p>
+<p><strong>3.方法:</strong></p>
+<p><strong>1. setProperty()</strong></p>
+<p><strong>2. getproperty()</strong></p>
+<p>**3. populate(object obj , Map map):将map集合的键值对信息,封装到对应的JavaBean对象中 **</p>
+<p><strong>HTTP协议:</strong></p>
+<p><strong>1.请求消息:客户端发送给服务器端的数据</strong></p>
+<p><strong>数据格式:</strong></p>
+<p><strong>1.请求行</strong></p>
+<p><strong>2.请求头</strong></p>
+<p><strong>3.请求空行</strong></p>
+<p><strong>4.请求体</strong></p>
+<p><strong>2,响应消息:服务器端发送给客户端的数据</strong></p>
+<p><strong>数据格式:</strong></p>
+<p><strong>1.响应行</strong></p>
+<p>​	<strong>1.组成:协议&#x2F;版本响应状态码 状态码描述</strong></p>
+<p>​	<strong>2.响应状态码:服务器告诉客户端浏览器本次请求和响应的一个状态。</strong></p>
+<p>​	<strong>1,状态码都是3位数字</strong></p>
+<p>​	<strong>2.分类:</strong></p>
+<p>​	<strong>1. 1xx：服务器就收客户端消息,但没有接受完成,等待一段时间后,发送1xx多状态码,</strong></p>
+<p>​	<strong>2. 2xxI：成功 代表: 200</strong></p>
+<p>​	<strong>3. 3xx:重定向。代表: 302(重定向) 304(访问缓存)</strong></p>
+<p>​	<strong>4. 4xx：客户端错误。</strong></p>
+<p>​		<strong>代表:</strong></p>
+<p>​		<strong>404(请求路径没有对应的资源)</strong></p>
+<p>​		<strong>405:请求方式没有对应的doxxx方法</strong></p>
+<p>​	<strong>5. 5xx:服务器端错误 服务器端错误。代表:500(服务器内部出现异常)。</strong></p>
+<p><strong>2.响应头</strong></p>
+<p><strong>1.格式:头名称:值</strong></p>
+<p><strong>2.常见的响应头:</strong></p>
+<p><strong>1. Content-Type:服务器告诉客户端本次响应体数据格式以及编码格式,</strong></p>
+<p><strong>2.Content-disposition :服务器告诉客户端以什么格式打开响应体数据</strong></p>
+<p><strong>值:</strong></p>
+<p><strong>in-line:默认值,在当前页面内打开</strong></p>
+<p><strong>attachment；filename&#x3D;xxx :以附件形式打开响应体 文件下载</strong></p>
+<p><strong>3.响应空行</strong></p>
+<p><strong>4.响应体</strong></p>
+<p><strong>响应字符串格式</strong></p>
+<p><strong>HTTP&#x2F;1.1 200 OK</strong></p>
+<p><strong>Content-Type: text&#x2F;html; charset&#x3D;UTF-8</strong></p>
+<p><strong>Content-Length: 101</strong></p>
+<p><strong>Date: wed, 06 Jun 2018 07:08:42 GMT</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Hello World! respones<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Response对象</strong></p>
+<p><strong>功能:设置响应消息</strong></p>
+<p><strong>1,设置响应行</strong></p>
+<p><strong>1. 格式: HTTP&#x2F;1.1 200 ok</strong></p>
+<p><strong>2.设置状态码: setsifaltus(int sc)</strong></p>
+<p><strong>2.设置响应头 setHeader(String name, String value)</strong></p>
+<p><strong>3.设置响应体</strong></p>
+<p><strong>使用步骤:</strong></p>
+<p><strong>1.获取输出流</strong></p>
+<p><strong>字符输出流: Printwriter getwriter()</strong></p>
+<p><strong>字节输出流: ServletoutputStream getoutputStream()</strong></p>
+<p><strong>2.使用输出流,将数据输出到客户端浏览器</strong></p>
+<p><strong>案例:</strong></p>
+<p><strong>1.完成重定向</strong></p>
+<p><strong>重定向：资源跳转的方式</strong></p>
+<p><strong>代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//访问responseDemo1自动跳转到Demo2资源</span></span><br><span class="line">        <span class="comment">//1.设置状态码为302</span></span><br><span class="line"><span class="comment">//        resp.setStatus(302);</span></span><br><span class="line">        <span class="comment">//2.设置响应头location</span></span><br><span class="line"><span class="comment">//        resp.setHeader(&quot;location&quot;,&quot;/day15/responseDemo2&quot;);</span></span><br><span class="line">        resp.sendRedirect(<span class="string">&quot;/day15/responseDemo2&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>重定向的特点  redirect</strong></p>
+<p><strong>1,地址栏发生变化</strong></p>
+<p><strong>2.重定向可以访问其他站点(服务器)的资源</strong></p>
+<p><strong>3,重定向是两次请求</strong></p>
+<p><strong>转发的特点:forward</strong></p>
+<p><strong>1.转发地址栏路径不变</strong></p>
+<p><strong>2.转发只能访问当前服务器下的资源</strong></p>
+<p><strong>3.转发是一次请求 可以使用request对象来共享数据</strong></p>
+<p><strong>forward和 redirect区别</strong></p>
+<p><strong>路径写法:</strong></p>
+<p><strong>1.路径分类</strong></p>
+<p><strong>1.1,相对路径:通过相对路径不可以确定唯一资源</strong></p>
+<p><strong>如:.&#x2F;index.html</strong></p>
+<p><strong>不以&#x2F;开头,以,开头路径</strong></p>
+<p><strong>规则:找到当前资源和目林资源之间的相对位置关系</strong></p>
+<p><strong>.&#x2F;:当前目录</strong></p>
+<p><strong>..&#x2F;:后退一级目录</strong></p>
+<p><strong>1.2.绝对路径:通过绝对路径可以确定唯一资源</strong></p>
+<p><strong>如: <a target="_blank" rel="noopener" href="http://localhost/day15/responseDemo2">http://localhost/day15/responseDemo2</a>           &#x2F;day15&#x2F;responseDemo2</strong></p>
+<p><strong>以&#x2F;开头的路径</strong></p>
+<p><strong>规则:判断定义的路径是给谁用的?判断请求将来从哪儿发出</strong></p>
+<p><strong>给客户端浏览器使用:需要加虚拟目录(项目的访问路径)</strong></p>
+<p><strong>建议虚拟目录动态获取: request.getcontextPath()</strong></p>
+<p><strong><a> , <form>重定向…</strong></p>
+<p><strong>给服务器使用:不需要加虚拟目录</strong></p>
+<p><strong>转发路径</strong></p>
+<p><strong>2.服务器输出字符数据到浏览器</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1.获取字符输出流</strong></p>
+<p><strong>2.输出数据</strong></p>
+<p><strong>注意:</strong></p>
+<p><strong>乱码问题:</strong></p>
+<p><strong>1. Printwriter pw&#x3D; response.getwriter();获取的流的默认编码是IS0-8859-1</strong></p>
+<p><strong>2.设置该流的默认编码</strong></p>
+<p><strong>3.告诉浏览器响应体使用的编码</strong></p>
+<p><strong>&#x2F;&#x2F;简单的形式,设置编码,是在获取流之前设置</strong></p>
+<p><strong>response.setcontentType(“text&#x2F;html;charset&#x3D;utf-8”);</strong></p>
+<p><strong>3.服务器输出字节数据到浏览器</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1.获取字节输出流</strong></p>
+<p><strong>2.输出数据</strong></p>
+<p><strong>4.验证码</strong></p>
+<p><strong>1.本质:图片</strong></p>
+<p><strong>2.目的:防止恶意表单注册</strong></p>
+<p><strong>servletContext对象</strong></p>
+<p><strong>1.概念:代表整个web应用,可以和程序的容器(服务器)来通信</strong></p>
+<p><strong>2.获取:</strong></p>
+<p><strong>1.通过request对象获取</strong></p>
+<p><strong>request.getservletcontext();</strong></p>
+<p><strong>2. 通过HttpServlet获取</strong></p>
+<p><strong>this.getServletcontext();</strong></p>
+<p><strong>3.功能:</strong></p>
+<p><strong>1,获取MIME类型:</strong></p>
+<p><strong>MIME类型:在互联网通信过程中定义的一种文件数据类型</strong></p>
+<p><strong>格式:大类型&#x2F;小类型 text&#x2F;html        image&#x2F;jpeg</strong></p>
+<p><strong>获取: String getMimeType(String file)</strong></p>
+<p><strong>2.域对象:共享数据</strong></p>
+<p><strong>1. setAttribute(String name, Object value)</strong></p>
+<p><strong>2. getattribute(String name)</strong></p>
+<p><strong>3. removeAttribute(string name)</strong></p>
+<p><strong>Servletcontext对象范围:所有用户所有请求的数据</strong></p>
+<p><strong>3.获取文件的真实(服务器)路径</strong></p>
+<p><strong>1. 方法: string getRealPath(Strihg path)</strong></p>
+<h1 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a><strong>会话技术</strong></h1><p><strong>1.会话:一次会话中包含多次请求和响应。</strong></p>
+<p><strong>一次会话:浏览器第一次给服务器资源发送请求,会话建立,直到有一方断开为止</strong></p>
+<p><strong>2.功能:在一次会话的范围内的多次请求间,共享数据</strong></p>
+<p><strong>3.方式:</strong></p>
+<p><strong>1,客户端会话技术:Cookie</strong></p>
+<p><strong>2.服务器端会话技术: Sesslion</strong></p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie:"></a>Cookie:</h2><p><strong>1.概念:客户端会话技术,将数据保存到客户端</strong></p>
+<p><strong>2.快速入门:</strong></p>
+<p><strong>使用步骤:</strong></p>
+<p><strong>1.创建cookie对象,绑定数据</strong></p>
+<p><strong>new Cookie(String name, String value)</strong></p>
+<p><strong>2.发送Cookie对象</strong></p>
+<p><strong>response.addCookie(Cookie cookie)</strong></p>
+<p><strong>3.获取Cookie,拿到数据</strong></p>
+<p>**Cookie[ ] request.getcookies () **</p>
+<p><strong>3.实现原理</strong></p>
+<p><strong>基于响应头set-cookie和请求头cookie实现</strong></p>
+<p><strong>4. cookie的细节</strong></p>
+<p><strong>1.一次可不可以发送多个cookie?</strong></p>
+<p><strong>可以</strong></p>
+<p><strong>可以创建多个Cookie对象,使用response调用多次addcookie方法发送cookie即可。</strong></p>
+<p><strong>2. cookie在浏览器中保存多长时间?</strong></p>
+<p><strong>1.默认情况下,当浏览器关闭后, cookie数据被销毁</strong></p>
+<p><strong>2.持久化存储:</strong></p>
+<p><strong>setMaxAge (int seconds)</strong></p>
+<p><strong>1,正数:将cookie数据写到硬盘的文件中。持久化存储。cookie存活时间。</strong></p>
+<p><strong>2.负数:默认值</strong></p>
+<p><strong>3.零:删除cookie信息</strong></p>
+<p><strong>3. cookie能不能存中文?</strong></p>
+<p><strong>在tomcat 8之前cookie中不能直接存储中文数据。</strong></p>
+<p><strong>需要将中文数据转码–一般采用URL编码(%E3)</strong></p>
+<p><strong>在tomcat 8之后,cookie支持中文数据。</strong></p>
+<p><strong>4. cookie共享问题?</strong></p>
+<p><strong>假设在一个tomcat服务器中,部署了多个web项目,那么在这些web项目中cookie能不能共享?</strong></p>
+<p><strong>默认情况下cookie不能共享</strong></p>
+<p><strong>setPath(String path):设置cookie的获取范围。默认情况下,设置当前的虚拟目录</strong></p>
+<p><strong>如果要共享,则可以将path设置为”&#x2F;“</strong></p>
+<p><strong>2.不同的tomcat服务器间cookie共享问题?</strong></p>
+<p><strong>setDomain(String path):如果设置一级域名相同,那么多个服务器之间cookie可以共享</strong></p>
+<p><strong>setDomain(“.baidu.com”),那么tieba.baidu.com和news.baidu.com中cookie可以共享</strong></p>
+<p><strong>5. cookie的特点和作用</strong></p>
+<p><strong>1. cookie存储数据在客户端浏览器</strong></p>
+<p><strong>2.浏览器对于单个cookie 的大小有限制(4kb)以及 对同一个域名下的总cookie数量也有限制(20个)</strong>*</p>
+<p><strong>作用:</strong></p>
+<p><strong>1. cookie一般用于存出少量的不太敏感的数据</strong></p>
+<p><strong>2,在不登录的情况下,完成服务器对客户端的身份识别</strong></p>
+<p><strong>6.案例:记住上一次访问时间</strong></p>
+<p><strong>1.需求:</strong></p>
+<p><strong>1.访问一个Servlet,如果是第一次访问,则提示:您好,欢迎您首次访问。</strong></p>
+<p><strong>2.如果不是第一次访问,则提示:欢迎回来,您上次访问时间为:显示时间字符申</strong></p>
+<p><strong>2.分析:</strong></p>
+<p><strong>1,可以采用cookie来完成</strong></p>
+<p><strong>2,在服务器中的Servlet判断是否有一个名为lastTime的cookie</strong></p>
+<p><strong>1,有:不是第一次访问</strong></p>
+<p><strong>1.响应数据:您好,欢迎您首次访问</strong></p>
+<p><strong>2.写回cookie: lastTime&#x3D;2018年6月10日11:50:01</strong></p>
+<p><strong>2,没有:是第一次访问,</strong></p>
+<p><strong>1.响应数据:您好,欢迎您首次访问</strong></p>
+<p><strong>2.写回cookie: lastTime&#x3D;2018年6月10日11:50:01</strong></p>
+<h1 id="JSP-入门学习"><a href="#JSP-入门学习" class="headerlink" title="JSP:入门学习"></a><strong>JSP:入门学习</strong></h1><p><strong>1,概念:</strong></p>
+<p><strong>Java Server Pages: java服务器端页面</strong></p>
+<p><strong>可以理解为:一个特殊的页面,其中既可以指定定义html标签,又可以定义java代码</strong></p>
+<p><strong>用于简化书写!!!</strong></p>
+<p><strong>2.原理</strong></p>
+<p><strong>JSP本质上就是一个Servlet</strong></p>
+<p><strong>3. JSP的脚本: JSP定义Java代码的方式</strong></p>
+<p><strong>1.&lt;% 代码 %&gt;:定义的java代码,在service方法中。service方法中可以定义什么,该脚本中就可以定义什么。</strong></p>
+<p><strong>2.&lt;%!代码%&gt;:定义的java代码,在jsp转换后的java类的成员位置。</strong></p>
+<p><strong>3.&lt;%&#x3D;代码 %&gt;:定义的java代码,会输出到页面上。输出语句中可以定义什么,该脚本中就可以定义什么。</strong></p>
+<p><strong>4. JSP的内置对象</strong></p>
+<p><strong>在jsp页面中不需要获取和创建,可以直接使用的对象</strong></p>
+<p><strong>jsp一共有9个内置对象。</strong></p>
+<p><strong>今天学习3个:</strong></p>
+<p><strong>request</strong></p>
+<p><strong>response</strong></p>
+<p><strong>out :字符输出流对象。可以将数据输出到页面上。和response.getwriter()类似</strong></p>
+<p><strong>response.getwriter)和out.write()的区别:</strong></p>
+<h1 id="Session"><a href="#Session" class="headerlink" title="Session:"></a><strong>Session:</strong></h1><p><strong>1.概念:服务器端会话技术,在一次会话的多次请求间共享数据,将数据保存在服务器端的对象中。Httpsession</strong></p>
+<p><strong>2.快速入门:</strong></p>
+<p><strong>1.1获取Httpsession对象:</strong></p>
+<p><strong>Httpsession session &#x3D; request.getSession();</strong></p>
+<p><strong>1.2使用HttpSession对象:</strong></p>
+<p><strong>Httpsession对象:object getattribute(String name)</strong></p>
+<p><strong>void setAttribute(String name, object value)</strong></p>
+<p><strong>void removeAttribute(String name)i</strong></p>
+<p><strong>3.原理</strong></p>
+<p><strong>Session的实现是依赖于cookie的。</strong></p>
+<p><strong>4.细节:</strong></p>
+<p><strong>1.当客户端关闭后,服务器不关闭,两次获取session是否为同一个?</strong></p>
+<p><strong>默认情况下。不是。</strong></p>
+<p><strong>如果需要相同,则可以创建cookie,键为JSESSIONID,设置最大存活时间,让cookie持久化保存。</strong></p>
+<p><strong>Cookie c &#x3D; new Cookie(“JSESSIONID”, session.getId());</strong></p>
+<p><strong>C.setMaxAge(60*60);</strong></p>
+<p><strong>response.addCookie(c);</strong></p>
+<p><strong>2.客户端不关闭,服务器关闭后,两次获取的session是同一个吗?</strong></p>
+<p><strong>不是同一个但是要确保数据不丢失</strong></p>
+<p><strong>session的顿化:</strong></p>
+<p><strong>在服务器正常关闭之前,将session对象系列化到硬盘上</strong></p>
+<p><strong>session的活化:</strong></p>
+<p><strong>在服务器启动后,将session文件转化为内存中的session对象即可。</strong></p>
+<p><strong>3. session的失效时间?</strong></p>
+<p><strong>1,服务器关闭</strong></p>
+<p><strong>2. session对象调用invalidate() .</strong></p>
+<p><strong>3. session默认失效时间30分钟选择性配置修改</strong></p>
+<p><strong><session-config></strong></p>
+<p><strong><session-timeout>30</session-timeout></strong></p>
+<p><strong></session-config></strong></p>
+<p><strong>5. session的特点</strong></p>
+<p><strong>1. session用于存储一次会话的多次请求的数据,存在服务器端</strong></p>
+<p><strong>2. session可以存储任意类型,任意大小的数据</strong></p>
+<p><strong>session与cookie的区别:</strong></p>
+<p><strong>1. session存储数据在服务器端, Cookie在客户端</strong></p>
+<p><strong>2. session没有数据大小限制, cookie有</strong></p>
+<p><strong>3. session数据安全, cookie相对于不安全</strong></p>
+<p><strong>JSP:</strong></p>
+<p><strong>1.指令</strong></p>
+<p><strong>作用:用于配置JSP页面,导入资源文件</strong></p>
+<p><strong>格式:&lt;%@指令名称 属性名1&#x3D;属性值1属性名2&#x3D;属性值2 …%&gt;</strong></p>
+<p><strong>分类:</strong></p>
+<p><strong>1. page:配置JSP页面的</strong></p>
+<p><strong>contentType :等同Fresponse.setContentType()</strong></p>
+<p><strong>1.1设置响应体的mime类型以及字符集</strong></p>
+<p><strong>1.2.设置当前jsp页面的编码(只能是高级的IDE才能生效,如果使用低级工具,则需要设置pageEncoding属性设置当前页面的字符集</strong></p>
+<p><strong>import : 导包errorPage:当前页面发生异常后,会自动跳转到指定的错误页面</strong></p>
+<p><strong>isErrorPage:标识当前也是是否是错误页面。</strong></p>
+<p><strong>true :是,可以使用内置对象exception</strong></p>
+<p><strong>false :否。默认值。不可以使用内置对象exception</strong></p>
+<p><strong>2. include :页面包含的。导入页面的资源文件</strong></p>
+<p><strong>&lt;%@include file&#x3D;”top.jsp”%&gt;</strong></p>
+<p><strong>3. taglib : 导入资源</strong></p>
+<p><strong>&lt;%@ taglib prefix&#x3D;”c” uri&#x3D;”<a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/core">http://java.sun.com/jsp/jstl/core</a>“ %</strong></p>
+<p><strong>prefix :前缀,自定义的</strong></p>
+<p><strong>2.注释</strong></p>
+<p><strong>1. html注释:<!-- -->:只能注释html代码片段</strong></p>
+<p><strong>2. jsp注释:推荐使用&lt;%– –%&gt; :可以注释所有</strong></p>
+<p><strong>3.内置对象</strong></p>
+<p><strong>在jsp页面中不需要创建,直接使用的对象</strong></p>
+<p><strong>一共有9个:</strong></p>
+<p><strong>变量名														真实类型</strong>													<strong>作用</strong></p>
+<p><strong>pageContext</strong>										<strong>PageContext</strong>										<strong>当前页面共享数据</strong></p>
+<p><strong>request</strong>												<strong>HttpservletRequest</strong>							<strong>一次请求访问的多个资源(转发)</strong></p>
+<p><strong>session</strong>													<strong>Httpsession</strong>										<strong>一次会话的多个请求间</strong></p>
+<p><strong>application</strong>										<strong>Servletcontext</strong>											<strong>所有用户间共享数据</strong></p>
+<p><strong>response</strong>											<strong>HttpservletResponse</strong>									<strong>响应对象</strong>	</p>
+<p><strong>page</strong>															<strong>object</strong>												<strong>当前页面(Servlet)的对象 this</strong></p>
+<p><strong>out</strong>																<strong>jspwriter</strong>										<strong>输出对象,数据输出到页面上</strong></p>
+<p>**config	**												<strong>Servletconfig</strong>												<strong>Servlet的配置对象</strong>	</p>
+<p>**exception **												<strong>Throwable</strong>													<strong>异常对象</strong></p>
+<h1 id="MVC-开发模式"><a href="#MVC-开发模式" class="headerlink" title="MVC:开发模式"></a>MVC:开发模式</h1><p><strong>1. jsp演变历史</strong></p>
+<p><strong>1.早期只有servlet,只能使用response输出标签数据,非常麻烦</strong></p>
+<p><strong>2.后来又jsp,简化了Servlet的开发,如果过度使用jsp,在jsp中即写大量的java代码,有写html表,造成难于维护,难于分工协作</strong></p>
+<p><strong>3.再后来, java的web开发,借鉴vc开发模式,使得程序的设计更加合理性</strong></p>
+<p><strong>2. MVC:</strong></p>
+<p><strong>1. M: Model, 模型 JavaBean</strong></p>
+<p><strong>完成具体的业务操作,如:查询数据库,封装对象</strong></p>
+<p><strong>2. v: View,视图 JSP</strong></p>
+<p><strong>展示数据</strong></p>
+<p><strong>3. C: Controller, 控制器 Servlet</strong></p>
+<p><strong>获取用户的输入</strong></p>
+<p><strong>调用模型</strong></p>
+<p><strong>将数据交给视图进行展示</strong></p>
+<p><strong>优缺点:</strong></p>
+<p><strong>1,优点:</strong></p>
+<p><strong>1.耦合性低,方便维护,可以利于分工协作</strong></p>
+<p><strong>2.重用性高</strong></p>
+<p><strong>2.缺点:</strong></p>
+<p><strong>1.使得项目架构变得复杂,对开发人员要求高</strong></p>
+<h1 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a><strong>EL表达式</strong></h1><p><strong>1.概念 Expression Language表达式语言</strong></p>
+<p><strong>2.作用:替换和简化jsp页面中java代码的编写</strong></p>
+<p><strong>3.语法:${表达式}</strong></p>
+<p><strong>4.注意:</strong></p>
+<p><strong>jsp默认支持el表达式的。如果要忽略el表达式</strong></p>
+<p><strong>1.设置jspPpage指令中:isELIgnored&#x3D;”true”忽略当前jsp页面中所有的el表达式</strong></p>
+<p><strong>2. ${表达式}:忽略当前这个el表达式</strong></p>
+<p><strong>5.使用:</strong></p>
+<p><strong>1.运算</strong></p>
+<p><strong>运算符:</strong></p>
+<p><strong>1. 算数运算符: + - * &#x2F; (div)  % (mod)</strong></p>
+<p><strong>2.比较运算符:&gt;&lt;&gt;&#x3D; &lt;&#x3D; &#x3D;&#x3D;!&#x3D;</strong></p>
+<p><strong>3. 逻辑运算符: &amp;&amp;(and) II(or)  !(not)</strong></p>
+<p><strong>4,空运算符: empty</strong></p>
+<p><strong>功能:用于判断字符串、集合、数组对象是否为null或者长度是否为0</strong></p>
+<p><strong>${empty list}：判断字符申!集合、数组对象是否为null或者长度为0</strong></p>
+<p><strong>${not empty str}:表示判断字符串、集合、数组对象是否不为null并目长度&gt;0</strong></p>
+<p><strong>2.获取值</strong></p>
+<p><strong>1. el表达式只能从域对象中获取值</strong></p>
+<p><strong>2.语法:</strong></p>
+<p><strong>1. ${域名称,键名}:从指定域中获取指定键的值</strong></p>
+<p><strong>域名称:</strong></p>
+<p><strong>1. pagescope–&gt; pageContext</strong></p>
+<p><strong>2. requestscope–&gt; request</strong></p>
+<p><strong>3. sessionScope –&gt; session</strong></p>
+<p><strong>4. applicationScope –&gt; application (Servletcontext)</strong></p>
+<p><strong>举例:在request域中存储了name&#x3D;张三</strong></p>
+<p><strong>获取: ${requestscope. name}</strong></p>
+<p><strong>2.${键名}:表示依次从最小的域中查找是否有该键对应的值,直到找到为止。</strong></p>
+<p><strong>3.获取对象、List集合、Map集合的值</strong></p>
+<p><strong>1.对象:${域名称,键名,属性名}</strong></p>
+<p><strong>本质上会去调用对象的getter方法</strong></p>
+<p><strong>2. List集合:</strong></p>
+<p><strong>${域名称.键名[索引]}</strong></p>
+<p><strong>3. Map集合:</strong></p>
+<p><strong>${域名称.键名.key名称}</strong></p>
+<p><strong>${域名称,键名[“key名称”]}</strong></p>
+<p><strong>3.隐式对象:</strong></p>
+<p><strong>el表达式中有11个隐式对象</strong></p>
+<p><strong>pageContext:</strong></p>
+<p><strong>获取jsp其他八个内置对象</strong></p>
+<p><strong>${pageContext.request.contextPath}: 动态获取虚拟目录</strong></p>
+<p><strong>JSTL</strong></p>
+<p><strong>1.概念: JavaServer Pages Tag Library  JSP标准标签库</strong></p>
+<p><strong>是由Apache组织提供的开源的免费的jsp标签    &lt;标签&gt;</strong></p>
+<p><strong>2.作用:用于简化和替换jsp页面上的java代码</strong></p>
+<p><strong>3.使用步骤:</strong></p>
+<p><strong>1. 导入jstl相关jar包</strong></p>
+<p><strong>2. 引入标签库: taglib指令: &lt;%@ taglib %&gt;</strong></p>
+<p><strong>3.使用标签</strong></p>
+<p><strong>4.常用的JSTL标签</strong></p>
+<p><strong>1. if： 相当于java代码的if语句</strong></p>
+<p><strong>1.属性:test必须属性,接受boolean表达式</strong></p>
+<p><strong>如果表达式为true,则显示if标签体内容,如果为false,则不显示标签体内容</strong></p>
+<p><strong>一般情况下, test属性值会结合el表达式一起使用</strong></p>
+<p><strong>2.注意:c:if标签没有else情况,想要else情况,则可以在定义一个c:if标签</strong></p>
+<p><strong>2. choose：相当于java代码的switch语句</strong></p>
+<p><strong>1.使用choose标签声明相当于switch声明</strong></p>
+<p><strong>2.使用when标签做判断相当于case</strong></p>
+<p><strong>1.使用choose标签声明相当于switch声明</strong></p>
+<p><strong>2.使用when标签做判断相当于case</strong></p>
+<p><strong>3.使用otherwise标签做其他情况的声明相当于default</strong></p>
+<p><strong>3.使用otherwise标签做其他情况的声明相当于default</strong></p>
+<p><strong>3. foreach：相当于java代码的for语句</strong></p>
+<p><strong>1,完成重复的操作</strong></p>
+<p><strong>属性:</strong></p>
+<p><strong>begin:开始值</strong></p>
+<p><strong>end:结束值</strong></p>
+<p><strong>var:临时变量</strong></p>
+<p><strong>step:步长</strong></p>
+<p><strong>varStatus:循环状态对象</strong></p>
+<p><strong>index:容器中元素的索引,从0开始</strong></p>
+<p><strong>count:循环次数,从1开始</strong></p>
+<p><strong>2.遍历容器</strong></p>
+<p><strong>List<User> list;</strong></p>
+<p><strong>for(User user: list){}</strong></p>
+<p><strong>属性:</strong></p>
+<p><strong>items :容器对象</strong></p>
+<p><strong>var:容器中元素的临时变量</strong></p>
+<p><strong>三层架构:软件设计架构</strong></p>
+<p><strong>1.界面层(表示层):用户看的得界面。用户可以通过界面上的组件和服务器进行交互,</strong></p>
+<p><strong>2.业务逻辑层:处理业务逻辑的。</strong></p>
+<p><strong>数据访问层:操作数据存储文件。</strong></p>
+<p><img src="C:\Users\24861\Desktop\三层架构.JPG" alt="三层架构"></p>
+<h2 id="Filter-过滤器"><a href="#Filter-过滤器" class="headerlink" title="Filter:过滤器"></a><strong>Filter:过滤器</strong></h2><p><strong>1.概念:生活中的过滤器:净水器,空气净化器,土匪、</strong></p>
+<p><strong>web中的过滤器:当访问服务器的资源时,过滤器可以将请求拦截下来,完成一些特殊的功能。</strong></p>
+<p><strong>过滤器的作用:</strong></p>
+<p><strong>一般用于完成通用的操作。如:登录验证、统一编码处理、敏感字符过滤.</strong></p>
+<p><strong>2.快速入门:</strong></p>
+<p><strong>1,步骤:</strong></p>
+<p><strong>1.定义一个类,实现接口Filter</strong></p>
+<p><strong>2.复写方法</strong></p>
+<p><strong>3.配置兰截路径</strong></p>
+<p><strong>3.过滤器细节:</strong></p>
+<p><strong>1.web.xml配置</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>cn.itcast.web.filer.FilterDemo1<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.过滤器执行流程</strong></p>
+<p><strong>1.执行过滤器</strong></p>
+<p><strong>2.执行放行后的资源</strong></p>
+<p><strong>3、回来执行过滤器放行代码下边的代码,</strong></p>
+<p><strong>3.过滤器生命周期方法</strong></p>
+<p><strong>1. init:在服务器启动后,会创建Filter对象,然后调用init方法。只执行一次。用于加载资源</strong></p>
+<p><strong>2. doFilter:每一次请求被拦截资源时,会执行。执行多次</strong></p>
+<p><strong>3. destroy:在服务器关闭后, Filter对象被销段。如果服务器足正常关闭,只会执行destrov方法。只执行一次。用工释放资源。</strong></p>
+<p><strong>4,过滤器配置详解</strong></p>
+<p><strong>拦載路径配置:</strong></p>
+<p><strong>1.具体资源路径: &#x2F;index.jsp 只有访问index.jsp资源时,过滤器才会被执行</strong></p>
+<p><em><em>2.拦截目录:&#x2F;user&#x2F;</em>   访问&#x2F;user下的所有资源时,过滤器都会被执行拦截方式配置:</em>*</p>
+<p>*<em>3.后缀名拦截: <em>.jsp 访问所有后缀名为jsp资源时,过滤器都会被执行</em></em></p>
+<p><em><em>4,拦截所有资源:&#x2F;</em> 访问所有资源时,付滤器都会被执行</em>*</p>
+<p><strong>5.过滤器链(配置多个过滤器)</strong></p>
+<p><strong>拦截方式配置:资源被访问的方式</strong></p>
+<p><strong>注解配置:设置dispatcherTypes属性</strong></p>
+<p><strong>1. REQUEST :默认值。浏览器直接请求资源</strong></p>
+<p><strong>2. FORWARD :转发访问资源</strong></p>
+<p><strong>3. INCLUDE : 包含访问资源</strong></p>
+<p><strong>4. ERROR:错误跳转资源</strong></p>
+<p><strong>5. ASYNC :异步访问资源</strong></p>
+<p><strong>web.xml配置</strong></p>
+<p><strong>设置<dispatcher></dispatcher>标签即可</strong></p>
+<p><strong>5.过滤器链(配置多个过滤器)</strong></p>
+<p><strong>执行顺序:如果有两个过滤器:过滤器1和过滤器2</strong></p>
+<p><strong>1.过滤器1</strong></p>
+<p><strong>2.过滤器2</strong></p>
+<p><strong>3.资源执行</strong></p>
+<p><strong>4,过滤器2</strong></p>
+<p><strong>5.过滤器1</strong></p>
+<p><strong>过滤器先后顺序问题:</strong></p>
+<p><strong>1.注解配置:按照类名的字符串比较规则比较,值小的先执行</strong></p>
+<p><strong>如:AFilter 和BFilter, Afilter就先执行了。</strong></p>
+<p><strong>2. web. xml配置:<filter-mapping>谁定义在上边,谁先执行</strong></p>
+<p><strong>增强对象的功能:</strong></p>
+<p><strong>设计模式:一些通用的解决固定问题的方式</strong></p>
+<p><strong>1,装饰模式</strong></p>
+<p><strong>2.代理模式</strong></p>
+<p><strong>概念:</strong></p>
+<p><strong>1,真实对象:被代理的对象</strong></p>
+<p><strong>2.代理对象:</strong></p>
+<p><strong>3.代理模式:代理对象代理真实对象,达到增强真实对象功能的目的</strong></p>
+<p><strong>实现方式:</strong></p>
+<p><strong>1.静态代理:有一个类文件描述代理模式</strong></p>
+<p><strong>2,动态代理:在内存中形成代理类</strong></p>
+<p><strong>实现步骤:</strong></p>
+<p><strong>1.代理对象和真实对象实现相同的接口</strong></p>
+<p><strong>2. 代理对象 &#x3D; Proxy.newInstance();</strong></p>
+<p><strong>3.使用代理对象调用方法。</strong></p>
+<p><strong>4,增强方法</strong></p>
+<p><strong>增强方式:</strong></p>
+<p><strong>1.增强参数列表</strong></p>
+<p><strong>2.增强返回值类型</strong></p>
+<p><strong>3.增强方法体执行逻辑</strong></p>
+<p><strong>Listener :监听器</strong></p>
+<p><strong>概念:web的三大組件之一。</strong></p>
+<p><strong>事件监听机制</strong></p>
+<p><strong>事件 :一件事情</strong></p>
+<p><strong>事件源:事件发生的地方</strong></p>
+<p><strong>监听器:一个对象</strong></p>
+<p>**注册监听:将事件、事件源、监听器绑定在一起。当事件源上发生某个事件后,执行监听器代码 **</p>
+<p><strong>ServletContextListener:监听servletcontext对象的创建和销毁</strong></p>
+<p><strong>void contextDestroyed(ServletContextEvent sce):Servletcontext对象被销毁之前会调用该方法</strong></p>
+<p><strong>void contextInitialized(ServletContextEvent sce):Servletcontext对象创建后会调用该方法</strong></p>
+<p><strong>步骤:</strong></p>
+<p><strong>1.定义一个类,实现ServletcontextListener接口</strong></p>
+<p><strong>2.复写方法</strong></p>
+<p><strong>3.配置</strong></p>
+<p><strong>1. web.xml</strong></p>
+<p><strong><listener></strong></p>
+<p><strong><listener-class>cn.itcast.web.listener.ContextLoaderListener</listener-class></strong></p>
+<p><strong></listener></strong></p>
+<p><strong>2.注解:</strong></p>
+<p><strong>指定初始化参数<context-param></strong></p>
+<p><strong>@webListener</strong></p>
+<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX:"></a><strong>AJAX:</strong></h1><p><strong>1. 概念: ASynchronous JavaScript And XML 异的Javascript 和XML</strong></p>
+<p><strong>1.异步和同步:客户端和服务器端相互通信的基础上</strong></p>
+<p><strong>客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。</strong></p>
+<p><strong>客户端不需要等待服务器端的响应。在服务器处理请求的过程中,客户端可以进行其他的操作。</strong></p>
+<p><strong>Ajax是一种在无需重新加载整个网页的情况下,能够更新部分网页的技本</strong></p>
+<p><strong>通过在后台与服务器进行少量数据交换,Ajax可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下,对网页的某部分进行更新。传统的网页(不使用Ajax)如果需要更新内容,必须重载整个网页页面。</strong></p>
+<p><strong>2.实现方式:</strong></p>
+<p><strong>1,原生的Js现方式</strong></p>
+<p><strong>2. JQeury实现方式</strong></p>
+<p><strong>1. $.ajax()</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">语法:S.ajax(&#123;键值对&#125;);</span><br><span class="line">//使用$.ajax()发送异步请求</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">url: &quot;ajaxServlet1111&quot; , // 请求路径</span><br><span class="line">type: &quot;POST&quot; , //请求方式</span><br><span class="line">//data: &quot;username=jack&amp;age=23&quot;,//请求参数</span><br><span class="line">data: &#123;&quot;username&quot;: &quot;jack&quot;, &quot;age&quot; :23&#125;,</span><br><span class="line">success: function (data) &#123;</span><br><span class="line">alert(data);</span><br><span class="line">&#125;,</span><br><span class="line">//响应成功后的回调函数</span><br><span class="line">error: function () &#123;</span><br><span class="line">alert(&quot;出错啦...&quot;)</span><br><span class="line">&#125;,//表示如果请求响应出现错误,会执行的回调函数</span><br><span class="line">datatype: &quot;text&quot;//设置接受到的响应数据的格式</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. $.get()发送get请求</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法: $.get(url, [data], [callback], [type])</span><br><span class="line">参数:* url :请求路径* data :请求参数*callback :回调函数*type:响应结果的类型</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. $.post()发送post请求</strong></p>
+<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON:"></a>JSON:</h1><p><strong>1.概念: Javascript object NotationJavascript对象表示法</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">p.<span class="title function_">setName</span>(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">p.<span class="title function_">setAge</span>(<span class="number">23</span>);</span><br><span class="line">p.<span class="title function_">setGender</span>(<span class="string">&quot;男&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> p = &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;age&quot;</span>:<span class="number">23</span>, <span class="string">&quot;gender&quot;</span> :<span class="string">&quot;男&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>JSON : JavaScript 对象表示法( JavaScript Object Notation)</strong></p>
+<p><strong>JSON 是存储和交换文本信息的语法。</strong></p>
+<p><strong>类似XML,JSON 比 XML 更小、更快,更易解析。</strong></p>
+<p><strong>2.语法:</strong></p>
+<p><strong>1.基本规则</strong></p>
+<p><strong>数据在名称&#x2F;值对中:json数据是由键值对构成的</strong></p>
+<p><strong>键用引号(单双都行)引起来,也可以不使用引号</strong></p>
+<p><strong>值得取值类型:</strong></p>
+<p><strong>1.数字(整数或浮点数)</strong></p>
+<p><strong>2.字符串(在双引号中)</strong></p>
+<p><strong>3.逻辑值(true或false)</strong></p>
+<p><strong>4,数组(在方括号中) {persons”:[{},{}]}</strong></p>
+<p><strong>5&#x2F;对象(在花括号中) {“address”:{“province” :”陕西”….}}</strong></p>
+<p><strong>null</strong></p>
+<p><strong>数据由逗号分隔:多个键值对由逗号分隔</strong></p>
+<p><strong>花括号保存对象:使用{}定义json格式</strong></p>
+<p><strong>方括号保存数组[ ]</strong></p>
+<p><strong>2.获取数据</strong></p>
+<p><strong>1. json对象,键名</strong></p>
+<p><strong>2. json对象[“键名”]</strong></p>
+<p><strong>3.数组对象[索引]</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">      var person=&#123;&quot;name&quot;:&quot;张三&quot;,age:23,&#x27;gender&#x27;:true&#125;</span><br><span class="line"></span><br><span class="line">      var ps=[&#123;&quot;name&quot;:&quot;张三&quot;,&quot;age&quot;:23,&quot;gender&quot;:true&#125;,&#123;&quot;name&quot;:&quot;张2&quot;,&quot;age&quot;:24,&quot;gender&quot;:true&#125;,&#123;&quot;name&quot;:&quot;张0&quot;,&quot;age&quot;:25,&quot;gender&quot;:false&#125;];</span><br><span class="line"></span><br><span class="line">      // for (var key in person)&#123;</span><br><span class="line">      //     alert(key+&quot;:&quot;+person[key]);</span><br><span class="line">      // &#125;</span><br><span class="line"></span><br><span class="line">      for (var i=0;i&lt;ps.length;i++)&#123;</span><br><span class="line">          var p=ps[i];</span><br><span class="line">          for (var key in p)&#123;</span><br><span class="line">              alert(key+&quot;:&quot;+p[key]);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3. JSON数据和Java对象的相互转换</strong></p>
+<p><strong>JSON解析器:</strong></p>
+<p><strong>常见的解析器: Jsonlib, Gson, fastjson, jackson</strong></p>
+<p><strong>1. JSON转为Java对象</strong></p>
+<p><strong>2. Java对象转JSON</strong></p>
+<p><strong>1.使用步骤:</strong></p>
+<p><strong>1. 导入jackson的相关jar包</strong></p>
+<p><strong>2.创建Jackson核心对象 objectMapper</strong></p>
+<p><strong>3.调用objectMapper的相关方法进行转换</strong></p>
+<p><strong>1. readvalue(ison字符串数据,class)</strong></p>
+<p><strong>1.转换方法:</strong></p>
+<p><strong>writevalue(参数1, obj):</strong></p>
+<p><strong>参数1:</strong></p>
+<p><strong>File :将obj对象转换为JSON字符串,并保存到指定的文件中</strong></p>
+<p><strong>Writer :将obj对象转换为JSON字符串,并将json数据填充到字符输出流中</strong></p>
+<p><strong>Outputstream :将obj对象转换为JSON字符串,并将json数据填充到字节输出流中</strong></p>
+<p><strong>writeValueAsstring(obj):将对象转为json字符串</strong></p>
+<p><strong>2.注解:</strong></p>
+<p>**1. @Jsonignore :排除属性。 **</p>
+<p><strong>2. @JsonHormat:属性值得格式化</strong></p>
+<p><strong>@JsonFormat(pattern &#x3D; “yyyy-MM-dd”)</strong></p>
+<p><strong>3.复杂java对象转换</strong></p>
+<p><strong>1. List：数组</strong></p>
+<p><strong>2. Map：对象格式一致</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://2486125878.github.io">kk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://2486125878.github.io/2024/03/13/JavaWeb/">https://2486125878.github.io/2024/03/13/JavaWeb/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JAVA/">JAVA</a></div><div class="post_share"><div class="social-share" data-image="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/13/SSM/" title="SSM"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">SSM</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/13/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">数据可视化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/03/13/SSM/" title="SSM"><img class="cover" src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-13</div><div class="title">SSM</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.v8Y5QxZNIiQVIEk3JOCC2QHaGi?rs=1&amp;pid=ImgDetMain" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">kk</div><div class="author-info__description">...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/2486125878" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2486125878@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-1Junit%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">1.1Junit单元测试:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">测试分类:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Junit%E4%BD%BF%E7%94%A8-%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.</span> <span class="toc-text">Junit使用:白盒测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%81%B5%E9%AD%82"><span class="toc-number">2.</span> <span class="toc-text">反射:框架设计的灵魂</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E4%BB%A3%E7%A0%81-%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%BB%8F%E5%8E%86%E7%9A%84%E9%98%B6%E6%AE%B5-%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">2.1.</span> <span class="toc-text">Java代码 在计算机中经历的阶段:三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96Class%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">获取Class对象的方式:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Class%E5%AF%B9%E8%B1%A1%E5%8A%9F%E8%83%BD"><span class="toc-number">3.</span> <span class="toc-text">Class对象功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">注解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#javaweb"><span class="toc-number">5.</span> <span class="toc-text">javaweb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">5.1.</span> <span class="toc-text">1.数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SQL%E5%88%86%E7%B1%BB"><span class="toc-number">5.2.</span> <span class="toc-text">3.SQL分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93-CRUD"><span class="toc-number">5.3.</span> <span class="toc-text">1,操作数据库: CRUD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%93%8D%E4%BD%9C%E8%A1%A8"><span class="toc-number">5.4.</span> <span class="toc-text">2.操作表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DQL-%E6%9F%A5%E8%AF%A2%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%AE%B0%E5%BD%95"><span class="toc-number">5.5.</span> <span class="toc-text">DQL:查询表中的记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.6.</span> <span class="toc-text">条件查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DML-%E5%A2%9E%E5%88%A0%E6%94%B9%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE"><span class="toc-number">5.7.</span> <span class="toc-text">DML:增删改表中数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DQL-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-number">5.8.</span> <span class="toc-text">DQL:查询语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">5.9.</span> <span class="toc-text">多表查询的分类:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JDBC"><span class="toc-number">6.</span> <span class="toc-text">JDBC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AF%A6%E8%A7%A3%E5%90%84%E4%B8%AA%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.1.</span> <span class="toc-text">3,详解各个对象:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number">7.</span> <span class="toc-text">数据库连接池</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#C3PO-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8A%80%E6%9C%AF"><span class="toc-number">7.1.</span> <span class="toc-text">C3PO:数据库连接池技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-JDBC"><span class="toc-number">7.2.</span> <span class="toc-text">Spring JDBC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#web%E6%A6%82%E5%BF%B5%E6%A6%82%E8%BF%B0"><span class="toc-number">8.</span> <span class="toc-text">web概念概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#XML"><span class="toc-number">8.1.</span> <span class="toc-text">XML:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet"><span class="toc-number">8.2.</span> <span class="toc-text">Servlet</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF"><span class="toc-number">9.</span> <span class="toc-text">会话技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie"><span class="toc-number">9.1.</span> <span class="toc-text">Cookie:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP-%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0"><span class="toc-number">10.</span> <span class="toc-text">JSP:入门学习</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Session"><span class="toc-number">11.</span> <span class="toc-text">Session:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MVC-%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="toc-number">12.</span> <span class="toc-text">MVC:开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EL%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">13.</span> <span class="toc-text">EL表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter-%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">13.1.</span> <span class="toc-text">Filter:过滤器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AJAX"><span class="toc-number">14.</span> <span class="toc-text">AJAX:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSON"><span class="toc-number">15.</span> <span class="toc-text">JSON:</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/SSM/" title="SSM"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SSM"/></a><div class="content"><a class="title" href="/2024/03/13/SSM/" title="SSM">SSM</a><time datetime="2024-03-13T07:40:53.000Z" title="Created 2024-03-13 15:40:53">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/JavaWeb/" title="JavaWeb"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaWeb"/></a><div class="content"><a class="title" href="/2024/03/13/JavaWeb/" title="JavaWeb">JavaWeb</a><time datetime="2024-03-13T07:40:02.000Z" title="Created 2024-03-13 15:40:02">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据可视化"/></a><div class="content"><a class="title" href="/2024/03/13/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化">数据可视化</a><time datetime="2024-03-13T07:19:21.000Z" title="Created 2024-03-13 15:19:21">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/Vue/" title="Vue"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue"/></a><div class="content"><a class="title" href="/2024/03/13/Vue/" title="Vue">Vue</a><time datetime="2024-03-13T07:18:25.000Z" title="Created 2024-03-13 15:18:25">2024-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/nodeJs/" title="nodeJs"><img src="https://images.pexels.com/photos/15999575/pexels-photo-15999575.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nodeJs"/></a><div class="content"><a class="title" href="/2024/03/13/nodeJs/" title="nodeJs">nodeJs</a><time datetime="2024-03-13T07:17:22.000Z" title="Created 2024-03-13 15:17:22">2024-03-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer"><div class="bubbles"><div class="bubble" style="--size:5.68773139156865rem; --distance:6.865316895937453rem; --position:57.290621099151096%; --time:3.6854046435828636s; --delay:-2.7251770753589684s;"></div><div class="bubble" style="--size:2.660276236307203rem; --distance:6.5309092242477105rem; --position:83.05841036424813%; --time:2.2410333043068316s; --delay:-3.7448096399901005s;"></div><div class="bubble" style="--size:4.58682412655002rem; --distance:7.1551180839752515rem; --position:27.90433039108703%; --time:2.9067014320187554s; --delay:-2.356507082699378s;"></div><div class="bubble" style="--size:5.3896963621676rem; --distance:6.693265365529442rem; --position:81.79914676372805%; --time:2.3727912399072473s; --delay:-3.3483453477970735s;"></div><div class="bubble" style="--size:4.559209408088377rem; --distance:9.2318834095179rem; --position:92.32004304020153%; --time:2.4719107307507047s; --delay:-2.166661213440785s;"></div><div class="bubble" style="--size:2.387374017330253rem; --distance:8.847153059500563rem; --position:93.21585229191915%; --time:3.0483562324845455s; --delay:-3.549169455570099s;"></div><div class="bubble" style="--size:4.751239747622374rem; --distance:7.223289117370025rem; --position:80.86240467180554%; --time:3.237309239781081s; --delay:-2.4360874727244446s;"></div><div class="bubble" style="--size:3.0707692750056585rem; --distance:9.246549003884915rem; --position:27.264062481467278%; --time:2.941653248248137s; --delay:-2.7432435571563962s;"></div><div class="bubble" style="--size:4.368912071388863rem; --distance:6.801962844895689rem; --position:11.599033599414927%; --time:3.9124319266726353s; --delay:-3.996138377038414s;"></div><div class="bubble" style="--size:2.807877169919278rem; --distance:8.17443002594924rem; --position:10.53958145856784%; --time:3.993722751918406s; --delay:-3.81139617857031s;"></div><div class="bubble" style="--size:5.631850213930575rem; --distance:9.794470782300422rem; --position:-2.3942050526785796%; --time:2.595675640708646s; --delay:-3.4061095657094387s;"></div><div class="bubble" style="--size:2.588920046494393rem; --distance:6.523775443074385rem; --position:77.48395927895594%; --time:2.1619080405610034s; --delay:-3.9617586884038953s;"></div><div class="bubble" style="--size:4.8423024905764835rem; --distance:8.536836111285158rem; --position:67.8414954819596%; --time:2.4470491883359244s; --delay:-3.852573750177295s;"></div><div class="bubble" style="--size:5.395463014653748rem; --distance:8.413492527039743rem; --position:72.33551424170244%; --time:3.7456536209073437s; --delay:-3.7634426478282332s;"></div><div class="bubble" style="--size:2.827370185829401rem; --distance:8.318753363897518rem; --position:94.3046296533108%; --time:2.2278848722016464s; --delay:-2.141293980316371s;"></div><div class="bubble" style="--size:5.9278859875395105rem; --distance:7.056251844262246rem; --position:52.69646012281166%; --time:2.5080233857503758s; --delay:-3.040101351572961s;"></div><div class="bubble" style="--size:2.6718916579030854rem; --distance:9.678635726310766rem; --position:35.780391468637596%; --time:2.6204068613581706s; --delay:-3.6194812942209698s;"></div><div class="bubble" style="--size:5.571217724447724rem; --distance:7.272488345782061rem; --position:43.080715384224895%; --time:2.9589915911994438s; --delay:-3.8059823383219724s;"></div><div class="bubble" style="--size:5.932659339819549rem; --distance:9.29482871356592rem; --position:34.62031472244305%; --time:2.6712560309119016s; --delay:-3.0328391919999897s;"></div><div class="bubble" style="--size:3.3744046802890866rem; --distance:6.7631058154291885rem; --position:19.01839193174235%; --time:2.803206535043418s; --delay:-3.2439283859708246s;"></div><div class="bubble" style="--size:3.034292094000902rem; --distance:8.897257991863588rem; --position:102.63563042728424%; --time:3.311565612394456s; --delay:-2.446589563710601s;"></div><div class="bubble" style="--size:5.381220949210583rem; --distance:7.057120149806893rem; --position:65.0722806947774%; --time:3.6913497976867005s; --delay:-2.9684755807787084s;"></div><div class="bubble" style="--size:3.2713880293822024rem; --distance:8.747945080446971rem; --position:1.1903814691317027%; --time:3.926151595290244s; --delay:-2.3326761298281244s;"></div><div class="bubble" style="--size:5.19080022011983rem; --distance:8.774926824925565rem; --position:16.83477212878429%; --time:2.4906451082990895s; --delay:-2.4860914220537254s;"></div><div class="bubble" style="--size:4.7380698617326455rem; --distance:7.411165139321156rem; --position:58.15738016369941%; --time:2.3151442715689385s; --delay:-3.746705864785136s;"></div><div class="bubble" style="--size:5.716771651272407rem; --distance:8.093871929293485rem; --position:65.87661493065762%; --time:2.0395043268705977s; --delay:-2.3903838545258513s;"></div><div class="bubble" style="--size:5.235754959058878rem; --distance:8.354775623144441rem; --position:29.879432162864617%; --time:3.3929399157189826s; --delay:-2.628831791788514s;"></div><div class="bubble" style="--size:5.969225936001087rem; --distance:8.070342620794065rem; --position:70.45296806977836%; --time:2.6295748907578322s; --delay:-3.906237137458487s;"></div><div class="bubble" style="--size:4.236497484678103rem; --distance:7.670508902905173rem; --position:74.04762093247611%; --time:3.4167946356149765s; --delay:-2.7209103991351595s;"></div><div class="bubble" style="--size:2.6059969958705382rem; --distance:9.079509615148682rem; --position:41.17170437851198%; --time:2.2427262528330534s; --delay:-3.9257694502385228s;"></div><div class="bubble" style="--size:3.7584593778362843rem; --distance:9.444585015075628rem; --position:81.95957351847532%; --time:2.395457540211894s; --delay:-3.749225652865458s;"></div><div class="bubble" style="--size:3.611479707638785rem; --distance:9.440634663382902rem; --position:38.76191565150896%; --time:3.904137203765664s; --delay:-2.6328865954435465s;"></div><div class="bubble" style="--size:5.796707302839222rem; --distance:9.412504422660394rem; --position:85.87149718150586%; --time:3.3955928643668014s; --delay:-2.575263537915135s;"></div><div class="bubble" style="--size:4.947468414232225rem; --distance:9.794549956633901rem; --position:0.7888649455578189%; --time:3.600089597918856s; --delay:-2.13146896790118s;"></div><div class="bubble" style="--size:2.69645163520551rem; --distance:7.47384661822294rem; --position:30.540224784612683%; --time:3.8890962574236183s; --delay:-2.289880400877382s;"></div><div class="bubble" style="--size:5.361840732389469rem; --distance:8.50559679122945rem; --position:59.24638361029099%; --time:3.205500527818642s; --delay:-3.5985106856787303s;"></div><div class="bubble" style="--size:3.2461424341222394rem; --distance:8.684088305711395rem; --position:11.577085688452769%; --time:3.3972633476570455s; --delay:-2.7570245160448237s;"></div><div class="bubble" style="--size:5.971380315872772rem; --distance:6.22067526136339rem; --position:49.11697637040754%; --time:3.231785042464168s; --delay:-2.0567197567731768s;"></div><div class="bubble" style="--size:2.528313985371769rem; --distance:9.315723871300635rem; --position:73.10522646970179%; --time:2.1145790660368022s; --delay:-3.267897152476562s;"></div><div class="bubble" style="--size:3.641574751463259rem; --distance:7.56025870259945rem; --position:57.89884634216083%; --time:3.493940664934371s; --delay:-2.2528834464279326s;"></div><div class="bubble" style="--size:5.242787511892561rem; --distance:6.933673300013276rem; --position:47.426943915250234%; --time:2.3615320767449726s; --delay:-2.5059068394041297s;"></div><div class="bubble" style="--size:3.037995898932933rem; --distance:6.430162953509438rem; --position:98.43539390016471%; --time:2.6749784325762067s; --delay:-2.5051655531435215s;"></div><div class="bubble" style="--size:3.381473210923768rem; --distance:7.010235474248121rem; --position:4.041193237327345%; --time:3.649538880712888s; --delay:-3.144167024973066s;"></div><div class="bubble" style="--size:2.2250834986908696rem; --distance:9.234389936694374rem; --position:95.29712643728118%; --time:3.2177900649096856s; --delay:-2.2693885052875995s;"></div><div class="bubble" style="--size:4.48280652526205rem; --distance:6.156624180463972rem; --position:87.73345814597424%; --time:2.927073638409615s; --delay:-3.6450966483986287s;"></div><div class="bubble" style="--size:5.0863119992331844rem; --distance:7.515992384539784rem; --position:9.23663108583413%; --time:3.8771278116707975s; --delay:-2.9102357978941833s;"></div><div class="bubble" style="--size:2.7611506962116783rem; --distance:8.520348976318417rem; --position:38.97301035219851%; --time:2.0026189752917136s; --delay:-2.221064919869286s;"></div><div class="bubble" style="--size:4.4396698479361145rem; --distance:8.718734349296305rem; --position:20.749530122213915%; --time:3.1270606576632822s; --delay:-2.36882341337086s;"></div><div class="bubble" style="--size:2.6426332413004046rem; --distance:9.848304242593336rem; --position:62.2302566572352%; --time:2.4903748826787213s; --delay:-2.0351392392082372s;"></div><div class="bubble" style="--size:2.0397945496954657rem; --distance:7.495987104796226rem; --position:59.02395916318015%; --time:3.215061978645465s; --delay:-2.409150655237257s;"></div><div class="bubble" style="--size:3.040359462242205rem; --distance:9.250807119120099rem; --position:68.22332673880365%; --time:3.933573615837122s; --delay:-2.42793570069172s;"></div><div class="bubble" style="--size:3.105028403933092rem; --distance:7.750544072059823rem; --position:8.506742476434896%; --time:3.2757184022828265s; --delay:-3.1847765850951024s;"></div><div class="bubble" style="--size:4.560477061566379rem; --distance:6.138827913633948rem; --position:59.96054957055944%; --time:3.942641116114473s; --delay:-2.007697447647552s;"></div><div class="bubble" style="--size:3.114697812147064rem; --distance:9.448516180966672rem; --position:32.13564256753505%; --time:3.043580784740865s; --delay:-3.75329570805167s;"></div><div class="bubble" style="--size:5.731734535042041rem; --distance:8.7855561915333rem; --position:68.54829030546402%; --time:3.3510898850971866s; --delay:-3.245884799060554s;"></div><div class="bubble" style="--size:2.921391027875406rem; --distance:6.674815443703066rem; --position:73.9960910505726%; --time:2.6633932069020942s; --delay:-3.593081989180334s;"></div><div class="bubble" style="--size:3.044377263339407rem; --distance:9.592465126593929rem; --position:39.05632772950524%; --time:3.097887255475451s; --delay:-2.981255738905484s;"></div><div class="bubble" style="--size:2.738423284815873rem; --distance:9.047146592054567rem; --position:53.19795680869545%; --time:3.7603098499996097s; --delay:-3.149503220812297s;"></div><div class="bubble" style="--size:3.2487174227861644rem; --distance:7.909126592620642rem; --position:8.958039205396107%; --time:2.7930141089800915s; --delay:-2.336581333481098s;"></div><div class="bubble" style="--size:3.175395499317742rem; --distance:7.669028779476115rem; --position:10.068029317662898%; --time:2.178675263301276s; --delay:-2.474069365655883s;"></div><div class="bubble" style="--size:3.7830235221008808rem; --distance:6.0579215530859605rem; --position:19.003232750333353%; --time:2.590329527766653s; --delay:-3.3164002487198143s;"></div><div class="bubble" style="--size:3.3687809489951492rem; --distance:6.6856097355825606rem; --position:20.294681829867553%; --time:3.9286706222983194s; --delay:-2.5416447011095102s;"></div><div class="bubble" style="--size:5.1922180648481895rem; --distance:7.965242365135587rem; --position:8.192377721054683%; --time:3.7225586763006s; --delay:-3.558380847529143s;"></div><div class="bubble" style="--size:3.3664719098123994rem; --distance:6.777041736451956rem; --position:15.586294106667069%; --time:3.954860423150183s; --delay:-3.540125862646614s;"></div><div class="bubble" style="--size:3.7882930290179155rem; --distance:6.554315842979523rem; --position:81.63306183364216%; --time:2.479695997671441s; --delay:-3.0087903643460834s;"></div><div class="bubble" style="--size:2.8972179985938817rem; --distance:6.426492517871922rem; --position:71.43208783850378%; --time:3.5143557595920893s; --delay:-3.007686123998869s;"></div><div class="bubble" style="--size:5.870718342399724rem; --distance:6.157783264957513rem; --position:61.619440807541736%; --time:3.2171394926000763s; --delay:-3.433098964096046s;"></div><div class="bubble" style="--size:2.719513421240862rem; --distance:6.631672235310097rem; --position:29.587933660178457%; --time:2.0495382531260753s; --delay:-3.836744723098494s;"></div><div class="bubble" style="--size:4.231963343141554rem; --distance:6.436908956998579rem; --position:71.14379233298405%; --time:3.38497379005187s; --delay:-3.637137131759826s;"></div><div class="bubble" style="--size:3.94379430389722rem; --distance:6.3606256153343rem; --position:18.754468702422717%; --time:3.403259342042215s; --delay:-3.475138001170929s;"></div><div class="bubble" style="--size:5.446084416965755rem; --distance:8.5396717839484rem; --position:-0.3035390092210388%; --time:2.9854936211016954s; --delay:-3.828933625310839s;"></div><div class="bubble" style="--size:5.394751216263335rem; --distance:6.698927461888331rem; --position:11.604492762006181%; --time:2.3085956998385306s; --delay:-3.8160125998244707s;"></div><div class="bubble" style="--size:2.1393875015844444rem; --distance:8.262930602381259rem; --position:87.28858637156873%; --time:3.839194220951215s; --delay:-2.6897822375458116s;"></div><div class="bubble" style="--size:2.721974665451488rem; --distance:8.228653894478304rem; --position:67.86004112697083%; --time:3.691816568140235s; --delay:-3.992176666747984s;"></div><div class="bubble" style="--size:4.915437513760504rem; --distance:9.596817795851265rem; --position:36.585512870253645%; --time:3.3996203446991755s; --delay:-3.7399459009457674s;"></div><div class="bubble" style="--size:5.1275137173458845rem; --distance:7.943485936133441rem; --position:29.961426071572994%; --time:2.4229374184422685s; --delay:-2.866652497621464s;"></div><div class="bubble" style="--size:2.344837812454635rem; --distance:9.962325344627402rem; --position:92.66312525091658%; --time:3.7338845163493173s; --delay:-2.4238925062964665s;"></div><div class="bubble" style="--size:2.1209349260962416rem; --distance:8.90892913160872rem; --position:42.31355081751806%; --time:3.186108652405582s; --delay:-2.1349589606135764s;"></div><div class="bubble" style="--size:5.053120743382651rem; --distance:8.821142864747875rem; --position:82.13168636390134%; --time:3.0903899575177047s; --delay:-3.615682974079604s;"></div><div class="bubble" style="--size:3.860477064368582rem; --distance:6.468244381564283rem; --position:47.43278589917347%; --time:3.0952889730812294s; --delay:-2.472520539824861s;"></div><div class="bubble" style="--size:3.1238636814876344rem; --distance:9.801061408261566rem; --position:81.02691096599276%; --time:2.786371320333712s; --delay:-2.36427438463683s;"></div><div class="bubble" style="--size:2.9983570387297034rem; --distance:6.151704357821059rem; --position:19.628550582909195%; --time:3.583380455415261s; --delay:-2.5879859260691847s;"></div><div class="bubble" style="--size:2.7495826149116516rem; --distance:9.473438773679318rem; --position:24.601527150357427%; --time:2.2673911383073624s; --delay:-3.292878571551834s;"></div><div class="bubble" style="--size:5.740787223313238rem; --distance:9.217859998151066rem; --position:75.30059999430273%; --time:3.5893322792828553s; --delay:-3.8810719263576874s;"></div><div class="bubble" style="--size:3.929363848316969rem; --distance:8.645351951835949rem; --position:21.838145436889654%; --time:3.1132455107517703s; --delay:-3.2296767657869276s;"></div><div class="bubble" style="--size:4.22667246609572rem; --distance:6.411128062115626rem; --position:93.30526210489582%; --time:2.5226575698529663s; --delay:-3.4492185407493796s;"></div><div class="bubble" style="--size:5.915686132411128rem; --distance:6.190514236369592rem; --position:71.64562935357465%; --time:2.6187400681808546s; --delay:-2.0795361916409294s;"></div><div class="bubble" style="--size:4.607077069162905rem; --distance:9.666256081951444rem; --position:58.268506043038734%; --time:2.1100445906923424s; --delay:-2.823577393084579s;"></div><div class="bubble" style="--size:3.225705700102905rem; --distance:8.725882309370865rem; --position:19.465067768832633%; --time:3.9426129890955113s; --delay:-3.6825969434263945s;"></div><div class="bubble" style="--size:4.4828513583616525rem; --distance:7.856422065698262rem; --position:97.84880080244392%; --time:3.259417825030069s; --delay:-3.3542690009030682s;"></div><div class="bubble" style="--size:3.035497334157446rem; --distance:8.711214189605194rem; --position:37.935909060457405%; --time:2.1931039903979737s; --delay:-3.5301789571788675s;"></div><div class="bubble" style="--size:4.052983448020311rem; --distance:8.531346743411817rem; --position:66.60319070111382%; --time:2.6008473115904014s; --delay:-3.77005506386261s;"></div><div class="bubble" style="--size:2.73136162891241rem; --distance:9.187276377602622rem; --position:20.102006908784706%; --time:2.7059678247109122s; --delay:-3.8228634683394196s;"></div><div class="bubble" style="--size:5.428858951640142rem; --distance:7.5257879859373205rem; --position:8.510446688769598%; --time:2.500752269113448s; --delay:-2.8639934528568025s;"></div><div class="bubble" style="--size:4.641393913912858rem; --distance:6.522734595345106rem; --position:2.266483969318731%; --time:2.9072485619613917s; --delay:-3.513127957847623s;"></div><div class="bubble" style="--size:2.565960608204997rem; --distance:6.567858707683354rem; --position:8.160190968461995%; --time:3.534251450171989s; --delay:-2.2973623245974495s;"></div><div class="bubble" style="--size:4.362267712616694rem; --distance:8.608714148095927rem; --position:94.96052425446995%; --time:2.206887561991268s; --delay:-3.410186594677341s;"></div><div class="bubble" style="--size:2.3617967252816356rem; --distance:6.83673648194295rem; --position:67.84306643018515%; --time:3.226530075965372s; --delay:-2.8115776354452344s;"></div><div class="bubble" style="--size:5.099745388124156rem; --distance:9.28034564936032rem; --position:45.015902871039934%; --time:2.7076358786003287s; --delay:-2.1280298815909213s;"></div><div class="bubble" style="--size:5.198903810774651rem; --distance:6.428075208768082rem; --position:80.59100237794993%; --time:2.705639963991455s; --delay:-2.7675518983617797s;"></div><div class="bubble" style="--size:4.457325766165171rem; --distance:7.5313757014919265rem; --position:25.229327623889752%; --time:3.4076653872267757s; --delay:-2.1247577644390208s;"></div><div class="bubble" style="--size:3.1600241398839106rem; --distance:7.238150617050592rem; --position:90.29272116949706%; --time:3.3153672764521303s; --delay:-3.687659425302122s;"></div><div class="bubble" style="--size:4.241304872859382rem; --distance:8.25152720404454rem; --position:57.76454219696978%; --time:3.934960832485421s; --delay:-3.707239329101205s;"></div><div class="bubble" style="--size:3.6730948802574153rem; --distance:7.188241000471602rem; --position:12.256868664855055%; --time:2.9032628757244625s; --delay:-2.1893571052196057s;"></div><div class="bubble" style="--size:5.2419784755794065rem; --distance:9.03361324481814rem; --position:55.943011670028305%; --time:3.1688236840350505s; --delay:-2.4672906730288124s;"></div><div class="bubble" style="--size:4.382687669607966rem; --distance:7.437366948116339rem; --position:100.02791214373853%; --time:2.6623065428222445s; --delay:-3.988703100150124s;"></div><div class="bubble" style="--size:5.032415584376693rem; --distance:6.633489169338708rem; --position:88.84789359914295%; --time:3.3796480321179776s; --delay:-2.7250016240741366s;"></div><div class="bubble" style="--size:4.787890609762553rem; --distance:8.953964866098516rem; --position:82.58468920247853%; --time:2.059887514867122s; --delay:-2.886365923602751s;"></div><div class="bubble" style="--size:5.557996335667664rem; --distance:7.954004734379126rem; --position:9.673284416970196%; --time:2.3048931287445638s; --delay:-2.8341547100762026s;"></div><div class="bubble" style="--size:5.951773019819248rem; --distance:9.537259795342393rem; --position:8.133504396135315%; --time:2.9378255651976075s; --delay:-2.165769207923414s;"></div><div class="bubble" style="--size:2.5497147107087104rem; --distance:8.684236820466829rem; --position:88.22400383999016%; --time:2.025563583222504s; --delay:-2.8856791657636163s;"></div><div class="bubble" style="--size:3.7907013902633544rem; --distance:8.978966112018208rem; --position:58.67988083802812%; --time:3.7406310926630124s; --delay:-3.974488189689701s;"></div><div class="bubble" style="--size:5.503181342537289rem; --distance:8.282168177008245rem; --position:80.31153293125489%; --time:3.9605161384320033s; --delay:-2.1179378511213587s;"></div><div class="bubble" style="--size:3.50177506723983rem; --distance:9.804450326553077rem; --position:94.27756667405872%; --time:3.4848159947200728s; --delay:-2.385298349272258s;"></div><div class="bubble" style="--size:4.1215458076342255rem; --distance:7.765565764924762rem; --position:17.126569072864527%; --time:3.606325520310503s; --delay:-2.6386224472538307s;"></div><div class="bubble" style="--size:3.913214158849926rem; --distance:9.337236401342425rem; --position:48.0833198162169%; --time:3.9017220413830382s; --delay:-2.4913689401177264s;"></div><div class="bubble" style="--size:4.861477126691963rem; --distance:6.550354799241916rem; --position:19.71364910511757%; --time:2.7942205658909476s; --delay:-2.5930063946197137s;"></div><div class="bubble" style="--size:3.742553356651552rem; --distance:6.608697419219666rem; --position:17.244372692977823%; --time:2.4700155640943846s; --delay:-3.1136747611501554s;"></div><div class="bubble" style="--size:5.767173416422185rem; --distance:8.824415585657274rem; --position:69.42312479970013%; --time:2.422449871788825s; --delay:-3.924333912735062s;"></div><div class="bubble" style="--size:4.314680733496919rem; --distance:9.365971425774035rem; --position:34.15827757091123%; --time:3.9124208619165812s; --delay:-3.493668095074741s;"></div><div class="bubble" style="--size:4.355423862622692rem; --distance:7.155402840099149rem; --position:-2.3537286027864357%; --time:3.1860159553850527s; --delay:-2.042191619613396s;"></div><div class="bubble" style="--size:2.3673465348184735rem; --distance:9.607988335289445rem; --position:97.44027892666632%; --time:2.0121555412738092s; --delay:-2.212772835839277s;"></div><div class="bubble" style="--size:2.9018564876931485rem; --distance:6.12451131167315rem; --position:18.042215720298557%; --time:2.145959884834457s; --delay:-2.9102893653716455s;"></div><div class="bubble" style="--size:4.694375891893983rem; --distance:9.163695846781856rem; --position:67.94116846105268%; --time:3.250968876904008s; --delay:-2.0575528280000235s;"></div><div class="bubble" style="--size:2.6884968491675965rem; --distance:6.262390247594476rem; --position:25.402599867069544%; --time:3.896195803524973s; --delay:-2.0666071744092953s;"></div><div class="bubble" style="--size:3.6105573720068396rem; --distance:6.721731785023822rem; --position:61.65806415531489%; --time:2.029489687496506s; --delay:-3.3958931363125218s;"></div><div class="bubble" style="--size:3.9053939741229495rem; --distance:8.73863858747719rem; --position:18.33540757542941%; --time:2.3800584466029138s; --delay:-2.2146778382070496s;"></div><div class="bubble" style="--size:5.155331556101125rem; --distance:9.512961481452944rem; --position:97.99546662933591%; --time:2.169683958282751s; --delay:-3.209172100573546s;"></div></div><div class="content"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
