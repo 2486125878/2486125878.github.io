@@ -1,3 +1,4 @@
+https://2486125878.github.io/2024/03/13/ajax/
 https://2486125878.github.io/2024/03/13/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/
 https://2486125878.github.io/2024/03/13/Vue/
 https://2486125878.github.io/2024/03/13/thinkphp-sql/
@@ -14,12 +15,13 @@ https://2486125878.github.io/categories/thinkphp.html
 https://2486125878.github.io/2023/11/24/hello-hexo/
 https://2486125878.github.io/
 https://2486125878.github.io/tags/JAVA/
-https://2486125878.github.io/tags/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
 https://2486125878.github.io/tags/vue/
+https://2486125878.github.io/tags/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
+https://2486125878.github.io/tags/Ajax/
 https://2486125878.github.io/tags/jQuery/
 https://2486125878.github.io/tags/javascript/
+https://2486125878.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/
 https://2486125878.github.io/tags/php/
 https://2486125878.github.io/tags/nodeJs/
-https://2486125878.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/
 https://2486125878.github.io/categories/JAVA/
 https://2486125878.github.io/categories/qd/
