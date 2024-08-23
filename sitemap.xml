@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://2486125878.github.io/music/index.html</loc>
+    
+    <lastmod>2024-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://2486125878.github.io/movies/index.html</loc>
+    
+    <lastmod>2024-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://2486125878.github.io/album/work/index.html</loc>
     
     <lastmod>2024-08-23</lastmod>
@@ -47,15 +65,6 @@
   </url>
   
   <url>
-    <loc>https://2486125878.github.io/movies/index.html</loc>
-    
-    <lastmod>2024-03-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://2486125878.github.io/about/index.html</loc>
     
     <lastmod>2024-03-15</lastmod>
@@ -66,15 +75,6 @@
   
   <url>
     <loc>https://2486125878.github.io/link/index.html</loc>
-    
-    <lastmod>2024-03-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://2486125878.github.io/music/index.html</loc>
     
     <lastmod>2024-03-15</lastmod>
     
@@ -324,14 +324,14 @@
   </url>
   
   <url>
-    <loc>https://2486125878.github.io/tags/Ajax/</loc>
+    <loc>https://2486125878.github.io/tags/vue/</loc>
     <lastmod>2024-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://2486125878.github.io/tags/vue/</loc>
+    <loc>https://2486125878.github.io/tags/Ajax/</loc>
     <lastmod>2024-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
