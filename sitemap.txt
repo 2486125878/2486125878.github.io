@@ -1,3 +1,4 @@
+https://2486125878.github.io/about/index.html
 https://2486125878.github.io/music/index.html
 https://2486125878.github.io/movies/index.html
 https://2486125878.github.io/album/work/index.html
@@ -5,7 +6,6 @@ https://2486125878.github.io/album/wallpaper/index.html
 https://2486125878.github.io/album/indian/index.html
 https://2486125878.github.io/album/life/index.html
 https://2486125878.github.io/Gallery/index.html
-https://2486125878.github.io/about/index.html
 https://2486125878.github.io/link/index.html
 https://2486125878.github.io/2024/03/14/thinkphp%E5%90%8E%E5%8F%B0%E7%AC%94%E8%AE%B0/
 https://2486125878.github.io/2024/03/14/thinkphp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
@@ -39,12 +39,12 @@ https://2486125878.github.io/tags/Ajax/
 https://2486125878.github.io/tags/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
 https://2486125878.github.io/tags/jQuery/
 https://2486125878.github.io/tags/javascript/
-https://2486125878.github.io/tags/php/
 https://2486125878.github.io/tags/nodeJs/
+https://2486125878.github.io/tags/php/
 https://2486125878.github.io/tags/HTML/
 https://2486125878.github.io/tags/mysql/
-https://2486125878.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/
 https://2486125878.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/
+https://2486125878.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/
 https://2486125878.github.io/categories/%E5%90%8E%E7%AB%AF/
 https://2486125878.github.io/categories/%E5%89%8D%E7%AB%AF/
 https://2486125878.github.io/categories/thinkphp%E9%A1%B9%E7%9B%AE/
