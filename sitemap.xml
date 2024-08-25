@@ -352,7 +352,7 @@
   </url>
   
   <url>
-    <loc>https://2486125878.github.io/tags/nodeJs/</loc>
+    <loc>https://2486125878.github.io/tags/php/</loc>
     <lastmod>2024-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -366,7 +366,7 @@
   </url>
   
   <url>
-    <loc>https://2486125878.github.io/tags/php/</loc>
+    <loc>https://2486125878.github.io/tags/nodeJs/</loc>
     <lastmod>2024-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -387,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://2486125878.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/</loc>
+    <loc>https://2486125878.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
     <lastmod>2024-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://2486125878.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
+    <loc>https://2486125878.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/</loc>
     <lastmod>2024-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -417,6 +417,13 @@
   </url>
   
   <url>
+    <loc>https://2486125878.github.io/categories/thinkphp%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2024-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://2486125878.github.io/categories/thinkphp%E6%9F%A5%E8%AF%A2/</loc>
     <lastmod>2024-08-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -425,13 +432,6 @@
   
   <url>
     <loc>https://2486125878.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2024-08-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://2486125878.github.io/categories/thinkphp%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2024-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

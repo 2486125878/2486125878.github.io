@@ -7145,7 +7145,7 @@ blockquote.pullquote.right {
 }
 
 .author-content-item.map {
-  background: url(https://img02.anheyu.com/adminuploads/1/2022/09/24/632e6f48981d8.jpg) no-repeat center;
+  background: url(https://map0.ssl.qhimg.com/static/?center=37.796317,112.545135&size=570x480&maptype=roadmap&markers=color:red%7Clabel:1%7Cposition:37.796317,112.545135&zoom=12) no-repeat center;
   min-height: 160px;
   max-height: 400px;
   position: relative;
@@ -7156,7 +7156,7 @@ blockquote.pullquote.right {
   transition: 1s ease-in-out;
 }
 [data-theme="dark"] .author-content-item.map {
-  background: url(https://img02.anheyu.com/adminuploads/1/2022/09/26/6330ebf1f3e65.jpg) no-repeat center;
+  background: url(https://map0.ssl.qhimg.com/static/?center=37.796317,112.545135&size=570x480&maptype=roadmap&markers=color:red%7Clabel:1%7Cposition:37.796317,112.545135&zoom=12) no-repeat center;
   background-size: 100%;
 }
 
@@ -7495,7 +7495,7 @@ blockquote.pullquote.right {
 
 .author-content-item.comic-content {
   width: 39%;
-  background: url(https://inews.gtimg.com/om_bt/OJa7DCt5foHgMV-T6tnr5ZhCYfc8q71rJWYOq9m5SclJ4AA/641) no-repeat top;
+  background: url(https://img0.baidu.com/it/u=1547860679,1950305047&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=800) no-repeat top;
   background-size: cover;
   min-height: 300px;
   overflow: hidden;
