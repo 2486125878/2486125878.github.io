@@ -1,0 +1,916 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>thinkphp链式操作 | 凯瑟兰森</title><meta name="keywords" content="php"><meta name="author" content="凯瑟兰森"><meta name="copyright" content="凯瑟兰森"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="thinkphp链式操作"><meta name="application-name" content="thinkphp链式操作"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="thinkphp链式操作"><meta property="og:url" content="https://2486125878.github.io/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/index.html"><meta property="og:site_name" content="凯瑟兰森"><meta property="og:description" content="链式操作 数据库提供的链式操作方法，可以有效的提高数据存取的代码清晰度和开发效率，并且支持所有的CURD操作。 使用也比较简单，假如我们现在要查询一个User表的满足状态为1的前10条记录，并希望按照用户的创建时间排序 ，代码如下： 12345Db::table(&amp;#x27;think_user&amp;amp;#"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://2486125878.github.io/image/mn.png"><meta property="article:author" content="凯瑟兰森"><meta property="article:tag" content="一个分享自由的博客"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://2486125878.github.io/image/mn.png"><meta name="description" content="链式操作 数据库提供的链式操作方法，可以有效的提高数据存取的代码清晰度和开发效率，并且支持所有的CURD操作。 使用也比较简单，假如我们现在要查询一个User表的满足状态为1的前10条记录，并希望按照用户的创建时间排序 ，代码如下： 12345Db::table(&amp;#x27;think_user&amp;amp;#"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://2486125878.github.io/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 凯瑟兰森","link":"链接: ","source":"来源: 凯瑟兰森","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '凯瑟兰森',
+  title: 'thinkphp链式操作',
+  postAI: '',
+  pageFillDescription: '链式操作, where, 表达式查询, 数组条件, 普通查询, 表达式查询, 字符串条件, table, 用法, alias, field, 用于查询, 指定字段, 使用SQL函数, 使用数组参数, 获取所有字段, 字段排除, 用于写入, order, limit, 限制结果数量, 分页查询, page, group, having, join, join, condition, type, union, distinct, lock, cache, 缓存自动更新, comment, fetchSql, force, bind, partition, strict, failException, sequence链式操作数据库提供的链式操作方法可以有效的提高数据存取的代码清晰度和开发效率并且支持所有的操作使用也比较简单假如我们现在要查询一个表的满足状态为的前条记录并希望按照用户的创建时间排序代码如下这里的和方法就被称之为链式操作方法除了方法必须放到最后一个外因为方法并不是链式操作方法链式操作的方法调用顺序没有先后例如下面的代码和上面的等效其实不仅仅是查询方法可以使用连贯操作包括所有的方法都可以使用例如链式操作在完成查询后会自动清空链式操作的所有传值简而言之链式操作的结果不会带入后面的其它查询系统支持的链式操作方法有连贯操作作用支持的参数类型用于查询字符串数组和对象用于查询字符串数组和对象用于时间日期的快捷查询字符串用于定义要操作的数据表名称字符串和数组用于给当前数据表定义别名字符串用于定义要查询的字段支持字段排除字符串和数组用于对结果排序字符串和数组用于限制查询结果数量字符串和数字用于查询分页内部会转换成字符串和数字用于对查询的支持字符串用于对查询的支持字符串用于对查询的支持字符串和数组用于对查询的支持字符串数组和对象用于视图查询字符串数组用于查询的支持布尔值用于数据库的锁机制布尔值用于查询缓存支持多个参数用于关联查询字符串用于关联预载入字符串数组用于数据绑定操作数组或多个参数用于注释字符串用于数据集的强制索引字符串用于设置主服务器读取数据布尔值用于设置是否严格检测字段名是否存在布尔值用于设置的自增序列名字符串用于设置没有查询到数据是否抛出异常布尔值用于设置分表信息数组字符串所有的连贯操作都返回当前的模型实例对象其中带标识的表示支持多次调用方法的用法是查询语言的精髓也是的重要组成部分和亮点所在可以完成包括普通查询表达式查询快捷查询区间查询组合查询在内的查询操作方法的参数支持字符串和数组虽然也可以使用对象但并不建议表达式查询新版的表达式查询采用全新的方式查询表达式的使用格式更多的表达式查询语法可以参考查询语法部分数组条件可以通过数组方式批量设置查询条件普通查询最简单的数组查询方式如下把查询条件传入查询方法最后生成的语句是表达式查询可以在数组条件中使用查询表达式例如字符串条件使用字符串条件直接查询和操作例如最后生成的语句是使用字符串条件的时候建议配合预处理机制确保更加安全例如方法主要用于指定操作的数据表用法一般情况下操作模型的时候系统能够自动识别当前对应的数据表所以使用方法的情况通常是为了切换操作的数据表对多表进行操作例如也可以在方法中指定数据库例如方法指定的数据表需要完整的表名但可以采用下面的方式简化数据表前缀的传入例如会自动获取当前模型对应的数据表前缀来生成数据表名称需要注意的是方法不会改变数据库的连接所以你要确保当前连接的用户有权限操作相应的数据库和数据表切换数据表后系统会自动重新获取切换后的数据表的字段缓存信息如果需要对多表进行操作可以这样使用为了尽量避免和的关键字冲突可以建议使用数组方式定义例如使用数组方式定义的优势是可以避免因为表名和关键字冲突而出错的情况用于设置当前数据表的别名便于使用其他的连贯操作例如方法等示例最终生成的语句类似于版本开始可以传入数组批量设置数据表以及别名例如最终生成的语句类似于方法属于模型的连贯操作方法之一主要目的是标识要返回或者操作的字段可以用于查询和写入操作用于查询指定字段在查询操作中方法是使用最频繁的这里使用方法指定了查询的结果集中包含三个字段的值执行的相当于可以给某个字段设置别名例如执行的语句相当于使用函数可以在方法中直接使用函数例如执行的相当于除了方法之外所有的查询方法包括等都可以使用方法使用数组参数方法的参数可以支持数组例如最终执行的和前面用字符串方式是等效的数组方式的定义可以为某些字段定义别名例如执行的相当于对于一些更复杂的字段要求数组的优势则更加明显例如执行的相当于获取所有字段如果有一个表有非常多的字段需要获取所有的字段这个也许很简单因为不调用方法或者直接使用空的方法都能做到上面的用法是等效的都相当于执行但是这并不是我说的获取所有字段而是显式的调用所有字段对于对性能要求比较高的系统这个要求并不过分起码是一个比较好的习惯下面的用法可以完成预期的作用的用法会显式的获取数据表的所有字段列表哪怕你的数据表有个字段字段排除如果我希望获取排除数据表中的字段文本字段的值非常耗内存之外的所有字段值我们就可以使用方法的排除功能例如下面的方式就可以实现所说的功能则表示获取除了之外的所有字段要排除更多的字段也可以或者用注意的是字段排除功能不支持跨表和操作用于写入除了查询操作之外方法还有一个非常重要的安全功能字段合法性检测方法结合数据库的写入方法使用就可以完成表单提交的字段合法性检测如果我们在表单提交的处理方法中使用了即表示表单中的合法字段只有和字段无论用户通过什么手段更改或者添加了浏览器的提交字段都会直接屏蔽因为其他是所有字段我们都不希望由用户提交来决定你可以通过自动完成功能定义额外的字段写入方法属于模型的连贯操作方法之一用于对操作的结果排序用法如下注意连贯操作方法没有顺序可以在方法调用之前随便改变调用顺序支持对多个字段的排序例如如果没有指定或者排序规则的话默认为如果你的字段和关键字有冲突那么建议采用数组方式调用例如方法也是模型类的连贯操作方法之一主要用于指定查询和操作的数量特别在分页查询的时候使用较多的方法可以兼容所有的数据库驱动类的限制结果数量例如获取满足要求的个用户如下调用即可方法也可以用于写操作例如更新满足要求的条数据分页查询用于文章分页查询是方法比较常用的场合例如表示查询文章数据从第行开始的条数据可能还取决于条件和排序的影响这个暂且不提你也可以这样使用作用是一样的对于大数据表尽量使用限制查询结果否则会导致很大的内存开销和性能问题方法也是模型的连贯操作方法之一是完全为分页查询而诞生的一个人性化操作方法我们在前面已经了解了关于方法用于分页查询的情况而方法则是更人性化的进行分页查询的方法例如还是以文章列表分页为例来说如果使用方法我们要查询第一页和第二页假设我们每页输出条数据写法如下查询第一页数据查询第二页数据虽然利用扩展类库中的分页类可以自动计算出每个分页的参数但是如果要自己写就比较费力了如果用方法来写则简单多了例如查询第一页数据查询第二页数据显而易见的是使用方法你不需要计算每个分页数据的起始位置方法内部会自动计算和方法一样方法也支持个参数的写法例如和下面的用法等效方法还可以和方法配合使用例如当方法只有一个值传入的时候表示第几页而方法则用于设置每页显示的数量也就是说上面的写法等同于方法也是连贯操作方法之一通常用于结合合计函数根据一个或多个列对结果集进行分组方法只有一个参数并且只能使用字符串例如我们都查询结果按照用户进行分组统计生成的语句是也支持对多个字段进行分组例如生成的语句是方法也是连贯操作之一用于配合方法完成从分组的结果中筛选通常是聚合条件数据方法只有一个参数并且只能使用字符串例如生成的语句是通常有下面几种类型不同类型的操作会影响返回的数据结果等同于默认的类型如果表中有至少一个匹配则返回行即使右表中没有匹配也从左表返回所有的行即使左表中没有匹配也从右表返回所有的行只要其中一个表中存在匹配就返回行说明方法也是连贯操作方法之一用于根据两个或多个表中的列之间的关系从这些表中查询数据参数要关联的完整表名以及别名支持三种写法写法完整表名或者子查询别名写法完整表名别名写法不带数据表前缀的表名关联条件可以为字符串或数组为数组时每一个元素都是一个关联条件关联类型可以为不区分大小写默认为返回值模型对象举例以上三种写法的效果一样和在最终解析的时候会转换为和注意表名这种方式中间的表名需要用大写如果不想使用别名后面的条件就要使用表全名可以使用下面这种方式默认采用方式如果需要用其他的方式可以改成表名也可以是一个子查询因返回的语句带有所以这里不需要在两端再加上操作用于合并两个或多个语句的结果集使用示例闭包用法或者支持操作例如或者每个方法相当于一个独立的语句注意内部的语句必须拥有相同数量的列列也必须拥有相似的数据类型同时每条语句中的列的顺序必须相同方法用于返回唯一不同的值例如数据库表中有以下数据以下代码会返回字段不同的数据生成的语句是返回以下数组方法的参数是一个布尔值方法是用于数据库的锁机制如果在查询或者执行操作的时候使用就会自动在生成的语句最后加上或者数据库方法用于查询缓存操作也是连贯操作方法之一可以用于和方法以及其衍生方法使用方法后在缓存有效期之内不会再次进行数据库查询操作而是直接获取缓存中的数据关于数据缓存的类型和设置可以参考缓存部分下面举例说明例如我们对方法使用方法如下第一次查询结果会被缓存第二次查询相同的数据的时候就会直接返回缓存中的内容而不需要再次进行数据库查询操作默认情况下缓存有效期是由默认的缓存配置参数决定的但方法可以单独指定例如或者使用下面的方式是等效的表示对查询结果的缓存有效期秒方法可以指定缓存标识指定查询缓存的标识可以使得查询缓存更有效率这样在外部就可以通过类直接获取查询缓存的数据例如方法支持设置缓存标签例如缓存自动更新这里的缓存自动更新是指一旦数据更新或者删除后会自动清理缓存下次获取的时候会自动重新缓存当你删除或者更新数据的时候可以使用方法手动更新清除缓存例如最后查询的数据不会受第一条查询缓存的影响确保查询和更新或者删除使用相同的缓存标识才能自动清除缓存如果使用方法并且使用主键查询的情况不需要指定缓存标识会自动清理缓存例如最后查询的数据会是更新后的数据方法用于在生成的语句中添加注释内容例如查询考试前十名分数最终生成的语句是查询考试前十名分数用于直接返回而不是执行查询适用于任何的操作方法例如输出结果为方法用于数据集的强制索引操作例如对查询强制使用索引必须是数据表实际创建的索引名称方法用于手动参数绑定大多数情况无需进行手动绑定系统会在查询和写入数据的时候自动使用参数绑定方法用法如下用于查询用于写入方法用于是数据库水平分表分表字段的数据分表字段的名称分表规则注意不要使用任何语句中会出现的关键字当表名字段名例如等会导致数据模型拼装语句语法错误方法用法如下用于写入分表方式分表数量用于查询方法用于设置是否严格检查字段名用法如下关闭字段严格检查注意系统默认值是由数据库配置参数决定因此修改数据库配置参数可以进行全局的严格检查配置如下关闭严格检查字段是否存在如果开启字段严格检查的话在更新和写入数据库的时候一旦存在非数据表字段的值则会抛出异常设置查询数据为空时是否需要抛出异常如果不传入任何参数默认为开启用于和方法例如数据不存在的话直接抛出异常数据不存在返回空数组不抛异常或者可以使用更方便的查空报错查询多条查询单条方法用于数据库指定自增序列名其它数据库不必使用用法为',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-10-20 16:28:08',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="凯瑟兰森" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/image/loading-avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">凯瑟兰森</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa fa-archive faa-tada"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fas fa-folder-open faa-tada"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fas fa-music faa-tada"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/Gallery/"><i class="fas fa-images faa-tada"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/movies/"><i class="fas fa-video faa-tada"></i><span> 豆瓣电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="fas fa-heart faa-tada"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/image/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="/image/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/image/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/image/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ajax/" style="font-size: 1.05rem;">Ajax<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>2</sup></a><a href="/tags/JAVA/" style="font-size: 1.05rem;">JAVA<sup>2</sup></a><a href="/tags/jQuery/" style="font-size: 1.05rem;">jQuery<sup>1</sup></a><a href="/tags/javascript/" style="font-size: 1.05rem;">javascript<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/nodeJs/" style="font-size: 1.05rem;">nodeJs<sup>1</sup></a><a href="/tags/php/" style="font-size: 1.05rem;">php<sup>8</sup></a><a href="/tags/vue/" style="font-size: 1.05rem;">vue<sup>1</sup></a><a href="/tags/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">创建博客记录<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 1.05rem;">数据可视化<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 1.05rem;">移动端<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">20</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/thinkphp%E6%9F%A5%E8%AF%A2/" itemprop="url">thinkphp查询</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/php/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>php</span></a></span></div></div><h1 class="post-title" itemprop="name headline">thinkphp链式操作</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-03-14T03:18:02.000Z" title="发表于 2024-03-14 11:18:02">2024-03-14</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-10-20T08:28:08.562Z" title="更新于 2026-10-20 16:28:08">2026-10-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为太原"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>太原</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/image/mn.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://2486125878.github.io/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/"><header><a class="post-meta-categories" href="/categories/thinkphp%E6%9F%A5%E8%AF%A2/" itemprop="url">thinkphp查询</a><a href="/tags/php/" tabindex="-1" itemprop="url">php</a><h1 id="CrawlerTitle" itemprop="name headline">thinkphp链式操作</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">凯瑟兰森</span><time itemprop="dateCreated datePublished" datetime="2024-03-14T03:18:02.000Z" title="发表于 2024-03-14 11:18:02">2024-03-14</time><time itemprop="dateCreated datePublished" datetime="2026-10-20T08:28:08.562Z" title="更新于 2026-10-20 16:28:08">2026-10-20</time></header><h1 id="链式操作"><a href="#链式操作" class="headerlink" title="链式操作"></a>链式操作</h1><hr>
+<p>数据库提供的链式操作方法，可以有效的提高数据存取的代码清晰度和开发效率，并且支持所有的CURD操作。</p>
+<p>使用也比较简单，假如我们现在要查询一个User表的满足状态为1的前10条记录，并希望按照用户的创建时间排序 ，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status&#x27;</span>,<span class="number">1</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">order</span>(<span class="string">&#x27;create_time&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">limit</span>(<span class="number">10</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>where</code>、<code>order</code>和<code>limit</code>方法就被称之为链式操作方法，除了select方法必须放到最后一个外（因为select方法并不是链式操作方法），链式操作的方法调用顺序没有先后，例如，下面的代码和上面的等效：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">order</span>(<span class="string">&#x27;create_time&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="number">10</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status&#x27;</span>,<span class="number">1</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>其实不仅仅是查询方法可以使用连贯操作，包括所有的CURD方法都可以使用，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>,<span class="number">1</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;id,name,email&#x27;</span>)-&gt;<span class="title function_ invoke__">find</span>(); <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status&#x27;</span>,<span class="number">1</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>,<span class="number">1</span>)-&gt;<span class="title function_ invoke__">delete</span>();</span><br></pre></td></tr></table></figure>
+
+<p>链式操作在完成查询后会自动清空链式操作的所有传值。简而言之，链式操作的结果不会带入后面的其它查询。</p>
+<p>系统支持的链式操作方法有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">连贯操作</th>
+<th align="left">作用</th>
+<th align="left">支持的参数类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">where*</td>
+<td align="left">用于AND查询</td>
+<td align="left">字符串、数组和对象</td>
+</tr>
+<tr>
+<td align="left">whereOr*</td>
+<td align="left">用于OR查询</td>
+<td align="left">字符串、数组和对象</td>
+</tr>
+<tr>
+<td align="left">wheretime*</td>
+<td align="left">用于时间日期的快捷查询</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">table</td>
+<td align="left">用于定义要操作的数据表名称</td>
+<td align="left">字符串和数组</td>
+</tr>
+<tr>
+<td align="left">alias</td>
+<td align="left">用于给当前数据表定义别名</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">field*</td>
+<td align="left">用于定义要查询的字段（支持字段排除）</td>
+<td align="left">字符串和数组</td>
+</tr>
+<tr>
+<td align="left">order</td>
+<td align="left">用于对结果排序</td>
+<td align="left">字符串和数组</td>
+</tr>
+<tr>
+<td align="left">limit</td>
+<td align="left">用于限制查询结果数量</td>
+<td align="left">字符串和数字</td>
+</tr>
+<tr>
+<td align="left">page</td>
+<td align="left">用于查询分页（内部会转换成limit）</td>
+<td align="left">字符串和数字</td>
+</tr>
+<tr>
+<td align="left">group</td>
+<td align="left">用于对查询的group支持</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">having</td>
+<td align="left">用于对查询的having支持</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">join*</td>
+<td align="left">用于对查询的join支持</td>
+<td align="left">字符串和数组</td>
+</tr>
+<tr>
+<td align="left">union*</td>
+<td align="left">用于对查询的union支持</td>
+<td align="left">字符串、数组和对象</td>
+</tr>
+<tr>
+<td align="left">view</td>
+<td align="left">用于视图查询</td>
+<td align="left">字符串、数组</td>
+</tr>
+<tr>
+<td align="left">distinct</td>
+<td align="left">用于查询的distinct支持</td>
+<td align="left">布尔值</td>
+</tr>
+<tr>
+<td align="left">lock</td>
+<td align="left">用于数据库的锁机制</td>
+<td align="left">布尔值</td>
+</tr>
+<tr>
+<td align="left">cache</td>
+<td align="left">用于查询缓存</td>
+<td align="left">支持多个参数</td>
+</tr>
+<tr>
+<td align="left">relation</td>
+<td align="left">用于关联查询</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">with</td>
+<td align="left">用于关联预载入</td>
+<td align="left">字符串、数组</td>
+</tr>
+<tr>
+<td align="left">bind*</td>
+<td align="left">用于数据绑定操作</td>
+<td align="left">数组或多个参数</td>
+</tr>
+<tr>
+<td align="left">comment</td>
+<td align="left">用于SQL注释</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">force</td>
+<td align="left">用于数据集的强制索引</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">master</td>
+<td align="left">用于设置主服务器读取数据</td>
+<td align="left">布尔值</td>
+</tr>
+<tr>
+<td align="left">strict</td>
+<td align="left">用于设置是否严格检测字段名是否存在</td>
+<td align="left">布尔值</td>
+</tr>
+<tr>
+<td align="left">sequence</td>
+<td align="left">用于设置Pgsql的自增序列名</td>
+<td align="left">字符串</td>
+</tr>
+<tr>
+<td align="left">failException</td>
+<td align="left">用于设置没有查询到数据是否抛出异常</td>
+<td align="left">布尔值</td>
+</tr>
+<tr>
+<td align="left">partition</td>
+<td align="left">用于设置分表信息</td>
+<td align="left">数组 字符串</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>所有的连贯操作都返回当前的模型实例对象（this），其中带*标识的表示支持多次调用。</p>
+</blockquote>
+<h1 id="where"><a href="#where" class="headerlink" title="where"></a>where</h1><hr>
+<p>where方法的用法是ThinkPHP查询语言的精髓，也是ThinkPHP ORM的重要组成部分和亮点所在，可以完成包括普通查询、表达式查询、快捷查询、区间查询、组合查询在内的查询操作。where方法的参数支持字符串和数组，虽然也可以使用对象但并不建议。</p>
+<h2 id="表达式查询"><a href="#表达式查询" class="headerlink" title="表达式查询"></a>表达式查询</h2><p>新版的表达式查询采用全新的方式，查询表达式的使用格式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="number">1</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;thinkphp&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+<p>更多的表达式查询语法，可以参考查询语法部分。</p>
+<h2 id="数组条件"><a href="#数组条件" class="headerlink" title="数组条件"></a>数组条件</h2><p>可以通过数组方式批量设置查询条件。</p>
+<h3 id="普通查询"><a href="#普通查询" class="headerlink" title="普通查询"></a>普通查询</h3><p>最简单的数组查询方式如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$map</span>[<span class="string">&#x27;name&#x27;</span>] = <span class="string">&#x27;thinkphp&#x27;</span>;<span class="variable">$map</span>[<span class="string">&#x27;status&#x27;</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 把查询条件传入查询方法</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="variable">$map</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>最后生成的SQL语句是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> think_user <span class="keyword">WHERE</span> `name`<span class="operator">=</span><span class="string">&#x27;thinkphp&#x27;</span> <span class="keyword">AND</span> status<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="表达式查询-1"><a href="#表达式查询-1" class="headerlink" title="表达式查询"></a>表达式查询</h3><p>可以在数组条件中使用查询表达式，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$map</span>[<span class="string">&#x27;id&#x27;</span>]=[<span class="string">&#x27;&gt;&#x27;</span>,<span class="number">1</span>];</span><br><span class="line"><span class="variable">$map</span>[<span class="string">&#x27;mail&#x27;</span>]=[<span class="string">&#x27;like&#x27;</span>,<span class="string">&#x27;%thinkphp@qq.com%&#x27;</span>];</span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="variable">$map</span>)-&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串条件"><a href="#字符串条件" class="headerlink" title="字符串条件"></a>字符串条件</h2><p>使用字符串条件直接查询和操作，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;type=1 AND status=1&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+<p>最后生成的SQL语句是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> think_user <span class="keyword">WHERE</span> type<span class="operator">=</span><span class="number">1</span> <span class="keyword">AND</span> status<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>使用字符串条件的时候，建议配合预处理机制，确保更加安全，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&quot;id=:id and username=:name&quot;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">bind</span>([<span class="string">&#x27;id&#x27;</span>=&gt;[<span class="number">1</span>,\PDO::<span class="variable constant_">PARAM_INT</span>],<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;thinkphp&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="table"><a href="#table" class="headerlink" title="table"></a>table</h1><hr>
+<p>table方法主要用于指定操作的数据表。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>一般情况下，操作模型的时候系统能够自动识别当前对应的数据表，所以，使用table方法的情况通常是为了：</p>
+<ol>
+<li>切换操作的数据表；</li>
+<li>对多表进行操作；</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status&gt;1&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>也可以在table方法中指定数据库，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;db_name.think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status&gt;1&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>table方法指定的数据表需要完整的表名，但可以采用下面的方式简化数据表前缀的传入，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;__USER__&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status&gt;1&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>会自动获取当前模型对应的数据表前缀来生成 <code>think_user</code> 数据表名称。</p>
+<p>需要注意的是table方法不会改变数据库的连接，所以你要确保当前连接的用户有权限操作相应的数据库和数据表。 切换数据表后，系统会自动重新获取切换后的数据表的字段缓存信息。</p>
+<p>如果需要对多表进行操作，可以这样使用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">field</span>(<span class="string">&#x27;user.name,role.title&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user user,think_role role&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">limit</span>(<span class="number">10</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>为了尽量避免和mysql的关键字冲突，可以建议使用数组方式定义，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">field</span>(<span class="string">&#x27;user.name,role.title&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">table</span>([<span class="string">&#x27;think_user&#x27;</span>=&gt;<span class="string">&#x27;user&#x27;</span>,<span class="string">&#x27;think_role&#x27;</span>=&gt;<span class="string">&#x27;role&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">limit</span>(<span class="number">10</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>使用数组方式定义的优势是可以避免因为表名和关键字冲突而出错的情况。</p>
+<h1 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h1><hr>
+<p>alias用于设置当前数据表的别名，便于使用其他的连贯操作例如join方法等。</p>
+<p>示例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">alias</span>(<span class="string">&#x27;a&#x27;</span>)-&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;__DEPT__ b &#x27;</span>,<span class="string">&#x27;b.user_id= a.id&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>最终生成的SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> think_user a <span class="keyword">INNER</span> <span class="keyword">JOIN</span> think_dept b <span class="keyword">ON</span> b.user_id<span class="operator">=</span> a.id</span><br></pre></td></tr></table></figure>
+
+<p><code>v5.0.2+</code>版本开始，可以传入数组批量设置数据表以及别名，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">alias</span>([<span class="string">&#x27;think_user&#x27;</span>=&gt;<span class="string">&#x27;user&#x27;</span>,<span class="string">&#x27;think_dept&#x27;</span>=&gt;<span class="string">&#x27;dept&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;think_dept&#x27;</span>,<span class="string">&#x27;dept.user_id= user.id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>最终生成的SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> think_user <span class="keyword">user</span> <span class="keyword">INNER</span> <span class="keyword">JOIN</span> think_dept dept <span class="keyword">ON</span> dept.user_id<span class="operator">=</span> user.id</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="field"><a href="#field" class="headerlink" title="field"></a>field</h1><hr>
+<p>field方法属于模型的连贯操作方法之一，主要目的是标识要返回或者操作的字段，可以用于查询和写入操作。</p>
+<h2 id="用于查询"><a href="#用于查询" class="headerlink" title="用于查询"></a>用于查询</h2><h5 id="指定字段"><a href="#指定字段" class="headerlink" title="指定字段"></a>指定字段</h5><p>在查询操作中field方法是使用最频繁的。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;id,title,content&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这里使用field方法指定了查询的结果集中包含id,title,content三个字段的值。执行的SQL相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id,title,content <span class="keyword">FROM</span> <span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+
+<p>可以给某个字段设置别名，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;id,nickname as name&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>执行的SQL语句相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id,nickname <span class="keyword">as</span> name <span class="keyword">FROM</span> <span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="使用SQL函数"><a href="#使用SQL函数" class="headerlink" title="使用SQL函数"></a>使用SQL函数</h5><p>可以在field方法中直接使用函数，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;id,SUM(score)&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>执行的SQL相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id,<span class="built_in">SUM</span>(score) <span class="keyword">FROM</span> <span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>除了select方法之外，所有的查询方法，包括find等都可以使用field方法。</p>
+</blockquote>
+<h5 id="使用数组参数"><a href="#使用数组参数" class="headerlink" title="使用数组参数"></a>使用数组参数</h5><p>field方法的参数可以支持数组，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>([<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;content&#x27;</span>])-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>最终执行的SQL和前面用字符串方式是等效的。</p>
+<p>数组方式的定义可以为某些字段定义别名，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>([<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;nickname&#x27;</span>=&gt;<span class="string">&#x27;name&#x27;</span>])-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>执行的SQL相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id,nickname <span class="keyword">as</span> name <span class="keyword">FROM</span> <span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+
+<p>对于一些更复杂的字段要求，数组的优势则更加明显，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">field</span>([<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;concat(name,&quot;-&quot;,id)&#x27;</span>=&gt;<span class="string">&#x27;truename&#x27;</span>,<span class="string">&#x27;LEFT(title,7)&#x27;</span>=&gt;<span class="string">&#x27;sub_title&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>执行的SQL相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id,concat(name,<span class="string">&#x27;-&#x27;</span>,id) <span class="keyword">as</span> truename,<span class="keyword">LEFT</span>(title,<span class="number">7</span>) <span class="keyword">as</span> sub_title <span class="keyword">FROM</span> <span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="获取所有字段"><a href="#获取所有字段" class="headerlink" title="获取所有字段"></a>获取所有字段</h5><p>如果有一个表有非常多的字段，需要获取所有的字段（这个也许很简单，因为不调用field方法或者直接使用空的field方法都能做到）：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();<span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;*&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>上面的用法是等效的，都相当于执行SQL：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+
+<p>但是这并不是我说的获取所有字段，而是显式的调用所有字段（对于对性能要求比较高的系统，这个要求并不过分，起码是一个比较好的习惯），下面的用法可以完成预期的作用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="literal">true</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p><code>field(true)</code>的用法会显式的获取数据表的所有字段列表，哪怕你的数据表有100个字段。</p>
+<h5 id="字段排除"><a href="#字段排除" class="headerlink" title="字段排除"></a>字段排除</h5><p>如果我希望获取排除数据表中的<code>content</code>字段（文本字段的值非常耗内存）之外的所有字段值，我们就可以使用field方法的排除功能，例如下面的方式就可以实现所说的功能：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;content&#x27;</span>,<span class="literal">true</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>则表示获取除了content之外的所有字段，要排除更多的字段也可以：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;user_id,content&#x27;</span>,<span class="literal">true</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line"><span class="comment">//或者用</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>([<span class="string">&#x27;user_id&#x27;</span>,<span class="string">&#x27;content&#x27;</span>],<span class="literal">true</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意的是 字段排除功能不支持跨表和join操作。</p>
+</blockquote>
+<h2 id="用于写入"><a href="#用于写入" class="headerlink" title="用于写入"></a>用于写入</h2><p>除了查询操作之外，field方法还有一个非常重要的安全功能–<strong>字段合法性检测</strong>。field方法结合数据库的写入方法使用就可以完成表单提交的字段合法性检测，如果我们在表单提交的处理方法中使用了：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;title,email,content&#x27;</span>)-&gt;<span class="title function_ invoke__">insert</span>(<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+
+<p>即表示表单中的合法字段只有<code>title</code>,<code>email</code>和<code>content</code>字段，无论用户通过什么手段更改或者添加了浏览器的提交字段，都会直接屏蔽。因为，其他是所有字段我们都不希望由用户提交来决定，你可以通过自动完成功能定义额外的字段写入。</p>
+<h1 id="order"><a href="#order" class="headerlink" title="order"></a>order</h1><hr>
+<p>order方法属于模型的连贯操作方法之一，用于对操作的结果排序。</p>
+<p>用法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status=1&#x27;</span>)-&gt;<span class="title function_ invoke__">order</span>(<span class="string">&#x27;id desc&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="number">5</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>注意：连贯操作方法没有顺序，可以在select方法调用之前随便改变调用顺序。</p>
+<p>支持对多个字段的排序，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status=1&#x27;</span>)-&gt;<span class="title function_ invoke__">order</span>(<span class="string">&#x27;id desc,status&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="number">5</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果没有指定desc或者asc排序规则的话，默认为asc。</p>
+</blockquote>
+<p>如果你的字段和mysql关键字有冲突，那么建议采用数组方式调用，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status=1&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">order</span>([<span class="string">&#x27;order&#x27;</span>,<span class="string">&#x27;id&#x27;</span>=&gt;<span class="string">&#x27;desc&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">limit</span>(<span class="number">5</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h1><hr>
+<p>limit方法也是模型类的连贯操作方法之一，主要用于指定查询和操作的数量，特别在分页查询的时候使用较多。ThinkPHP的limit方法可以兼容所有的数据库驱动类的。</p>
+<h2 id="限制结果数量"><a href="#限制结果数量" class="headerlink" title="限制结果数量"></a>限制结果数量</h2><p>例如获取满足要求的10个用户，如下调用即可：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;status=1&#x27;</span>)-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;id,name&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="number">10</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>limit方法也可以用于写操作，例如更新满足要求的3条数据：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;score=100&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="number">3</span>)-&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;level&#x27;</span>=&gt;<span class="string">&#x27;A&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><p>用于文章分页查询是limit方法比较常用的场合，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="string">&#x27;10,25&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>表示查询文章数据，从第10行开始的25条数据（可能还取决于where条件和order排序的影响 这个暂且不提）。</p>
+<p>你也可以这样使用，作用是一样的：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="number">10</span>,<span class="number">25</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>对于大数据表，尽量使用limit限制查询结果，否则会导致很大的内存开销和性能问题。</p>
+<h1 id="page"><a href="#page" class="headerlink" title="page"></a>page</h1><hr>
+<p>page方法也是模型的连贯操作方法之一，是完全为分页查询而诞生的一个人性化操作方法。</p>
+<p>我们在前面已经了解了关于limit方法用于分页查询的情况，而page方法则是更人性化的进行分页查询的方法，例如还是以文章列表分页为例来说，如果使用limit方法，我们要查询第一页和第二页（假设我们每页输出10条数据）写法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询第一页数据</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="string">&#x27;0,10&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>(); </span><br><span class="line"><span class="comment">// 查询第二页数据</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)-&gt;<span class="title function_ invoke__">limit</span>(<span class="string">&#x27;10,10&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+<p>虽然利用扩展类库中的分页类Page可以自动计算出每个分页的limit参数，但是如果要自己写就比较费力了，如果用page方法来写则简单多了，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询第一页数据</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">page</span>(<span class="string">&#x27;1,10&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>(); </span><br><span class="line"><span class="comment">// 查询第二页数据</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">page</span>(<span class="string">&#x27;2,10&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+<p>显而易见的是，使用page方法你不需要计算每个分页数据的起始位置，page方法内部会自动计算。</p>
+<p>和limit方法一样，page方法也支持2个参数的写法，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">page</span>(<span class="number">1</span>,<span class="number">10</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line"><span class="comment">// 和下面的用法等效</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">page</span>(<span class="string">&#x27;1,10&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>page方法还可以和limit方法配合使用，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">limit</span>(<span class="number">25</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">page</span>(<span class="number">3</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>当page方法只有一个值传入的时候，表示第几页，而limit方法则用于设置每页显示的数量，也就是说上面的写法等同于：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_article&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">page</span>(<span class="string">&#x27;3,25&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="group"><a href="#group" class="headerlink" title="group"></a>group</h1><hr>
+<p>GROUP方法也是连贯操作方法之一，通常用于结合合计函数，根据一个或多个列对结果集进行分组 。</p>
+<p>group方法只有一个参数，并且只能使用字符串。</p>
+<p>例如，我们都查询结果按照用户id进行分组统计：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;user_id,username,max(score)&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">group</span>(<span class="string">&#x27;user_id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>生成的SQL语句是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> user_id,username,<span class="built_in">max</span>(score) <span class="keyword">FROM</span> think_score <span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br></pre></td></tr></table></figure>
+
+<p>也支持对多个字段进行分组，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;user_id,test_time,username,max(score)&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">group</span>(<span class="string">&#x27;user_id,test_time&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>生成的SQL语句是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> user_id,test_time,username,<span class="built_in">max</span>(score) <span class="keyword">FROM</span> think_score <span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id,test_time</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="having"><a href="#having" class="headerlink" title="having"></a>having</h1><hr>
+<p>HAVING方法也是连贯操作之一，用于配合group方法完成从分组的结果中筛选（通常是聚合条件）数据。</p>
+<p>having方法只有一个参数，并且只能使用字符串，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;username,max(score)&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">group</span>(<span class="string">&#x27;user_id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">having</span>(<span class="string">&#x27;count(test_time)&gt;3&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>(); </span><br></pre></td></tr></table></figure>
+
+<p>生成的SQL语句是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username,<span class="built_in">max</span>(score) <span class="keyword">FROM</span> think_score <span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id <span class="keyword">HAVING</span> <span class="built_in">count</span>(test_time)<span class="operator">&gt;</span><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="join"><a href="#join" class="headerlink" title="join"></a>join</h1><hr>
+<p>join通常有下面几种类型，不同类型的join操作会影响返回的数据结果。</p>
+<ul>
+<li><strong>INNER JOIN</strong>: 等同于 JOIN（默认的JOIN类型）,如果表中有至少一个匹配，则返回行</li>
+<li><strong>LEFT JOIN</strong>: 即使右表中没有匹配，也从左表返回所有的行</li>
+<li><strong>RIGHT JOIN</strong>: 即使左表中没有匹配，也从右表返回所有的行</li>
+<li><strong>FULL JOIN</strong>: 只要其中一个表中存在匹配，就返回行</li>
+</ul>
+<p><strong>说明</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> <span class="title function_ invoke__">join</span> ( <span class="keyword">mixed</span> join [, <span class="keyword">mixed</span> <span class="variable">$condition</span> = <span class="literal">null</span> [, <span class="keyword">string</span> <span class="variable">$type</span> = <span class="string">&#x27;INNER&#x27;</span>]] )</span><br></pre></td></tr></table></figure>
+
+<p>JOIN方法也是连贯操作方法之一，用于根据两个或多个表中的列之间的关系，从这些表中查询数据。</p>
+<p><strong>参数</strong></p>
+<h4 id="join-1"><a href="#join-1" class="headerlink" title="join"></a>join</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">要关联的（完整）表名以及别名</span><br></pre></td></tr></table></figure>
+
+<p>支持三种写法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">写法1：[ &#x27;完整表名或者子查询&#x27;=&gt;&#x27;别名&#x27; ]</span><br><span class="line">写法2：&#x27;完整表名 别名&#x27;</span><br><span class="line">写法3：&#x27;不带数据表前缀的表名&#x27;</span><br></pre></td></tr></table></figure>
+
+<h4 id="condition"><a href="#condition" class="headerlink" title="condition"></a>condition</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关联条件。可以为字符串或数组， 为数组时每一个元素都是一个关联条件。</span><br></pre></td></tr></table></figure>
+
+<h4 id="type"><a href="#type" class="headerlink" title="type"></a>type</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关联类型。可以为:INNER、LEFT、RIGHT、FULL，不区分大小写，默认为INNER。</span><br></pre></td></tr></table></figure>
+
+<p><strong>返回值</strong><br>模型对象</p>
+<p><strong>举例</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_artist&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">alias</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;think_work w&#x27;</span>,<span class="string">&#x27;a.id = w.artist_id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;think_card c&#x27;</span>,<span class="string">&#x27;a.card_id = c.id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line"></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_artist&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">alias</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;__WORK__ w&#x27;</span>,<span class="string">&#x27;a.id = w.artist_id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;__CARD__ c&#x27;</span>,<span class="string">&#x27;a.card_id = c.id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$join</span> = [    </span><br><span class="line">    [<span class="string">&#x27;think_work w&#x27;</span>,<span class="string">&#x27;a.id=w.artist_id&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;think_card c&#x27;</span>,<span class="string">&#x27;a.card_id=c.id&#x27;</span>],];</span><br><span class="line"></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">alias</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="variable">$join</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>以上三种写法的效果一样，<code>__WORK__</code>和 <code>__CARD__</code>在最终解析的时候会转换为 <code>think_work</code>和 <code>think_card</code>。注意:’<em>*表名</em>*’这种方式中间的表名需要用大写</p>
+<p>如果不想使用别名，后面的条件就要使用表全名，可以使用下面这种方式</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;__WORK__&#x27;</span>,<span class="string">&#x27;__ARTIST__.id = __WORK__.artist_id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>默认采用INNER JOIN 方式，如果需要用其他的JOIN方式，可以改成</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">alias</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>(<span class="string">&#x27;word w&#x27;</span>,<span class="string">&#x27;a.id = w.artist_id&#x27;</span>,<span class="string">&#x27;RIGHT&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>表名也可以是一个子查询</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$subsql</span> = <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_work&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;status&#x27;</span>=&gt;<span class="number">1</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;artist_id,count(id) count&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">group</span>(<span class="string">&#x27;artist_id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">buildSql</span>();</span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">alias</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">join</span>([<span class="variable">$subsql</span>=&gt; <span class="string">&#x27;w&#x27;</span>], <span class="string">&#x27;a.artist_id = w.artist_id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>因buildSql返回的语句带有()，所以这里不需要在两端再加上()。</p>
+<h1 id="union"><a href="#union" class="headerlink" title="union"></a>union</h1><hr>
+<p>UNION操作用于合并两个或多个 SELECT 语句的结果集。</p>
+<p>使用示例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">field</span>(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user_0&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>(<span class="string">&#x27;SELECT name FROM think_user_1&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>(<span class="string">&#x27;SELECT name FROM think_user_2&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>闭包用法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">field</span>(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user_0&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>(function(<span class="variable">$query</span>)&#123;</span><br><span class="line">        <span class="variable">$query</span>-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;name&#x27;</span>)-&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user_1&#x27;</span>);</span><br><span class="line">    &#125;)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>(function(<span class="variable">$query</span>)&#123;</span><br><span class="line">        <span class="variable">$query</span>-&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;name&#x27;</span>)-&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user_2&#x27;</span>);</span><br><span class="line">    &#125;)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">field</span>(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user_0&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>([<span class="string">&#x27;SELECT name FROM think_user_1&#x27;</span>,<span class="string">&#x27;SELECT name FROM think_user_2&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>支持UNION ALL 操作，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">field</span>(<span class="string">&#x27;name&#x27;</span>)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user_0&#x27;</span>)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>(<span class="string">&#x27;SELECT name FROM think_user_1&#x27;</span>,<span class="literal">true</span>)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>(<span class="string">&#x27;SELECT name FROM think_user_2&#x27;</span>,<span class="literal">true</span>)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">field</span>(<span class="string">&#x27;name&#x27;</span>)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user_0&#x27;</span>)      </span><br><span class="line">    -&gt;<span class="title function_ invoke__">union</span>([<span class="string">&#x27;SELECT name FROM think_user_1&#x27;</span>,<span class="string">&#x27;SELECT name FROM think_user_2&#x27;</span>],<span class="literal">true</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>每个union方法相当于一个独立的SELECT语句。</p>
+<blockquote>
+<p>注意：UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。</p>
+</blockquote>
+<h1 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h1><hr>
+<p>DISTINCT 方法用于返回唯一不同的值 。</p>
+<p>例如数据库表中有以下数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/posts/placeholder-article.jpg" alt="img"></p>
+<p>以下代码会返回<code>user_login</code>字段不同的数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">distinct</span>(<span class="literal">true</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;user_login&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>生成的SQL语句是： <code>SELECT DISTINCT user_login FROM think_user</code></p>
+<p>返回以下数组</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">array</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">array</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        [<span class="string">&quot;user_login&quot;</span>] =&gt; <span class="keyword">string</span>(<span class="number">7</span>) <span class="string">&quot;chunice&quot;</span>  </span><br><span class="line">    &#125;  </span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">array</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        [<span class="string">&quot;user_login&quot;</span>] =&gt; <span class="keyword">string</span>(<span class="number">5</span>) <span class="string">&quot;admin&quot;</span>  </span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>distinct方法的参数是一个布尔值。</p>
+<h1 id="lock"><a href="#lock" class="headerlink" title="lock"></a>lock</h1><hr>
+<p>Lock方法是用于数据库的锁机制，如果在查询或者执行操作的时候使用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">lock</span>(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>就会自动在生成的SQL语句最后加上 <code>FOR UPDATE</code>或者<code>FOR UPDATE NOWAIT</code>（Oracle数据库）。</p>
+<h1 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h1><hr>
+<p>cache方法用于查询缓存操作，也是连贯操作方法之一。</p>
+<p><strong>cache</strong>可以用于<code>select</code>、<code>find</code>、<code>value</code>和<code>column</code>方法，以及其衍生方法，使用<code>cache</code>方法后，在缓存有效期之内不会再次进行数据库查询操作，而是直接获取缓存中的数据，关于数据缓存的类型和设置可以参考缓存部分。</p>
+<p>下面举例说明，例如，我们对find方法使用cache方法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id=5&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="literal">true</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br></pre></td></tr></table></figure>
+
+<p>第一次查询结果会被缓存，第二次查询相同的数据的时候就会直接返回缓存中的内容，而不需要再次进行数据库查询操作。</p>
+<p>默认情况下， 缓存有效期是由默认的缓存配置参数决定的，但<code>cache</code>方法可以单独指定，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="literal">true</span>,<span class="number">60</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br><span class="line"><span class="comment">// 或者使用下面的方式 是等效的</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="number">60</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br></pre></td></tr></table></figure>
+
+<p>表示对查询结果的缓存有效期60秒。</p>
+<p>cache方法可以指定缓存标识：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="string">&#x27;key&#x27;</span>,<span class="number">60</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>指定查询缓存的标识可以使得查询缓存更有效率。</p>
+</blockquote>
+<p>这样，在外部就可以通过<code>\think\Cache</code>类直接获取查询缓存的数据，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$result</span> = <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="string">&#x27;key&#x27;</span>,<span class="number">60</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br><span class="line"><span class="variable">$data</span> = \think<span class="title class_">\Cache</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;key&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>cache</code>方法支持设置缓存标签，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="string">&#x27;key&#x27;</span>,<span class="number">60</span>,<span class="string">&#x27;tagName&#x27;</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="缓存自动更新"><a href="#缓存自动更新" class="headerlink" title="缓存自动更新"></a>缓存自动更新</h2><p>这里的缓存自动更新是指一旦数据更新或者删除后会自动清理缓存（下次获取的时候会自动重新缓存）。</p>
+<p>当你删除或者更新数据的时候，可以使用cache方法手动更新（清除）缓存，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">cache</span>(<span class="string">&#x27;user_data&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>]);</span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">cache</span>(<span class="string">&#x27;user_data&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;id&#x27;</span>=&gt;<span class="number">1</span>,<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;thinkphp&#x27;</span>]);</span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="string">&#x27;user_data&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>([<span class="number">1</span>,<span class="number">5</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>最后查询的数据不会受第一条查询缓存的影响，确保查询和更新或者删除使用相同的缓存标识才能自动清除缓存。</p>
+<p>如果使用<code>find</code>方法并且使用主键查询的情况，不需要指定缓存标识，会自动清理缓存，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">cache</span>(<span class="literal">true</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">find</span>(<span class="number">1</span>);</span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;id&#x27;</span>=&gt;<span class="number">1</span>,<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;thinkphp&#x27;</span>]);</span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">cache</span>(<span class="literal">true</span>)-&gt;<span class="title function_ invoke__">find</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最后查询的数据会是更新后的数据。</p>
+<h1 id="comment"><a href="#comment" class="headerlink" title="comment"></a>comment</h1><hr>
+<p>COMMENT方法 用于在生成的SQL语句中添加注释内容，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_score&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">comment</span>(<span class="string">&#x27;查询考试前十名分数&#x27;</span>)    </span><br><span class="line">    -&gt;<span class="title function_ invoke__">field</span>(<span class="string">&#x27;username,score&#x27;</span>)    </span><br><span class="line">    -&gt;<span class="title function_ invoke__">limit</span>(<span class="number">10</span>)    </span><br><span class="line">    -&gt;<span class="title function_ invoke__">order</span>(<span class="string">&#x27;score desc&#x27;</span>)    </span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>最终生成的SQL语句是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username,score <span class="keyword">FROM</span> think_score <span class="keyword">ORDER</span> <span class="keyword">BY</span> score <span class="keyword">desc</span> LIMIT <span class="number">10</span> <span class="comment">/* 查询考试前十名分数 */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="fetchSql"><a href="#fetchSql" class="headerlink" title="fetchSql"></a>fetchSql</h1><hr>
+<p>fetchSql用于直接返回SQL而不是执行查询，适用于任何的CURD操作方法。 例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$result</span> = <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">fetchSql</span>(<span class="literal">true</span>)-&gt;<span class="title function_ invoke__">find</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出result结果为： <code>SELECT * FROM think_user where id = 1</code></p>
+<h1 id="force"><a href="#force" class="headerlink" title="force"></a>force</h1><hr>
+<p>force 方法用于数据集的强制索引操作，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)-&gt;<span class="title function_ invoke__">force</span>(<span class="string">&#x27;user&#x27;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>对查询强制使用user索引，user必须是数据表实际创建的索引名称。</p>
+<h1 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h1><hr>
+<p>bind方法用于手动参数绑定，大多数情况，无需进行手动绑定，系统会在查询和写入数据的时候自动使用参数绑定。</p>
+<p>bind方法用法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于查询</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;:name&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">bind</span>([<span class="string">&#x27;id&#x27;</span>=&gt;[<span class="number">10</span>,\PDO::<span class="variable constant_">PARAM_INT</span>],<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;thinkphp&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line"><span class="comment">// 用于写入</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;think_user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">bind</span>([<span class="string">&#x27;id&#x27;</span>=&gt;[<span class="number">10</span>,\PDO::<span class="variable constant_">PARAM_INT</span>],<span class="string">&#x27;email&#x27;</span>=&gt;<span class="string">&#x27;thinkphp@qq.com&#x27;</span>,<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;thinkphp&#x27;</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;:name&#x27;</span>,<span class="string">&#x27;email&#x27;</span>=&gt;<span class="string">&#x27;:email&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="partition"><a href="#partition" class="headerlink" title="partition"></a>partition</h1><hr>
+<p>partition 方法用于是数据库水平分表</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">partition</span>(<span class="variable">$data</span>, <span class="variable">$field</span>, <span class="variable">$rule</span>);</span><br><span class="line"><span class="comment">// $data 分表字段的数据</span></span><br><span class="line"><span class="comment">// $field 分表字段的名称</span></span><br><span class="line"><span class="comment">// $rule 分表规则</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：不要使用任何 SQL 语句中会出现的关键字当表名、字段名，例如 order 等。会导致数据模型拼装 SQL 语句语法错误。</strong></p>
+<p>partition 方法用法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于写入</span></span><br><span class="line"><span class="variable">$data</span> = [</span><br><span class="line">    <span class="string">&#x27;user_id&#x27;</span>   =&gt; <span class="number">110</span>,</span><br><span class="line">    <span class="string">&#x27;user_name&#x27;</span> =&gt; <span class="string">&#x27;think&#x27;</span></span><br><span class="line">];</span><br><span class="line"><span class="variable">$rule</span> = [    </span><br><span class="line">    <span class="string">&#x27;type&#x27;</span> =&gt; <span class="string">&#x27;mod&#x27;</span>, <span class="comment">// 分表方式</span></span><br><span class="line">    <span class="string">&#x27;num&#x27;</span>  =&gt; <span class="number">10</span>     <span class="comment">// 分表数量</span></span><br><span class="line">];</span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">name</span>(<span class="string">&#x27;log&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">partition</span>([<span class="string">&#x27;user_id&#x27;</span> =&gt; <span class="number">110</span>], <span class="string">&quot;user_id&quot;</span>, <span class="variable">$rule</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">insert</span>(<span class="variable">$data</span>);</span><br><span class="line"><span class="comment">// 用于查询</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">name</span>(<span class="string">&#x27;log&#x27;</span>)    </span><br><span class="line">    -&gt;<span class="title function_ invoke__">partition</span>([<span class="string">&#x27;user_id&#x27;</span> =&gt; <span class="number">110</span>], <span class="string">&quot;user_id&quot;</span>, <span class="variable">$rule</span>)    </span><br><span class="line">    -&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;user_id&#x27;</span> =&gt; <span class="number">110</span>])    </span><br><span class="line">    -&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="strict"><a href="#strict" class="headerlink" title="strict"></a>strict</h1><hr>
+<p><code>strict</code>方法用于设置是否严格检查字段名，用法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关闭字段严格检查</span></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">name</span>(<span class="string">&#x27;user&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">strict</span>(<span class="literal">false</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">insert</span>(<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+
+<p>注意，系统默认值是由数据库配置参数<code>fields_strict</code>决定，因此修改数据库配置参数可以进行全局的严格检查配置，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 关闭严格检查字段是否存在</span><br><span class="line">&#x27;fields_strict&#x27;  =&gt; false,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果开启字段严格检查的话，在更新和写入数据库的时候，一旦存在非数据表字段的值，则会抛出异常。</p>
+</blockquote>
+<h1 id="failException"><a href="#failException" class="headerlink" title="failException"></a>failException</h1><hr>
+<p><code>failException</code>设置查询数据为空时是否需要抛出异常，如果不传入任何参数，默认为开启，用于<code>select</code>和<code>find</code>方法，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据不存在的话直接抛出异常</span></span><br><span class="line">Db:<span class="title function_ invoke__">name</span>(<span class="string">&#x27;blog&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;status&#x27;</span> =&gt; <span class="number">1</span>])-&gt;<span class="title function_ invoke__">failException</span>()-&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line"><span class="comment">// 数据不存在返回空数组 不抛异常</span></span><br><span class="line">Db:<span class="title function_ invoke__">name</span>(<span class="string">&#x27;blog&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;status&#x27;</span> =&gt; <span class="number">1</span>])-&gt;<span class="title function_ invoke__">failException</span>(<span class="literal">false</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br></pre></td></tr></table></figure>
+
+<p>或者可以使用更方便的查空报错</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询多条</span></span><br><span class="line">Db:<span class="title function_ invoke__">name</span>(<span class="string">&#x27;blog&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;status&#x27;</span> =&gt; <span class="number">1</span>])-&gt;<span class="title function_ invoke__">selectOrFail</span>();</span><br><span class="line"><span class="comment">// 查询单条</span></span><br><span class="line">Db:<span class="title function_ invoke__">name</span>(<span class="string">&#x27;blog&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;status&#x27;</span> =&gt; <span class="number">1</span>])-&gt;<span class="title function_ invoke__">findOrFail</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="sequence"><a href="#sequence" class="headerlink" title="sequence"></a>sequence</h1><hr>
+<p><code>sequence</code>方法用于<code>pgsql</code>数据库指定自增序列名，其它数据库不必使用，用法为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">name</span>(<span class="string">&#x27;user&#x27;</span>)-&gt;<span class="title function_ invoke__">sequence</span>(<span class="string">&#x27;id&#x27;</span>)-&gt;<span class="title function_ invoke__">insert</span>([<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;thinkphp&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/avator.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/avator.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">凯瑟兰森</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://2486125878.github.io/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://2486125878.github.io/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/')">thinkphp链式操作</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/image/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/image/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://2486125878.github.io/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=thinkphp链式操作&amp;url=https://2486125878.github.io/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/&amp;pic=/image/mn.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://2486125878.github.io" target="_blank">凯瑟兰森</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/php/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>php<span class="tagsPageCount">8</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/image/mn.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/14/%E6%9F%A5%E8%AF%A2%E6%9E%84%E9%80%A0%E5%99%A8/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">查询构造器</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/14/thinkphp%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">thinkphp多种查询</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/03/13/thinkphp/" title="thinkphp"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-03-13</div><div class="title">thinkphp</div></div></a></div><div><a href="/2024/03/14/thinkphp%E5%90%8E%E5%8F%B0%E7%AC%94%E8%AE%B0/" title="thinkphp后台笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-03-14</div><div class="title">thinkphp后台笔记</div></div></a></div><div><a href="/2024/03/13/thinkphp-sql/" title="thinkphp_sql"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-03-13</div><div class="title">thinkphp_sql</div></div></a></div><div><a href="/2024/03/14/thinkphp%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B6%E4%BB%96/" title="thinkphp数据库其他"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-03-14</div><div class="title">thinkphp数据库其他</div></div></a></div><div><a href="/2024/03/14/thinkphp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="thinkphp学习笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-03-14</div><div class="title">thinkphp学习笔记</div></div></a></div><div><a href="/2024/03/14/thinkphp%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2/" title="thinkphp多种查询"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-03-14</div><div class="title">thinkphp多种查询</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/avator.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">...</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(/image/wechat_front.jpg) center center / 100% no-repeat"></div><div class="back face" style="background: url(/image/wechat_back.jpg) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">链式操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#where"><span class="toc-number">2.</span> <span class="toc-text">where</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.1.</span> <span class="toc-text">表达式查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">数组条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.2.1.</span> <span class="toc-text">普通查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9F%A5%E8%AF%A2-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">表达式查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">字符串条件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#table"><span class="toc-number">3.</span> <span class="toc-text">table</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">用法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#alias"><span class="toc-number">4.</span> <span class="toc-text">alias</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#field"><span class="toc-number">5.</span> <span class="toc-text">field</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.1.</span> <span class="toc-text">用于查询</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E5%AD%97%E6%AE%B5"><span class="toc-number">5.1.0.0.1.</span> <span class="toc-text">指定字段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8SQL%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.0.0.2.</span> <span class="toc-text">使用SQL函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84%E5%8F%82%E6%95%B0"><span class="toc-number">5.1.0.0.3.</span> <span class="toc-text">使用数组参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5"><span class="toc-number">5.1.0.0.4.</span> <span class="toc-text">获取所有字段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E6%8E%92%E9%99%A4"><span class="toc-number">5.1.0.0.5.</span> <span class="toc-text">字段排除</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E5%86%99%E5%85%A5"><span class="toc-number">5.2.</span> <span class="toc-text">用于写入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#order"><span class="toc-number">6.</span> <span class="toc-text">order</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#limit"><span class="toc-number">7.</span> <span class="toc-text">limit</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E7%BB%93%E6%9E%9C%E6%95%B0%E9%87%8F"><span class="toc-number">7.1.</span> <span class="toc-text">限制结果数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number">7.2.</span> <span class="toc-text">分页查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#page"><span class="toc-number">8.</span> <span class="toc-text">page</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#group"><span class="toc-number">9.</span> <span class="toc-text">group</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#having"><span class="toc-number">10.</span> <span class="toc-text">having</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#join"><span class="toc-number">11.</span> <span class="toc-text">join</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#join-1"><span class="toc-number">11.0.0.1.</span> <span class="toc-text">join</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#condition"><span class="toc-number">11.0.0.2.</span> <span class="toc-text">condition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#type"><span class="toc-number">11.0.0.3.</span> <span class="toc-text">type</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#union"><span class="toc-number">12.</span> <span class="toc-text">union</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#distinct"><span class="toc-number">13.</span> <span class="toc-text">distinct</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lock"><span class="toc-number">14.</span> <span class="toc-text">lock</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cache"><span class="toc-number">15.</span> <span class="toc-text">cache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="toc-number">15.1.</span> <span class="toc-text">缓存自动更新</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#comment"><span class="toc-number">16.</span> <span class="toc-text">comment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fetchSql"><span class="toc-number">17.</span> <span class="toc-text">fetchSql</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#force"><span class="toc-number">18.</span> <span class="toc-text">force</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bind"><span class="toc-number">19.</span> <span class="toc-text">bind</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#partition"><span class="toc-number">20.</span> <span class="toc-text">partition</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#strict"><span class="toc-number">21.</span> <span class="toc-text">strict</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#failException"><span class="toc-number">22.</span> <span class="toc-text">failException</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sequence"><span class="toc-number">23.</span> <span class="toc-text">sequence</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E5%90%8E%E5%8F%B0%E7%AC%94%E8%AE%B0/" title="thinkphp后台笔记"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp后台笔记"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E5%90%8E%E5%8F%B0%E7%AC%94%E8%AE%B0/" title="thinkphp后台笔记">thinkphp后台笔记</a><time datetime="2024-03-14T07:51:34.000Z" title="发表于 2024-03-14 15:51:34">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="thinkphp学习笔记"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp学习笔记"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="thinkphp学习笔记">thinkphp学习笔记</a><time datetime="2024-03-14T07:32:59.000Z" title="发表于 2024-03-14 15:32:59">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B6%E4%BB%96/" title="thinkphp数据库其他"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp数据库其他"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B6%E4%BB%96/" title="thinkphp数据库其他">thinkphp数据库其他</a><time datetime="2024-03-14T04:04:00.000Z" title="发表于 2024-03-14 12:04:00">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2/" title="thinkphp多种查询"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp多种查询"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2/" title="thinkphp多种查询">thinkphp多种查询</a><time datetime="2024-03-14T03:47:23.000Z" title="发表于 2024-03-14 11:47:23">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/" title="thinkphp链式操作"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp链式操作"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/" title="thinkphp链式操作">thinkphp链式操作</a><time datetime="2024-03-14T03:18:02.000Z" title="发表于 2024-03-14 11:18:02">2024-03-14</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="凯瑟兰森" target="_blank">凯瑟兰森</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://2486125878.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://2486125878.github.io/" title="凯"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/favicon.ico" alt="凯"/><span class="back-menu-item-text">凯</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa fa-archive faa-tada"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fas fa-folder-open faa-tada"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fas fa-music faa-tada"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/Gallery/"><i class="fas fa-images faa-tada"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/movies/"><i class="fas fa-video faa-tada"></i><span> 豆瓣电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="fas fa-heart faa-tada"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ajax/" style="font-size: 0.88rem;">Ajax<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>2</sup></a><a href="/tags/JAVA/" style="font-size: 0.88rem;">JAVA<sup>2</sup></a><a href="/tags/jQuery/" style="font-size: 0.88rem;">jQuery<sup>1</sup></a><a href="/tags/javascript/" style="font-size: 0.88rem;">javascript<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/nodeJs/" style="font-size: 0.88rem;">nodeJs<sup>1</sup></a><a href="/tags/php/" style="font-size: 0.88rem;">php<sup>8</sup></a><a href="/tags/vue/" style="font-size: 0.88rem;">vue<sup>1</sup></a><a href="/tags/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">创建博客记录<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 0.88rem;">数据可视化<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 0.88rem;">移动端<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("/image/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 凯瑟兰森 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://npm.elemecdn.com/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

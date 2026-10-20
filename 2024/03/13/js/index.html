@@ -1,0 +1,1409 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>javascript | 凯瑟兰森</title><meta name="keywords" content="javascript"><meta name="author" content="凯瑟兰森"><meta name="copyright" content="凯瑟兰森"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="javascript"><meta name="application-name" content="javascript"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="javascript"><meta property="og:url" content="https://2486125878.github.io/2024/03/13/js/index.html"><meta property="og:site_name" content="凯瑟兰森"><meta property="og:description" content="1.4浏览器执行JS简介浏览器分成两部分:渲染引擎和JS引擎 渲染引擎:用来解析HTML与CSS ,俗称内核,比如chrome浏览器的blink ,老版本的webkit Js引擎:也称为JS解释器。用来读取网页中的JavaScript代码,对其处理后运行,比如chrome浏览器的V8 浏览器本身并不"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://2486125878.github.io/image/mn.png"><meta property="article:author" content="凯瑟兰森"><meta property="article:tag" content="一个分享自由的博客"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://2486125878.github.io/image/mn.png"><meta name="description" content="1.4浏览器执行JS简介浏览器分成两部分:渲染引擎和JS引擎 渲染引擎:用来解析HTML与CSS ,俗称内核,比如chrome浏览器的blink ,老版本的webkit Js引擎:也称为JS解释器。用来读取网页中的JavaScript代码,对其处理后运行,比如chrome浏览器的V8 浏览器本身并不"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://2486125878.github.io/2024/03/13/js/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 凯瑟兰森","link":"链接: ","source":"来源: 凯瑟兰森","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '凯瑟兰森',
+  title: 'javascript',
+  postAI: '',
+  pageFillDescription: '1.4浏览器执行JS简介, 1.2变量的数据类型, 2.1简单数据类型(基本数据类型), 4.isNaN(), 2.字符串转义符, 4.2转换为字符串, 4.3转换为数字型(重点), 4.4转换为布尔型, 函数, 3.4小结, 4.5 breakcontinue return的区别., 5.arguments的使用, Javascript作用域, 2.2全局变量, 2.2局部变量, 2.3全局变量和局部变量的区别, 3作用域链：内部函数访问外部函数的变量采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链, 对象, 1.1什么是对象?, 1.2为什么需要对象, 2．创建对象的三种方式, 2.1利用字面量创建对象, 对象的调用, 变量、属性、函数、方法总结, 2.3利用构造函数创建对象, 2.4构造函数和对象, new在执行时会做四件事情, for in 语句用于对数组或者对象的属性进行循环操作。, 小结, 内置对象, 查文档, 2.1 MDN学习一个内置对象的使用只要学会其常用成员的使用即可, 2.2如何学习对象中的方法, Math, 描述, 3.1 Math概述, random()随机生成小数, 构造函数, 4.1 Date概述, 4.2 Date()方法的使用, 4.4获取日期的总的毫秒形式, 4.日期对象, 案例分析, 5.数组对象, instanceof和isArray, 5.3添加删除数组元素的方法, 5.4数组排序, 5.5数组索引方法, 5.6数组转换为字符串, 5.7课下查询, 6.1基本包装类型, 6.2字符串的不可变, 6.3根据字符返回位置, 6.4根据位置返回字符(重点), 6.5字符串操作方法(重点), 6.8课下查阅, 1.简单类型与复杂类型, 2.堆和栈, 3.简单类型的内存分配, 6.复杂类型传参, Web APIs介绍, 1.1 JS的组成, 1.2JS基础阶段以及Web APIs阶段, 2.1 API, 2.2 Web API, 2.3 API和Web API总结, DOM(重点), 1.1什么是DOM, 1.2 DOM树, 2.1如何获取页面元素, 2.2根据ID获取, 2.3根据标签名获取, 2.4通过HTML5新增的方法获取i9以上浏览器可以使用, 2.5获取特殊元素( body  html ), 3.事件基础, 3.1事件概述, 3.3执行事件的步骤, 3.3常见的鼠标事件, 4·操作元素, 4.1改变元素内容, 4.2常用元素的属性操作, 4.3表单元素的属性操作, 4.4样式属性操作, 4·操作元素总结, 4.6自定义属性的操作, 4.7 H5自定义属性, 5．节点操作, 5.1为什么学节点操作, 1利用DOM提供的方法获取元素, 2·利用节点层级关系获取元素, 5.2节点概述, 5.3节点层级, 3.兄弟节点, 5.4创建节点, 5.5添加节点, 5.5删除节点, 5.6复制节点(克隆节点), 5.8三种动态创建元素区别, 6.DOM重点核心, 6.1创建, 6.2增, 6.3删, 6.4改, 6.5查, 6.6属性操作, 6.7 事件操作, 1.注册事件(绑定事件), 1.2 addEventListener事件监听方式, 1.3 attachEvent事件监听方式, 1.4注册事件兼容性解决方案, 2.删除事件（解绑事件)., 2.1删除事件的方式, 2.2删除事件兼容性解决方案, 3.DOM事件流, 4.1什么是事件对象, 4.3事件对象的兼容性方案, 4.4事件对象的常见属性和方法, 5.1阻止事件冒泡的两种方式, 5.2阻止事件冒泡的兼容性解决方案, 6．事件委托（代理、委派), 事件委托, 事件委托的原理, 事件委托的作用, 7．常用的鼠标事件, 7.1常用的鼠标事件, 7.2鼠标事件对象, 8.1常用键盘事件, 8.2键盘事件对象, BOM, 1.2 BоM的构成, 2.1窗口加载事件, 总结, 2.2调整窗口大小事件, 3.1两种定时器, 3.2 setTimeout()定时器, 3.3停止setTimeout()定时器（只调用一次）, 3.4 setInterval()定时器（重复调用）, 3.5停止setInterval()定时器, 3.6 this, 4.JS执行机制, 4.1JS单线程, 4.3同步和异步, 4.4 JS执行机制, 5.location对象, 5.1什么是location对象, 5.2 URL, 5.3 location对象的属性, 5.4 location对象的方法, 6.navigator对象, 7.history对象, 1·元素偏移量offset系列, 1.1 offset概述, 1.2 offset与style区别, 2元素可视区client系列, 3.立即执行函数, 案例：淘宝flexible.js源码分析, 3.1元素scroll系列属性, 3.2页面被卷去的头部, 三大系列总结, mouseenter和mouseover的区别, mouseenter鼠标事件, 4．动画函数封装, 4.1动画实现原理, 4.2动画函数简单封装, 4.4缓动效果原理, 5．常见网页特效案例, 5.1节流阀, 移动端, 1.触屏事件, 1.1触屏事件概述, 1.2触摸事件对象(TouchEvent ), 1.3移动端拖动元素, 2.移动端常见特效, 2.2 click延时解决方案, 3.移动端常用开发插件, 3.1什么是插件, 3.3 Swiper插件的使用, 3.4其他移动端常见插件, 3.5插件的使用总结, 3.6练习移动端视频插件zy.media.js, 4.移动端常用开发框架, 4.1框架概述框架, 4.2 BootstrapBootstrap, 1.本地存储, 2.window.sessionStorage, 3.window.localStorage.浏览器执行简介浏览器分成两部分渲染引擎和引擎渲染引擎用来解析与俗称内核比如浏览器的老版本的引擎也称为解释器用来读取网页中的代码对其处理后运行比如浏览器的浏览器本身并不会执行代码而是通过内置引擎解释器来执行代码引擎执行代码时逐行解释每一句源码转换为机器语言然后由计算机去执行所以语言归为脚本语言会逐行解释执行语法页面文档对象模型浏览器对象模型可以将单行或少量代码写在标签的事件属性中以开头的属性如注意单双引号的使用在中我们推荐使用双引号中我们推荐使用单引号可读性差在中编写大量代码时不方便阅读引号易错引号多层嵌套匹配时非常容易弄混特殊情况下使用单行注释多行注释默认的快捷键多行注释中修改多行注释的快捷键方法说明归属浏览器弹出警示框浏览器浏览器控制台打印输出信息浏览器浏览器弹出输入框用户可以输入浏览器变量的数据类型变量是用来存储值的所在处它们有名字和数据类型变量的数据类型决定了如何将代表这些值的位存储到计算机的内存中是一种弱类型或者说动态语言这意味着不用提前声明变量的类型在程序运行过程中类型会被自动确定这是一个数字型是的这是一个字符串在代码运行时变量的数据类型是由引擎根据右边变量值的数据类型来判断的运行完毕之后变量就确定了数据类型拥有动态类型同时也意味着相同的变量可用作不同的型为数字为字符串简单数据类型基本数据类型中的简单数据类型及其说明如下简单数据类型说明默认值数字型包含整型值和浮点型值如布尔值类型如等价于和字符串类型如张三注意咱们里面字符串都带引号声明了变量但是没有给值此时声明了变量为空值现阶段我们只需要记住在中八进制前面加十六进制前面加的最大和最小值数字型三个特殊值代表无穷大大于任何数值代表无穷小小于任何数值代表一个非数值用来判断一个变量是否为非数字的类型返回或者是数字返回不是数字返回是一个非数字类型字符串引号嵌套可以用单引号嵌套双引号或者用双引号碳套单引号外双内单外单内双字符串转义符类似面的特殊字符字符串中也有特殊字符我们称之为转义符转义符都是开头的常用的转义符及其说明如下转义符解释说明换行符是的意思斜杠单引号双引号缩进空格是的意思字符串是由若干字符组成的这些字符的数量就是字符串的长度通过字符串的属性可以获取整个字符串的长度转换为字符串方式说明案例转成字符串强制转换转成字符串加号拼接字符串和字符串拼接的结果都是字符串我是字符串和使用方式不一样三种转换方式我们更喜欢用第三种加号拼接字符串转换方式这一种方式也称之为隐式转换转换为数字型重点方式说明案例函数将类型转成整数数值型函数将类型转成浮点数数值型强制转换函数将类型转换为数值型隐式转换利用算术运算隐式转换为数值型案例转换为布尔型方式说明案例函数其他类型转成布尔值代表空否定的值会被转换为如其余值都会被转换为标签可以实现多种滚动效果而且不仅可以移动文字也可以移动图片表格等语法说明在标记之间添加要进行滚动的内容常用到的两个事件当鼠标移出该区域时当鼠标移入该区域时代码示例常用到的两个事件的重要属性设置滚动的方式循环滚动默认效果只滚动一次就停止来回交替进行滚动语法设置滚动的方向可选值有如果未指定值默认值为语法设置滚动的速度以像素为单位默认值为语法设置两次滚动的时间间隔以毫秒为单位默认值为除非指定值否则将忽略任何小于的值并改为使用设置滚动的次数如果未指定值默认值为表示将连续滚动设置滚动的范围设置水平和垂直边距设置滚动的背景颜色函数小结函数可以带參数也可以不带参数声明函数的时候函数名括号里面的是形参形参的默认值为调用函数的时候函数名括号里面的是实参多个参数中间用逗号分隔形参的个数可以和实参个数不配但是结果不可预计我们尽量要匹配的区别结束当前的循环体如跳出本次循环继续执行下次循环如不仅可以退出循环还能够返回语句中的值同时还可以结束当前的函数体内的代码的使用当我们不确定有多少个参数传递的时候可以用来获取在中实际上它是当前函数的一个内置对象所有函数都内置了一个对象对象中存储了传递的所有实参展示形式是一个伪数组因此可以进行遍历伪数组具有以下特点具有属性按索引方式储存数据不具有数组的等方法作用域作用域就是代码名字在某个范围内起作用和效果目的是为了提高程序的可靠性更重要的是减少命名冲突的作用域之前全局作用域局部作用域全局作用域整个标签或者是一个单独的文件局部作用域函数作用域在函数内部就是局部作用域这个代码的名字只在函数内部起效果和作用注意如果在函数内部没有声明直接赋值的变量也属于全局变量注意函数的形参也可以看做是局部变量从执行效率来看全局变量和局部变量全局变量只有浏览器关闭的时候才会销毁比较占内存资源局部变量当我们程序执行完毕就会销毁比较节约内存资源全局变量在全局作用域下声明的变量叫做全局变量在函数外部定义的变量全局变量在代码的任何位置都可以使用在全局作用域下声明的变量是全局变量特殊情况下在函数内不使用声明的变量也是全局变量不建议使用局部变量在局部作用域下声明的变量叫做局部变量在函数内部定义的变量局部变量只能在该函数内部使用在函数内部声明的变量是局部变量函数的形参实际上就是局部变量全局变量和局部变量的区别全局变量在任何一个地方都可以使用只有在浏览器关闭时才会被销毁因此比较占内存局部变量只在函数内部使用当其所在的代码块被执行时会被初始化当代码块运行结束后就会被销毁因此更节省内存空间中没有块级作用域的作用域全局作用域局部作用域现阶段我们没有块级作用域我们也是在的时候新增的块级作用域块级作用域作用域链内部函数访问外部函数的变量采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链只要是代码就至少有一个作用域写在函数内部的局部作用域如果函数中还有函数那么在这个作用域中就又可以诞生一个作用域根据在内部函数可以访问外部函数变量的这种机制用链式查找决定哪些数据能被内部函数访问就称作作用域链就近原则对象什么是对象现实生活中万物皆对象对象一个具体的事物看得见摸得着的实物例如一本书辆汽车一个人可以是对象一个数据库张网页一写远程服务器的连接也可以是对象在中对象是一组无序的相关属性和方法的集合所有的事物都是对象例如字符串数值数组函数等对象是由属性和方法组成的属性事物的特征在对象中用属性来表示常用名词方法事物的行为在对象中用方法来表示常用动词为什么需要对象保存一个值时可以使用变量保存多个值一组值时可以使用数组如果要保存一个人的完整信息呢例如将张三疯的个人的信息保存在数组中的方式为张三疯男中的对象表达结构更清晰更强大张三疯的个人信息在对象中的表达结构如下张三疯姓名张三疯张三疯性别男张三疯年龄张三疯身高张三疯男创建对象的三种方式在中现阶段我们可以采用三种方式创建对象利用字面量创建对象利用创建对象利用构造函数创建对象利用字面量创建对象对象字面量就是花括号里面包含了表达这个具体事物对象的属性和方法对象的调用对象里面的属性调用对象属性名这个小点就理解为的对象里面属性的另一种调用方式对象属性名注意方括号里面的属性必须加引号我们后面会用对象里面的方法调用对象方法名注意这个方法名字后面一定加括号调用名字属性调用名字属性调用方法注意一定不要忘记带后面的括号变量属性函数方法总结变量单独声明赋值单独存在属性对象里面的变量称为属性不需要声明用来描述该对象的特征函数单独存在的通过函数名的方式就可以调用方法对象里面的函数称为方法方法不需要声明使用对象方法名的方式就可以调用方法用来描述该对象的行为和功能利用构造函数创建对象构造函数是一种特殊的函数主要用来初始化对象即为对象成员变量赋初值它总与运算符一起使用我们可以把对象中一些公共的属性和方法抽取出来然后封装到这个函数里面构造函数和对象构造函数如抽象了对象的公共部分封装到了函数里面它泛指某一大类创建对象如特指某一个通过关键字创建对象的过程我们也称为对象实例化在执行时会做四件事情在内存中创建一个新的空对象让指向这个新的对象执行构造函数里面的代码给这个新对象添加属性和方法返回这个新对象所以构造函数里面不需要语句用于对数组或者对象的属性进行循环操作小结对象可以让代码结构更清晰对象复杂数据类型本质对象就是一组无序的相关属性和方法的集合构造函数泛指某一大类比如苹果不管是红色苹果还是绿色苹果都统称为苹果用于对对象的属性进行循环操作内置对象中的对象分为种自定义对象内置对象浏览器对象前面两种对象是基础内容属于第三个浏览器对象属于我们独有的我们讲解内置对象就是指语言自带的一些对象这些对象供开发者使用并提供了一些常用的或是最基本而必要的功能属性和方法内置对象最大的优点就是帮助我们快速开发提供了多个内置对象等查文档学习一个内置对象的使用只要学会其常用成员的使用即可我们可以通过查文档学习可以通过来查询开发者网络提供了有关开放网络技术的信息包括和万维网及应用的如何学习对象中的方法查阅该方法的功能查看里面参数的意义和类型查看返回值的意义和类型通过进行测试是一个内置对象它具有数学常数和函数的属性和方法不是一个函数对象描述与其它全局对象不同的是不是一个构造器的所有属性和方法都是静态的你用到的常数可以用表示用作参数调函数中的常数是以全精度的实数定义的概述对象不是构造函数它具有数学常数和函数的属性和方法跟数学相关的运算求绝对值取整最大值等可以使用中的成员圆周率向下取整向上取整四舍五入就近取整注意结果是绝对值求最大和最小值随机生成小数随机生成整数构造函数需要注意的是只能通过调用构這函来实例化日期对象以常规函数调用它即不加操作符将会返回一个字符串而不是一个日期对象另外不像其他类型对象没有字面量格式如果没有输入可容数则的构造器会依据系统设置的当前时间来创建一个对象如果提供了至少两个参数其余的参数均会默认设置为如果没有提供参数或者参数常用写法数字型参数常用的写法数字型或者是字符型返回的是月不是月准确建议使用概述对象和对象不一样他是一个构造函数所以我们需要实例化后才能使用实例用来处理日期和时间方法的使用获取当前时间必须实例化构造函数的参数如果括号里面有时间就返回参数里面的时间例如日期格式字符串为可以写成或者日期格式化我们想要格式的日期要怎么办需要获取日期指定的部分所以我们要手动的得到这种格式方法名说明代码获取当年获取当月获取当天日期获取星期几周日到周六获取当前小时获取当前分钟获取当前秒钟不需要参数获取日期的总的毫秒形式对象是基于年月日世界标准时间起的毫秒数为什么计算机起始时间从年开始我们经常利用总的毫秒数来计算时间因为它更精确日期对象案例分析倒计时算法核心算法输入的时间减去现在的时间就是剩余的时间即倒计时但是不能拿着时分秒相减比如分减去分结果会是负数的用时间戳来做用户输入时间总的毫秒数减去现在时间的总的毫秒数得到的就是剩余时间的毫秒数把剩余时间总的毫秒数转换为天时分秒时间戳转换为时分秒转换公式如下总秒数计算天数总秒数计算小时总秒数计算分数总秒数计算当前秒数数组对象和当检测实例时优于因为能检测添加删除数组元素的方法方法名说明返回值参数末尾添加一个或多个元素注意修改原数组并返回新的长度删除数组最后一个元素把教组长度减无参数修改原数组返回它删除的元素的值参数向数组的开头添加一个或更多元素注意修改原数组并返回新的长度删除数组的第一个元素数组长度减无参数修改原数组并返回第一个元素的值数组排序方法名说明是否修改原数组颠倒数组中元素的顺序无参数该方法会改变原来的数组返回新数组对数组的元素进行排序该方法会改变原来的数组返回新数组数组索引方法方法名说明返回值数组中查找给定元素的第一个索引如果存在返回索引号如果不存在则返回在数组中的最后一个的索引如果存在返回素引号如果不存在则返回有一个数组要求去除数组中重复的元素核心算法我们遍历日数组然后拿着旧数组元素去查询新数组如果该元素在新数组里面没有出现过我们就添加否则不添加我们怎么知道该元素没有存在利用新数组数组元素如果返回时就说明新数组里面没有改元素数组转换为字符串方法名说明返回值把数组转换成字符串逗号分隔每一项返回一个字符串分隔符方法用于把数组中的所有元素转换为一个字符串返回一个字符串课下查询方法名说明返回值连接两个或多个数组不影响原数组返回一个新的数组数组截取返回被截取项目的新数组数组删除第几个开始要删除个数返回被删除项目的新数组注意这个会影响原数组和目的基本相同建议同学们重点看下基本包装类型为了方便操作基本数据类型还提供了三个特殊的引用类型和基本包装类型就是把简单数据类型包装成为复杂数据类型这样基本数据类型就有了属性和方法字符串的不可变指的是里面的值不可变虽然看上去可以改变内容但其实是地址变了内存中新开辟了一个内存空间根据字符返回位置字符串所有的方法都不会修改字符串本身字符串是不可变的操作完成会返回一个新的字符串方法名说明要查找的字符开始的位置返回指定内容在元字符串中的位置如果找不到就返回开始的位置是索引号从后往前找只找第一个匹配的根据位置返回字符重点方法名说明使用返回指定位置的字符字符串的索引号获取指定位置处字符的码素引号获取指定位置处字符支持和等效字符串操作方法重点方法名说明方法用于连接两个或多个字符串拼接字符串等效于更常用从位置开始索引号取的个数重点记住这个从位置开始截取到位置取不到他们俩都是索引号从位置开始截取到位置取不到基本和相同但是不接受负值课下查阅转换大写转换小写简单类型与复杂类型简单类型又叫做基本数据类型或者值类型复杂类型又叫做引用类型值类型简单数据类型基本数据类型在存储时变量中存储的是值本身因此做值类型引用类型复杂数据类型在存储时变量中存储的仅仅是地址引用因此叫做引用数据类型通过关键字创建的对象系统对象自定义对象如等堆和栈堆栈空间分配区别栈操作系统由操作系统自动分配释放存放函数的参数值局部变量的值等其操作方式类似于数据结构中的栈简单数据类型存放到栈里面堆操作系统存储复杂类型对象一般由程序员分配释放若程序员不释放由垃圾回收机制回收复杂数据类型存放到堆里面注意中没有堆栈的概念通过堆栈的方式可以让大家更容易理解代码的一些执行方式便于将来学习其他语言简单类型的内存分配值类型简单数据类型值类型变量的数据直接存放在变量栈空间中复杂类型传参函数的形参也可以看做是一个变量当我们把一个值类型变量作为参数传给函数的形参时其实是把变量在栈空间里的值复制了一份给形参那么在方法内部对形参做任何修改都不会影响到的外部变量函数的形参也可以看做是一个变量当我们把引用类型变量传给形参时其实是把变量在栈空间里保存的堆地址复制给了形参形参和实参其实葆存的是同一个堆地址所以操作的是同一个对象介绍的组成基础阶段以及阶段基础阶段我们学习的是标准规定的基本语法要求同学们掌握基础语法只学习基本语法做不了常用的网页交互效果目的是为了后面的课程打基础做铺垫阶段是组织的标准和是我们所独有的部分我们主要学习页面交互功能需要使用基础的课程内容做基础基础学习基础语法为后面作铺垫是的应用大量使用基础语法做交互效果应用程序编程接口是一些预先定义的函数目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力而又无需访问源码或理解内部工作机制的细节简单理解是给程序员提供的一种工具以便能更轻松的实现想要完成的功能是浏览器提供的一套操作浏览器功能和页面元素的和现阶段我们主要针对于浏览器讲解常用的主要针对浏览器做交互效果比如我们想要浏览器弹出一个警示框直接使用弹出详细因为很多所以我们将这个阶段称为和总结是为我们程序员提供的一个接口帮助我们实现某种功能我们会使用就可以了不必纠结内部如何实现主要是针对于浏览器提供的接口主要针对于浏览器做交互效果一般都有输入和输出函数的传参和返回值很多都是方法函数学习可以结合前面学习内置对象方法的思路学习重点什么是文档对象模型简称是组织推荐的处理可扩展标记语言或者的标准编程接口已经定义了一系列的接口通过这些接口可以改变网页的内容结构和样式树文档一个页面就是一个文档中使用表示元素页面中的所有标签都是元素中使用表示节点网页中的所有内容都是节点标签属性文本注释等中使用表示把以上内容都看做是对象如何获取页面元素在我们实际开发中主要用来操作元素我们如何来获取页面中的元素呢获取页面中的元素可以使用以下几种方式根据获取根据标签名获取通过新增的方法获取特殊元素获取根据获取使用方法可以获取带有的元素对象的方法返回一个匹配特定的元素由于元素的在大部分情况下要求是独一无二的这个方法自然而然地成为了一个高效查找特库元素的方法是一个对象如果当前文档中拥有特定的元素不存在则返回是写的字代表了所要查找的元素的唯一返回一个匹配到的若在当前下没有找到则返回根据标签名获取使用方法可以返回带有指定标签名的对象的集合还可以获取某个元素元素内部所有指定标签名的子元素标签名注意父元素必须是单个对象必须指明是哪一个元素对象获取的时候不包括元素自己通过新增的方法获取以上浏览器可以使用类名根据类名返回元素对象集合选择器根据指定选择器返回第一个元素对象選择器根据指定选择器返回获取特殊元素获取元素返回元素对象获取元素返回元素对象事件基础事件概述使我们有能力创建动态页面而事件是可以被侦测到的行为简单理解触发响应机制网页中的每个元素都可以产生某些可以触发的事件例如我们可以在用户点击某按钮时产生一个事件然后去执行某些操作执行事件的步骤获取事件源注册事件绑定事件添事件处理程序采取函数赋值形式常见的鼠标事件鼠标事件触发条件鼠标点击左键触发鼠标经过触鼠标离开触发获得鼠标焦点触发失去鼠标焦点触发鼠标移动触发鼠标弹起触发鼠标按下触发操作元素的操作可以改变网页内容结构和样式我们可以利用操作元素来改变元素里面的内容属性等注意以下都是属性改变元素内容从起始位置到终止位置的内容但它去除标签同时空格和换行也会去掉起始位置到终止位置的全部内容包括标签同时保留空格和换行常用元素的属性操作改变元素内容表单元素的属性操作利用可以操作如下表单元素的属性样式属性操作我们可以通过修改元素的大小颜色位置等样式行内样式操作用行内样式覆盖了类名样式操作样式很多用注意里面的样式采取驼峰命名法比如修改样式操作产生的是行内样式权重比较高注意如果样式修改较多可以采取操作类名方式更改元素样式因为是个保留字因此使用来操作元素类名属性会直接更改元素的类名会覆盖原先的类名可以利用循环设置一组元素的精灵图背景首先精灵图图片排列有规律的核心思路利用循环修改精灵图片的背景位置剩下的就是考验你的数学功底了循环里面的索引号就是每个图片的坐标首先表单需要个新事件获得焦点失去焦点如果获得焦点判断表单里面内容是否为默认文字如果是默认文字就清空表单内容如果失去焦点判断表单内容是否为空如果为空则表单内容改为默认文字操作元素总结操作元素是核心内容自定义属性的操作获取属性值属性获取属性值属性区别属性获取内置属性值元素本身自带的属性属性主要获得自定义的属性标准我们程序员自定义的属性设置属性值属性值设置内置属性值属性值移除属性属性自定义属性自定义属性目的是为了保存并使用数据有些数据可以保存到页面中而不用保存到数据库中自定义属性获取是通过属性获取但是有些自定义属性很容易引起歧义不容易判断是元素的内属性还是自定义属性给我们新增了自定义属性设置自定义属性规定自定义属性开头做为属性名并且赋值比如或者使用设置获取自定义属性兼容性获取新增或者才开始支持节点操作为什么学节点操作利用提供的方法获取元素等逻辑性不强繁琐利用节点层级关系获取元素利用父子兄节点关系获取元素逻辑性强但是兼容性稍差这两种方式都可以获取元素节点我们后面都会使用但是节点操作更简单节点概述网页中的所有内容都是节点标签属性文本注程等在中节点使用来表示树中的所有节点均可通过进行访问所有元素节点均可被修改也可以创建或删除一般地节点至少拥有节点类型节点名称和节点值这三个基本属性元素节点为属性节点为文本节点为文本节点包含文字空恪换行等我们在实际开发中节点操作主要操作的是元素节点节点层级利用树可以把节点划分为不同的层级关系常见的是父子兄层级关系父级节点属性可返回某节点的父节点注意是最近的一个父节点如果指定的节点没有父节点则返回子节点标准返回包含指定节点的子节点的集合该集合为即时更新的集合注意返回值里面包含了所有的子节点包括元素节点文本节点等如果只想要获得里面的元素节点则需要专门处理所以我们一般不提倡使用是元素节点获取所有的子元素节点非标准返回第一个子节点找不到则返回同样也是包含所有的节点返回第一个子节点找不到则返回同样也是包含所有的节点返回第一个子元素节点找不到则返回返回最后一个子元素节点找不到则返回注意这两个方法有兼容性问题以上才支持实际开发中和包含其他节点操作不方便而和又有兼容性问题那么我们如何获取第一个子元素节点或最后一个子元素节点呢兄弟节点返回当前元素的下一个兄弟节点找不到则返回同样也是包含所有的节点返回当前元素上一个兄弟节点找不到则返回同样也是包含所有的节点返回当前元素下一个兄弟元素节点找不到则返回返回当前元素上一个兄弟节点找不到则返回主意这两个方法有兼容性问题以上才支持如何解决兼容性问题自己封装一个兼容性的函数创建节点方法创建由指定的元素因为这些元素原先不存在是根据我们的需求动态生成的所以我们也称为动态创建元素节点添加节点方法将一个节点添加到指定父节点的子节点列表未尾类似于里面的伪元素指定元素方法将一个节点添加到父节点的指定子节点前面类似于里面的伪元素删除节点方法从中删除一个子节点返回删除的节点复制节点克隆节点方法返回调用该方法的节点的一个副本也称为克隆节点拷贝节点注意如果括号参数为空或者为则是浅拷贝即只克隆复制节点本身不克隆里面的子节点如果括号参数为则是深度拷贝会复制节点本身以及里面所有的子节点三种动态创建元素区别区别是直接将内容写入页面的内容流但是文档流执行完毕则它会导致页面全部重绘是将内容写入某个节点不会导致页面全部重绘创建多个元素效率更高不要拼接字符串采取数组形式拼接结构稍微复杂创建多个元素效率稍低一点点但是结构更清材总结不同浏览器下效率要比高重点核心文档对象模型简称是组织推荐的处理可扩展标记语言或者的标准编程接口已经定义了一系列的接口通过这些接口可以改变网页的内容结构和样式对于为了能够使操作就有了一套自己的编程接口对于使得形成一棵树包含文档元素节点我们获取过来的元素是一个对象所以称为文档对象模型关于操作我们主要针对于元素的操作主要有创建增删改查属性操作事件操作创建增删改主要修改的元素属性元素的内容属性表单的值等修改元素属性等修改普通元素内容修改表单元素等修改元素样式查主要获取查询的元素提供的方法古老用法不太推荐提供的新方法提倡利用节点操作获取元素父子兄提倡属性操作主要针对于自定义属性设置的属性值得到的属性值移除属性事件操作给元素注册事件采取事件源事件类型事件处理程序注册事件绑定事件注册事件概述给元素添加事件称为注册事件或者绑定事件注册事件有两种方式传统方式和方法监听注册方式传统注册方式利用开头的事件特点注册事件的唯一性同一个元素同一个事件只能设置一个处理函数最后注册的处理函数将会覆盖前面注册的处理函数方法监听注册方式标准推荐方式它是一个方法之前的不变持此方法可使用代替特点同一个元素同一个事件可以注册多个监听器按注册顺序依次执行事件监听方式方法将指定的监听器注册到目标对象上当该对象触发指定的事件时就会执行事件处理函数该方法接收三个参数事件类型字符串比如注意这里不要带事件处理函数事件发生时会调用该监听函数可选参数是一个布尔值默认是学完事件流后我们再进步学习事件监听方式方法将指定的监听器注册到目标对象上当该对象触发指定的事件时指定的回调函数就会被执行该方法接收两个参数事件类型字符串比如这里要带事件处理函数当目标触发事件时回调函数被调用注册事件兼容性解决方案判断当前浏览器是否支持方法第三个参数默认是相当于兼容性处理的原则首先照顾大多数浏览器再处理特殊浏览器删除事件解绑事件删除事件的方式传统注册方式方法监听注册方式删除事件兼容性解决方案判断当前浏览器是否支持方法第三个参数默认是事件流事件流描述的是从页面中接收事件的顺序事件发生时会在元素节点之间按照特定的顺字传播这个传播过程即事件流事件冒泡最早提出事件开始时由最具体的元素接收然后逐级向上传播到到最顶层节点的过程事件捕获网景最早提出由最顶层节点开始然后逐级向下传播到到最具体的元素接收的过程我们向水里面扔一块石头首先它会有一个下降的过程这个过程就可以理解为从最顶层向事件发生的最具体元素目标点的捕获过程之后会产生泡泡会在最低点最具体元素之后漂浮到水面上这个过程相当于事件冒泡事件发生时会在元素节点之间按照特定的顺序传播这个传播过程即事件流注意代码中只能执行捕获或者冒泡其中的一个阶段和只能得到冒泡阶段第三个参数如果是表示在事件捕获阶段调用事件处理程序如果是不写默认就是表示在事件冒泡阶段调用事件处理程序实际开发中我们很少使用事件捕获我们更关注事件冒泡有些事件是没有冒泡的比如事件冒泡有时候会带来麻烦有时候又会帮助很巧妙的做某些事件我们后面讲解什么是事件对象这个就是事件对象我们还喜欢的写成或者这个就是事件对象我们还喜欢的写成或者官方解释对象代表事件的状态比如键盘按键的状态鼠标的位置鼠标按钮的状态简单理解事件发生后跟事件相关的一系列信息数据的集合都放到这个对象里面这个对象就是事件对象它有很多属性和方法比如谁绑定了这个事件鼠标触发事件的话会得到鼠标的相关信息如鼠标位置键盘触发事件的话会得到腱盘的相关信息如按了哪个键这个是个形参系统帮我们设定为事件对象不需要传递实参过去当我们注册事件时对象就会被系统自动创建并依次传递给事件监听器事件处理函数事件对象的兼容性方案事件对象本身的获取存在兼容问题标准浏览器中是浏览器给方法传递的参数只需要定义形参就可以获取到在中浏览器不会给方法传递参数如果需要的话需要到中获取查找解决事件对象的常见属性和方法事件对象属性方法说明返回触发事件的对象标准返回触发事件的对象非标准使用返回事件的类型比如不带该属性阻止冒泡非标准使用该属性阻止默认事件默认行为非标准使用比如不让链接跳转该方法阻止默认事件默认行为标准比如不让链接跳转阻止冒泡标准阻止事件冒泡的两种方式事件冒泡开始时由最具体的元素接收然后逐级向上传播到到最页层节点事件冒泡本身的特性会带来的坏处也会带来的好处需要我们灵活掌握阻止事件冒泡标准写法利用事件对象里面的方法停止传播取消泡泡阻止事件冒泡的兼容性解决方案事件委托代理委派事件冒泡本身的特性会带来的坏处也会带来的好处需要我们灵活掌握生活中有如下场景咱们班有个学生快递员有个快递如果一个个的送花费时间较长同时每个学生领取的时候也需要排队领取也花费时间较长何如解决方案快递员把个快递委托给班主任班主任把这些快递放到办公室同学们下课自行领取即可优势快递员省事委托给班主任就可以走了同学们领取也方便因为相信班主任事件冒泡本身的特性会带来的坏处也会带来的好处需要我们灵活掌握程序中也有如此场景知否知否应该有弹框在手知否知否应该有弹框在手知否知否应该有弹框在手知否知否应该有弹框在手知否知否应该有弹框在手点击每个都会弹出对话框以前需要给每个注册事件是非常辛苦的而且访问的次数越多这就会延长整个页面的交互就绪时间事件委托事件委托也称为事件代理在里面称为事件委派事件委托的原理重要不是每个子节点单独设置事件监听器而是事件监听器设置在其父节点上然后利用冒泡原理影响设置每个子节点以上案例给注册点击事件然后利用事件对象的来找到当前点击的因为点击事件会冒泡到上有注册事件就会触发事件监听器事件委托的作用我们只操作了一次提高了程序的性能常用的鼠标事件常用的鼠标事件禁止鼠标右键菜单主要控制应该何时显示上下文菜单主要用于程序员取消默认的上下文某单禁止鼠标选中开始选中鼠标事件对象对象代表事件的状态跟事件相关的一系列信息的集合现阶段我们主要是用鼠标事件对象和键盘事件对象鼠标事件对象说明返回鼠标相对于浏览器窗口可视区的坐标返回鼠标相对于浏览器窗口可视区的坐标返回鼠标相对于文档页面的坐标支持返回鼠标相对于文档页面的坐标支持返回鼠标相对于电脑屏幕的坐标返回鼠标相对于电脑屏幕的坐标常用键盘事件事件除了使用鼠标触发还可以使用鍵盘触发键盘事件触发条件某个键盘按键被松开时触发某个鍵盘按键被按下时触发某个键盘按键被按下时触发但是它不识别功能键比如箭头等注意如果使用不需要加和前面个的区别是它不识别功能键比如左右箭头等三个事件的执行顺序是键盘事件对象键盘事件对象属性说明返回该键的值注意和不区分字母大与区分字母大小写在我们实际开发中我们更多的使用和它能识别所有的键包括功能键不识别功能键但是属性能区分大小写返回不同的值什么是即浏览器对象模型它提供了独立于内容而与浏览器窗口进行交互的对象其核心对象是由一系列相关的对象构成并且每个对象都提供了很多方法与属性缺乏标准语法的标准化组织是的标准化组织是最初是浏览器标准的一部分文档对象模型就是把文档当做一个对象来看待的顶级对象是主要学习的是操作页面元素是标准规范浏览器对象模型把浏览器当做一个对象来看待的顶级对象是学习的是浏览器窗口交互的一些对象是浏览器厂商在各自浏览器上定义的兼容性较差比更大包含的构成对象是浏览器的顶级对象它具有双重角色它是访问浏览器窗口的一个接口它是一个全局对象定义在全局作用域中的变量函数都会变成对象的属性和方法在调用的时候可以省略前面学习的对话框都属于对象方法如等注意下的一个特殊属性窗口加载事件或者是窗口页面加载事件当文档内容完全加载完成会触发该事件包括图像脚本文件文件等就调用的处理函数注意有了就可以把代码写到页面元素的上方因为是等页面内容全部加载完毕再去执行处理函数传统注册事件方式只能写一次如果有多个会以最后一个为准如果使用则没有限制事件触发时仅当加载完成不包括样式表图片等等以上才支持如果页面的图片很多的话从用户访问到触发可能需要较长的时间交互效果就不能实现必然影响用户的体验此时用事件比较合适总结等页面内容全部加载完毕包含页面元素图片等等是加载完毕不包含图片等就可以执行加载速度比更快一些调整窗口大小事件是调整窗口大小加载事件当触发时就调用的处理函数注意只要窗口大小发生像素变化就会触发这个事件我们经常利用这个事件完成响应式布局当前屏幕的宽度两种定时器对象给我们提供了个非常好用的方法定时器定时器调用函数延迟的毫秒数方法用于设置一个定时器该定时器在定时器到期后执行调用函数这个在调用的时候可以省略这个延时时间单位是毫秒但是可以省略如果省略默认的是这个调用函数可以直接写函数还可以写函数名还有一个写法函数名我们不提倡这个写法页面中可能有很多的定时器我们经常给定时器加标识符名字这个调用函数我们也称为回调函数普通函数是按照代码顺序直接调用而这个函数需要等待时间时间到了才去调用这个函数因此称为回调函数简单理解回调就是回头调用的意思上一件事干完再回头再调用这个函数以前我们讲的或者里面的函数也是回调函数停止定时器只调用一次定时器名字方法取消了先前通过调用建立的定时器注意可以省略定时器重复调用回函数间隔的毫秒数方法重复调用一个函数每隔这个时间就去调用一次回调函数注意可以省略这个调用函数可以直接写函数或者写函数名或者采取字符串函数名三种形式间隔的毫秒数省略默认是如果写必须是毫秒表示每隔多少毫秒就自动调用这个函数因为定时器可能有很多所以我们经常给定时器赋值一个标识符停止定时器方法取消了先前通过调用建立的定时器注意可以省略里面的参数就是定时器的标识符的指向在函数定义的时候是确定不了的只有函数执行的时候才能确定到底指向谁一般情况下的最终指向的是那个调用它的对象现阶段我们先了解一下几个指向全局作用域或者普通函数中指向全局对象注意定时器里面的指向执行机制单线程语言的一大特点就是单线程也就是说同一个时间只能做一件事这是因为这门脚本语言诞生的使命所致是为处理页面中用户的交互以及操作而诞生的比如我们对某个元素进行添加和删除操作不能同时进行应该先进行添加之后再删除单线程就意味着所有任务需要排队前一个任务结束才会执行后一个任务这样所导致的问题是如果执行的时间过长这样就会造成页面的渲染不连贯导致页面渲染加载阻塞的感觉同步和异步为了解决这个问题利用多核的计算能力提出标准允许脚本创建多个线程于是中出现了同步和异步同步前一个任务结束后再执行后一个任务程序的执行顺字与任务的排列顺序是一致的同步的比如做饭的同步做法我们要烧水煮饭等水开了分钟之后再去切菜炒菜异步你在做一件事情时因为这件事情会花费很长时间在做这件事的同时你还可以去处理其他事情比如做饭的异步做法我们在烧水的同时利用这分钟去切菜炒菜他们的本质区别这条流水线上各个流程的执行顺序不同同步任务同步任务都在主线程上执行形成一个执行栈异步任务的异步是通过回调函数实现的一般而言异步任务有以下三种类型普通事件如等资源加载如等定时器包括等异步任务相关回调函数添加到任务队列中任务队列也称为消息队列执行机制先执行执行栈中的同步任务异步任务回调函数放入任务队列中一旦执行栈中的所有同步任务执行完毕系统就会按次序读取任务队列中的异步任务于是被读取的异步任务结束等待状态进入执行栈开始执行由于主线程不断的重复获得任务执行任务再获取任务再执行所以这种机制被称为事件循环对象什么是对象对象给我们提供了一个属性用于获取或设置窗体的并且可以用于解析因为这个属性返回的是一个对象所以我们将这个属性也称为对象统一资源定位符是互联网上标准资源的地址互联网上的每个文件都有一个唯一的它包含的信息指出文件的位置以及浏览器应该怎么处理它的一股语法格式为组成说明通信协议常用的等主机域名端口号可选省略时使用方案的默认端口如的默认端口为路径由零或多个符号隔开的字符串一般用来表示主机上的一个目录或文件地址参数以键值对的形式通过符号分隔开来片段后面内容常见于链接锚点对象的属性对象属性返回值获取或者设置整个返回主机域名返回端口号如果未写返回空字符串返回路径返回参数返回片段后面内容常见于链接锚点重点记住和对象的方法对象方法返回值跟一样可以跳转页面也称为重定向页面替换当前页面因为不记录历史所以不能后退页面重新加载页面相当于刷新按钮或者如果参数为强制刷新对象对象包含有关浏览器的信息它有很多属性我们最常用的是该属性可以返回由客户机发送服务器的头部的值下面前端代码可以判断用户那个终端打开页面实现跳转手机电脑对象对象给我们提供了一个对象与浏览器历史记录进行交互该对象包含用户在浏览器窗口中访问过的对象方法作用可以后退功能前进功能参数前进后退功能参数如果是前进个页面如果是后退个页面元素偏移量系列概述翻译过来就是偏移量我们使用系列相关属性可以动态的得到该元素的位置偏移大小等获得元素距离带有定位父元素的位置获得元素自身的大小宽度高度注意返回的数值都不带单位系列常用属性系列属性作用返回作为该元素带有定位的父级元素如果父级都没有定位则返回返回元素相对带有定位父元素上方的偏移返回元素相对带有定位父元素左边框的偏移返回自身包括边框内容区的宽度返回数值不带单位返回自身包括边框内容区的高度返回数值不带单位与区别可以得到任意样式表中的样式值系列获得的数值是没有单位的包含等属性是只读属性只能获取不能赋值所以我们想要获取元素大小位置用更合适只能得到行内样式表中的样式值获得的是带有单位的字符串获得不包含和的值是可读写属性可以获取也可以赋值所以我们想要给元素更改值则需要用改变元素可视区系列翻译过来就是客户端我们使用系列的相关属性来获取元素可视区的相关信息通过系列的相关属性可以动态的得到该元素的边框大小元素大小等系列属性作用返回元素上边框的大小返回元素左边框的大小返回自身包括内容区的宽度不含边框返回数值不带单位返回自身包括内容区的高度不含边框返回数值不带单位立即执行函数立即执行函数或者主要作用创建一个独立的作用域避免了命名冲突问题案例淘宝源码分析下面三种情况都会刷新页面都会触发事件标签的超链接或者刷新按钮强制刷断前进后退按钮但是火狐中有个特点有个往返缓存这个缓存中不仅保存着页面数据还保存了和的状态实际上是将整个页面都保存在了内存里所以此时后退按钮不能刷新页面此时可以使用事件来触发这个事件在页面显示时触发无论页面是否来自缓存在重新加载页面中会在或件触发后触发根据事件对象中的来判断是否是缓存中的页面触发的事件注意这个事件给添加元素系列属性翻译过来就是滚动的我们使用系列的相关属性可以动态的得到该元素的大小滚动距离等系列属性作用返回被卷去的上侧距离返回数值不带单位返回被卷去的左侧距离返回数值不带单位返回自身实际的宽度不含边框返回数值不带单位返回自身实际的高度不含边框返回数值不带单位内容的实际大小页面被卷去的头部如果浏览器的高或宽度不足以显示整个页面时会自动出现滚动条当滚动条向下滚动时页面上面被隐藏掉的高度我们就称为页面被卷去的头部滚动条在滚动时会触发事件需要用到页面滚动事件因为是页面滚动所以事件源是滚动到某个位置就是判断页面被卷去的上部值页面被卷去的头部可以通过获得如果是被卷去的左侧注意元素被卷去的头部是如果是页面被卷去的头部则是新方法和开始支持使用的时候三大系列总结三大系列大小对比作用返回自身包括边框内容区的宽度返回数值不带单位返回自身包括内容区的宽度不含边框返回数值不带单位返回自身实际的宽度不含边框返回数值不带单位他们主要用法系列经常用于获得元素位置经常用于获取元素大小经常用于获取滚动距离注意页面滚动的距离通过获得和的区别鼠标事件当鼠标移动到元素上时就会触发事件类似它们两者之间的差别是鼠标经过自身盒子会触发经过子盒子还会触发只会经过自身盒子触发之所以这样就是因为不会冒泡跟搭配鼠标离开同样不会冒泡动画函数封装动画实现原理核心原理通过定时器不断移动盒子位置实现步骤获得盒子当前位置让盒子在当前位置加上个移动距离利用定时器不断重复这个操作加一个结束定时器的条件注意此元素需要添加定位才能使用动画函数简单封装注意函数需要传递个参数动画对象和移动到的距离缓动效果原理缓动动画就是让元素运动速度有所变化最常见的是让速度慢慢停下来思路让盒子每次移动的距离慢慢变小速度就会慢慢落下来核心算法目标值现在的位置做为每次移动的距离步长停止的条件是让当前盒子位置等于目标位置就停止定时器常见网页特效案例节流阀防止轮播图按纽连续点击造成播放过快节流阀目的当上一个函数动画内容执行完毕再去执行下一个函鼓动画让事件无法连续身发核心实现思路利用回调函数添加一个变量来控制锁住函数和解锁函数开始设置一个变量闭水龙头利用回调函数动画执行完毕打开水龙头移动端触屏事件触屏事件概述移动端浏览器兼容性较好我们不需要考虑以前的兼容性问题可以放心的使用原生书写效果但是移动端也有自己独特的地方比如触屏事件也称触摸事件和都有对象代表一个触摸点触摸点可能是一根手指也可能是一根触摸笔触屏事件可响应用户手指或触空笔对屏幕或者触控板操作触屏事件说明手指触摸到一个元素时触发手指在一个元素上滑动时触发手指从一个元素上移开时触发触摸事件对象是一类描述手指在触莫平面触摸屏触莫板等的状态变化的事件这类事件用于描述一个或多个触点使开发者可以检测触点的移动触点的增加和减少等等三个事件都会各自有事件对象触摸列表说明正在触摸屏幕的所有手指的一个列表正在触摸当前元素上的手指的一个列表手指状态发生了改变的列表从无到有从有到无变化因为平时我们都是给元素注册触摸事件所以重点记住移动端拖动元素可以实现拖动元素但是拖动元素需要当前手指的坐标值我们可以使用里面的和移动端拖动的原理手指移动中计算出手指移动的距离然后用盒子原来的位置手指移动的距离手指移动的距离手指滑动中的位置减去手指刚开始触摸的位置拖动元素三步曲触摸元素获取手指初始坐标同时获得盒子原来的位置移动手指计算手指的滑动距离并且移动盒子离开手指注意手指移动也会触发滚动屏幕所以这里要阻止默认的屏幕滚动移动端常见特效属性属性是新增的一个属性返回元素的类名但是以上版本支持该属性用于在元素中添加移除及切换类有以下方法添加类类名移除类类名切换类类名延时解决方案移动端事件会有的延时原因是移动端屏幕双击会缩放页面解决方案禁用缩放浏览器禁用默认的双击缩放行为并且去掉的点击延迟利用事件自己封装这个事件解决延迟原理就是当我们手指触摸屏幕记录当前触摸时间当我们手指离开屏幕用离开的时间减去触莫的时间如果时间小于并且没有滑动过屏幕那么我们就定义为点击封装解决延时记录触摸时候的时间变量记录触摸时间看看是否有滑动有滑动算拖拽不算点击如果手指触摸和离开时间小于算点击执行回调函数取反重置调用执行代码移动端常用开发插件什么是插件移动端要求的是快速开发所以我们经常会借助于一些插件来帮我完成操作那么什么是插件呢插件是文件它遵循一定规范编写方便程序展示效果拥有特定功能目方便调用如轮播图和瀑布流插件特点它一般是为了解决某个问题而专门存在其功能单一并且比较小我们以前写的也算一个最简单的插件插件解决延迟使用延时官网地址插件的使用中文官网地址引入插件相关文件按照规定语法使用其他移动端常见插件插件的使用总结确认插件实现的功能去官网查看使用说明下载插件打开实例文件查看需要引入的相关文件并且引入复制实例文件中的结构样式以及代码练习移动端视频插件给我们提供了标签但是浏览器的支持情况不同不同的视频格式文件我们可以通过解决但是外观样式还有暂停播放全屏等功能我们只能自己写代码解决这个时候我们可以使用插件方式来制作移动端常用开发框架框架概述框架顾名思义就是一套架构它会基于自身的特点向用户提供一套较为完整的解决方案框架的控制权在框架本身使用者要按照框架所规定的某种规范进行开发插件一般是为了解决某个问题而专门存在其功能单一并且比较小前端常用的框架有等既能开发端也能开发移动端前端常用的移动端插件有等框架大而全一整套解决方案插件小而专一某个功能的解决方案是一个简洁直观强悍的前端开发框架它让开发更迅速简单它能开发端也能开发移动端插件使用步骤引入相关文件复制结构修改对应样式修改相应参数本地存储随着互联网的快速发展基于网页的应用越来越普遍同时也变的越来越复杂为了满足各种各样的需求会常性在本地存储大量的数据规范提出了相关解决方案本地存储特性数据存储在用户浏览器中设置读取方便甚至页面刷新不丢失数据容量较大约约只能存储字符串可以将对象编码后存储生命周期为关闭浏览器窗口在同一个窗口页面下数据可以共享以键值对的形式存储使用存储数据获取数据删除数据删除所有数据生命周期永久生效除非手动删除否则关闭页面也会存在可以多窗口页面共享同一浏览器可以共享以键值对的形式存储使用存储数据获取数据删除数据删除所有数据',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-13 16:21:42',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="凯瑟兰森" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/image/loading-avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">凯瑟兰森</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa fa-archive faa-tada"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fas fa-folder-open faa-tada"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fas fa-music faa-tada"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/Gallery/"><i class="fas fa-images faa-tada"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/movies/"><i class="fas fa-video faa-tada"></i><span> 豆瓣电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="fas fa-heart faa-tada"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/image/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="/image/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/image/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/image/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ajax/" style="font-size: 1.05rem;">Ajax<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>2</sup></a><a href="/tags/JAVA/" style="font-size: 1.05rem;">JAVA<sup>2</sup></a><a href="/tags/jQuery/" style="font-size: 1.05rem;">jQuery<sup>1</sup></a><a href="/tags/javascript/" style="font-size: 1.05rem;">javascript<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/nodeJs/" style="font-size: 1.05rem;">nodeJs<sup>1</sup></a><a href="/tags/php/" style="font-size: 1.05rem;">php<sup>8</sup></a><a href="/tags/vue/" style="font-size: 1.05rem;">vue<sup>1</sup></a><a href="/tags/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">创建博客记录<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 1.05rem;">数据可视化<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 1.05rem;">移动端<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">20</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url">前端</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/javascript/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>javascript</span></a></span></div></div><h1 class="post-title" itemprop="name headline">javascript</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-03-13T07:14:59.000Z" title="发表于 2024-03-13 15:14:59">2024-03-13</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-03-13T08:21:42.000Z" title="更新于 2024-03-13 16:21:42">2024-03-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为太原"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>太原</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/image/mn.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://2486125878.github.io/2024/03/13/js/"><header><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url">前端</a><a href="/tags/javascript/" tabindex="-1" itemprop="url">javascript</a><h1 id="CrawlerTitle" itemprop="name headline">javascript</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">凯瑟兰森</span><time itemprop="dateCreated datePublished" datetime="2024-03-13T07:14:59.000Z" title="发表于 2024-03-13 15:14:59">2024-03-13</time><time itemprop="dateCreated datePublished" datetime="2024-03-13T08:21:42.000Z" title="更新于 2024-03-13 16:21:42">2024-03-13</time></header><h1 id="1-4浏览器执行JS简介"><a href="#1-4浏览器执行JS简介" class="headerlink" title="1.4浏览器执行JS简介"></a>1.4浏览器执行JS简介</h1><p><strong>浏览器分成两部分:渲染引擎和JS引擎</strong></p>
+<p><strong>渲染引擎:用来解析HTML与CSS ,俗称内核,比如chrome浏览器的blink ,老版本的webkit</strong></p>
+<p><strong>Js引擎:也称为JS解释器。用来读取网页中的JavaScript代码,对其处理后运行,比如chrome浏览器的V8</strong></p>
+<p><strong>浏览器本身并不会执行IS代码,而是通过内置JavaScript引擎(解释器)来执行JS代码。S引擎执行代码时逐行解释每一句源码(转换为机器语言) ,然后由计算机去执行,所以JavaScript语言归为脚本语言,会逐行解释执行。</strong></p>
+<p>​			<strong>JavaScript</strong></p>
+<p><strong>ECMAScript   Javascript语法</strong></p>
+<p><strong>DOM			页面文档对象模型</strong></p>
+<p><strong>BOM			浏览器对象模型</strong></p>
+<p><strong>可以将单行或少量JS代码写在HTML标签的事件属性中(以on开头的属性),如: onclick</strong></p>
+<p><strong>注意单双引号的使用:在HTML中我们推荐使用双引号,JS中我们推荐使用单引号</strong></p>
+<p><strong>可读性差,在html中编写IS大量代码时,不方便阅读;引号易错,</strong></p>
+<p><strong>引号多层嵌套匹配时,非常容易弄混;</strong></p>
+<p><strong>特殊情况下使用</strong></p>
+<p><strong>单行注释ctrl +&#x2F;</strong></p>
+<p><strong>多行注释 	默认的快捷键shift + alt +a</strong></p>
+<p><strong>多行注释 vscode中修改多行注释的快捷键: ctrl + shift +&#x2F;</strong></p>
+<p><strong>方法									说明																	归属</strong></p>
+<p><strong>alert(msg)						浏览器弹出警示框											浏览器</strong></p>
+<p><strong>console.log(msg)			浏览器控制台打印输出信息						   浏览器</strong></p>
+<p><strong>prompt(info)					浏览器弹出输入框,用户可以输入				  浏览器</strong></p>
+<h2 id="1-2变量的数据类型"><a href="#1-2变量的数据类型" class="headerlink" title="1.2变量的数据类型"></a>1.2变量的数据类型</h2><p><strong>变量是用来存储值的所在处,它们有名字和数据类型。变量的数据类型决定了如何将代表这些值的位存储到计算机的内存中。 JavaScript是一种弱类型或者说动态语言。这意味着不用提前声明变量的类型,在程序运行过程中,类型会被自动确定。</strong></p>
+<p><strong>var age &#x3D; 10;&#x2F;&#x2F;这是一个数字型</strong></p>
+<p><strong>var arexouok &#x3D;‘是的’; &#x2F;&#x2F;这是一个字符串</strong></p>
+<p><strong>在代码运行时,变量的数据类型是由JS引擎根据&#x3D;右边变量值的数据类型来判断的,运行完毕之后,变量就确定了数据类型。</strong></p>
+<p><strong>Javascript拥有动态类型,同时也意味着相同的变量可用作不同的型:</strong></p>
+<p><strong>var x&#x3D;6;x为数字</strong></p>
+<p><strong>var x&#x3D; “Bil”;x为字符串</strong> </p>
+<h2 id="2-1简单数据类型-基本数据类型"><a href="#2-1简单数据类型-基本数据类型" class="headerlink" title="2.1简单数据类型(基本数据类型)"></a>2.1简单数据类型(基本数据类型)</h2><p><strong>JavaScript中的简单数据类型及其说明如下:</strong></p>
+<p><strong>简单数据类型					说明																						默认值</strong></p>
+<p><strong>Number						数字型,包含整型值和浮点型值,如21、0.21 								0</strong></p>
+<p><strong>Boolean						布尔值类型,如true、false,等价于1和0									false</strong></p>
+<p><strong>string 							字符串类型,如”张三”注意咱们js里面,字符串都带引号			“”</strong></p>
+<p><strong>Undefined					var a;声明了变量a但是没有给值,此时a&#x3D; undefined			undefined</strong></p>
+<p><strong>Null								var a &#x3D;null;声明了变量a为空值													null</strong> </p>
+<p><strong>现阶段我们只需要记住,在JS中八进制前面加0,十六进制前面加Ox</strong> </p>
+<p><strong>JavaScriptthf的最大和最小值</strong></p>
+<p><strong>alert (Number.MAX_VALUE); &#x2F;&#x2F; 1.7976931348623157e+308</strong> </p>
+<p><strong>alert (Number.MIN VALUE); &#x2F;&#x2F; 5e-324</strong></p>
+<p><strong>数字型三个特殊值</strong></p>
+<p><strong>alert(Infinity); &#x2F;&#x2F; Infinity</strong></p>
+<p><strong>alert(nfinity) ; &#x2F;&#x2F;-Infinity</strong></p>
+<p><strong>alert (NaN);NaN</strong></p>
+<p><strong>Infinity ,代表无穷大,大于任何数值</strong></p>
+<p><strong>-Infinity ,代表无穷小,小于任何数值</strong></p>
+<p><strong>NaN , Not a number,代表一个非数值</strong></p>
+<h2 id="4-isNaN"><a href="#4-isNaN" class="headerlink" title="4.isNaN()"></a>4.isNaN()</h2><p><strong>用来判断一个变量是否为非数字的类型,返回true或者falsex</strong></p>
+<p><strong>x是数字,返回false</strong></p>
+<p><strong>isNaN (x)</strong></p>
+<p><strong>x不是数字,返回true</strong> </p>
+<p><strong>x是一个非数字类型</strong></p>
+<p><strong>1,字符串引号嵌套JS可以用单引号嵌套双引号,或者用双引号碳套单引号(外双内单,外单内双)</strong></p>
+<h2 id="2-字符串转义符"><a href="#2-字符串转义符" class="headerlink" title="2.字符串转义符"></a>2.字符串转义符</h2><p><strong>类似HTML面的特殊字符,字符串中也有特殊字符,我们称之为转义符。</strong></p>
+<p><strong>转义符都是\开头的,常用的转义符及其说明如下:</strong></p>
+<p><strong>转义符					解释说明</strong></p>
+<p><strong>\n						换行符,n是newline的意思</strong></p>
+<p><strong>\\						斜杠</strong></p>
+<p><strong>\‘					     单引号</strong></p>
+<p><strong>\“						双引号</strong></p>
+<p><strong>\t						tab缩进</strong></p>
+<p><strong>\b					空格,b是blank的意思</strong></p>
+<p><strong>字符串是由若干字符组成的,这些字符的数量就是字符串的长度。通过字符串的length属性可以获取整个字符串的长度。</strong></p>
+<p><strong>console. log(true +1); &#x2F;&#x2F; 2</strong></p>
+<p><strong>console.log (false + 1); &#x2F;&#x2F; 1</strong></p>
+<h2 id="4-2转换为字符串"><a href="#4-2转换为字符串" class="headerlink" title="4.2转换为字符串"></a>4.2转换为字符串</h2><p><strong>方式									说明																案例</strong></p>
+<p><strong>toString()						  转成字符串													var num&#x3D; 1; alert(num.toString();</strong></p>
+<p><strong>String()强制转换			  转成字符串												    var num &#x3D;1; alert(String(null);</strong></p>
+<p><strong>加号拼接字符串			   和字符串拼接的结果都是字符串				var num &#x3D;1; alert(num+ “我是字符串”);</strong></p>
+<p><strong>toString0和String0使用方式不一样。</strong></p>
+<p><strong>三种转换方式,我们更喜欢用第三种加号拼接字符串转换方式,这一种方式也称之为隐式转换。</strong></p>
+<h2 id="4-3转换为数字型-重点"><a href="#4-3转换为数字型-重点" class="headerlink" title="4.3转换为数字型(重点)"></a>4.3转换为数字型(重点)</h2><p><strong>方式												 说明</strong>																			<strong>案例</strong></p>
+<p><strong>parselnt(string)函数					将string类型转成整数数值型							parselnt(78’)</strong></p>
+<p><strong>parseFloat(string)函数			   将string类型转成浮点数数值型						parsefloat(‘78.21’)</strong></p>
+<p><strong>Number()强制转换函数			  将string类型转换为数值型								Number(‘12’)</strong></p>
+<p><strong>js隐式转换(- * &#x2F;)							利用算术运算隐式转换为数值型案例				‘12-0’</strong></p>
+<h2 id="4-4转换为布尔型"><a href="#4-4转换为布尔型" class="headerlink" title="4.4转换为布尔型"></a>4.4转换为布尔型</h2><p><strong>方式						说明												案例</strong></p>
+<p><strong>Boolean()函数		其他类型转成布尔值				Boolean(‘true’);</strong></p>
+<p><strong>代表空、否定的值会被转换为false ,如 0,NaN, null, undefined</strong></p>
+<p><strong>其余值都会被转换为true</strong></p>
+<p><strong>tml标签marquee可以实现多种滚动效果，而且不仅可以移动文字，也可以移动图片，表格等。</strong><br><strong>语法：<marquee>…</marquee>；</strong><br><strong>说明：在标记之间添加要进行滚动的内容。</strong></p>
+<p><strong>marquee常用到的两个事件：</strong><br><strong>onMouseOut&#x3D;“this.start()” 当鼠标移出该区域时</strong><br><strong>onMouseOver&#x3D;“this.stop()” 当鼠标移入该区域时</strong></p>
+<p><strong>代码示例：</strong><br><strong><marquee onMouseOut="this.start()" onMouseOver="this.stop()">marquee常用到的两个事件</marquee></strong></p>
+<p><strong>marquee的重要属性：</strong><br><strong>1.behavior设置滚动的方式；</strong><br><strong>scroll:循环滚动，默认效果；</strong><br><strong>slide:只滚动一次就停止；</strong><br><strong>alternate:来回交替进行滚动。</strong><br><strong>语法：<marquee behavior="滚动方式">…</marquee></strong></p>
+<p><strong>2.direction设置滚动的方向；</strong><br><strong>可选值有 left, right, up and down。如果未指定值，默认值为 left。</strong><br><strong>语法：<marquee direction="滚动方向">…</marquee></strong><br><strong>3.scrollamount设置滚动的速度；</strong><br><strong>以像素为单位，默认值为 6。</strong><br><strong>语法：<marquee scrollamount="5">…</marquee></strong><br><strong>4.scrolldelay设置两次滚动的时间间隔；</strong><br><strong>以毫秒为单位，默认值为 85。 除非指定 truespeed 值，否则将忽略任何小于 60 的值，并改为使用 60。</strong><br><strong>5.loop设置 marquee 滚动的次数；</strong><br><strong>如果未指定值，默认值为 −1，表示 marquee 将连续滚动。</strong><br><strong>6.width、height设置滚动的范围；</strong><br><strong>7.hspace、vspace设置水平和垂直边距；</strong><br><strong>8.bgcolor设置滚动的背景颜色。</strong></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="3-4小结"><a href="#3-4小结" class="headerlink" title="3.4小结"></a>3.4小结</h3><p><strong>函数可以带參数也可以不带参数</strong></p>
+<p><strong>声明函数的时候,函数名括号里面的是形参,形参的默认值为undefined</strong></p>
+<p><strong>调用函数的时候,函数名括号里面的是实参</strong></p>
+<p><strong>多个参数中间用逗号分隔</strong></p>
+<p><strong>形参的个数可以和实参个数不配,但是结果不可预计,我们尽量要匹配</strong></p>
+<h2 id="4-5-break-continue-return的区别"><a href="#4-5-break-continue-return的区别" class="headerlink" title="4.5 break,continue ,return的区别."></a>4.5 break,continue ,return的区别.</h2><p><strong>break :结束当前的循环体(如for, while )</strong></p>
+<p><strong>continue :跳出本次循环,继续执行下次循环(如for, while )</strong></p>
+<p><strong>return :不仅可以退出循环,还能够返回return语句中的值,同时还可以结束当前的函数体内的代码</strong></p>
+<h2 id="5-arguments的使用"><a href="#5-arguments的使用" class="headerlink" title="5.arguments的使用"></a>5.arguments的使用</h2><p><strong>当我们不确定有多少个参数传递的时候,可以用arguments来获取。</strong></p>
+<p><strong>在JavaScript中, arguments实际上它是当前函数的一个内置对象。</strong></p>
+<p><strong>所有函数都内置了一个arguments对象, <u>arguments对象中存储了传递的所有实参。</u></strong></p>
+<p><strong><u>arguments展示形式是一个伪数组</u>,因此可以进行遍历。伪数组具有以下特点:</strong></p>
+<p><strong>具有length属性</strong></p>
+<p><strong>按索引方式储存数据</strong></p>
+<p><strong>不具有数组的push, pop等方法</strong></p>
+<h2 id="Javascript作用域"><a href="#Javascript作用域" class="headerlink" title="Javascript作用域"></a>Javascript作用域</h2><p><strong>Javascript作用域: 就是代码名字在某个范围内起作用和效果</strong></p>
+<p><strong>目的是为了提高程序的可靠性更重要的是减少命名冲突</strong></p>
+<p><strong>js的作用域(es6)之前: 全局作用域 局部作用域</strong></p>
+<p><u><strong>全局作用域: 整个script标签或者是一个单独的js文件</strong></u></p>
+<p><strong><u>局部作用域(函数作用域)：在函数内部就是局部作用域这个代码的名字只在函数内部起效果和作用</u></strong></p>
+<p><strong>注意：如果在函数内部没有声明直接赋值的变量也属于全局变量</strong></p>
+<p><strong>注意: 函数的形参也可以看做是局部变量</strong></p>
+<p><strong>3,从执行效率来看全局变量和局部变量</strong></p>
+<p><strong>1全局变量只有浏览器关闭的时候才会销毁,比较占内存资源</strong></p>
+<p><strong>2局部变量当我们程序执行完毕就会销毁 比较节约内存资源</strong></p>
+<h3 id="2-2全局变量"><a href="#2-2全局变量" class="headerlink" title="2.2全局变量"></a>2.2全局变量</h3><p><strong>在全局作用域下声明的变量叫做全局变量(在函数外部定义的变量)</strong></p>
+<p><strong>全局变量在代码的任何位置都可以使用</strong></p>
+<p><strong>在全局作用域下var声明的变量是全局变量</strong></p>
+<p><strong>特殊情况下,在函数内不使用var声明的变量也是全局变量(不建议使用)</strong></p>
+<h3 id="2-2局部变量"><a href="#2-2局部变量" class="headerlink" title="2.2局部变量"></a>2.2局部变量</h3><p><strong>在局部作用域下声明的变量叫做局部变量(在函数内部定义的变量</strong></p>
+<p><strong>局部变量只能在该函数内部使用</strong></p>
+<p><strong>在函数内部var声明的变量是局部变量</strong></p>
+<p><strong>函数的形参实际上就是局部变量</strong></p>
+<h3 id="2-3全局变量和局部变量的区别"><a href="#2-3全局变量和局部变量的区别" class="headerlink" title="2.3全局变量和局部变量的区别"></a>2.3全局变量和局部变量的区别</h3><p><strong>全局变量:在任何一个地方都可以使用,只有在浏览器关闭时才会被销毁,因此比较占内存</strong></p>
+<p><strong>局部变量:只在函数内部使用,当其所在的代码块被执行时,会被初始化;当代码块运行结束后,就会被·销毁,因此更节省内存空间</strong></p>
+<p><strong>js中没有块级作用域 js的作用域: 全局作用域 局部作用域 现阶段我们js没有块级作用域</strong></p>
+<p><strong>我们is也是在es6的时候新增的块级作用域</strong></p>
+<p><strong>块级作用域 {} if{}  for {}</strong></p>
+<h3 id="3作用域链：内部函数访问外部函数的变量-采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链"><a href="#3作用域链：内部函数访问外部函数的变量-采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链" class="headerlink" title="3作用域链：内部函数访问外部函数的变量,采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链"></a>3作用域链：内部函数访问外部函数的变量,采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链</h3><p><strong>只要是代码，就至少有一个作用域</strong></p>
+<p><strong>写在函数内部的局部作用域</strong></p>
+<p><strong>如果函数中还有函数,那么在这个作用域中就又可以诞生一个作用域</strong></p>
+<p><strong>根据在内部函数可以访问外部函数变量的这种机制,用链式查找决定哪些数据能被内部函数访问,就称作作用域链</strong></p>
+<p><strong>就近原则</strong></p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="1-1什么是对象"><a href="#1-1什么是对象" class="headerlink" title="1.1什么是对象?"></a>1.1什么是对象?</h3><p><strong>现实生活中:万物皆对象,对象一个具体的事物1看得见摸得着的实物。例如,一本书、-辆汽车、一个人可以是”对象” ,一个数据库、张网页、一写远程服务器的连接也可以是“对象”</strong></p>
+<p><strong>在Javascript 中,对象是一组无序的相关属性和方法的集合,所有的事物都是对象,例如字符串、数值、数组、函数等。</strong></p>
+<p><u><strong>对象是由属性和方法组成的。</strong></u></p>
+<p><u><strong>属性:事物的特征,在对象中用属性来表示(常用名词)</strong></u></p>
+<p><u><strong>方法：事物的行为,在对象中用方法来表示(常用动词)</strong></u></p>
+<h3 id="1-2为什么需要对象"><a href="#1-2为什么需要对象" class="headerlink" title="1.2为什么需要对象"></a>1.2为什么需要对象</h3><p><strong>保存一个值时,可以使用变量,保存多个值(一组值)时,可以使用数组。如果要保存一个人的完整信息呢?</strong></p>
+<p><strong>例如,将”张三疯”的个人的信息保存在数组中的方式为:</strong></p>
+<p><strong>var arr &#x3D;[‘张三疯’,男’, 128,154];</strong></p>
+<p><strong><u>JS中的对象表达结构更清晰,更强大。张三疯的个人信息在对象中的表达结构如下:</u></strong></p>
+<p><strong>张三疯.姓名&#x3D; ‘’张三疯’;</strong></p>
+<p><strong>张三疯.性别&#x3D;’男’;</strong></p>
+<p><strong>张三疯.年龄&#x3D;129;</strong></p>
+<p><strong>张三疯.身高&#x3D;154;</strong></p>
+<p><strong>person. name &#x3D; ‘张三疯’;</strong></p>
+<p><strong>person.sex&#x3D;男;</strong></p>
+<p><strong>person.age &#x3D;128;</strong></p>
+<p><strong>person.height &#x3D; 154;</strong></p>
+<h2 id="2．创建对象的三种方式"><a href="#2．创建对象的三种方式" class="headerlink" title="2．创建对象的三种方式"></a>2．创建对象的三种方式</h2><p><strong>在Javascript中,现阶段我们可以采用三种方式创建对象(object) :</strong></p>
+<p><strong>利用字面量创建对象</strong></p>
+<p><strong>利用new Object创建对象</strong></p>
+<p><strong>利用构造函数创建对象</strong></p>
+<h3 id="2-1利用字面量创建对象"><a href="#2-1利用字面量创建对象" class="headerlink" title="2.1利用字面量创建对象"></a>2.1利用字面量创建对象</h3><p><strong>对象字面量:就是花括号()里面包含了表达这个具体事物(对象)的属性和方法。</strong></p>
+<h4 id="对象的调用"><a href="#对象的调用" class="headerlink" title="对象的调用"></a>对象的调用</h4><p><strong>对象里面的属性调用:对象 属性名,这个小点.就理解为”的“</strong></p>
+<p><strong>对象里面属性的另一种调用方式:对象[‘属性名‘ ],注意方括号里面的属性必须加引号,我们后面会用对象里面的方法调用:对象方法名(),注意这个方法名字后面一定加括号</strong></p>
+<p><strong>console.log (star.name) &#x2F;&#x2F;调用名字属性</strong></p>
+<p><strong>console.log (star [‘name’]) &#x2F;&#x2F;调用名字属性</strong></p>
+<p><strong>star.sayHi(); &#x2F;&#x2F;调用sayHi方法,注意,一定不要忘记带后面的括号</strong></p>
+<h3 id="变量、属性、函数、方法总结"><a href="#变量、属性、函数、方法总结" class="headerlink" title="变量、属性、函数、方法总结"></a>变量、属性、函数、方法总结</h3><p><strong>变量:单独声明赋值,单独存在</strong></p>
+<p><strong>属性:对象里面的变量称为属性,不需要声明,用来描述该对象的特征</strong></p>
+<p><strong>函数:单独存在的,通过”函数名()”的方式就可以调用</strong></p>
+<p><strong>方法:对象里面的函数称为方法,方法不需要声明,使用“对象方法名()”的方式就可以调用,方法用来描述该对象的行为和功能。</strong></p>
+<h2 id="2-3利用构造函数创建对象"><a href="#2-3利用构造函数创建对象" class="headerlink" title="2.3利用构造函数创建对象"></a>2.3利用构造函数创建对象</h2><p><strong>构造函数:是一种特殊的函数,主要用来初始化对象,即为对象成员变量赋初值,它总与new运算符一起使用。我们可以把对象中一些公共的属性和方法抽取出来,然后封装到这个函数里面。</strong></p>
+<h2 id="2-4构造函数和对象"><a href="#2-4构造函数和对象" class="headerlink" title="2.4构造函数和对象"></a>2.4构造函数和对象</h2><p><strong>构造函数,如Stars() ,抽象了对象的公共部分,封装到了函数里面,它泛指某一大类(class)</strong></p>
+<p><strong>创建对象,如new Stars(),特指某一个,通过new关键字创建对象的过程我们也称为对象实例化</strong></p>
+<h3 id="new在执行时会做四件事情"><a href="#new在执行时会做四件事情" class="headerlink" title="new在执行时会做四件事情:"></a>new在执行时会做四件事情:</h3><p><strong>1,在内存中创建一个新的空对象。</strong></p>
+<p><strong>2．让this指向这个新的对象。</strong></p>
+<p><strong>3.执行构造函数里面的代码,给这个新对象添加属性和方法。</strong></p>
+<p><strong>4.返回这个新对象(所以构造函数里面不需要return).</strong></p>
+<h3 id="for-in-语句用于对数组或者对象的属性进行循环操作。"><a href="#for-in-语句用于对数组或者对象的属性进行循环操作。" class="headerlink" title="for in 语句用于对数组或者对象的属性进行循环操作。"></a>for in 语句用于对数组或者对象的属性进行循环操作。</h3><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><strong>1.对象可以让代码结构更清晰</strong></p>
+<p><strong>2,对象复杂数据类型object</strong></p>
+<p><strong>3·本质:对象就是一组无序的相关属性和方法的集合</strong></p>
+<p><strong>4.构造函数泛指某一大类,比如苹果,不管是红色苹果还是绿色苹果,都统称为苹果。</strong></p>
+<p><strong>5.for..in 用于对对象的属性进行循环操作。</strong></p>
+<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><p><strong>Javascript中的对象分为3种:自定义对象、内置对象、浏览器对象</strong></p>
+<p><strong>前面两种对象是&#x2F;S基础内容,属于ECMAScript ;第三个浏览器对象属于我们Js独有的,我们JS APl讲解</strong></p>
+<p><strong>内置对象就是指JS语言自带的一些对象,这些对象供开发者使用,并提供了一些常用的或是最基本而必要的功能(属性和方法)</strong></p>
+<p><strong>内置对象最大的优点就是帮助我们快速开发</strong></p>
+<p><strong>Javascript提供了多个内置对象: Math, Date、Array, string等</strong> </p>
+<h2 id="查文档"><a href="#查文档" class="headerlink" title="查文档"></a>查文档</h2><h3 id="2-1-MDN学习一个内置对象的使用只要学会其常用成员的使用即可"><a href="#2-1-MDN学习一个内置对象的使用只要学会其常用成员的使用即可" class="headerlink" title="2.1 MDN学习一个内置对象的使用只要学会其常用成员的使用即可"></a>2.1 MDN学习一个内置对象的使用只要学会其常用成员的使用即可</h3><p><strong>我们可以通过查文档学习,可以通过MDN&#x2F;W3C来查询。</strong></p>
+<p><strong>Mozilla开发者网络(MDN )提供了有关开放网络技术(Open Web )的信息,包括HTML, CSS和万维网及HTML5应用的API</strong></p>
+<p><strong>MDN: <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/">https://developer.mozilla.org/zh-CN/</a></strong></p>
+<h3 id="2-2如何学习对象中的方法"><a href="#2-2如何学习对象中的方法" class="headerlink" title="2.2如何学习对象中的方法"></a>2.2如何学习对象中的方法</h3><p><strong>1．查阅该方法的功能</strong></p>
+<p><strong>2．查看里面参数的意义和类型</strong></p>
+<p><strong>3.查看返回值的意义和类型</strong></p>
+<p><strong>4.通过demo进行测试</strong></p>
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><p><strong>Math是一个内置对象,它具有数学常数和函数的属性和方法。不是一个函数对象。</strong></p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><strong>与其它全局对象不同的是, Math不是一个构造器 Math 的所有属性和方法都是静态的,你用到的常数p可以用Math.PI 表示用 x 作参数 Math.sin (x) 调sin函数 JavaScript中的常数,是以全精度的实数定义的</strong></p>
+<h3 id="3-1-Math概述"><a href="#3-1-Math概述" class="headerlink" title="3.1 Math概述"></a>3.1 Math概述</h3><p><strong>Math对象不是构造函数,它具有数学常数和函数的属性和方法。跟数学相关的运算(求绝对值,取整、最大值等)可以使用Math中的成员。</strong></p>
+<p><strong>Math.PI&#x2F;&#x2F;圆周率</strong></p>
+<p><strong>Math.floor()&#x2F;&#x2F;向下取整</strong></p>
+<p><strong>Math.ceil ()&#x2F;&#x2F;向上取整</strong></p>
+<p><strong>Math.round()&#x2F;&#x2F;四舍五入  就近取整 注意-3.5 结果是-3</strong></p>
+<p><strong>Math.abs ()&#x2F;&#x2F;绝对值</strong></p>
+<p><strong>Math.max () &#x2F;Math.min() &#x2F;&#x2F;求最大和最小值</strong></p>
+<h2 id="random-随机生成小数"><a href="#random-随机生成小数" class="headerlink" title="random()随机生成小数"></a>random()随机生成小数</h2><p><strong>随机生成整数</strong></p>
+<p><strong>function getRandom(min, max) {</strong></p>
+<p>​      <strong>return Math.floor(Math.random() * (max - min + 1)) + min;</strong></p>
+<p>​    <strong>}</strong></p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p><strong>new Date();</strong></p>
+<p><strong>需要注意的是只能通过调用Date构這函 来实例化日期对象:以常规函数调用它, (即不加new操作符)将会返回一个字符串,而不是一个日期对象。另外,不像其他JavaScript类型, Date对象没有字面量格式。</strong></p>
+<p><strong>如果没有输入 可容数,则Date的构造器会依据系统设置的当前时间来创建一个Date对象。</strong></p>
+<p><strong>如果提供了至少两个参数,其余的参数均会默认设置为1 (如果没有提供day参数)或者0</strong></p>
+<p><strong>&#x2F;&#x2F;参数常用写法 数字型参数 常用的写法数字型 2019, 10, 01或者是 字符型’2019-10-1 8:8:8’’</strong></p>
+<p>​    <strong>var date1 &#x3D; new Date(2019, 10, 1);</strong></p>
+<p>​    <strong>console.log(date1); &#x2F;&#x2F;返回的是11月不是10月</strong></p>
+<p>​    <strong>var date2 &#x3D; new Date(‘2019-10-1 8:8:8’);</strong></p>
+<p>​    <strong>console.log(date2); &#x2F;&#x2F;准确建议使用</strong></p>
+<h2 id="4-1-Date概述"><a href="#4-1-Date概述" class="headerlink" title="4.1 Date概述"></a>4.1 Date概述</h2><p><strong>Date对象和Math对象不一样,他是一个构造函数,所以我们需要实例化后才能使用</strong></p>
+<p><strong>Date实例用来处理日期和时间</strong></p>
+<h2 id="4-2-Date-方法的使用"><a href="#4-2-Date-方法的使用" class="headerlink" title="4.2 Date()方法的使用"></a>4.2 Date()方法的使用</h2><p><strong>1,获取当前时间必须实例化</strong></p>
+<p><strong>var now &#x3D; new Date ();</strong></p>
+<p><strong>console.log (now);</strong></p>
+<p><strong>2.Date)构造函数的参数</strong></p>
+<p><strong>如果括号里面有时间,就返回参数里面的时间。例如日期格式字符串为‘2019-5-1’ ,可以写成new Date(2019-5-1)或者new Date(’2019&#x2F;5&#x2F;1‘)</strong></p>
+<p><strong>4.3日期格式化</strong></p>
+<p><strong>我们想要2019-8-88:8:8格式的日期,要怎么办?</strong></p>
+<p><strong>需要获取日期指定的部分,所以我们要手动的得到这种格式。</strong></p>
+<p><strong>方法名									说明												  代码</strong></p>
+<p><strong>getFullYear()                          获取当年										  dObj.getFullYear()</strong></p>
+<p><strong>getMonth()							 获取当月(0-11)							   dobj.getMonth()</strong></p>
+<p><strong>getDate()								获取当天日期								  dObi.getDate()</strong></p>
+<p><strong>getDay()								 获取星期几(周日0到周六6)			dObj.getDay()</strong></p>
+<p><strong>getHours()							 获取当前小时								  dobj.getHours()</strong></p>
+<p><strong>getMinutes()						  获取当前分钟								dobj.getMinutes()</strong></p>
+<p><strong>getSeconds()						获取当前秒钟							   dObj.getSeconds()</strong></p>
+<p><strong>不需要参数</strong></p>
+<h3 id="4-4获取日期的总的毫秒形式"><a href="#4-4获取日期的总的毫秒形式" class="headerlink" title="4.4获取日期的总的毫秒形式"></a>4.4获取日期的总的毫秒形式</h3><p><strong>Date对象是基于1970年1月1日(世界标准时间)起的毫秒数</strong></p>
+<p><strong>为什么计算机起始时间从1970年开始?</strong></p>
+<p><strong>我们经常利用总的毫秒数来计算时间,因为它更精确</strong></p>
+<h2 id="4-日期对象"><a href="#4-日期对象" class="headerlink" title="4.日期对象"></a>4.日期对象</h2><h3 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h3><p><strong>倒计时算法</strong></p>
+<p><strong>①核心算法:输入的时间减去现在的时间就是剩余的时间,即倒计时,但是不能拿着时分秒相减,比如05分减去25分,结果会是负数的。</strong></p>
+<p><strong>用时间戳来做。用户输入时间总的毫秒数减去现在时间的总的毫秒数,得到的就是剩余时,间的毫秒数。</strong></p>
+<p><strong>把剩余时间总的毫秒数转换为天、时、分、秒(时间戳转换为时分秒)</strong></p>
+<p><strong>转换公式如下:</strong></p>
+<p><strong>d &#x3D; parselnt(总秒数&#x2F;60&#x2F;60&#x2F;24); &#x2F;&#x2F;计算天数</strong></p>
+<p><strong>h &#x3D; parselnt(总秒数&#x2F;60&#x2F;60%24) &#x2F;&#x2F;计算小时</strong></p>
+<p><strong>m &#x3D; parselnt(总秒数&#x2F;60 %60); &#x2F;&#x2F;计算分数</strong></p>
+<p><strong>s&#x3D; parselnt(总秒数%60); &#x2F;&#x2F;计算当前秒数</strong></p>
+<h2 id="5-数组对象"><a href="#5-数组对象" class="headerlink" title="5.数组对象"></a>5.数组对象</h2><h3 id="instanceof和isArray"><a href="#instanceof和isArray" class="headerlink" title="instanceof和isArray"></a>instanceof和isArray</h3><p><strong>当检测Array实例时, Array.isArray优于instanceof,因为Array. isArray能检测iframes.</strong></p>
+<h3 id="5-3添加删除数组元素的方法"><a href="#5-3添加删除数组元素的方法" class="headerlink" title="5.3添加删除数组元素的方法"></a>5.3添加删除数组元素的方法</h3><p><strong>方法名						 说明																		                                返回值</strong></p>
+<p><strong>push(参数1..) 			末尾添加一个或多个元素,注意修改原数组		                               并返回新的长度</strong></p>
+<p><strong>pop()						   删除数组最后一个元素,把教组长度减1无参数、修改原数组         返回它删除的元素的值</strong></p>
+<p><strong>unshift(参数… )		 向数组的开头添加一个或更多元素,注意修改原数组					   并返回新的长度</strong></p>
+<p><strong>shift()                         删除数组的第一个元素,数组长度减1无参数、修改原数组 			并返回第一个元素的值</strong></p>
+<h3 id="5-4数组排序"><a href="#5-4数组排序" class="headerlink" title="5.4数组排序"></a>5.4数组排序</h3><p><strong>方法名 				说明																 是否修改原数组</strong></p>
+<p><strong>reverse()			 颠倒数组中元素的顺序,无参数					该方法会改变原来的数组返回新数组</strong></p>
+<p><strong>sort()					对数组的元素进行排序								该方法会改变原来的数组返回新数组</strong></p>
+<h3 id="5-5数组索引方法"><a href="#5-5数组索引方法" class="headerlink" title="5.5数组索引方法"></a>5.5数组索引方法</h3><p><strong>方法名					 说明															返回值</strong>  </p>
+<p><strong>indexOf()			    数组中查找给定元素的第一个索引		如果存在返回索引号如果不存在,则返回-1</strong></p>
+<p><strong>lastindexOf()		 在数组中的最后一个的索引,                   如果存在返回素引号如果不存在,则返回-1.</strong></p>
+<p><strong>有一个数组[‘c’, ‘a’, ‘2’, ‘a’, ‘x’, ‘a’, ‘x’, ‘c’,’b’],要求去除数组中重复的元素。</strong></p>
+<p><strong>核心算法:我们遍历日数组,然后拿着旧数组元素去查询新数组,如果该元素在新数组里面没有出现过,我们就添加,否则不添加。</strong></p>
+<p><strong>我们怎么知道该元素没有存在?利用新数组.indexOf(数组元素)如果返回时-1就说明新数组里面没有改元素</strong></p>
+<h3 id="5-6数组转换为字符串"><a href="#5-6数组转换为字符串" class="headerlink" title="5.6数组转换为字符串"></a>5.6数组转换为字符串</h3><p><strong>方法名							   说明																					 返回值</strong></p>
+<p><strong>toString()						  把数组转换成字符串,逗号分隔每一项							返回一个字符串</strong></p>
+<p><strong>join(‘分隔符’)					方法用于把数组中的所有元素转换为一个字符串。	 返回一个字符串</strong></p>
+<h3 id="5-7课下查询"><a href="#5-7课下查询" class="headerlink" title="5.7课下查询"></a>5.7课下查询</h3><p><strong>方法名 				说明																  返回值</strong></p>
+<p><strong>concat() 			 连接两个或多个数组不影响原数组		 	 返回一个新的数组</strong></p>
+<p><strong>slice()				  数组截取slice(begin, end)							 返回被截取项目的新数组</strong></p>
+<p><strong>splice()			   数组删除splice(第几个开始,要删除个数) 	返回被删除项目的新数组注意,这个会影响原数组</strong></p>
+<p><strong>slice()和splice()目的基本相同,建议同学们重点看下splice()</strong></p>
+<h3 id="6-1基本包装类型"><a href="#6-1基本包装类型" class="headerlink" title="6.1基本包装类型"></a>6.1基本包装类型</h3><p><strong>为了方便操作基本数据类型, Javascript还提供了三个特殊的引用类型: String, Number和Boolean.</strong></p>
+<p><strong>基本包装类型就是把简单数据类型包装成为复杂数据类型,这样基本数据类型就有了属性和方法</strong></p>
+<h3 id="6-2字符串的不可变"><a href="#6-2字符串的不可变" class="headerlink" title="6.2字符串的不可变"></a>6.2字符串的不可变</h3><p><strong>指的是里面的值不可变,虽然看上去可以改变内容,但其实是地址变了,内存中新开辟了一个内存空间。</strong></p>
+<h3 id="6-3根据字符返回位置"><a href="#6-3根据字符返回位置" class="headerlink" title="6.3根据字符返回位置"></a>6.3根据字符返回位置</h3><p><strong>字符串所有的方法,都不会修改字符串本身字符串是不可变的,操作完成会返回一个新的字符串。</strong></p>
+<p><strong>方法名																  说明</strong></p>
+<p><strong>indexof(要查找的字符,开始的位置)				返回指定内容在元字符串中的位置,如果找不到就返回-1,开始的位置是index索引号</strong></p>
+<p><strong>lastlindexof()													 从后往前找,只找第一个匹配的</strong></p>
+<h3 id="6-4根据位置返回字符-重点"><a href="#6-4根据位置返回字符-重点" class="headerlink" title="6.4根据位置返回字符(重点)"></a>6.4根据位置返回字符(重点)</h3><p><strong>方法名									说明																				 使用</strong></p>
+<p><strong>charAt(index)					   返回指定位置的字符(index字符串的索引号) 			str.charAt(0)</strong></p>
+<p><strong>charCodeAt(index)		      获取指定位置处字符的ASCI1码(index素引号) 		 str.charCodeAt(0)</strong></p>
+<p><strong>charAt(index)						获取指定位置处字符													HTML5, IE8+支持和charAt()等效</strong></p>
+<h3 id="6-5字符串操作方法-重点"><a href="#6-5字符串操作方法-重点" class="headerlink" title="6.5字符串操作方法(重点)"></a>6.5字符串操作方法(重点)</h3><p><strong>方法名											  说明</strong></p>
+<p><strong>concat(str1,str2,str3…. 				concat()方法用于连接两个或多个字符串。拼接字符串,等效于+, +更常用</strong></p>
+<p><strong>substr(start,length) 					 从start位置开始(索引号) , length取的个数重点记住这个</strong></p>
+<p><strong>slice(start, end)							从start位置开始,截取到end位置, end取不到(他们俩都是索引号)</strong></p>
+<p><strong>substring(start, end)				  从start位置开始,截取到end位置, end取不到基本和slice相同但是不接受负值</strong></p>
+<h3 id="6-8课下查阅"><a href="#6-8课下查阅" class="headerlink" title="6.8课下查阅"></a>6.8课下查阅</h3><p><strong>toUpperCase()&#x2F;&#x2F;转换大写</strong></p>
+<p><strong>tolowerCase() &#x2F;&#x2F;转换小写</strong></p>
+<h1 id="1-简单类型与复杂类型"><a href="#1-简单类型与复杂类型" class="headerlink" title="1.简单类型与复杂类型"></a>1.简单类型与复杂类型</h1><p><strong>简单类型又叫做基本数据类型或者 值类型,复杂类型又叫做 引用类型。·</strong></p>
+<p><strong>值类型:简单数据类型基本数据类型,在存储时变量中存储的是值本身,因此 做值类型</strong></p>
+<p><strong>string , number, boolean , undefined, null</strong></p>
+<p><strong>引用类型:复杂数据类型,在存储时变量中存储的仅仅是地址(引用) ,因此叫做引用数据类型</strong></p>
+<p><strong>通过new关键字创建的对象(系统对象、自定义对象) ,如Object,Array. Date等</strong></p>
+<h2 id="2-堆和栈"><a href="#2-堆和栈" class="headerlink" title="2.堆和栈"></a>2.堆和栈</h2><p><strong>堆栈空间分配区别：</strong></p>
+<p><strong>1、栈(操作系统) :由操作系统自动分配释放存放函数的参数值、局部变量的值等。其操作方式类似于数据结构中的栈;</strong></p>
+<p><strong>简单数据类型存放到栈里面</strong></p>
+<p><strong>2、堆(操作系统) :存储复杂类型对象,一般由程序员分配释放,若程序员不释放,由垃圾回收机制回收。</strong></p>
+<p><strong>复杂数据类型存放到堆里面</strong></p>
+<p><strong>注意: JavaScriot中没有堆栈的概念,通过堆栈的方式,可以让大家更容易理解代码的一些执行方式,便于将来学习其他语言</strong></p>
+<h2 id="3-简单类型的内存分配"><a href="#3-简单类型的内存分配" class="headerlink" title="3.简单类型的内存分配"></a>3.简单类型的内存分配</h2><p><strong>值类型(简单数据类型) : string , number , boolean , undefined , null</strong></p>
+<p><strong>值类型变量的数据直接存放在变量(栈空间)中</strong></p>
+<h2 id="6-复杂类型传参"><a href="#6-复杂类型传参" class="headerlink" title="6.复杂类型传参"></a>6.复杂类型传参</h2><p><strong>函数的形参也可以看做是一个变量,当我们把一个值类型变量作为参数传给函数的形参时,其实是把变量在栈空间里的值复制了一份给形参,那么在方法内部对形参做任何修改,都不会影响到的外部变量。</strong></p>
+<p><strong>函数的形参也可以看做是一个变量,当我们把引用类型变量传给形参时,其实是把变量在栈空间里保存的堆地址复制给了形参,形参和实参其实葆存的是同一个堆地址,所以操作的是同一个对象。</strong></p>
+<h1 id="Web-APIs介绍"><a href="#Web-APIs介绍" class="headerlink" title="Web APIs介绍"></a>Web APIs介绍</h1><h2 id="1-1-JS的组成"><a href="#1-1-JS的组成" class="headerlink" title="1.1 JS的组成"></a>1.1 JS的组成</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\24861\Desktop\笔记图\js组成.JPG" alt="js组成"></p>
+<h2 id="1-2JS基础阶段以及Web-APIs阶段"><a href="#1-2JS基础阶段以及Web-APIs阶段" class="headerlink" title="1.2JS基础阶段以及Web APIs阶段"></a>1.2JS基础阶段以及Web APIs阶段</h2><p><strong>JS基础阶段</strong></p>
+<p><strong>我们学习的是ECMAScript标准规定的基本语法</strong></p>
+<p><strong>要求同学们掌握Js基础语法</strong></p>
+<p><strong>只学习基本语法,做不了常用的网页交互效果</strong></p>
+<p><strong>目的是为了Js后面的课程打基础、做铺垫</strong></p>
+<p><strong>Web APis阶段Web APIs是w3c组织的标准</strong></p>
+<p><strong>Web APIs a Doм和BOM</strong></p>
+<p><strong>Web APIs是我们Js所独有的部分</strong></p>
+<p><strong>我们主要学习页面交互功能</strong></p>
+<p><strong>需要使用Js基础的课程内容做基础</strong></p>
+<p><strong>Js基础学习ECMAScript基础语法为后面作铺垫, web APIs是Js的应用,大量使用Js基础语法做交互效果</strong></p>
+<h2 id="2-1-API"><a href="#2-1-API" class="headerlink" title="2.1 API"></a>2.1 API</h2><p><strong>API (Application Programming Interface,应用程序编程接口)是一些预先定义的函数,目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力,而又无需访问源码,或理解内部工作机制的细节。</strong></p>
+<p><strong>简单理解: API是给程序员提供的一种工具,以便能更轻松的实现想要完成的功能。</strong></p>
+<h2 id="2-2-Web-API"><a href="#2-2-Web-API" class="headerlink" title="2.2 Web API"></a>2.2 Web API</h2><p><strong>Web API是浏览器提供的一套操作浏览器功能和页面元素的API (BOM和DOM).</strong></p>
+<p><strong>现阶段我们主要针对于浏览器讲解常用的API,主要针对浏览器做交互效果。</strong></p>
+<p><strong>比如我们想要浏览器弹出一个警示框,直接使用alert( 弹出 )</strong></p>
+<p><strong>MDN详细API : <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API">https://developer.mozilla.org/zh-CN/docs/Web/API</a></strong></p>
+<p><strong>因为Web API很多,所以我们将这个阶段称为Web APls</strong></p>
+<h2 id="2-3-API和Web-API总结"><a href="#2-3-API和Web-API总结" class="headerlink" title="2.3 API和Web API总结"></a>2.3 API和Web API总结</h2><p><strong>1.API是为我们程序员提供的一个接口,帮助我们实现某种功能,我们会使用就可以了,不必纠结内部如何实现</strong></p>
+<p><strong>2.Web API主要是针对于浏览器提供的接口,主要针对于浏览器做交互效果。</strong></p>
+<p><strong>3.Web API一般都有输入和输出(函数的传参和返回值) , WebAPI很多都是方法(函数)</strong></p>
+<p><strong>4.学习Web APl可以结合前面学习内置对象方法的思路学习</strong></p>
+<h2 id="DOM-重点"><a href="#DOM-重点" class="headerlink" title="DOM(重点)"></a>DOM(重点)</h2><h3 id="1-1什么是DOM"><a href="#1-1什么是DOM" class="headerlink" title="1.1什么是DOM"></a>1.1什么是DOM</h3><p><strong>文档对象模型( Document Object Model ,简称DOM ) ,是W3C组织推荐的处理可扩展标记语言(HTML或者XML )的标准编程接口。</strong></p>
+<p> <strong>W3C已经定义了一系列的DOM接口,通过这些DOM接口可以改变网页的内容、结构和样式。</strong></p>
+<h3 id="1-2-DOM树"><a href="#1-2-DOM树" class="headerlink" title="1.2 DOM树"></a>1.2 DOM树</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\24861\Desktop\笔记图\dom树.JPG" alt="dom树"></p>
+<p><strong>文档:一个页面就是一个文档, DOM中使用document表示</strong></p>
+<p><strong>元素:页面中的所有标签都是元素, DOM中使用element表示</strong></p>
+<p><strong>节点:网页中的所有内容都是节点(标签、属性、文本、注释等) , DOM中使用node表示</strong></p>
+<p><strong>DOM把以上内容都看做是对象</strong></p>
+<h3 id="2-1如何获取页面元素"><a href="#2-1如何获取页面元素" class="headerlink" title="2.1如何获取页面元素"></a>2.1如何获取页面元素</h3><p><strong>DOM在我们实际开发中主要用来操作元素。</strong></p>
+<p><strong>我们如何来获取页面中的元素呢?</strong></p>
+<p><strong>获取页面中的元素可以使用以下几种方式:</strong></p>
+<p><strong>根据ID获取</strong></p>
+<p><strong>根据标签名获取</strong></p>
+<p><strong>通过HTML5新增的方法获取</strong></p>
+<p><strong>特殊元素获取</strong></p>
+<h3 id="2-2根据ID获取"><a href="#2-2根据ID获取" class="headerlink" title="2.2根据ID获取"></a>2.2根据ID获取</h3><p><strong>使用getElementByld()方法可以获取带有ID的元素对象。</strong></p>
+<p><strong>Document的方法getElementByld())返回一个匹配特定1D的元素由于元素的ID在大部分情况下要求是独一无二的,这个方法自然而然地成为了一个高效查找特库元素的方法。</strong></p>
+<p><strong>element是一个Element对象。如果当前文档中拥有特定ID的元素不存在则返回null</strong></p>
+<p><strong>id是写的字,代表了所要查找的元素的唯一ID.</strong></p>
+<p><strong>返回一个匹配到ID的DOM ElementE,若在当前Document下没有找到,则返回null</strong></p>
+<h3 id="2-3根据标签名获取"><a href="#2-3根据标签名获取" class="headerlink" title="2.3根据标签名获取"></a>2.3根据标签名获取</h3><p><strong>使用getElementsByTagName()方法可以返回带有指定标签名的对象的集合。</strong></p>
+<p><strong>还可以获取某个元素(3元素)内部所有指定标签名的子元素.</strong></p>
+<p><strong>element.getElementsByTagName (‘标签名‘);</strong></p>
+<p><strong>注意:父元素必须是单个对象(必须指明是哪一个元素对象).获取的时候不包括元素自己。</strong></p>
+<h3 id="2-4通过HTML5新增的方法获取i9以上浏览器可以使用"><a href="#2-4通过HTML5新增的方法获取i9以上浏览器可以使用" class="headerlink" title="2.4通过HTML5新增的方法获取i9以上浏览器可以使用"></a>2.4通过HTML5新增的方法获取i9以上浏览器可以使用</h3><p><strong>1.document.getElementsByClassName (类名’) ; &#x2F;&#x2F;根据类名返回元素对象集合</strong></p>
+<p><strong>2.document.querySelector (‘选择器’);  &#x2F;&#x2F;根据指定选择器返回第一个元素对象</strong></p>
+<p><strong>3.document.querySelelctorAll (,選择器’);&#x2F;&#x2F;根据指定选择器返回</strong></p>
+<h3 id="2-5获取特殊元素-body-html"><a href="#2-5获取特殊元素-body-html" class="headerlink" title="2.5获取特殊元素( body , html )"></a>2.5获取特殊元素( body , html )</h3><p><strong>获取body元素</strong></p>
+<p><strong>doucumnet.body &#x2F;&#x2F;返回body元素对象</strong></p>
+<p><strong>获取html元素</strong></p>
+<p><strong>document-documentElement &#x2F;&#x2F;返回html元素对象</strong></p>
+<h2 id="3-事件基础"><a href="#3-事件基础" class="headerlink" title="3.事件基础"></a>3.事件基础</h2><h3 id="3-1事件概述"><a href="#3-1事件概述" class="headerlink" title="3.1事件概述"></a>3.1事件概述</h3><p><strong>JavaScript使我们有能力创建动态页面,而事件是可以被Javascript侦测到的行为</strong>。</p>
+<p><strong>简单理解:触发–响应机制。</strong></p>
+<p><strong>网页中的每个元素都可以产生某些可以触发JavaScript的事件,例如,我们可以在用户点击某按钮时产生一个事件,然后去执行某些操作。</strong></p>
+<h3 id="3-3执行事件的步骤"><a href="#3-3执行事件的步骤" class="headerlink" title="3.3执行事件的步骤"></a>3.3执行事件的步骤</h3><p><strong>1.获取事件源</strong></p>
+<p><strong>2注册事件（绑定事件)</strong></p>
+<p><strong>3.添事件处理程序(采取函数赋值形式)</strong></p>
+<h3 id="3-3常见的鼠标事件"><a href="#3-3常见的鼠标事件" class="headerlink" title="3.3常见的鼠标事件"></a>3.3常见的鼠标事件</h3><p><strong>鼠标事件										 触发条件</strong></p>
+<p><strong>onclick										   鼠标点击左键触发</strong></p>
+<p><strong>onmouseover							  鼠标经过触</strong></p>
+<p><strong>onmouseout								鼠标离开触发</strong></p>
+<p><strong>onfocus									    获得鼠标焦点触发</strong></p>
+<p><strong>onblur										  失去鼠标焦点触发</strong></p>
+<p><strong>onmousemove					     鼠标移动触发</strong></p>
+<p><strong>onmouseup						      鼠标弹起触发</strong></p>
+<p><strong>onmousedown					    鼠标按下触发</strong></p>
+<h2 id="4·操作元素"><a href="#4·操作元素" class="headerlink" title="4·操作元素"></a>4·操作元素</h2><p><strong>JavaScript的DOM操作可以改变网页内容、结构和样式,我们可以利用DOM操作元素来改变元素里面的内容、属性等。注意以下都是属性</strong></p>
+<h3 id="4-1改变元素内容"><a href="#4-1改变元素内容" class="headerlink" title="4.1改变元素内容"></a>4.1改变元素内容</h3><p><strong>element. innerText</strong></p>
+<p><strong>从起始位置到终止位置的内容,但它去除html标签,同时空格和换行也会去掉</strong></p>
+<p><strong>element. innerHTML</strong></p>
+<p><strong>起始位置到终止位置的全部内容,包括html标签,同时保留空格和换行</strong></p>
+<h3 id="4-2常用元素的属性操作"><a href="#4-2常用元素的属性操作" class="headerlink" title="4.2常用元素的属性操作"></a>4.2常用元素的属性操作</h3><p><strong>1.innerText. innerHTMI改变元素内容</strong></p>
+<p><strong>2.src, href</strong></p>
+<p><strong>3.id, alt, title</strong></p>
+<h3 id="4-3表单元素的属性操作"><a href="#4-3表单元素的属性操作" class="headerlink" title="4.3表单元素的属性操作"></a>4.3表单元素的属性操作</h3><p><strong>利用DOM可以操作如下表单元素的属性:</strong></p>
+<p><strong>type, value, checked, selected, disabled</strong></p>
+<h3 id="4-4样式属性操作"><a href="#4-4样式属性操作" class="headerlink" title="4.4样式属性操作"></a>4.4样式属性操作</h3><p><strong>我们可以通过IS修改元素的大小、颜色、位置等样式。</strong></p>
+<ol>
+<li><strong>element.style 行内样式操作——-用行内样式覆盖了</strong>  </li>
+<li><strong>element.className类名样式操作——-样式很多用</strong></li>
+</ol>
+<p><strong>注意:</strong></p>
+<p><strong>1.Js里面的样式采取驼峰命名法比如fontSize, backgroundColor</strong></p>
+<p><strong>2.Js修改style样式操作,产生的是行内样式, css权重比较高</strong></p>
+<p><strong>注意：</strong></p>
+<p><strong>1,如果样式修改较多,可以采取操作类名方式更改元素样式。</strong></p>
+<p><strong>2.class因为是个保留字,因此使用className来操作元素类名属性</strong></p>
+<p><strong>3.className会直接更改元素的类名,会覆盖原先的类名。</strong></p>
+<p><strong>可以利用for循环设置一组元素的精灵图背景</strong></p>
+<p><strong>首先精灵图图片排列有规律的核心思路:</strong></p>
+<p><strong>利用for循环修改精灵图片的背景位置background-position</strong></p>
+<p><strong>剩下的就是考验你的数学功底了</strong></p>
+<p><strong>i循环里面的i索引号*44就是每个图片的y坐标</strong></p>
+<p><strong>首先表单需要2个新事件,获得焦点onfocus失去焦点onblur</strong></p>
+<p><strong>如果获得焦点,判断表单里面内容是否为默认文字,如果是默认文字,就清空表单内容</strong></p>
+<p><strong>如果失去焦点,判断表单内容是否为空,如果为空,则表单内容改为默认文字</strong></p>
+<h2 id="4·操作元素总结"><a href="#4·操作元素总结" class="headerlink" title="4·操作元素总结"></a>4·操作元素总结</h2><p><strong>操作元素是DOM核心内容</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\24861\Desktop\笔记图\操作元素总结.JPG" alt="操作元素总结"></p>
+<h3 id="4-6自定义属性的操作"><a href="#4-6自定义属性的操作" class="headerlink" title="4.6自定义属性的操作"></a>4.6自定义属性的操作</h3><p><strong>1·获取属性值</strong></p>
+<p><strong>element.属性 获取属性值</strong></p>
+<p><strong>element.getAttribute (属性);</strong></p>
+<p><strong>区别:</strong></p>
+<p><strong>element.属性 获取内置属性值(元素本身自带的属性)</strong></p>
+<p><strong>element .getattribute ( ‘属性’);主要获得自定义的属性(标准)我们程序员自定义的属性</strong></p>
+<p><strong>2,设置属性值</strong></p>
+<p><strong>element.属性&#x3D; ‘值’ 设置内置属性值。</strong> </p>
+<p><strong>element .setAttribute (‘属性’,‘值’);</strong></p>
+<p><strong>3.移除属性</strong></p>
+<p><strong>element. removeAttribute (‘’属性”);</strong></p>
+<h3 id="4-7-H5自定义属性"><a href="#4-7-H5自定义属性" class="headerlink" title="4.7 H5自定义属性"></a>4.7 H5自定义属性</h3><p><strong>自定义属性目的:是为了保存并使用数据。有些数据可以保存到页面中而不用保存到数据库中。</strong></p>
+<p><strong>自定义属性获取是通过getAttribute (属性”)获取。但是有些自定义属性很容易引起歧义,不容易判断是元素的内 属性还是自定义属性。</strong></p>
+<p><strong>H5给我们新增了自定义属性:</strong></p>
+<p><strong>1·设置H5自定义属性H5规定自定义属性data开头做为属性名并且赋值</strong></p>
+<p><strong>比如<div data-inde= "1" ></div></strong></p>
+<p><strong>或者使用JS设置</strong></p>
+<p><strong>element.setAttribute( ‘data-index’ ,2)</strong></p>
+<p><strong>2,获取H5自定义属性</strong></p>
+<p><strong>1,兼容性获取element.getAttribute( ‘data-index ‘)</strong></p>
+<p><strong>H5新增element.dataset.index或者element.dataset ’index’ ] ie 11才开始支持</strong></p>
+<h2 id="5．节点操作"><a href="#5．节点操作" class="headerlink" title="5．节点操作"></a>5．节点操作</h2><h3 id="5-1为什么学节点操作"><a href="#5-1为什么学节点操作" class="headerlink" title="5.1为什么学节点操作"></a>5.1为什么学节点操作</h3><h4 id="1-利用DOM提供的方法获取元素"><a href="#1-利用DOM提供的方法获取元素" class="headerlink" title="1,利用DOM提供的方法获取元素"></a><strong>1,利用DOM提供的方法获取元素</strong></h4><p><strong>document.getElementByld(）</strong></p>
+<p><strong>document.getElementsByTagName()</strong></p>
+<p><strong>document.querySelector等</strong></p>
+<p><strong>逻辑性不强、繁琐</strong></p>
+<h4 id="2·利用节点层级关系获取元素"><a href="#2·利用节点层级关系获取元素" class="headerlink" title="2·利用节点层级关系获取元素"></a>2·利用节点层级关系获取元素</h4><p><strong>利用父子兄节点关系获取元素</strong></p>
+<p><strong>逻辑性强,但是兼容性稍差</strong></p>
+<p><strong>这两种方式都可以获取元素节点,我们后面都会使用,但是节点操作更简单</strong></p>
+<h3 id="5-2节点概述"><a href="#5-2节点概述" class="headerlink" title="5.2节点概述"></a>5.2节点概述</h3><p><strong>网页中的所有内容都是节点(标签、属性、文本、注程等) ,在DOM中,节点使用node来表示。HTMILDOM树中的所有节点均可通过Javascript进行访问,所有HTML元素(节点)均可被修改,也可以创建或删除。</strong></p>
+<p><strong>一般地,节点至少拥有nodeType (节点类型)、nodeName (节点名称)和nodeValue (节点值)这三个基本属性。</strong></p>
+<p><strong>元素节点nodeType为1</strong></p>
+<p><strong>属性节点nodeType为2</strong></p>
+<p><strong>文本节点nodelype为3 (文本节点包含文字、空恪、换行等)</strong></p>
+<p><strong>我们在实际开发中,节点操作主要操作的是元素节点</strong></p>
+<h3 id="5-3节点层级"><a href="#5-3节点层级" class="headerlink" title="5.3节点层级"></a>5.3节点层级</h3><p><strong>利用DOM树可以把节点划分为不同的层级关系,常见的是父子兄层级关系。</strong></p>
+<p><strong>1,父级节点 node.parentNode</strong></p>
+<p><strong>parentNode属性可返回某节点的父节点,注意是最近的一个父节点</strong></p>
+<p><strong>如果指定的节点没有父节点则返回null</strong></p>
+<p><strong>2.子节点</strong></p>
+<p><strong>1. parentNode. childNodes (标准）</strong></p>
+<p><strong>parentNode. childNodes返回包含指定节点的子节点的集合,该集合为即时更新的集合。</strong></p>
+<p><strong>注意：返回值里面包含了所有的子节点,包括元素节点,文本节点等。如果只想要获得里面的元素节点,则需要专门处理。所以我们一般不提倡使用childNodes</strong></p>
+<p><strong>var ul &#x3D; document. queryselector (‘ul’);</strong></p>
+<p><strong>for(var i&#x3D; 0; i &lt; ul.childNodes.length;i++) {</strong></p>
+<p><strong>if (ul.childNodes [i].nodeType&#x3D;&#x3D;1) {</strong></p>
+<p><strong>&#x2F;&#x2F; ul.childNodes [i]是元素节点</strong></p>
+<p><strong>console. log (ul.childNodes [i]);</strong></p>
+<p><strong>}</strong></p>
+<p><strong>}</strong></p>
+<p><strong>children获取所有的子元素节点</strong></p>
+<p><strong>2.parentNode. children (非标准)</strong></p>
+<p><strong>firstChild返回第一个子节点,找不到则返回null,同样,也是包含所有的节点。</strong></p>
+<p><strong>3.parentNode.firstChild</strong></p>
+<p><strong>lastchild返回第一个子节点,找不到则返回null,同样,也是包含所有的节点。</strong></p>
+<p><strong>4.parentNode.lastchild</strong></p>
+<p><strong>5.parentNode .firstElementChild</strong></p>
+<p><strong>firstElementchild返回第一个子元素节点,找不到则返回null</strong></p>
+<p><strong>6.parent Node  .lastElementChild</strong></p>
+<p><strong>lastElenentchild返回最后一个子元素节点,找不到则返回null</strong></p>
+<p><strong>注意:这两个方法有兼容性问题, IE9以上才支持。</strong></p>
+<p><strong>实际开发中, firstChild和lastchild包含其他节点,操作不方便,而firstElementchild和lastElementchila又有兼容性问题,那么我们如何获取第一个子元素节点或最后一个子元素节点呢?</strong></p>
+<h3 id="3-兄弟节点"><a href="#3-兄弟节点" class="headerlink" title="3.兄弟节点"></a><strong>3.兄弟节点</strong></h3><p><strong>1.node.nextsibling</strong></p>
+<p><strong>nextsibling返回当前元素的下一个兄弟节点,找不到则返回nu11。同样,也是包含所有的节点。</strong></p>
+<p><strong>2.node.previoussibling</strong></p>
+<p><strong>previoussibling返回当前元素上一个兄弟节点,找不到则返回nu11。同样,也是包含所有的节点</strong></p>
+<p><strong>3.node.nextElementsibling</strong></p>
+<p><strong>nextElementsibling返回当前元素下一个兄弟元素节点,找不到则返回null.</strong></p>
+<p><strong>4.node.previousElementsibling</strong></p>
+<p><strong>previousElementsibling返回当前元素上一个兄弟节点,找不到则返回null.</strong></p>
+<p><strong>主意:这两个方法有兼容性问题, 1E9以上才支持。</strong></p>
+<p><strong>如何解决兼容性问题?</strong></p>
+<p><strong>自己封装一个兼容性的函数</strong></p>
+<p><strong>function getNextElementsibling (element) {</strong></p>
+<p><strong>var el &#x3D; element;</strong></p>
+<p><strong>while (el &#x3D; el.nextsibling) {</strong></p>
+<p><strong>if (el.nodeType &#x3D;&#x3D;1) {</strong> </p>
+<p><strong>return el;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>}</strong></p>
+<p><strong>return null;</strong></p>
+<p><strong>}</strong></p>
+<h3 id="5-4创建节点"><a href="#5-4创建节点" class="headerlink" title="5.4创建节点"></a>5.4创建节点</h3><p><strong>document. createElement (“tagName ‘)document. createlement ()</strong></p>
+<p><strong>方法创建由tagName指定的HTML元素。因为这些元素原先不存在,是根据我们的需求动态生成的,所以我们也称为动态创建元素节点。</strong></p>
+<h3 id="5-5添加节点"><a href="#5-5添加节点" class="headerlink" title="5.5添加节点"></a>5.5添加节点</h3><p><strong>1.node.appendchild (child)</strong> </p>
+<p><strong>node. appendchild()方法将一个节点添加到指定父节点的子节点列表未尾。类似于css里面的after伪元素。</strong></p>
+<p><strong>2.node.insertBefore (child,指定元素)</strong></p>
+<p><strong>node. insert Be fore ()方法将一个节点添加到父节点的指定子节点前面。类似于css里面的before伪元素。</strong></p>
+<h3 id="5-5删除节点"><a href="#5-5删除节点" class="headerlink" title="5.5删除节点"></a>5.5删除节点</h3><p><strong>node. removechild (child)</strong></p>
+<p><strong>node.removechild()方法从DoM中删除一个子节点,返回删除的节点</strong></p>
+<h3 id="5-6复制节点-克隆节点"><a href="#5-6复制节点-克隆节点" class="headerlink" title="5.6复制节点(克隆节点)"></a>5.6复制节点(克隆节点)</h3><p><strong>node.cloneNode ()node.cloneNode (1)方法返回调用该方法的节点的一个副本。也称为克隆节点&#x2F;拷贝节点</strong></p>
+<p><strong>注意：</strong></p>
+<p><strong>1,如果括号参数为空或者为false ,则是浅拷贝,即只克隆复制节点本身,不克隆里面的子节点。</strong></p>
+<p><strong>2,如果括号参数为true,则是深度拷贝,会复制节点本身以及里面所有的子节点。</strong></p>
+<h3 id="5-8三种动态创建元素区别"><a href="#5-8三种动态创建元素区别" class="headerlink" title="5.8三种动态创建元素区别"></a>5.8三种动态创建元素区别</h3><p><strong>document.write ()</strong></p>
+<p><strong>element .innerHTML</strong></p>
+<p><strong>document. creeateElement ().</strong></p>
+<p><strong>区别.</strong></p>
+<p><strong>1. document.write是直接将内容写入页面的内容流,但是文档流执行完毕,则它会导致页面全部重绘</strong></p>
+<p><strong>2.innerHTML是将内容写入某个DoM节点,不会导致页面全部重绘</strong></p>
+<p><strong>3.innerHTML创建多个元素效率更高(不要拼接字符串,采取数组形式拼接) ,结构稍微复杂</strong></p>
+<p><strong>4.createElement ()创建多个元素效率稍低一点点,但是结构更清材</strong></p>
+<p><strong>总结:不同浏览器下, innerHTM效率要比creatElement高</strong></p>
+<h2 id="6-DOM重点核心"><a href="#6-DOM重点核心" class="headerlink" title="6.DOM重点核心"></a>6.DOM重点核心</h2><p><strong>文档对象模型( Document Object Model,简称DOM ) ,是W3C组织推荐的处理可扩展标记语言(HTML或者XML )的标准编程接口</strong></p>
+<p><strong>W3C已经定义了一系列的DOM接口,通过这些DOM接口可以改变网页的内容、结构和样式</strong></p>
+<p><strong>1,对于JavaScript,为了能够使lavaScript操作HTML , JavaScript就有了一套自己的dom编程接口。</strong></p>
+<p><strong>2,对于HTMIL, dom使得html形成一棵dom树,包含文档、元素、节点</strong></p>
+<p><strong>我们获取过来的DOM元素是一个对象(object) , 所以称为文档对象模型</strong></p>
+<p><strong>关于dom操作,我们主要针对于元素的操作。主要有创建、增、删、改、查、属性操作、事件操作。</strong></p>
+<h3 id="6-1创建"><a href="#6-1创建" class="headerlink" title="6.1创建"></a>6.1创建</h3><ol>
+<li><strong>document.write</strong></li>
+<li><strong>innerHTML</strong></li>
+<li><strong>createElement</strong></li>
+</ol>
+<h3 id="6-2增"><a href="#6-2增" class="headerlink" title="6.2增"></a>6.2增</h3><ol>
+<li><strong>appendChild</strong></li>
+<li><strong>insertBefore</strong></li>
+</ol>
+<h3 id="6-3删"><a href="#6-3删" class="headerlink" title="6.3删"></a><strong>6.3删</strong></h3><ol>
+<li><strong>removeChild</strong></li>
+</ol>
+<h3 id="6-4改"><a href="#6-4改" class="headerlink" title="6.4改"></a>6.4改</h3><p><strong>主要修改dom的元素属性, dom元素的内容、属性,表单的值等</strong></p>
+<p><strong>1.修改元素属性: src, href, titte等</strong></p>
+<p><strong>2,修改普通元素内容: innerHTML, innerText</strong></p>
+<p><strong>3,修改表单元素: value, type, disabled等</strong></p>
+<p><strong>4.修改元素样式: style, className</strong></p>
+<h3 id="6-5查"><a href="#6-5查" class="headerlink" title="6.5查"></a>6.5查</h3><p><strong>主要获取查询dom的元素</strong></p>
+<ol>
+<li><p><strong>DOM提供的API方法: getElementByld, getElementsByTagName  古老用法不太推荐</strong></p>
+</li>
+<li><p><strong>H5提供的新方法: querySelector, querySelectorAll提倡</strong></p>
+</li>
+<li><p><strong>“利用节点操作获取元素:父(parentNode),子(children),</strong></p>
+<p><strong>兄(previousElementSibling \ nextElementSibling )提倡</strong></p>
+</li>
+</ol>
+<h3 id="6-6属性操作"><a href="#6-6属性操作" class="headerlink" title="6.6属性操作"></a>6.6属性操作</h3><p><strong>主要针对于自定义属性。</strong></p>
+<ol>
+<li><strong>setAttribute :设置dom的属性值</strong></li>
+<li><strong>getAttribute :得到dom的属性值</strong></li>
+<li><strong>removeAttribute移除属性</strong></li>
+</ol>
+<h3 id="6-7-事件操作"><a href="#6-7-事件操作" class="headerlink" title="6.7 事件操作"></a>6.7 事件操作</h3><p><strong>给元素注册事件,采取事件源事件类型&#x3D;事件处理程序</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\24861\Desktop\笔记图\操作事件.JPG" alt="操作事件" style="zoom:100%;" />
+
+<h2 id="1-注册事件-绑定事件"><a href="#1-注册事件-绑定事件" class="headerlink" title="1.注册事件(绑定事件)"></a>1.注册事件(绑定事件)</h2><p><strong>1.1注册事件概述给元素添加事件,称为注册事件或者绑定事件。</strong></p>
+<p><strong>注册事件有两种方式:传统方式和方法监听注册方式</strong></p>
+<p><strong>传统注册方式</strong></p>
+<p><strong>利用on开头的事件onclick</strong></p>
+<p><button onclick= "alert(hi~)" ></button></p>
+<p><strong>btn.onclick &#x3D; function(){}</strong></p>
+<p><strong>特点：注册事件的唯一性,</strong></p>
+<p><strong>同一个元素同一个事件只能设置一个处理函数,最后注册的处理函数将会覆盖前面注册的处理函数</strong></p>
+<p><strong>方法监听注册方式</strong></p>
+<p><strong>w3c标准推荐方式</strong></p>
+<p><strong>addEventListener()它是一个方法</strong></p>
+<p><strong>IE9之前的IE不变持此方法,可使用attachEvent()代替</strong></p>
+<p><strong>特点:同一个元素同一个事件可以注册多个监听器</strong></p>
+<p><strong>按注册顺序依次执行</strong></p>
+<h3 id="1-2-addEventListener事件监听方式"><a href="#1-2-addEventListener事件监听方式" class="headerlink" title="1.2 addEventListener事件监听方式"></a>1.2 addEventListener事件监听方式</h3><p><strong>eventTarget.addEventListener (type, listener [, usecapture]).</strong></p>
+<p><strong>eventTarget.addEventListener ()方法将指定的监听器注册到eventTarget (目标对象)上,当该对象触发指定的事件时,就会执行事件处理函数。</strong></p>
+<p><strong>该方法接收三个参数:</strong></p>
+<p><strong>type:事件类型字符串,比如click, mouseover ,注意这里不要带on</strong></p>
+<p><strong>listener:事件处理函数,事件发生时,会调用该监听函数</strong></p>
+<p><strong>useCapture:可选参数,是一个布尔值,默认是false,学完DOM事件流后,我们再进步学习</strong></p>
+<h3 id="1-3-attachEvent事件监听方式"><a href="#1-3-attachEvent事件监听方式" class="headerlink" title="1.3 attachEvent事件监听方式"></a>1.3 attachEvent事件监听方式</h3><p><strong>eventrarget. attachEvent (eventNamewithOn, callback).</strong></p>
+<p><strong>eventTarget. attachEvent ()方法将指定的监听器注册到eventTarget (目标对象)上,当该对象触发指定的事件时,指定的回调函数就会被执行。</strong></p>
+<p><strong>该方法接收两个参数:</strong></p>
+<p><strong>eventNameWithOn :事件类型字符串,比如onclick, onmouseover ,这里要带on</strong></p>
+<p><strong>callback :事件处理函数,当目标触发事件时回调函数被调用</strong></p>
+<h3 id="1-4注册事件兼容性解决方案"><a href="#1-4注册事件兼容性解决方案" class="headerlink" title="1.4注册事件兼容性解决方案"></a>1.4注册事件兼容性解决方案</h3><p><strong>function addEventzistener (element, eventName, fn) {</strong></p>
+<p><strong>&#x2F;&#x2F;判断当前浏览器是否支持addEventListener方法</strong></p>
+<p><strong>if (element. addEventListener) {</strong></p>
+<p><strong>element.addiventListener (eventName, fn); &#x2F;&#x2F;第三个参数默认是false</strong></p>
+<p><strong>} else if (element.attachEvent) {</strong></p>
+<p><strong>element. attachEvent (‘on’ + eventName, fn);</strong></p>
+<p><strong>} else{</strong></p>
+<p><strong>&#x2F;&#x2F;相当于element.onclick&#x3D;fn;</strong></p>
+<p><strong>element[‘on’ + eventName] &#x3D; fn;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>兼容性处理的原则:首先照顾大多数浏览器,再处理特殊浏览器</strong></p>
+<h2 id="2-删除事件（解绑事件"><a href="#2-删除事件（解绑事件" class="headerlink" title="2.删除事件（解绑事件)."></a>2.删除事件（解绑事件).</h2><h3 id="2-1删除事件的方式"><a href="#2-1删除事件的方式" class="headerlink" title="2.1删除事件的方式"></a>2.1删除事件的方式</h3><p><strong>1.传统注册方式</strong></p>
+<p><strong>eventTarget.onclick &#x3D; null;</strong></p>
+<p><strong>2.方法监听注册方式.</strong></p>
+<p><strong>eventTarget. removeEventListener (type, listenerl, useCapturel);</strong></p>
+<p><strong>ventrarget. detachEvent (eventNamewithon, callback);</strong></p>
+<h3 id="2-2删除事件兼容性解决方案"><a href="#2-2删除事件兼容性解决方案" class="headerlink" title="2.2删除事件兼容性解决方案"></a>2.2删除事件兼容性解决方案</h3><p><strong>functiont removeEventListener (element, eventName, fn)</strong></p>
+<p> <strong>&#x2F;&#x2F;判断当前浏览器是否支持removeEventistener方法</strong></p>
+<p><strong>if (element. removeEventListener) {</strong></p>
+<p><strong>element.removeEventListener (eventName, fn); &#x2F;&#x2F;第三个参数默认是false</strong></p>
+<p><strong>} else if (element.detaEvent) {</strong></p>
+<p><strong>element. detachEvent (‘on’ + eventName, fn);</strong></p>
+<p><strong>} else {</strong></p>
+<p><strong>element[‘on’ + eventName] &#x3D; null;</strong></p>
+<p><strong>}</strong></p>
+<h2 id="3-DOM事件流"><a href="#3-DOM事件流" class="headerlink" title="3.DOM事件流"></a>3.DOM事件流</h2><p><strong>事件流描述的是从页面中接收事件的顺序。</strong></p>
+<p><strong>事件发生时会在元素节点之间按照特定的顺字传播,这个传播过程即DOM事件流。</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\24861\Desktop\笔记图\Dom事件流.JPG" alt="Dom事件流"></p>
+<p><strong>事件冒泡: IE最早提出,事件开始时由最具体的元素接收,然后逐级向上传播到到DOM最顶层节点的过程。</strong></p>
+<p><strong>事件捕获:网景最早提出,由DOM最顶层节点开始,然后逐级向下传播到到最具体的元素接收的过程。</strong></p>
+<p><strong>我们向水里面扔一块石头,首先它会有一个下降的过程,这个过程就可以理解为从最顶层向事件发生的最具体元素(目标点)的捕获过程;之后会产生泡泡,会在最低点(最具体元素)之后漂浮到水面上,这个过程相当于事件冒泡。</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\24861\Desktop\笔记图\事件流2.JPG" alt="事件流2"></p>
+<p><strong>事件发生时会在元素节点之间按照特定的顺序传播,这个传播过程即DoM事件流。</strong></p>
+<p><strong>注意.</strong></p>
+<p><strong>1. Js代码中只能执行捕获或者冒泡其中的一个阶段。</strong></p>
+<p><strong>2.onclick和attachEvent只能得到冒泡阶段</strong></p>
+<p><strong>3.addEventListener (type, listenert, usecapture] )</strong></p>
+<p><strong>第三个参数如果是true ,表示在事件捕获阶段调用事件处理程序;</strong></p>
+<p><strong>如果是false (不写默认就是false ) ,表示在事件冒泡阶段调用事件处理程序。</strong></p>
+<p><strong>4,实际开发中我们很少使用事件捕获,我们更关注事件冒泡。</strong></p>
+<p><strong>5,有些事件是没有冒泡的,比如onblur, onfocus, onmouseenter, onmouseleave</strong></p>
+<p><strong>6·事件冒泡有时候会带来麻烦,有时候又会帮助很巧妙的做某些事件,我们后面讲解。</strong></p>
+<h3 id="4-1什么是事件对象"><a href="#4-1什么是事件对象" class="headerlink" title="4.1什么是事件对象"></a>4.1什么是事件对象</h3><p><strong>eventTarget. onclick &#x3D; function (event) {}</strong></p>
+<p><strong>&#x2F;&#x2F;这个event就是事件对象,我们还喜欢的写成e或者evt</strong></p>
+<p><strong>eventTarget.addEventListener (‘click’, function (event) {})</strong></p>
+<p><strong>&#x2F;&#x2F;这个event就是事件对象,我们还喜欢的写成e或者evt</strong></p>
+<p><strong>官方解释: event对象代表事件的状态 比如键盘按键的状态鼠标的位置、鼠标按钮的状态。</strong></p>
+<p><strong>简单理解:事件发生后,跟事件相关的一系列信息数据的集合都放到这个对象里面,这个对象就是事件对象event,它有很多属性和方法。</strong></p>
+<p><strong>比如：</strong></p>
+<p><strong>1谁绑定了这个事件。</strong></p>
+<p><strong>2鼠标触发事件的话,会得到鼠标的相关信息,如鼠标位置。</strong></p>
+<p><strong>3键盘触发事件的话,会得到腱盘的相关信息,如按了哪个键。</strong></p>
+<p><strong>这个event是个形参,系统帮我们设定为事件对象,不需要传递实参过去。</strong></p>
+<p><strong>当我们注册事件时, event对象就会被系统自动创建,并依次传递给事件监听器(事件处理函数)。</strong></p>
+<h3 id="4-3事件对象的兼容性方案"><a href="#4-3事件对象的兼容性方案" class="headerlink" title="4.3事件对象的兼容性方案"></a>4.3事件对象的兼容性方案</h3><p><strong>事件对象本身的获取存在兼容问题:</strong></p>
+<p><strong>1,标准浏览器中是浏览器给方法传递的参数,只需要定义形参e就可以获取到。</strong></p>
+<p><strong>2.在1E6-8中,浏览器不会给方法传递参数,如果需要的话,需要到window.event中获取查找。</strong></p>
+<p><strong>解决:e &#x3D;e Il window.event</strong></p>
+<h3 id="4-4事件对象的常见属性和方法"><a href="#4-4事件对象的常见属性和方法" class="headerlink" title="4.4事件对象的常见属性和方法"></a>4.4事件对象的常见属性和方法</h3><p><strong>事件对象属性方法								说明</strong></p>
+<p><strong>e.target 												返回触发事件的对象标准</strong></p>
+<p><strong>e.srcElement										返回触发事件的对象非标准1e6-8使用</strong></p>
+<p><strong>e.type													返回事件的类型比如click mouseover不带on</strong></p>
+<p><strong>e.cancelBubble									该属性阻止冒泡非标准ie6-8使用</strong></p>
+<p><strong>e.returnValue									该属性阻止默认事件(默认行为)非标准ie6-8使用比如不让链接跳转</strong></p>
+<p><strong>e.preventDefault()							该方法阻止默认事件(默认行为)标准比如不让链接跳转</strong></p>
+<p><strong>e.stopPropagation()						阻止冒泡标准</strong></p>
+<h3 id="5-1阻止事件冒泡的两种方式"><a href="#5-1阻止事件冒泡的两种方式" class="headerlink" title="5.1阻止事件冒泡的两种方式"></a>5.1阻止事件冒泡的两种方式</h3><p><strong>事件冒泡:开始时由最具体的元素接收,然后逐级向上传播到到DOM最页层节点。</strong></p>
+<p><strong>事件冒泡本身的特性,会带来的坏处,也会带来的好处,需要我们灵活掌握。</strong></p>
+<p><strong>阻止事件冒泡标准写法:</strong></p>
+<p><strong>利用事件对象里面的stopPropagation()方法</strong>  <strong>&#x2F;&#x2F;stop停止 Propagation 传播</strong></p>
+<p><strong>e.cancelBubble &#x3D; true;&#x2F;&#x2F;cancel 取消bubble泡泡</strong> </p>
+<h3 id="5-2阻止事件冒泡的兼容性解决方案"><a href="#5-2阻止事件冒泡的兼容性解决方案" class="headerlink" title="5.2阻止事件冒泡的兼容性解决方案"></a>5.2阻止事件冒泡的兼容性解决方案</h3><p><strong>if (e &amp;&amp; e.stopPropagation) {</strong></p>
+<p><strong>e.stopPropagation();</strong></p>
+<p><strong>}else{</strong></p>
+<p><strong>window.event.cancelBubble &#x3D; true;</strong></p>
+<p><strong>}</strong></p>
+<h2 id="6．事件委托（代理、委派"><a href="#6．事件委托（代理、委派" class="headerlink" title="6．事件委托（代理、委派)"></a>6．事件委托（代理、委派)</h2><p><strong>事件冒泡本身的特性,会带来的坏处,也会带来的好处,需要我们灵活掌握,生活中有如下场景:</strong></p>
+<p><strong>咱们班有100个学生,快递员有100个快递,如果一个个的送花费时间较长。同时每个学生领取的时候,也需要排队领取，也花费时间较长,何如?</strong></p>
+<p><strong>解决方案:快递员把100个快递,委托给班主任,班主任把这些快递放到办公室,同学们下课自行领取即可。</strong></p>
+<p><strong>优势:快递员省事,委托给班主任就可以走了。同学们领取也方便,因为相信班主任。</strong></p>
+<p>事件冒泡本身的特性,会带来的坏处,也会带来的好处,需要我们灵活掌握。程序中也有如此场景:</p>
+<p>1.<ul></p>
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<li>知否知否,应该有弹框在手</li>
+
+<p>1.<ul></p>
+<p><strong>点击每个li都会弹出对话框,以前需要给每个 注册事件,是非常辛苦的,而且访问DOM的次数越多,这就会延长整个页面的交互就绪时间。</strong></p>
+<h3 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h3><p><strong>事件委托也称为事件代理,在jQuery里面称为事件委派。</strong></p>
+<h3 id="事件委托的原理"><a href="#事件委托的原理" class="headerlink" title="事件委托的原理"></a>事件委托的原理</h3><p><u><strong>(重要)不是每个子节点单独设置事件监听器,而是事件监听器设置在其父节点上,然后利用冒泡原理影响设置每个子节点。</strong></u></p>
+<p><strong>以上案例:给ul注册点击事件,然后利用事件对象的target来找到当前点击的l1,因为点击li,事件会冒泡到ul上,ul有注册事件,就会触发事件监听器。</strong></p>
+<h3 id="事件委托的作用"><a href="#事件委托的作用" class="headerlink" title="事件委托的作用"></a><strong>事件委托的作用</strong></h3><p><strong>我们只操作了一次DOM,提高了程序的性能。</strong></p>
+<h2 id="7．常用的鼠标事件"><a href="#7．常用的鼠标事件" class="headerlink" title="7．常用的鼠标事件"></a>7．常用的鼠标事件</h2><h3 id="7-1常用的鼠标事件"><a href="#7-1常用的鼠标事件" class="headerlink" title="7.1常用的鼠标事件"></a>7.1常用的鼠标事件</h3><p><strong>1.禁止鼠标右键菜单</strong></p>
+<p><strong>contextmenu主要控制应该何时显示上下文菜单,主要用于程序员取消默认的上下文某单document.addEventListener (‘contextmenu’, function(e) {</strong></p>
+<p><strong>e.preventDefault ();</strong></p>
+<p><strong>})</strong></p>
+<p><strong>2.禁止鼠标选中( selectstart开始选中)</strong></p>
+<p><strong>document.addEventListener (‘selectstart’, function(e) {</strong></p>
+<p><strong>e.preventDefault ();</strong></p>
+<p><strong>})</strong></p>
+<h3 id="7-2鼠标事件对象"><a href="#7-2鼠标事件对象" class="headerlink" title="7.2鼠标事件对象"></a>7.2鼠标事件对象</h3><p><strong>event对象代表事件的状态,跟事件相关的一系列信息的集合。现阶段我们主要是用鼠标事件对象</strong></p>
+<p><strong>MouseEvent和键盘事件对象KeyboardEvent.</strong></p>
+<p><strong>鼠标事件对象						说明</strong></p>
+<p><strong>e.clientx								返回鼠标相对于浏览器窗口可视区的×坐标</strong></p>
+<p><strong>e.clientY								返回鼠标相对于浏览器窗口可视区的Y坐标</strong></p>
+<p><strong>e.pagex								返回鼠标相对于文档页面的x坐标1E9+支持</strong></p>
+<p><strong>e.pageY								返回鼠标相对于文档页面的Y坐标1E9+支持</strong></p>
+<p><strong>e.screenX							返回鼠标相对于电脑屏幕的x坐标</strong></p>
+<p><strong>e.screenY							返回鼠标相对于电脑屏幕的Y坐标</strong></p>
+<h3 id="8-1常用键盘事件"><a href="#8-1常用键盘事件" class="headerlink" title="8.1常用键盘事件"></a>8.1常用键盘事件</h3><p><strong>事件除了使用鼠标触发,还可以使用鍵盘触发。</strong></p>
+<p><strong>键盘事件					触发条件</strong></p>
+<p><strong>onkeyup					某个键盘按键被松开时触发</strong></p>
+<p><strong>onkeydown 			某个鍵盘按键被按下时触发</strong></p>
+<p><strong>onkeypress			某个键盘按键被按下时触发 但是它不识别功能键比如ctrl shift箭头等</strong></p>
+<p><strong>注意:</strong></p>
+<p><strong>1,如果使用addEventListener不需要加on</strong></p>
+<p><strong>2.onkeypress和前面2个的区别是,它不识别功能键,比如左右箭头, shift等。</strong></p>
+<p><strong>3.三个事件的执行顺序是: keydown–keypress —keyup</strong></p>
+<h3 id="8-2键盘事件对象"><a href="#8-2键盘事件对象" class="headerlink" title="8.2键盘事件对象"></a>8.2键盘事件对象</h3><p><strong>键盘事件对象属性    				说明</strong></p>
+<p><strong>keyCode									返回该键的ASCII值</strong></p>
+<p><strong>注意: onkeydown和onkeyup不区分字母大与, onkeypress区分字母大小写.</strong></p>
+<p><strong>在我们实际开发中,我们更多的使用keydown和keyup ,它能识别所有的键(包括功能键)</strong></p>
+<p><strong>Keypress不识别功能键,但是keyCode属性能区分大小写,返回不同的ASCI值</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\24861\Desktop\笔记图\ACSII.JPG" alt="ACSII"></p>
+<h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h1><p><strong>1.1什么是BOMBOM (Browser Object Model )即浏览器对象模型,它提供了独立于内容而与浏览器窗口进行交互的对象,其核心对象是window.</strong></p>
+<p><strong>BOM由一系列相关的对象构成,并且每个对象都提供了很多方法与属性。BOM缺乏标准, Javascript语法的标准化组织是ECMA, DOM的标准化组织是W3C, BOM最初是Netscape浏览器标准的一部分。</strong></p>
+<p><strong>DOM</strong></p>
+<p><strong>文档对象模型</strong></p>
+<p><strong>DOM就是把「文档」当做一个「对象」来看待</strong></p>
+<p><strong>DOM的顶级对象是document</strong></p>
+<p><strong>DOM主要学习的是操作页面元素</strong></p>
+<p><strong>DOM是W3C标准规范</strong></p>
+<p><strong>BOM</strong></p>
+<p><strong>浏览器对象模型</strong></p>
+<p><strong>把「浏览器」当做一个「对象」来看待</strong></p>
+<p><strong>BOM的顶级对象是window</strong></p>
+<p><strong>BOM学习的是浏览器窗口交互的一些对象</strong></p>
+<p><strong>BOM是浏览器厂商在各自浏览器上定义的,兼容性较差</strong></p>
+<p><strong>вом比DOM更大,包含DOM.</strong></p>
+<h2 id="1-2-BоM的构成"><a href="#1-2-BоM的构成" class="headerlink" title="1.2 BоM的构成"></a>1.2 BоM的构成</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="E:\桌面\笔记图\bom.JPG" alt="bom"></p>
+<p><strong>window对象是浏览器的顶级对象,它具有双重角色。</strong></p>
+<p><strong>1,它是JS访问浏览器窗口的一个接口。</strong></p>
+<p><strong>2,它是一个全局对象。定义在全局作用域中的变量、函数都会变成window对象的属性和方法。在调用的时候可以省略window ,前面学习的对话框都属于window对象方法,如alert(), prompt()等。</strong></p>
+<p><strong>注意： window下的一个特殊属性window.name</strong></p>
+<h2 id="2-1窗口加载事件"><a href="#2-1窗口加载事件" class="headerlink" title="2.1窗口加载事件"></a>2.1窗口加载事件</h2><p><strong>window.onload &#x3D; function (){}</strong></p>
+<p><strong>或者window.addEventListener (“load”, function () {});</strong></p>
+<p><strong>window.onload是窗口(页面)加载事件,当文档内容完全加载完成会触发该事件(包括图像、脚本文件、CSs文件等),就调用的处理函数。</strong></p>
+<p><strong>注意:</strong></p>
+<p><strong>1,有了window.onload就可以把JS代码写到页面元素的上方,因为onload是等页面内容全部加载完毕,再去执行处理函数。</strong></p>
+<p><strong>2. window.onload传统注册事件方式只能写一次,如果有多个,会以最后一个window.onload为准。</strong></p>
+<p><strong>3,如果使用addEventnistener则没有限制</strong></p>
+<p><strong>document.addEventListener (‘DOMContentLoaded’, function(){})</strong></p>
+<p><strong>DOMContentLoaded事件触发时,仅当DOM加载完成,不包括样式表,图片, flash等等。le9以上才支持</strong></p>
+<p><strong>如果页面的图片很多的话,从用户访问到onload触发可能需要较长的时间,交互效果就不能实现,必然影响用户的体验,此时用DOMContentloaded事件比较合适。</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>load等页面内容全部加载完毕,包含页面dom元素图片flash css等等DOMContentLoaded是DOM加载完毕,不包含图片falsh css等就可以执行加载速度比load更快一些</strong></p>
+<h2 id="2-2调整窗口大小事件"><a href="#2-2调整窗口大小事件" class="headerlink" title="2.2调整窗口大小事件"></a>2.2调整窗口大小事件</h2><p><strong>window.onresize &#x3D; function(){}</strong></p>
+<p><strong>window.addEventListener(“resize”, function(){});</strong></p>
+<p><strong>window.onresize是调整窗口大小加载事件,当触发时就调用的处理函数。注意:</strong></p>
+<p><strong>1,只要窗口大小发生像素变化,就会触发这个事件。</strong></p>
+<p><strong>2,我们经常利用这个事件完成响应式布局.window.innerWidth当前屏幕的宽度</strong></p>
+<h2 id="3-1两种定时器"><a href="#3-1两种定时器" class="headerlink" title="3.1两种定时器"></a><strong>3.1两种定时器</strong></h2><p><strong>window对象给我们提供了2个非常好用的方法-定时器。</strong></p>
+<p><strong>setTimeout()</strong></p>
+<p><strong>setlnterval()</strong></p>
+<h2 id="3-2-setTimeout-定时器"><a href="#3-2-setTimeout-定时器" class="headerlink" title="3.2 setTimeout()定时器"></a>3.2 setTimeout()定时器</h2><p><strong>window.setTimeout (调用函数, [延迟的毫秒数]);</strong></p>
+<p><strong>setTimeout()方法用于设置一个定时器,该定时器在定时器到期后执行调用函数。</strong></p>
+<p><strong>这个window在调用的时候可以省略</strong></p>
+<p><strong>这个延时时间单位是毫秒但是可以省略,如果省略默认的是0</strong></p>
+<p><strong>这个调用函数可以直接写函数还可以写函数名</strong></p>
+<p><strong>还有一个写法,’函数名()’ &#x2F;&#x2F;我们不提倡这个写法</strong></p>
+<p><strong>页面中可能有很多的定时器,我们经常给定时器加标识符(名字)</strong></p>
+<p><strong>setTimeout()这个调用函数我们也称为回调函数callback</strong></p>
+<p><strong>普通函数是按照代码顺序直接调用。</strong></p>
+<p><strong>而这个函数,需要等待时间,时间到了才去调用这个函数,因此称为回调函数。</strong></p>
+<p><strong>简单理解:回调,就是回头调用的意思。上一件事干完,再回头再调用这个函数。</strong></p>
+<p><strong>以前我们讲的element.onclick&#x3D;functiono(){}或者element.addeventistener(“clik”, fn);里面的函数也是回调函数。</strong></p>
+<h2 id="3-3停止setTimeout-定时器（只调用一次）"><a href="#3-3停止setTimeout-定时器（只调用一次）" class="headerlink" title="3.3停止setTimeout()定时器（只调用一次）"></a>3.3停止setTimeout()定时器（只调用一次）</h2><p><strong>window.clearTimeout (timeoutID)—(定时器名字)</strong></p>
+<p><strong>clearTimeout (1)方法取消了先前通过调用setTimeout ()建立的定时器。</strong></p>
+<p><strong>注意：1. window可以省略。</strong></p>
+<h2 id="3-4-setInterval-定时器（重复调用）"><a href="#3-4-setInterval-定时器（重复调用）" class="headerlink" title="3.4 setInterval()定时器（重复调用）"></a>3.4 setInterval()定时器（重复调用）</h2><p><strong>window.set Interval (回 函数, [间隔的毫秒数] );</strong></p>
+<p><strong>setinterval()方法重复调用一个函数,每隔这个时间,就去调用一次回调函数。</strong></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li><strong>window可以省略</strong></li>
+<li><strong>这个调用函数可以直接写函数,或者写函数名或者采取字符串函数名0三种形式。</strong></li>
+<li><strong>间隔的毫秒数省略默认是0,如果写,必须是毫秒,表示每隔多少毫秒就自动调用这个函数。</strong></li>
+<li><strong>因为定时器可能有很多,所以我们经常给定时器赋值一个标识符。</strong></li>
+</ol>
+<h2 id="3-5停止setInterval-定时器"><a href="#3-5停止setInterval-定时器" class="headerlink" title="3.5停止setInterval()定时器"></a>3.5停止setInterval()定时器</h2><p><strong>window. clearInterval (intervalID);</strong></p>
+<p><strong>clearInterval ()方法取消了先前通过调用setInterval ()建立的定时器。</strong></p>
+<p><strong>注意:</strong></p>
+<p><strong>1.window可以省略。</strong></p>
+<p><strong>2.里面的参数就是定时器的标识符。</strong></p>
+<h2 id="3-6-this"><a href="#3-6-this" class="headerlink" title="3.6 this"></a>3.6 this</h2><p><strong>this的指向在函数定义的时候是确定不了的,只有函数执行的时候才能确定</strong></p>
+<p><strong>this到底指向谁,一般情况下this的最终指向的是那个调用它的对象</strong></p>
+<p><strong>现阶段,我们先了解一下几个this指向</strong></p>
+<p><strong>1,全局作用域或者普通函数中this指向全局对象window (注意定时器里面的this指向window )</strong></p>
+<h2 id="4-JS执行机制"><a href="#4-JS执行机制" class="headerlink" title="4.JS执行机制"></a>4.JS执行机制</h2><h2 id="4-1JS单线程"><a href="#4-1JS单线程" class="headerlink" title="4.1JS单线程"></a>4.1JS单线程</h2><p><strong>JavaScript语言的一大特点就是单线程,也就是说,同一个时间只能做一件事。这是因为Javascript这门脚本语言诞生的使命所致-JavaScript是为处理页面中用户的交互,以及操作DOM而诞生的。比如我们对某个DOM元素进行添加和删除操作,不能同时进行。应该先进行添加,之后再删除。</strong></p>
+<p><strong>单线程就意味着,所有任务需要排队,前一个任务结束,才会执行后一个任务。这样所导致的问题是:如果JS执行的时间过长,这样就会造成页面的渲染不连贯,导致页面渲染加载阻塞的感觉。</strong></p>
+<h2 id="4-3同步和异步"><a href="#4-3同步和异步" class="headerlink" title="4.3同步和异步"></a>4.3同步和异步</h2><p><strong>为了解决这个问题,利用多核CPU的计算能力, HTML5提出Web Worker标准,允许JavaScript脚本创建多个线程。于是，JS中出现了同步和异步。</strong></p>
+<p><strong>同步</strong></p>
+<p><strong>前一个任务结束后再执行后一个任务,程序的执行顺字与任务的排列顺序是一致的、同步的。比如做饭的同步做法:我们要烧水煮饭,等水开了(10分钟之后) ,再去切菜,炒菜。</strong></p>
+<p><strong>异步</strong></p>
+<p><strong>你在做一件事情时,因为这件事情会花费很长时间,在做这件事的同时,你还可以去处理其他事情。比如做饭的异步做法,我们在烧水的同时,利用这10分钟,去切菜,炒菜。</strong></p>
+<p><strong>他们的本质区别：这条流水线上各个流程的执行顺序不同。</strong></p>
+<p><strong>同步任务</strong></p>
+<p><strong>同步任务都在主线程上执行,形成一个执行栈。</strong></p>
+<p><strong>异步任务</strong></p>
+<p><strong>JS的异步是通过回调函数实现的。</strong></p>
+<p><strong>一般而言,异步任务有以下三种类型</strong></p>
+<p><strong>1、普通事件,如click, resize等</strong></p>
+<p><strong>2、资源加载,如load, error等</strong></p>
+<p><strong>3、定时器,包括setInterval, setTimeout等</strong></p>
+<p><strong>异步任务相关回调函数添加到任务队列中(任务队列也称为消息队列)。</strong></p>
+<h2 id="4-4-JS执行机制"><a href="#4-4-JS执行机制" class="headerlink" title="4.4 JS执行机制"></a>4.4 JS执行机制</h2><p><strong>1.先执行执行栈中的同步任务。</strong></p>
+<p><strong>2异步任务(回调函数)放入任务队列中。</strong></p>
+<p><strong>3,一旦执行栈中的所有同步任务执行完毕,系统就会按次序读取任务队列中的异步任务,于是被读取的异步任务结束等待状态,进入执行栈，开始执行。</strong></p>
+<p><strong>由于主线程不断的重复获得任务、执行任务、再获取任务、再执行,所以这种机制被称为事件循环( event loop).</strong></p>
+<h2 id="5-location对象"><a href="#5-location对象" class="headerlink" title="5.location对象"></a>5.location对象</h2><h3 id="5-1什么是location对象"><a href="#5-1什么是location对象" class="headerlink" title="5.1什么是location对象"></a>5.1什么是location对象</h3><p><strong>window对象给我们提供了一个location属性用于获取或设置窗体的URL ,并且可以用于解析URL。</strong></p>
+<p><strong>因为这个属性返回的是一个对象,所以我们将这个属性也称为location对象。</strong></p>
+<h3 id="5-2-URL"><a href="#5-2-URL" class="headerlink" title="5.2 URL"></a>5.2 URL</h3><p><strong>统一资源定位符(Uniform Resource Locator, URL)是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL,它包含的信息指出文件的位置以及浏览器应该怎么处理它</strong></p>
+<p><strong>URL的一股语法格式为:</strong></p>
+<p><strong>protocol:&#x2F;&#x2F;host [:port]&#x2F;path&#x2F; [?query]#fragment</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="http://www.itcast.cn/index.html">http://www.itcast.cn/index.html</a> ?name-andysage&#x3D;18#link</strong></p>
+<p><strong>组成						说明</strong></p>
+<p><strong>protocol 				通信协议常用的http,ftp,maito等</strong></p>
+<p><strong>host						主机(域名) <a target="_blank" rel="noopener" href="http://www.itheima.com/">www.itheima.com</a></strong></p>
+<p><strong>port						端口号可选,省略时使用方案的默认端口如http的默认端口为80</strong></p>
+<p><strong>path						路径由零或多个&#x2F;符号隔开的字符串,一般用来表示主机上的一个目录或文件地址</strong></p>
+<p><strong>query					 参数以键值对的形式,通过&amp;符号分隔开来</strong></p>
+<p><strong>fragment 			 片段#后面内容常见于链接锚点</strong></p>
+<h2 id="5-3-location对象的属性"><a href="#5-3-location对象的属性" class="headerlink" title="5.3 location对象的属性"></a><strong>5.3 location对象的属性</strong></h2><p><strong>location对象属性						返回值</strong></p>
+<p><strong>location.href								获取或者设置整个URL</strong></p>
+<p><strong>location. host							返回主机(域名) <a target="_blank" rel="noopener" href="http://www.itheima.com/">www.itheima.com</a></strong></p>
+<p> <strong>location.port							返回端口号如果未写返回空字符串</strong></p>
+<p> <strong>location.pathname				  返回路径</strong></p>
+<p> <strong>location. search						返回参数</strong></p>
+<p> <strong>location. hash							返回片段#后面内容常见于链接锚点</strong></p>
+<p><strong>重点记住: href和search</strong></p>
+<h2 id="5-4-location对象的方法"><a href="#5-4-location对象的方法" class="headerlink" title="5.4 location对象的方法"></a>5.4 location对象的方法</h2><p><strong>location对象方法			返回值</strong></p>
+<p><strong>location.assign()			跟href一样,可以跳转页面(也称为重定向页面)</strong></p>
+<p><strong>location.replace()		替换当前页面,因为不记录历史,所以不能后退页面</strong></p>
+<p><strong>location.reload()		 重新加载页面,相当于刷新按钮或者f5如果参数为true强制刷新ctrl+5</strong></p>
+<h2 id="6-navigator对象"><a href="#6-navigator对象" class="headerlink" title="6.navigator对象"></a>6.navigator对象</h2><p><strong>navigator对象包含有关浏览器的信息,它有很多属性,我们最常用的是userAgent ,该属性可以返回由客户机发送服务器的user-agent头部的值。</strong></p>
+<p><strong>下面前端代码可以判断用户那个终端打开页面,实现跳转</strong></p>
+<p><strong>if ( (navigator. userAgent. match (&#x2F; (phone lpadl podl iPhone lipodl ios l iPad I Androidl tMobile IBlackBerryl IEMobi le IMOOBrowserl JuC I Fennec IwOSBrowser I BrowserNG| WebosI Symbian Iwindows Phone)&#x2F;i))) {</strong></p>
+<p><strong>window.location.href&#x3D;””;&#x2F;&#x2F;手机</strong></p>
+<p><strong>} else {</strong></p>
+<p><strong>window. location.href &#x3D;””;&#x2F;&#x2F;电脑</strong></p>
+<p><strong>}</strong></p>
+<h2 id="7-history对象"><a href="#7-history对象" class="headerlink" title="7.history对象"></a>7.history对象</h2><p><strong>window对象给我们提供了一个history对象,与浏览器历史记录进行交互。该对象包含用户(在浏览器窗口中)访问过的URL</strong></p>
+<p><strong>history对象方法			作用</strong></p>
+<p><strong>back()							可以后退功能</strong></p>
+<p><strong>forward()						前进功能</strong></p>
+<p><strong>go(参数)						前进后退功能参数如果是1前进1个页面如果是-1后退1个页面</strong></p>
+<h2 id="1·元素偏移量offset系列"><a href="#1·元素偏移量offset系列" class="headerlink" title="1·元素偏移量offset系列"></a>1·元素偏移量offset系列</h2><h3 id="1-1-offset概述"><a href="#1-1-offset概述" class="headerlink" title="1.1 offset概述"></a>1.1 offset概述</h3><p><strong>offset 翻译过来就是偏移量,我们使用offset系列相关属性可以动态的得到该元素的位置(偏移)、大小等。</strong></p>
+<p><strong>获得元素距离带有定位父元素的位置</strong></p>
+<p><strong>获得元素自身的大小(宽度高度)</strong></p>
+<p><strong>注意:返回的数值都不带单位</strong></p>
+<p><strong>offset系列常用属性:</strong></p>
+<p><strong>offset系列属性						作用</strong></p>
+<p><strong>element.offsetParent				返回作为该元素带有定位的父级元素如果父级都没有定位则返回body</strong></p>
+<p><strong>element.offsetTop				 	返回元素相对带有定位父元素上方的偏移</strong></p>
+<p><strong>element.offsetLeft					返回元素相对带有定位父元素左边框的偏移</strong></p>
+<p><strong>element.offsetWidth				返回自身包括padding、边框、内容区的宽度,返回数值不带单位</strong></p>
+<p><strong>element.offsetHeight			 返回自身包括padding、边框、内容区的高度,返回数值不带单位</strong></p>
+<h2 id="1-2-offset与style区别"><a href="#1-2-offset与style区别" class="headerlink" title="1.2 offset与style区别"></a>1.2 offset与style区别</h2><p><strong>offset</strong></p>
+<p><strong>offset可以得到任意样式表中的样式值</strong></p>
+<p><strong>offset系列获得的数值是没有单位的</strong></p>
+<p><strong>offsetwidth 包含padding+border+width</strong></p>
+<p><strong>offsetidth等属性是只读属性,只能获取不能赋值</strong></p>
+<p><strong>所以,我们想要获取元素大小位置,用offset更合适</strong></p>
+<p><strong>style</strong></p>
+<p><strong>style只能得到行内样式表中的样式值</strong></p>
+<p><strong>style.width获得的是带有单位的字符串</strong></p>
+<p><strong>style.width获得不包含padding和border 的值</strong></p>
+<p><strong>style.width是可读写属性,可以获取也可以赋值</strong></p>
+<p><strong>所以,我们想要给元素更改值,则需要用style改变</strong></p>
+<h2 id="2-元素可视区client系列"><a href="#2-元素可视区client系列" class="headerlink" title="2,元素可视区client系列"></a>2,元素可视区client系列</h2><p><strong>client翻译过来就是客户端,我们使用clent系列的相关属性来获取元素可视区的相关信息。通过client系列的相关属性可以动态的得到该元素的边框大小、元素大小等。</strong></p>
+<p><strong>elient系列属性					   作用</strong></p>
+<p><strong>element.clientTop				返回元素上边框的大小</strong></p>
+<p><strong>element.clientLeft				返回元素左边框的大小</strong></p>
+<p><strong>element.clientWidth			返回自身包括padding、内容区的宽度,不含边框返回数值不带单位</strong></p>
+<p><strong>element.clientHeight		 返回自身包括padding、内容区的高度,不含边框,返回数值不带单位</strong></p>
+<h2 id="3-立即执行函数"><a href="#3-立即执行函数" class="headerlink" title="3.立即执行函数"></a>3.立即执行函数</h2><p><strong>立即执行函数</strong></p>
+<p><strong>(functiono(){})()</strong></p>
+<p><strong>或者</strong></p>
+<p><strong>(function(){}())</strong></p>
+<p><strong>主要作用:创建一个独立的作用域。避免了命名冲突问题</strong></p>
+<h2 id="案例：淘宝flexible-js源码分析"><a href="#案例：淘宝flexible-js源码分析" class="headerlink" title="案例：淘宝flexible.js源码分析"></a><strong>案例：淘宝flexible.js源码分析</strong></h2><p><strong>下面三种情况都会刷新页面都会触发load事件。</strong></p>
+<p><strong>1.a标签的超链接</strong></p>
+<p><strong>2.F5或者刷新按钮(强制刷断)</strong></p>
+<p><strong>3.前进后退按钮</strong></p>
+<p><strong>但是火狐中,有个特点,有个”往返缓存” ,这个缓存中不仅保存着页面数据,还保存了DOM和JavaScript的状态;实际上是将整个页面都保存在了内存里。</strong></p>
+<p><strong>所以此时后退按钮不能刷新页面。</strong></p>
+<p><strong>此时可以使用pageshow事件来触发。,这个事件在页面显示时触发,无论页面是否来自缓存。在重新加载页面中, pageshow会在load或件触发后触发;根据事件对象中的persisted来判断是否是缓存中的页面触发的pageshow事件,注意这个事件给window添加。</strong></p>
+<h2 id="3-1元素scroll系列属性"><a href="#3-1元素scroll系列属性" class="headerlink" title="3.1元素scroll系列属性"></a>3.1元素scroll系列属性</h2><p><strong>scroll翻译过来就是滚动的,我们使用scroll系列的相关属性可以动态的得到该元素的大小、滚动距离等。</strong></p>
+<p><strong>scroll系列属性					    作用</strong></p>
+<p><strong>element.scrollTop				返回被卷去的上侧距离,返回数值不带单位</strong></p>
+<p><strong>element.scrollLeft				返回被卷去的左侧距离,返回数值不带单位</strong></p>
+<p><strong>element.scrollWidth			返回自身实际的宽度,不含边框,返回数值不带单位</strong></p>
+<p><strong>element.scrollHeight		  返回自身实际的高度,不含边框,返回数值不带单位</strong></p>
+<p><strong>内容的实际大小</strong></p>
+<h2 id="3-2页面被卷去的头部"><a href="#3-2页面被卷去的头部" class="headerlink" title="3.2页面被卷去的头部"></a>3.2页面被卷去的头部</h2><p><strong>如果浏览器的高(或宽)度不足以显示整个页面时,会自动出现滚动条。当滚动条向下滚动时,页面上面被隐藏掉的高度,我们就称为页面被卷去的头部。滚动条在滚动时会触发onscroll事件。</strong></p>
+<p><strong>需要用到页面滚动事件scroll因为是页面滚动,所以事件源是document</strong></p>
+<p><strong>②滚动到某个位置,就是判断页面被卷去的上部值。</strong></p>
+<p><strong>3页面被卷去的头部:可以通过window.pageYoffset获得 如果是被卷去的左侧window.pagexoffset</strong></p>
+<p><strong>④注意,元素被卷去的头部是element.scolTop,如果是页面被卷去的头部则是window.pageYofset</strong></p>
+<p><strong>3,新方法window.pageroffset和window. pagexoffset , IE9开始支持</strong></p>
+<p><strong>function getscroll() {</strong></p>
+<p><strong>return {</strong></p>
+<p><strong>left: window.pagexoffset I I document.documentElement.scrollleft II document.body.scrollleft I I0, top: window.pageYoffset II document.documentElement.scrollTop II document.body.scrollTop II0};</strong></p>
+<p><strong>}</strong></p>
+<p><strong>使用的时候getScroll ().left</strong></p>
+<h2 id="三大系列总结"><a href="#三大系列总结" class="headerlink" title="三大系列总结"></a>三大系列总结</h2><p><strong>三大系列大小对比					作用</strong></p>
+<p><strong>element.offsetWidth			 返回自身包括padding.(边框)内容区的宽度,返回数值不带单位</strong></p>
+<p><strong>element.clientWidth			 返回自身包括padding、内容区的宽度,不含边框,返回数值不带单位</strong></p>
+<p><strong>element.scrollWidth			 返回自身实际的宽度,不含边框,返回数值不带单位</strong></p>
+<p><strong>他们主要用法:</strong></p>
+<p><strong>1.offst系列经常用于获得元素位置offsetLeft offsetTop</strong></p>
+<p><strong>2.client经常用于获取元素大小clientwidth clientHeight</strong></p>
+<p><strong>3, scroll经常用于获取滚动距离scrollTop scrolleft</strong></p>
+<p><strong>4,注意页面滚动的距离通过window.pagexoffset获得</strong></p>
+<h2 id="mouseenter和mouseover的区别"><a href="#mouseenter和mouseover的区别" class="headerlink" title="mouseenter和mouseover的区别"></a>mouseenter和mouseover的区别</h2><h3 id="mouseenter鼠标事件"><a href="#mouseenter鼠标事件" class="headerlink" title="mouseenter鼠标事件"></a>mouseenter鼠标事件</h3><p><strong>当鼠标移动到元素上时就会触发mouseenter事件</strong></p>
+<p><strong>类似mouseover,它们两者之间的差别是</strong></p>
+<p><strong>mouseover鼠标经过自身盒子会触发,经过子盒子还会触发。mouseenter只会经过自身盒子触发</strong></p>
+<p><strong>之所以这样,就是因为mouseenter不会冒泡</strong></p>
+<p><strong>跟mouseenter搭配鼠标离开mouseleave同样不会冒泡</strong></p>
+<h2 id="4．动画函数封装"><a href="#4．动画函数封装" class="headerlink" title="4．动画函数封装"></a>4．动画函数封装</h2><h3 id="4-1动画实现原理"><a href="#4-1动画实现原理" class="headerlink" title="4.1动画实现原理"></a>4.1动画实现原理</h3><p><strong>核心原理:通过定时器setinterval()不断移动盒子位置。</strong></p>
+<p><strong>实现步骤：</strong></p>
+<p><strong>1获得盒子当前位置</strong></p>
+<p><strong>2.让盒子在当前位置加上1个移动距离</strong></p>
+<p><strong>3,利用定时器不断重复这个操作</strong></p>
+<p><strong>4.加一个结束定时器的条件</strong></p>
+<p><strong>5,注意此元素需要添加定位,才能使用element.style.left</strong></p>
+<h3 id="4-2动画函数简单封装"><a href="#4-2动画函数简单封装" class="headerlink" title="4.2动画函数简单封装"></a>4.2动画函数简单封装</h3><p><strong>注意函数需要传递2个参数，动画对象和移动到的距离。</strong></p>
+<h3 id="4-4缓动效果原理"><a href="#4-4缓动效果原理" class="headerlink" title="4.4缓动效果原理,"></a>4.4缓动效果原理,</h3><p><strong>缓动动画就是让元素运动速度有所变化,最常见的是让速度慢慢停下来</strong></p>
+<p><strong>思路:1,让盒子每次移动的距离慢慢变小,速度就会慢慢落下来。</strong></p>
+<p><strong>核心算法: (目标值·现在的位置) &#x2F; 10做为每次移动的距离步长</strong></p>
+<p><strong>停止的条件是:让当前盒子位置等于目标位置就停止定时器</strong></p>
+<h2 id="5．常见网页特效案例"><a href="#5．常见网页特效案例" class="headerlink" title="5．常见网页特效案例"></a>5．常见网页特效案例</h2><h3 id="5-1节流阀"><a href="#5-1节流阀" class="headerlink" title="5.1节流阀"></a>5.1节流阀</h3><p><strong>防止轮播图按纽连续点击造成播放过快.</strong></p>
+<p><strong>节流阀目的:当上一个函数动画内容执行完毕,再去执行下一个函鼓动画,让事件无法连续身发。</strong></p>
+<p><strong>核心实现思路:利用回调函数,添加一个变量来控制,锁住函数和解锁函数</strong></p>
+<p><strong>开始设置一个变量 var flag&#x3D; true;</strong></p>
+<p><strong>If(flag) (flag &#x3D; false; do somethng) 闭水龙头</strong></p>
+<p><strong>利用回调函数动画执行完毕, flag&#x3D;true打开水龙头</strong></p>
+<h1 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h1><h2 id="1-触屏事件"><a href="#1-触屏事件" class="headerlink" title="1.触屏事件"></a>1.触屏事件</h2><h3 id="1-1触屏事件概述"><a href="#1-1触屏事件概述" class="headerlink" title="1.1触屏事件概述"></a>1.1触屏事件概述</h3><p><strong>移动端浏览器兼容性较好,我们不需要考虑以前JS的兼容性问题,可以放心的使用原生JS书写效果,但是移动端也有自己独特的地方。比如触屏事件touch (也称触摸事件) , Android和IOS都有。</strong> </p>
+<p><strong>touch对象代表一个触摸点。触摸点可能是一根手指,也可能是一根触摸笔。触屏事件可响应用户手指(或触空笔）对屏幕或者触控板操作。</strong></p>
+<p><strong>触屏touch事件			说明</strong></p>
+<p><strong>touchstart				  手指触摸到一个DOM元素时触发</strong></p>
+<p><strong>touchmove				手指在一个DOM元素上滑动时触发</strong></p>
+<p><strong>touchend					手指从一个DOM元素上移开时触发</strong></p>
+<h3 id="1-2触摸事件对象-TouchEvent"><a href="#1-2触摸事件对象-TouchEvent" class="headerlink" title="1.2触摸事件对象(TouchEvent )"></a>1.2触摸事件对象(TouchEvent )</h3><p><strong>TouchEvent是一类描述手指在触莫平面(触摸屏、触莫板等)的状态变化的事件。这类事件用于描述一个或多个触点,使开发者可以检测触点的移动,触点的增加和减少,等等</strong></p>
+<p><strong>touchstart, touchmove, touchend三个事件都会各自有事件对象。</strong></p>
+<p><strong>触摸列表						说明</strong></p>
+<p><strong>touches						正在触摸屏幕的所有手指的一个列表</strong></p>
+<p><strong>targetTouches			正在触摸当前DOM元素上的手指的一个列表</strong></p>
+<p><strong>changedTouches		手指状态发生了改变的列表,从无到有,从有到无变化</strong></p>
+<p><strong>因为平时我们都是给元素注册触摸事件,所以重点记住targetTocuhes</strong></p>
+<h3 id="1-3移动端拖动元素"><a href="#1-3移动端拖动元素" class="headerlink" title="1.3移动端拖动元素"></a>1.3移动端拖动元素</h3><p><strong>1.touchstart, touchmove, touchend可以实现拖动元素</strong></p>
+<p><strong>2,但是拖动元素需要当前手指的坐标值我们可以使用targetTouches[0]里面的pagex和pageY</strong></p>
+<p><strong>3,移动端拖动的原理: 手指移动中,计算出手指移动的距离。然后用盒子原来的位置+手指移动的距离</strong></p>
+<p><strong>4,手指移动的距离:手指滑动中的位置减去手指刚开始触摸的位置</strong></p>
+<p><strong>拖动元素三步曲:</strong></p>
+<p><strong>(1)触摸元素touchstart :获取手指初始坐标,同时获得盒子原来的位置</strong></p>
+<p><strong>(2)移动手指touchmove :计算手指的滑动距离,并且移动盒子</strong></p>
+<p><strong>(3)离开手指touchend:</strong></p>
+<p><strong>注意:手指移动也会触发滚动屏幕所以这里要阻止默认的屏幕滚动e.preventDefault();</strong></p>
+<h2 id="2-移动端常见特效"><a href="#2-移动端常见特效" class="headerlink" title="2.移动端常见特效"></a>2.移动端常见特效</h2><p><strong>classList属性</strong></p>
+<p><strong>classlist属性是HTML5新增的一个属性,返回元素的类名。但是ie10以上版本支持。</strong></p>
+<p><strong>该属性用于在元素中添加,移除及切换CSS类。</strong></p>
+<p><strong>有以下方法</strong></p>
+<p><strong>添加类：</strong></p>
+<p><strong>element.classlist.add ( 类名” ) ;</strong></p>
+<p><strong>移除类:</strong></p>
+<p><strong>element.classlist.remove (‘类名’ );</strong></p>
+<p><strong>切换类</strong></p>
+<p><strong>element.classlist.toggle (‘类名’ ) ;</strong></p>
+<h3 id="2-2-click延时解决方案"><a href="#2-2-click延时解决方案" class="headerlink" title="2.2 click延时解决方案"></a>2.2 click延时解决方案</h3><p><strong>移动端click事件会有300ms的延时,原因是移动端屏幕双击会缩放(double tapto zoom)页面。</strong></p>
+<p><strong>解决方案:1,禁用缩放。浏览器禁用默认的双击缩放行为并且去掉300ms的点击延迟。</strong></p>
+<p><strong>1.<meta name="viewport" content="user-scalable=no"></strong></p>
+<p><strong>2.利用touch事件自己封装这个事件解决300ms延迟。</strong></p>
+<p><strong>原理就是:</strong></p>
+<p><strong>1,当我们手指触摸屏幕,记录当前触摸时间</strong></p>
+<p><strong>2,当我们手指离开屏幕,用离开的时间减去触莫的时间</strong></p>
+<p><strong>3.如果时间小于150ms ,并且没有滑动过屏幕,那么我们就定义为点击</strong></p>
+<p><strong>&#x2F;&#x2F;封装tap,解决click 300ms延时</strong></p>
+<p><strong>function tap (obj, callback) {</strong></p>
+<p><strong>var isMove &#x3D; false;</strong></p>
+<p><strong>var startTime &#x3D;0; &#x2F;&#x2F;记录触摸时候的时间变量</strong></p>
+<p><strong>obj.addeventListener (‘touchstart’, function (e){</strong></p>
+<p><strong>startrime &#x3D; Date.now(); &#x2F;&#x2F;记录触摸时间</strong></p>
+<p><strong>});</strong></p>
+<p><strong>obj.addEventListener (‘touchmove’, function (e) {</strong></p>
+<p><strong>isMove &#x3D;true; &#x2F;&#x2F;看看是否有滑动,有滑动算拖拽,不算点击</strong></p>
+<p><strong>});</strong></p>
+<p><strong>obj.addeventListener (‘touchend’, function (e) {</strong></p>
+<p><strong>if (isMove &amp;&amp; (Date.now() -startTime) &lt; 150) { &#x2F;&#x2F;如果手指触摸和离开时间小于150ms算点击</strong></p>
+<p><strong>callback &amp;&amp; callback(); &#x2F;&#x2F;执行回调函数</strong></p>
+<p><strong>}isMove &#x3D; false; &#x2F;&#x2F; 取反重置</strong></p>
+<p><strong>startTime &#x3D; 0;</strong></p>
+<p><strong>});</strong></p>
+<p><strong>&#x2F;&#x2F;调用</strong></p>
+<p><strong>tap(div, function(){ &#x2F;&#x2F;执行代码});</strong></p>
+<h2 id="3-移动端常用开发插件"><a href="#3-移动端常用开发插件" class="headerlink" title="3.移动端常用开发插件"></a>3.移动端常用开发插件</h2><h3 id="3-1什么是插件"><a href="#3-1什么是插件" class="headerlink" title="3.1什么是插件"></a>3.1什么是插件</h3><p><strong>移动端要求的是快速开发,所以我们经常会借助于一些插件来帮我完成操作,那么什么是插件呢?</strong></p>
+<p><strong>Js插件是js文件,它遵循一定规范编写,方便程序展示效果,拥有特定功能目方便调用。如轮播图和瀑布流插件。</strong></p>
+<p><strong>特点:它一般是为了解决某个问题而专门存在,其功能单一,并且比较小。</strong></p>
+<p><strong>我们以前写的animatejs也算一个最简单的插件</strong></p>
+<p><strong>fastclick插件解决300ms延迟。使用延时</strong></p>
+<p><strong>GitHub官网地址: <a target="_blank" rel="noopener" href="https://github.com/ftlabs/fastclick">https://github.com/ftlabs/fastclick</a></strong></p>
+<h3 id="3-3-Swiper插件的使用"><a href="#3-3-Swiper插件的使用" class="headerlink" title="3.3 Swiper插件的使用"></a>3.3 Swiper插件的使用</h3><p><strong>中文官网地址: <a target="_blank" rel="noopener" href="https://www.swiper.com.cn/1">https://www.swiper.com.cn/1</a>.</strong></p>
+<p><strong>引入插件相关文件</strong></p>
+<p><strong>按照规定语法使用</strong></p>
+<h3 id="3-4其他移动端常见插件"><a href="#3-4其他移动端常见插件" class="headerlink" title="3.4其他移动端常见插件"></a>3.4其他移动端常见插件</h3><p><strong>superslide : <a target="_blank" rel="noopener" href="http://www.superslide2.com/">http://www.superslide2.com/</a></strong> </p>
+<p><strong>iscroll: <a target="_blank" rel="noopener" href="https://github.com/cubiq/iscroll">https://github.com/cubiq/iscroll</a></strong></p>
+<h3 id="3-5插件的使用总结"><a href="#3-5插件的使用总结" class="headerlink" title="3.5插件的使用总结"></a>3.5插件的使用总结</h3><p><strong>1,确认插件实现的功能</strong> </p>
+<p><strong>2,去官网查看使用说明</strong></p>
+<p><strong>3.下载插件</strong></p>
+<p><strong>4,打开demo实例文件,查看需要引入的相关文件,并且引入</strong></p>
+<p><strong>5.复制demo实例文件中的结构html,样式ss以及s代码</strong></p>
+<h3 id="3-6练习移动端视频插件zy-media-js"><a href="#3-6练习移动端视频插件zy-media-js" class="headerlink" title="3.6练习移动端视频插件zy.media.js"></a>3.6练习移动端视频插件zy.media.js</h3><p><strong>H5给我们提供了video标签,但是浏览器的支持情况不同。</strong></p>
+<p><strong>不同的视频格式文件,我们可以通过source解决。</strong></p>
+<p><strong>但是外观样式,还有暂停,播放,全屏等功能我们只能自己写代码解决。</strong></p>
+<p><strong>这个时候我们可以使用插件方式来制作。</strong></p>
+<h2 id="4-移动端常用开发框架"><a href="#4-移动端常用开发框架" class="headerlink" title="4.移动端常用开发框架"></a>4.移动端常用开发框架</h2><h3 id="4-1框架概述框架"><a href="#4-1框架概述框架" class="headerlink" title="4.1框架概述框架,"></a>4.1框架概述框架,</h3><p><strong>顾名思义就是一套架构,它会基于自身的特点向用户提供一套较为完整的解决方案。框架的控制权在框架本身,使用者要按照框架所规定的某种规范进行开发。</strong></p>
+<p><strong>插件一般是为了解决某个问题而专门存在,其功能单一,并且比较小。</strong></p>
+<p><strong>前端常用的框架有Bootstrap, Vue, Angular, React等。既能开发PC端,也能开发移动端</strong></p>
+<p><strong>前端常用的移动端插件有swiper, superslide, iscrol等</strong></p>
+<p><strong>框架:大而全,一整套解决方案</strong></p>
+<p><strong>插件：小而专一,某个功能的解决方案</strong></p>
+<h3 id="4-2-BootstrapBootstrap"><a href="#4-2-BootstrapBootstrap" class="headerlink" title="4.2 BootstrapBootstrap"></a>4.2 BootstrapBootstrap</h3><p><strong>是一个简洁、直观、强悍的前端开发框架,它让web开发更迅速、简单。它能开发PC端,也能开发移动端</strong></p>
+<p><strong>Bootstrap JS插件使用步骤:</strong></p>
+<p><strong>1,引入相关js文件</strong></p>
+<p><strong>2.复制HTML结构</strong></p>
+<p><strong>3,修改对应样式</strong></p>
+<p><strong>4,修改相应JS参数</strong></p>
+<h1 id="1-本地存储"><a href="#1-本地存储" class="headerlink" title="1.本地存储"></a>1.本地存储</h1><p><strong>随着互联网的快速发展,基于网页的应用越来越普遍,同时也变的越来越复杂,为了满足各种各样的需求,会常性在本地存储大量的数据, HTMI5规范提出了相关解决方案</strong></p>
+<p><strong>本地存储特性</strong></p>
+<p><strong>1、数据存储在用户浏览器中</strong></p>
+<p><strong>2、设置、读取方便、甚至页面刷新不丢失数据</strong></p>
+<p><strong>3、容量较大, sessionStorage约5M, localstorage约20M</strong></p>
+<p><strong>4、只能存储字符串,可以将对象JSON.stringifyo编码后存储</strong></p>
+<h3 id="2-window-sessionStorage"><a href="#2-window-sessionStorage" class="headerlink" title="2.window.sessionStorage"></a>2.window.sessionStorage</h3><p> <strong>1.生命周期为关闭浏览器窗口</strong></p>
+<p><strong>2.在同一个窗口(页面)下数据可以共享</strong></p>
+<p><strong>3,以键值对的形式存储使用</strong></p>
+<p><strong>存储数据：</strong></p>
+<p><strong>sessionStorage.setltem(key, value)</strong></p>
+<p><strong>获取数据:</strong></p>
+<p><strong>sessionStorage.getitem(key)</strong></p>
+<p><strong>删除数据:</strong></p>
+<p><strong>sessionStorage.removeltem(key)</strong></p>
+<p><strong>删除所有数据:</strong></p>
+<p><strong>sessionStorage.clear()</strong></p>
+<h2 id="3-window-localStorage"><a href="#3-window-localStorage" class="headerlink" title="3.window.localStorage."></a>3.window.localStorage.</h2><p><strong>1、生命周期永久生效,除非手动删除否则关闭页面也会存在</strong></p>
+<p><strong>2、可以多窗口(页面)共享(同一浏览器可以共享)</strong></p>
+<p><strong>3,以键值对的形式存储使用</strong></p>
+<p><strong>存储数据:</strong></p>
+<p><strong>localStorage.setitem(key, value)</strong></p>
+<p><strong>获取数据:</strong></p>
+<p><strong>localStorage.getltem(key)</strong></p>
+<p><strong>删除数据:</strong></p>
+<p><strong>localStorage.removeltem(key)</strong></p>
+<p><strong>删除所有数据:</strong></p>
+<p><strong>localStorage.clear()</strong></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/avator.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/avator.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">凯瑟兰森</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://2486125878.github.io/2024/03/13/js/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://2486125878.github.io/2024/03/13/js/')">javascript</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/image/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/image/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://2486125878.github.io/2024/03/13/js/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=javascript&amp;url=https://2486125878.github.io/2024/03/13/js/&amp;pic=/image/mn.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://2486125878.github.io" target="_blank">凯瑟兰森</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/javascript/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>javascript<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/image/mn.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/13/ajax/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">服务器的基本概念与初识Ajax</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/13/jquery/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">jQuery</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/avator.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">...</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(/image/wechat_front.jpg) center center / 100% no-repeat"></div><div class="back face" style="background: url(/image/wechat_back.jpg) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-4%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A7%E8%A1%8CJS%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">1.4浏览器执行JS简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2%E5%8F%98%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1.2变量的数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2.1简单数据类型(基本数据类型)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-isNaN"><span class="toc-number">1.3.</span> <span class="toc-text">4.isNaN()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E4%B9%89%E7%AC%A6"><span class="toc-number">1.4.</span> <span class="toc-text">2.字符串转义符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.</span> <span class="toc-text">4.2转换为字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97%E5%9E%8B-%E9%87%8D%E7%82%B9"><span class="toc-number">1.6.</span> <span class="toc-text">4.3转换为数字型(重点)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="toc-number">1.7.</span> <span class="toc-text">4.4转换为布尔型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.8.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E5%B0%8F%E7%BB%93"><span class="toc-number">1.8.1.</span> <span class="toc-text">3.4小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-break-continue-return%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.9.</span> <span class="toc-text">4.5 break,continue ,return的区别.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-arguments%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.10.</span> <span class="toc-text">5.arguments的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.11.</span> <span class="toc-text">Javascript作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">1.11.1.</span> <span class="toc-text">2.2全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number">1.11.2.</span> <span class="toc-text">2.2局部变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.11.3.</span> <span class="toc-text">2.3全局变量和局部变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%EF%BC%9A%E5%86%85%E9%83%A8%E5%87%BD%E6%95%B0%E8%AE%BF%E9%97%AE%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%98%E9%87%8F-%E9%87%87%E5%8F%96%E7%9A%84%E6%98%AF%E9%93%BE%E5%BC%8F%E6%9F%A5%E6%89%BE%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E5%86%B3%E5%AE%9A%E5%8F%96%E9%82%A3%E4%B8%AA%E5%80%BC%E8%BF%99%E7%A7%8D%E7%BB%93%E6%9E%84%E6%88%91%E4%BB%AC%E7%A7%B0%E4%B8%BA%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">1.11.4.</span> <span class="toc-text">3作用域链：内部函数访问外部函数的变量,采取的是链式查找的方式来决定取那个值这种结构我们称为作用域链</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.1.</span> <span class="toc-text">1.1什么是对象?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.2.</span> <span class="toc-text">1.2为什么需要对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%BC%8E%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.13.</span> <span class="toc-text">2．创建对象的三种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%88%A9%E7%94%A8%E5%AD%97%E9%9D%A2%E9%87%8F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.13.1.</span> <span class="toc-text">2.1利用字面量创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%B0%83%E7%94%A8"><span class="toc-number">1.13.1.1.</span> <span class="toc-text">对象的调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E5%87%BD%E6%95%B0%E3%80%81%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93"><span class="toc-number">1.13.2.</span> <span class="toc-text">变量、属性、函数、方法总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3%E5%88%A9%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.14.</span> <span class="toc-text">2.3利用构造函数创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.15.</span> <span class="toc-text">2.4构造函数和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#new%E5%9C%A8%E6%89%A7%E8%A1%8C%E6%97%B6%E4%BC%9A%E5%81%9A%E5%9B%9B%E4%BB%B6%E4%BA%8B%E6%83%85"><span class="toc-number">1.15.1.</span> <span class="toc-text">new在执行时会做四件事情:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in-%E8%AF%AD%E5%8F%A5%E7%94%A8%E4%BA%8E%E5%AF%B9%E6%95%B0%E7%BB%84%E6%88%96%E8%80%85%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E8%BF%9B%E8%A1%8C%E5%BE%AA%E7%8E%AF%E6%93%8D%E4%BD%9C%E3%80%82"><span class="toc-number">1.15.2.</span> <span class="toc-text">for in 语句用于对数组或者对象的属性进行循环操作。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.16.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.17.</span> <span class="toc-text">内置对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%96%87%E6%A1%A3"><span class="toc-number">1.18.</span> <span class="toc-text">查文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-MDN%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%AA%E8%A6%81%E5%AD%A6%E4%BC%9A%E5%85%B6%E5%B8%B8%E7%94%A8%E6%88%90%E5%91%98%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8D%B3%E5%8F%AF"><span class="toc-number">1.18.1.</span> <span class="toc-text">2.1 MDN学习一个内置对象的使用只要学会其常用成员的使用即可</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.18.2.</span> <span class="toc-text">2.2如何学习对象中的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math"><span class="toc-number">1.19.</span> <span class="toc-text">Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.20.</span> <span class="toc-text">描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Math%E6%A6%82%E8%BF%B0"><span class="toc-number">1.20.1.</span> <span class="toc-text">3.1 Math概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#random-%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%B0%8F%E6%95%B0"><span class="toc-number">1.21.</span> <span class="toc-text">random()随机生成小数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.22.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Date%E6%A6%82%E8%BF%B0"><span class="toc-number">1.23.</span> <span class="toc-text">4.1 Date概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Date-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.24.</span> <span class="toc-text">4.2 Date()方法的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E8%8E%B7%E5%8F%96%E6%97%A5%E6%9C%9F%E7%9A%84%E6%80%BB%E7%9A%84%E6%AF%AB%E7%A7%92%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.24.1.</span> <span class="toc-text">4.4获取日期的总的毫秒形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.25.</span> <span class="toc-text">4.日期对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">1.25.1.</span> <span class="toc-text">案例分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.26.</span> <span class="toc-text">5.数组对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof%E5%92%8CisArray"><span class="toc-number">1.26.1.</span> <span class="toc-text">instanceof和isArray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.26.2.</span> <span class="toc-text">5.3添加删除数组元素的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F"><span class="toc-number">1.26.3.</span> <span class="toc-text">5.4数组排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95%E6%96%B9%E6%B3%95"><span class="toc-number">1.26.4.</span> <span class="toc-text">5.5数组索引方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.26.5.</span> <span class="toc-text">5.6数组转换为字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7%E8%AF%BE%E4%B8%8B%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.26.6.</span> <span class="toc-text">5.7课下查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E5%9F%BA%E6%9C%AC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.26.7.</span> <span class="toc-text">6.1基本包装类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%8F%98"><span class="toc-number">1.26.8.</span> <span class="toc-text">6.2字符串的不可变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E8%BF%94%E5%9B%9E%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.26.9.</span> <span class="toc-text">6.3根据字符返回位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4%E6%A0%B9%E6%8D%AE%E4%BD%8D%E7%BD%AE%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6-%E9%87%8D%E7%82%B9"><span class="toc-number">1.26.10.</span> <span class="toc-text">6.4根据位置返回字符(重点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95-%E9%87%8D%E7%82%B9"><span class="toc-number">1.26.11.</span> <span class="toc-text">6.5字符串操作方法(重点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-8%E8%AF%BE%E4%B8%8B%E6%9F%A5%E9%98%85"><span class="toc-number">1.26.12.</span> <span class="toc-text">6.8课下查阅</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%AE%80%E5%8D%95%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%A4%8D%E6%9D%82%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">1.简单类型与复杂类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A0%86%E5%92%8C%E6%A0%88"><span class="toc-number">2.1.</span> <span class="toc-text">2.堆和栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%80%E5%8D%95%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">2.2.</span> <span class="toc-text">3.简单类型的内存分配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%A4%8D%E6%9D%82%E7%B1%BB%E5%9E%8B%E4%BC%A0%E5%8F%82"><span class="toc-number">2.3.</span> <span class="toc-text">6.复杂类型传参</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-APIs%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">Web APIs介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-JS%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">3.1.</span> <span class="toc-text">1.1 JS的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2JS%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E4%BB%A5%E5%8F%8AWeb-APIs%E9%98%B6%E6%AE%B5"><span class="toc-number">3.2.</span> <span class="toc-text">1.2JS基础阶段以及Web APIs阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-API"><span class="toc-number">3.3.</span> <span class="toc-text">2.1 API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Web-API"><span class="toc-number">3.4.</span> <span class="toc-text">2.2 Web API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-API%E5%92%8CWeb-API%E6%80%BB%E7%BB%93"><span class="toc-number">3.5.</span> <span class="toc-text">2.3 API和Web API总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E9%87%8D%E7%82%B9"><span class="toc-number">3.6.</span> <span class="toc-text">DOM(重点)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E4%BB%80%E4%B9%88%E6%98%AFDOM"><span class="toc-number">3.6.1.</span> <span class="toc-text">1.1什么是DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-DOM%E6%A0%91"><span class="toc-number">3.6.2.</span> <span class="toc-text">1.2 DOM树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0"><span class="toc-number">3.6.3.</span> <span class="toc-text">2.1如何获取页面元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E6%A0%B9%E6%8D%AEID%E8%8E%B7%E5%8F%96"><span class="toc-number">3.6.4.</span> <span class="toc-text">2.2根据ID获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E6%A0%B9%E6%8D%AE%E6%A0%87%E7%AD%BE%E5%90%8D%E8%8E%B7%E5%8F%96"><span class="toc-number">3.6.5.</span> <span class="toc-text">2.3根据标签名获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E9%80%9A%E8%BF%87HTML5%E6%96%B0%E5%A2%9E%E7%9A%84%E6%96%B9%E6%B3%95%E8%8E%B7%E5%8F%96i9%E4%BB%A5%E4%B8%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8"><span class="toc-number">3.6.6.</span> <span class="toc-text">2.4通过HTML5新增的方法获取i9以上浏览器可以使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5%E8%8E%B7%E5%8F%96%E7%89%B9%E6%AE%8A%E5%85%83%E7%B4%A0-body-html"><span class="toc-number">3.6.7.</span> <span class="toc-text">2.5获取特殊元素( body , html )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="toc-number">3.7.</span> <span class="toc-text">3.事件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E4%BA%8B%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">3.7.1.</span> <span class="toc-text">3.1事件概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E6%89%A7%E8%A1%8C%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.7.2.</span> <span class="toc-text">3.3执行事件的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E5%B8%B8%E8%A7%81%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.7.3.</span> <span class="toc-text">3.3常见的鼠标事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%C2%B7%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0"><span class="toc-number">3.8.</span> <span class="toc-text">4·操作元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E6%94%B9%E5%8F%98%E5%85%83%E7%B4%A0%E5%86%85%E5%AE%B9"><span class="toc-number">3.8.1.</span> <span class="toc-text">4.1改变元素内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E5%B8%B8%E7%94%A8%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.2.</span> <span class="toc-text">4.2常用元素的属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.3.</span> <span class="toc-text">4.3表单元素的属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.4.</span> <span class="toc-text">4.4样式属性操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%C2%B7%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E6%80%BB%E7%BB%93"><span class="toc-number">3.9.</span> <span class="toc-text">4·操作元素总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.1.</span> <span class="toc-text">4.6自定义属性的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-H5%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">3.9.2.</span> <span class="toc-text">4.7 H5自定义属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%BC%8E%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">5．节点操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.1.</span> <span class="toc-text">5.1为什么学节点操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%A9%E7%94%A8DOM%E6%8F%90%E4%BE%9B%E7%9A%84%E6%96%B9%E6%B3%95%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">3.10.1.1.</span> <span class="toc-text">1,利用DOM提供的方法获取元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%C2%B7%E5%88%A9%E7%94%A8%E8%8A%82%E7%82%B9%E5%B1%82%E7%BA%A7%E5%85%B3%E7%B3%BB%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">3.10.1.2.</span> <span class="toc-text">2·利用节点层级关系获取元素</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E8%8A%82%E7%82%B9%E6%A6%82%E8%BF%B0"><span class="toc-number">3.10.2.</span> <span class="toc-text">5.2节点概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3%E8%8A%82%E7%82%B9%E5%B1%82%E7%BA%A7"><span class="toc-number">3.10.3.</span> <span class="toc-text">5.3节点层级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.4.</span> <span class="toc-text">3.兄弟节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.5.</span> <span class="toc-text">5.4创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.6.</span> <span class="toc-text">5.5添加节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.7.</span> <span class="toc-text">5.5删除节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6%E5%A4%8D%E5%88%B6%E8%8A%82%E7%82%B9-%E5%85%8B%E9%9A%86%E8%8A%82%E7%82%B9"><span class="toc-number">3.10.8.</span> <span class="toc-text">5.6复制节点(克隆节点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-8%E4%B8%89%E7%A7%8D%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%85%83%E7%B4%A0%E5%8C%BA%E5%88%AB"><span class="toc-number">3.10.9.</span> <span class="toc-text">5.8三种动态创建元素区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-DOM%E9%87%8D%E7%82%B9%E6%A0%B8%E5%BF%83"><span class="toc-number">3.11.</span> <span class="toc-text">6.DOM重点核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E5%88%9B%E5%BB%BA"><span class="toc-number">3.11.1.</span> <span class="toc-text">6.1创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2%E5%A2%9E"><span class="toc-number">3.11.2.</span> <span class="toc-text">6.2增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3%E5%88%A0"><span class="toc-number">3.11.3.</span> <span class="toc-text">6.3删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4%E6%94%B9"><span class="toc-number">3.11.4.</span> <span class="toc-text">6.4改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5%E6%9F%A5"><span class="toc-number">3.11.5.</span> <span class="toc-text">6.5查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-6%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">3.11.6.</span> <span class="toc-text">6.6属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-7-%E4%BA%8B%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">3.11.7.</span> <span class="toc-text">6.7 事件操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6-%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.12.</span> <span class="toc-text">1.注册事件(绑定事件)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-addEventListener%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E6%96%B9%E5%BC%8F"><span class="toc-number">3.12.1.</span> <span class="toc-text">1.2 addEventListener事件监听方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-attachEvent%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E6%96%B9%E5%BC%8F"><span class="toc-number">3.12.2.</span> <span class="toc-text">1.3 attachEvent事件监听方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.12.3.</span> <span class="toc-text">1.4注册事件兼容性解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6%EF%BC%88%E8%A7%A3%E7%BB%91%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.13.</span> <span class="toc-text">2.删除事件（解绑事件).</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">3.13.1.</span> <span class="toc-text">2.1删除事件的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.13.2.</span> <span class="toc-text">2.2删除事件兼容性解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-DOM%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">3.14.</span> <span class="toc-text">3.DOM事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.14.1.</span> <span class="toc-text">4.1什么是事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E6%96%B9%E6%A1%88"><span class="toc-number">3.14.2.</span> <span class="toc-text">4.3事件对象的兼容性方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">3.14.3.</span> <span class="toc-text">4.4事件对象的常见属性和方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">3.14.4.</span> <span class="toc-text">5.1阻止事件冒泡的两种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.14.5.</span> <span class="toc-text">5.2阻止事件冒泡的兼容性解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%EF%BC%8E%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%88%E4%BB%A3%E7%90%86%E3%80%81%E5%A7%94%E6%B4%BE"><span class="toc-number">3.15.</span> <span class="toc-text">6．事件委托（代理、委派)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">3.15.1.</span> <span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">3.15.2.</span> <span class="toc-text">事件委托的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.15.3.</span> <span class="toc-text">事件委托的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%EF%BC%8E%E5%B8%B8%E7%94%A8%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.16.</span> <span class="toc-text">7．常用的鼠标事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1%E5%B8%B8%E7%94%A8%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.16.1.</span> <span class="toc-text">7.1常用的鼠标事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.16.2.</span> <span class="toc-text">7.2鼠标事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1%E5%B8%B8%E7%94%A8%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.16.3.</span> <span class="toc-text">8.1常用键盘事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.16.4.</span> <span class="toc-text">8.2键盘事件对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BOM"><span class="toc-number">4.</span> <span class="toc-text">BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-B%D0%BEM%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">4.1.</span> <span class="toc-text">1.2 BоM的构成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E7%AA%97%E5%8F%A3%E5%8A%A0%E8%BD%BD%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">2.1窗口加载事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.2.1.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E8%B0%83%E6%95%B4%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">2.2调整窗口大小事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1%E4%B8%A4%E7%A7%8D%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">4.4.</span> <span class="toc-text">3.1两种定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-setTimeout-%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">4.5.</span> <span class="toc-text">3.2 setTimeout()定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3%E5%81%9C%E6%AD%A2setTimeout-%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%88%E5%8F%AA%E8%B0%83%E7%94%A8%E4%B8%80%E6%AC%A1%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">3.3停止setTimeout()定时器（只调用一次）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-setInterval-%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%88%E9%87%8D%E5%A4%8D%E8%B0%83%E7%94%A8%EF%BC%89"><span class="toc-number">4.7.</span> <span class="toc-text">3.4 setInterval()定时器（重复调用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5%E5%81%9C%E6%AD%A2setInterval-%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">4.8.</span> <span class="toc-text">3.5停止setInterval()定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-this"><span class="toc-number">4.9.</span> <span class="toc-text">3.6 this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JS%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">4.10.</span> <span class="toc-text">4.JS执行机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1JS%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="toc-number">4.11.</span> <span class="toc-text">4.1JS单线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="toc-number">4.12.</span> <span class="toc-text">4.3同步和异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-JS%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">4.13.</span> <span class="toc-text">4.4 JS执行机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-location%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.14.</span> <span class="toc-text">5.location对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E4%BB%80%E4%B9%88%E6%98%AFlocation%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.14.1.</span> <span class="toc-text">5.1什么是location对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-URL"><span class="toc-number">4.14.2.</span> <span class="toc-text">5.2 URL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-location%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">4.15.</span> <span class="toc-text">5.3 location对象的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-location%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">4.16.</span> <span class="toc-text">5.4 location对象的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-navigator%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.17.</span> <span class="toc-text">6.navigator对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-history%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.18.</span> <span class="toc-text">7.history对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1%C2%B7%E5%85%83%E7%B4%A0%E5%81%8F%E7%A7%BB%E9%87%8Foffset%E7%B3%BB%E5%88%97"><span class="toc-number">4.19.</span> <span class="toc-text">1·元素偏移量offset系列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-offset%E6%A6%82%E8%BF%B0"><span class="toc-number">4.19.1.</span> <span class="toc-text">1.1 offset概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-offset%E4%B8%8Estyle%E5%8C%BA%E5%88%AB"><span class="toc-number">4.20.</span> <span class="toc-text">1.2 offset与style区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%83%E7%B4%A0%E5%8F%AF%E8%A7%86%E5%8C%BAclient%E7%B3%BB%E5%88%97"><span class="toc-number">4.21.</span> <span class="toc-text">2,元素可视区client系列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="toc-number">4.22.</span> <span class="toc-text">3.立即执行函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%B7%98%E5%AE%9Dflexible-js%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">4.23.</span> <span class="toc-text">案例：淘宝flexible.js源码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1%E5%85%83%E7%B4%A0scroll%E7%B3%BB%E5%88%97%E5%B1%9E%E6%80%A7"><span class="toc-number">4.24.</span> <span class="toc-text">3.1元素scroll系列属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2%E9%A1%B5%E9%9D%A2%E8%A2%AB%E5%8D%B7%E5%8E%BB%E7%9A%84%E5%A4%B4%E9%83%A8"><span class="toc-number">4.25.</span> <span class="toc-text">3.2页面被卷去的头部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%A4%A7%E7%B3%BB%E5%88%97%E6%80%BB%E7%BB%93"><span class="toc-number">4.26.</span> <span class="toc-text">三大系列总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mouseenter%E5%92%8Cmouseover%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.27.</span> <span class="toc-text">mouseenter和mouseover的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mouseenter%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.27.1.</span> <span class="toc-text">mouseenter鼠标事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%EF%BC%8E%E5%8A%A8%E7%94%BB%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">4.28.</span> <span class="toc-text">4．动画函数封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">4.28.1.</span> <span class="toc-text">4.1动画实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E5%8A%A8%E7%94%BB%E5%87%BD%E6%95%B0%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85"><span class="toc-number">4.28.2.</span> <span class="toc-text">4.2动画函数简单封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E7%BC%93%E5%8A%A8%E6%95%88%E6%9E%9C%E5%8E%9F%E7%90%86"><span class="toc-number">4.28.3.</span> <span class="toc-text">4.4缓动效果原理,</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%BC%8E%E5%B8%B8%E8%A7%81%E7%BD%91%E9%A1%B5%E7%89%B9%E6%95%88%E6%A1%88%E4%BE%8B"><span class="toc-number">4.29.</span> <span class="toc-text">5．常见网页特效案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E8%8A%82%E6%B5%81%E9%98%80"><span class="toc-number">4.29.1.</span> <span class="toc-text">5.1节流阀</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="toc-number">5.</span> <span class="toc-text">移动端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%A6%E5%B1%8F%E4%BA%8B%E4%BB%B6"><span class="toc-number">5.1.</span> <span class="toc-text">1.触屏事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E8%A7%A6%E5%B1%8F%E4%BA%8B%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">5.1.1.</span> <span class="toc-text">1.1触屏事件概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-TouchEvent"><span class="toc-number">5.1.2.</span> <span class="toc-text">1.2触摸事件对象(TouchEvent )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%8B%96%E5%8A%A8%E5%85%83%E7%B4%A0"><span class="toc-number">5.1.3.</span> <span class="toc-text">1.3移动端拖动元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%89%B9%E6%95%88"><span class="toc-number">5.2.</span> <span class="toc-text">2.移动端常见特效</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-click%E5%BB%B6%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">5.2.1.</span> <span class="toc-text">2.2 click延时解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">3.移动端常用开发插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E4%BB%80%E4%B9%88%E6%98%AF%E6%8F%92%E4%BB%B6"><span class="toc-number">5.3.1.</span> <span class="toc-text">3.1什么是插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-Swiper%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">5.3.2.</span> <span class="toc-text">3.3 Swiper插件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E5%85%B6%E4%BB%96%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E8%A7%81%E6%8F%92%E4%BB%B6"><span class="toc-number">5.3.3.</span> <span class="toc-text">3.4其他移动端常见插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93"><span class="toc-number">5.3.4.</span> <span class="toc-text">3.5插件的使用总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6%E7%BB%83%E4%B9%A0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%A7%86%E9%A2%91%E6%8F%92%E4%BB%B6zy-media-js"><span class="toc-number">5.3.5.</span> <span class="toc-text">3.6练习移动端视频插件zy.media.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6"><span class="toc-number">5.4.</span> <span class="toc-text">4.移动端常用开发框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0%E6%A1%86%E6%9E%B6"><span class="toc-number">5.4.1.</span> <span class="toc-text">4.1框架概述框架,</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-BootstrapBootstrap"><span class="toc-number">5.4.2.</span> <span class="toc-text">4.2 BootstrapBootstrap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="toc-number">6.</span> <span class="toc-text">1.本地存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-window-sessionStorage"><span class="toc-number">6.0.1.</span> <span class="toc-text">2.window.sessionStorage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-window-localStorage"><span class="toc-number">6.1.</span> <span class="toc-text">3.window.localStorage.</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E5%90%8E%E5%8F%B0%E7%AC%94%E8%AE%B0/" title="thinkphp后台笔记"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp后台笔记"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E5%90%8E%E5%8F%B0%E7%AC%94%E8%AE%B0/" title="thinkphp后台笔记">thinkphp后台笔记</a><time datetime="2024-03-14T07:51:34.000Z" title="发表于 2024-03-14 15:51:34">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="thinkphp学习笔记"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp学习笔记"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="thinkphp学习笔记">thinkphp学习笔记</a><time datetime="2024-03-14T07:32:59.000Z" title="发表于 2024-03-14 15:32:59">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B6%E4%BB%96/" title="thinkphp数据库其他"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp数据库其他"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B6%E4%BB%96/" title="thinkphp数据库其他">thinkphp数据库其他</a><time datetime="2024-03-14T04:04:00.000Z" title="发表于 2024-03-14 12:04:00">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2/" title="thinkphp多种查询"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp多种查询"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2/" title="thinkphp多种查询">thinkphp多种查询</a><time datetime="2024-03-14T03:47:23.000Z" title="发表于 2024-03-14 11:47:23">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/" title="thinkphp链式操作"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/image/mn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thinkphp链式操作"/></a><div class="content"><a class="title" href="/2024/03/14/thinkphp%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/" title="thinkphp链式操作">thinkphp链式操作</a><time datetime="2024-03-14T03:18:02.000Z" title="发表于 2024-03-14 11:18:02">2024-03-14</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="凯瑟兰森" target="_blank">凯瑟兰森</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://2486125878.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://2486125878.github.io/" title="凯"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/favicon.ico" alt="凯"/><span class="back-menu-item-text">凯</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa fa-archive faa-tada"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fas fa-folder-open faa-tada"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fas fa-music faa-tada"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/Gallery/"><i class="fas fa-images faa-tada"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/movies/"><i class="fas fa-video faa-tada"></i><span> 豆瓣电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="fas fa-heart faa-tada"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ajax/" style="font-size: 0.88rem;">Ajax<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>2</sup></a><a href="/tags/JAVA/" style="font-size: 0.88rem;">JAVA<sup>2</sup></a><a href="/tags/jQuery/" style="font-size: 0.88rem;">jQuery<sup>1</sup></a><a href="/tags/javascript/" style="font-size: 0.88rem;">javascript<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/nodeJs/" style="font-size: 0.88rem;">nodeJs<sup>1</sup></a><a href="/tags/php/" style="font-size: 0.88rem;">php<sup>8</sup></a><a href="/tags/vue/" style="font-size: 0.88rem;">vue<sup>1</sup></a><a href="/tags/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">创建博客记录<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 0.88rem;">数据可视化<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 0.88rem;">移动端<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("/image/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 凯瑟兰森 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://npm.elemecdn.com/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
